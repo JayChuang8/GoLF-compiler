@@ -1,0 +1,69 @@
+// singletons - pay attention throughout that semicolons get added per spec!
+
++
+-
+*
+/
+%
+(
+)
+{
+}
+;
+,
+
+// may be pairs
+
+! !=
+= ==
+< <=
+> >=
+
+> = // should be recognised separately
+
+// must be pairs
+
+&&
+||
+
+// reserved words
+
+break
+else
+for
+func
+if
+return
+var
+
+// identifiers
+
+Break
+switch
+case
+goto
+continue
+while
+prints
+printi
+printb
+printc
+halt
+getchar
+true
+bool
+false
+string
+int
+main
+abcdef
+abc123
+_
+_abc_0
+_42
+
+// numbers
+
+0
+12345678901234567890
+

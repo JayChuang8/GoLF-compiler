@@ -1,0 +1,10 @@
+// legal strings
+
+"abc"
+"ab\t\ndef"
+"ab\"cd"
+"ab\\\"cd"
+"a\b\r\fcd"
+"abc'def"
+"abcdef"
+

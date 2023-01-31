@@ -1,0 +1,2 @@
+// semicolons get added at EOF too per spec
+}

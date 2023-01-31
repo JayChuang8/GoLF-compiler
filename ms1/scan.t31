@@ -1,0 +1,3 @@
+// illegal string escape
+
+"ab\acd"
