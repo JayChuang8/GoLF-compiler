@@ -1,16 +1,20 @@
-CC := gcc
-OBJS := a.o b.o
+CC := g++
+SUBDIRS = Scanner
+OBJS := main.o
 
-all: a.out
+all: golf.out
 
-a.out: $(OBJS)
-	$(CC) -o $@ $^
+golf.out: $(OBJS)
+	$(CC) -o $@ $^ $(wildcard $(addsuffix /*.o,$(SUBDIRS)))
 
 -include $(OBJS:.o=.d)
 
-%.o: %.c
+main.o: main.cpp $(SUBDIRS)
 	$(CC) -o $@ -c $< -MMD -MF $*.d
+
+.PHONY: $(SUBDIRS)
+$(SUBDIRS):
+	$(MAKE) -C $@
 
 clean:
 	rm -f *.o *.out *.d
-
