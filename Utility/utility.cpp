@@ -7,7 +7,7 @@
 using namespace std;
 
 
-const int MAXNUMWARNINGS = 10;
+#define MaxWarnings 10
 
 Utility& Utility::getInstance()
 {
@@ -49,7 +49,7 @@ void Utility::warning(string message, int lineNum)
 
     Utility::numWarnings++;
 
-    if(numWarnings > MAXNUMWARNINGS) {
+    if(numWarnings > MaxWarnings) {
         error("Too many warnings", lineNum);
     }
 }
