@@ -17,11 +17,10 @@ class Utility
     public:
         static Utility& getInstance();
 
-        fstream inputFile;
         int numWarnings;
 
-        void openInputFile(const char *fileName);
-        void closeInputFile();
+        void openInputFile(fstream& inputFile, const char *fileName);
+        void closeInputFile(fstream& inputFile);
         void error(string message, int lineNum);
         void warning(string message, int lineNum);
 };

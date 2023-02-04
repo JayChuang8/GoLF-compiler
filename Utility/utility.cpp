@@ -15,7 +15,7 @@ Utility& Utility::getInstance()
     return instance;
 }
 
-void Utility::openInputFile(const char *fileName)
+void Utility::openInputFile(fstream& inputFile, const char *fileName)
 {
     inputFile.open(fileName, ios::in);
     if(!inputFile) {
@@ -24,7 +24,7 @@ void Utility::openInputFile(const char *fileName)
     }
 }
 
-void Utility::closeInputFile()
+void Utility::closeInputFile(fstream& inputFile)
 {
 	inputFile.close();
 }

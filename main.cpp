@@ -16,27 +16,18 @@ int main(int argc, char *argv[])
 
     // Open input file
     Utility& util = Utility::getInstance();
-    util.openInputFile(argv[1]);
+    fstream inputFile;
+    util.openInputFile(inputFile, argv[1]);
 
     // Scanner
+    Scanner scanner;
+    Token token;
+    while((token = scanner.lex(inputFile)).attribute != "EOF") {
+        cout << token.type << "     [" << token.attribute << "] @ line " << token.lineNum << endl;
+    }
 
-
-    util.closeInputFile();
-
-
-    // if (util.inputFile.is_open()) { //checking whether the file is open
-    //     string tp;
-    //     while(getline(util.inputFile, tp)){ //read data from file object and put it into string.
-    //         cout << tp << "\n"; //print the data of the string
-    //     }
-    //     util.inputFile.close(); //close the file object.
-    // }
-
-    // std::cout << "You have entered " << argc
-    //      << " arguments:" << "\n";
-  
-    // for (int i = 0; i < argc; ++i)
-    //     std::cout << argv[i] << "\n";
+    // Close input file
+    util.closeInputFile(inputFile);
 
     return 0;
 }

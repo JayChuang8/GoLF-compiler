@@ -2,9 +2,9 @@ CC := g++
 SUBDIRS = Scanner Utility
 OBJS := main.o
 
-all: golf.out
+all: golf
 
-golf.out: $(OBJS)
+golf: $(OBJS)
 	$(CC) -o $@ $^ $(wildcard $(addsuffix /*.o,$(SUBDIRS)))
 
 -include $(OBJS:.o=.d)
