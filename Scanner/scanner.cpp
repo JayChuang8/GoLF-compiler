@@ -16,6 +16,8 @@ const unordered_set<string> keywords = {"break", "else", "for", "func", "if", "r
 const unordered_set<string> semicolonTokens = {
     "id", "int", "string", "break", "return", ")", "}"};
 
+const unordered_set<char> escapeChars = {'b', 'f', 'n', 'r', 't', '\\', '"'};
+
 Scanner::Scanner()
 {
     lineNum = 1;
@@ -50,7 +52,7 @@ Token Scanner::lex(fstream &inputFile, Utility &util)
             }
 
             // whitespace
-            if (isspace(c))
+            if (c == '\x20' || c == '\x09' || c == '\x0D' || c == '\x0A')
             {
                 if (c == '\n')
                 {
@@ -64,12 +66,16 @@ Token Scanner::lex(fstream &inputFile, Utility &util)
             // comments
             case '/':
             {
-                while (!inputFile.eof() && c != '\n')
+                char nextChar = inputFile.peek();
+                if (nextChar == '/')
                 {
-                    inputFile.get(c);
+                    while (!inputFile.eof() && c != '\n')
+                    {
+                        inputFile.get(c);
+                    }
+                    inputFile.putback(c);
+                    continue;
                 }
-                inputFile.putback(c);
-                continue;
             }
 
             // singletons
@@ -175,6 +181,65 @@ Token Scanner::lex(fstream &inputFile, Utility &util)
                 break;
             }
 
+            // string literals
+            case '"':
+            {
+                inputFile.get(c);
+                string str = "";
+                while (((c >= 0 && c <= 127) || c == '"') && !inputFile.eof() && c != '\n')
+                {
+                    if (c == '\\')
+                    {
+                        char nextChar = inputFile.peek();
+                        if (escapeChars.count(nextChar) <= 0)
+                        {
+                            inputFile.get(c);
+                            string message = "bad string escape '";
+                            message += c;
+                            message += '\'';
+
+                            if (inputFile.eof())
+                            {
+                                message = "string terminated by EOF";
+                            }
+                            else if (c == '\n')
+                            {
+                                message = "string contains newline";
+                            }
+                            util.error(message, getLineNum());
+                        }
+                        // if there is \" escape_char
+                        else if (nextChar == '"')
+                        {
+                            // add backslash to string
+                            str += c;
+                            inputFile.get(c);
+                        }
+                    }
+                    else if (c == '"')
+                    {
+                        break;
+                    }
+
+                    str += c;
+                    inputFile.get(c);
+                }
+
+                if (inputFile.eof())
+                {
+                    util.error("string terminated by EOF", getLineNum());
+                }
+                else if (c == '\n')
+                {
+                    util.error("string contains newline", getLineNum());
+                }
+                else if (c == '"')
+                {
+                    setLastToken(Token("string", str, getLineNum()));
+                }
+                break;
+            }
+
             default:
             {
                 // integer literals
@@ -222,7 +287,19 @@ Token Scanner::lex(fstream &inputFile, Utility &util)
                 }
                 else
                 {
-                    util.warning("unknown character", getLineNum());
+                    string message = "skipping unknown character '";
+                    message += c;
+                    message += '\'';
+
+                    if (c == '\x00')
+                    {
+                        message = "skipping NUL character";
+                    }
+                    else if (c < 0 || c > 127)
+                    {
+                        message = "skipping non-ASCII input character";
+                    }
+                    util.warning(message, getLineNum());
                     continue;
                 }
             }
