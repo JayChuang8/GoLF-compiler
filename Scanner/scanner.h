@@ -10,26 +10,25 @@
 #include <string>
 using namespace std;
 
-
 class Scanner
 {
-    public:
-        Scanner();
+public:
+    Scanner();
 
-        int lineNum;
-        Token lastToken;
-        bool reread;
+    int lineNum;
+    Token lastToken;
+    bool reread;
 
-        Token lex(fstream& inputFile);
-        void unlex();
+    Token lex(fstream &inputFile, Utility &util);
+    void unlex();
 
-    private:
-        int getLineNum();
-        void incrementLineNum();
-        Token getLastToken();
-        void setLastToken(Token t);
-        bool getReread();
-        void setReread(bool r);
+private:
+    int getLineNum();
+    void incrementLineNum();
+    Token getLastToken();
+    void setLastToken(Token t);
+    bool getReread();
+    void setReread(bool r);
 };
 
 #endif

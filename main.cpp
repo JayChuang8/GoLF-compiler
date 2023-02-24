@@ -5,24 +5,26 @@
 #include "./scanner/token.h"
 #include "./utility/utility.h"
 
-
-int main(int argc, char *argv[]) 
+int main(int argc, char *argv[])
 {
     // Check command line input for correct number of arguments
-    if (argc != 2) {
-        std::cerr << "Error: Requires 1 input file" << "\n";
+    if (argc != 2)
+    {
+        std::cerr << "Error: Requires 1 input file"
+                  << "\n";
         exit(0);
     }
 
     // Open input file
-    Utility& util = Utility::getInstance();
+    Utility &util = Utility::getInstance();
     fstream inputFile;
     util.openInputFile(inputFile, argv[1]);
 
     // Scanner
     Scanner scanner;
     Token token;
-    while((token = scanner.lex(inputFile)).attribute != "EOF") {
+    while ((token = scanner.lex(inputFile, util)).attribute != "EOF")
+    {
         cout << token.type << "     [" << token.attribute << "] @ line " << token.lineNum << endl;
     }
 

@@ -6,36 +6,39 @@
 #include <string>
 using namespace std;
 
-
 #define MaxWarnings 10
 
-Utility& Utility::getInstance()
+Utility &Utility::getInstance()
 {
     static Utility instance;
     return instance;
 }
 
-void Utility::openInputFile(fstream& inputFile, const char *fileName)
+void Utility::openInputFile(fstream &inputFile, const char *fileName)
 {
     inputFile.open(fileName, ios::in);
-    if(!inputFile) {
+    if (!inputFile)
+    {
         cerr << "Error: file '" << fileName << "' could not be opened" << endl;
         exit(1);
     }
 }
 
-void Utility::closeInputFile(fstream& inputFile)
+void Utility::closeInputFile(fstream &inputFile)
 {
-	inputFile.close();
+    inputFile.close();
 }
 
 void Utility::error(string message, int lineNum = 0)
 {
     string errorMessage;
 
-    if(lineNum == 0) {
+    if (lineNum == 0)
+    {
         errorMessage = message;
-    } else {
+    }
+    else
+    {
         errorMessage = message + " at or near " + to_string(lineNum);
     }
 
@@ -49,7 +52,8 @@ void Utility::warning(string message, int lineNum)
 
     Utility::numWarnings++;
 
-    if(numWarnings > MaxWarnings) {
+    if (numWarnings > MaxWarnings)
+    {
         error("Too many warnings", lineNum);
     }
 }

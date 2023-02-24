@@ -5,16 +5,15 @@
 #include <stdio.h>
 using namespace std;
 
-
 class Token
 {
-    public:
-        Token();
-        Token(string type, string attribute, int linNum);
+public:
+    Token();
+    Token(string type, string attribute, int linNum);
 
-        string type;
-        string attribute;
-        int lineNum;
+    string type;
+    string attribute;
+    int lineNum;
 };
 
 #endif
