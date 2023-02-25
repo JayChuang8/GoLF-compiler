@@ -19,6 +19,7 @@ public:
     int lineNum;
     Token lastToken;
     bool reread;
+    bool insertSemicolon;
 
     Token lex(fstream &inputFile, Utility &util);
     void unlex();
@@ -30,6 +31,8 @@ private:
     void setLastToken(Token t);
     bool getReread();
     void setReread(bool r);
+    bool getInsertSemicolon();
+    void setInsertSemicolon(bool s);
 };
 
 #endif

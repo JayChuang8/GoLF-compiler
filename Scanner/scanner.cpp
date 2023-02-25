@@ -38,6 +38,13 @@ Token Scanner::lex(fstream &inputFile, Utility &util)
         return getLastToken();
     }
 
+    if (getInsertSemicolon() == true)
+    {
+        setInsertSemicolon(false);
+        setLastToken(Token(";", "", getLineNum()));
+        return getLastToken();
+    }
+
     if (inputFile.is_open())
     {
         while (true)
@@ -91,6 +98,11 @@ Token Scanner::lex(fstream &inputFile, Utility &util)
             case ';':
             {
                 setLastToken(Token(string(1, c), string(1, c), getLineNum()));
+
+                if ((inputFile.peek() == '\n' || inputFile.peek() == EOF) && (c == ')' || c == '}'))
+                {
+                    setInsertSemicolon(true);
+                }
                 break;
             }
 
@@ -236,6 +248,11 @@ Token Scanner::lex(fstream &inputFile, Utility &util)
                 else if (c == '"')
                 {
                     setLastToken(Token("string", str, getLineNum()));
+
+                    if ((inputFile.peek() == '\n' || inputFile.peek() == EOF))
+                    {
+                        setInsertSemicolon(true);
+                    }
                 }
                 break;
             }
@@ -252,6 +269,11 @@ Token Scanner::lex(fstream &inputFile, Utility &util)
                         inputFile.get(c);
                     }
                     setLastToken(Token("int", num, getLineNum()));
+
+                    if (c == '\n' || inputFile.eof())
+                    {
+                        setInsertSemicolon(true);
+                    }
 
                     // If the token is the last in the file, don't putback the EOF
                     if (!inputFile.eof())
@@ -273,10 +295,20 @@ Token Scanner::lex(fstream &inputFile, Utility &util)
                     if (keywords.count(id) > 0)
                     {
                         setLastToken(Token(id, id, getLineNum()));
+
+                        if ((c == '\n' || inputFile.eof()) && (id == "break" || id == "return"))
+                        {
+                            setInsertSemicolon(true);
+                        }
                     }
                     else
                     {
                         setLastToken(Token("id", id, getLineNum()));
+
+                        if ((c == '\n' || inputFile.eof()))
+                        {
+                            setInsertSemicolon(true);
+                        }
                     }
 
                     // If the token is the last in the file, don't putback the EOF
@@ -339,4 +371,14 @@ bool Scanner::getReread()
 void Scanner::setReread(bool r)
 {
     reread = r;
+}
+
+bool Scanner::getInsertSemicolon()
+{
+    return insertSemicolon;
+}
+
+void Scanner::setInsertSemicolon(bool s)
+{
+    insertSemicolon = s;
 }

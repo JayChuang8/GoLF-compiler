@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <iostream>
+#include <iomanip>
 
 #include "./scanner/scanner.h"
 #include "./scanner/token.h"
@@ -25,7 +26,7 @@ int main(int argc, char *argv[])
     Token token;
     while ((token = scanner.lex(inputFile, util)).attribute != "EOF")
     {
-        cout << token.type << "     [" << token.attribute << "] @ line " << token.lineNum << endl;
+        cout << setw(10) << token.type << "     [" << token.attribute << "] @ line " << token.lineNum << endl;
     }
 
     // Close input file
