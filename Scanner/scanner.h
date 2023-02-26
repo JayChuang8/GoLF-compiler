@@ -14,17 +14,20 @@ using namespace std;
 class Scanner
 {
 public:
-    Scanner();
+    Scanner(fstream &inputFile, Utility &util);
 
     int lineNum;
     Token lastToken;
     bool reread;
     bool insertSemicolon;
 
-    Token lex(fstream &inputFile, Utility &util);
+    Token lex();
     void unlex();
 
 private:
+    Utility &util;
+    fstream &inputFile;
+
     int getLineNum();
     void incrementLineNum();
     Token getLastToken();

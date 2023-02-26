@@ -5,6 +5,8 @@
 #include "./scanner/scanner.h"
 #include "./scanner/token.h"
 #include "./utility/utility.h"
+#include "./parser/parser.h"
+#include "./parser/ast.h"
 
 int main(int argc, char *argv[])
 {
@@ -22,12 +24,17 @@ int main(int argc, char *argv[])
     util.openInputFile(inputFile, argv[1]);
 
     // Scanner
-    Scanner scanner;
+    Scanner scanner(inputFile, util);
     Token token;
-    while ((token = scanner.lex(inputFile, util)).attribute != "EOF")
+    while ((token = scanner.lex()).attribute != "EOF")
     {
         cout << setw(10) << token.type << "     [" << token.attribute << "] @ line " << token.lineNum << endl;
     }
+
+    // Parser
+    // Scanner scanner(inputFile, util);
+    // Parser parser;
+    // AST ast = parser.parse(scanner);
 
     // Close input file
     util.closeInputFile(inputFile);

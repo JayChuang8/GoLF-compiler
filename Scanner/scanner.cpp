@@ -18,7 +18,7 @@ const unordered_set<string> semicolonTokens = {
 
 const unordered_set<char> escapeChars = {'b', 'f', 'n', 'r', 't', '\\', '"'};
 
-Scanner::Scanner()
+Scanner::Scanner(fstream &inputFile, Utility &util) : inputFile(inputFile), util(util)
 {
     lineNum = 1;
 }
@@ -28,7 +28,7 @@ void Scanner::unlex()
     this->reread = true;
 }
 
-Token Scanner::lex(fstream &inputFile, Utility &util)
+Token Scanner::lex()
 {
     char c;
 
