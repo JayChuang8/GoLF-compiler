@@ -24,17 +24,17 @@ int main(int argc, char *argv[])
     util.openInputFile(inputFile, argv[1]);
 
     // Scanner
-    Scanner scanner(inputFile, util);
-    Token token;
-    while ((token = scanner.lex()).attribute != "EOF")
-    {
-        cout << setw(10) << token.type << "     [" << token.attribute << "] @ line " << token.lineNum << endl;
-    }
+    // Scanner scanner(inputFile, util);
+    // Token token;
+    // while ((token = scanner.lex()).attribute != "EOF")
+    // {
+    //     cout << setw(10) << token.type << "     [" << token.attribute << "] @ line " << token.lineNum << endl;
+    // }
 
     // Parser
-    // Scanner scanner(inputFile, util);
-    // Parser parser;
-    // AST ast = parser.parse(scanner);
+    Scanner scanner(inputFile, util);
+    Parser parser(scanner, util);
+    AST ast = parser.parse();
 
     // Close input file
     util.closeInputFile(inputFile);
