@@ -16,6 +16,7 @@ public:
     AST &setChildren(vector<AST> children);
     AST &addChild(AST child);
     int getKidsLength(AST *self);
+    void printAST(const AST &ast, int indent);
 
     string type;
     string attribute;

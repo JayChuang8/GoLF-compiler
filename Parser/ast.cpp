@@ -47,3 +47,18 @@ int AST::getKidsLength(AST *self)
 {
     return self->kids.size();
 }
+
+void AST::printAST(const AST &ast, int indent = 0)
+{
+    for (int i = 0; i < indent; i++)
+    {
+        cout << " ";
+    }
+
+    cout << ast.type << " [" << ast.attribute << "] " << ast.lineNum << endl;
+
+    for (const AST &child : ast.kids)
+    {
+        printAST(child, indent + 4);
+    }
+}

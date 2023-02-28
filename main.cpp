@@ -36,6 +36,8 @@ int main(int argc, char *argv[])
     Parser parser(scanner, util);
     AST ast = parser.parse();
 
+    ast.printAST(ast, 0);
+
     // Close input file
     util.closeInputFile(inputFile);
 
