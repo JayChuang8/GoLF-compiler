@@ -1,0 +1,517 @@
+Run started on Tue Feb 28 17:13:37 2023
+
+Hostname: DESKTOP-LH91K7L
+
+-------------------------------------------------------------------------------
+Running make |
+--------------
+
+% /usr/bin/make
+
+STDOUT:
+/usr/bin/make -C Scanner
+make[1]: Entering directory '/mnt/c/Projects/golf-compiler/Scanner'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/mnt/c/Projects/golf-compiler/Scanner'
+/usr/bin/make -C Utility
+make[1]: Entering directory '/mnt/c/Projects/golf-compiler/Utility'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/mnt/c/Projects/golf-compiler/Utility'
+/usr/bin/make -C Parser
+make[1]: Entering directory '/mnt/c/Projects/golf-compiler/Parser'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/mnt/c/Projects/golf-compiler/Parser'
+g++ -o main.o -c main.cpp -MMD -MF main.d
+g++ -o golf main.o Scanner/token.o Scanner/scanner.o Utility/utility.o Parser/parser.o Parser/ast.o
+
+
+STDERR:
+make: Warning: File 'main.d' has modification time 21415 s in the future
+make[1]: Warning: File 'parser.d' has modification time 21340 s in the future
+make[1]: warning:  Clock skew detected.  Your build may be incomplete.
+make: warning:  Clock skew detected.  Your build may be incomplete.
+
+
+RETURN CODE: 0
+
+-------------------------------------------------------------------------------
+Locating GoLF compiler |
+------------------------
+
+Compiler will be run as ./golf
+
+-------------------------------------------------------------------------------
+Test: too few arguments |
+-------------------------
+
+% ./golf
+
+STDOUT:
+
+
+STDERR:
+Error: Requires 1 input file
+
+
+RETURN CODE: 0
+
+-------------------------------------------------------------------------------
+Test: too many arguments |
+--------------------------
+
+% ./golf /dev/null /dev/zero
+
+STDOUT:
+
+
+STDERR:
+Error: Requires 1 input file
+
+
+RETURN CODE: 0
+
+-------------------------------------------------------------------------------
+Test: nonexistent file |
+------------------------
+
+% ./golf /i/do/not/exist
+
+STDOUT:
+
+
+STDERR:
+Error: file '/i/do/not/exist' could not be opened
+
+
+RETURN CODE: 1
+
+-------------------------------------------------------------------------------
+Test: func open brace in wrong place |
+--------------------------------------
+
+% ./golf ./test/ms2/parse.t1
+
+STDOUT:
+
+
+STDERR:
+Error: unexpected ;, expected { at or near 3
+
+
+RETURN CODE: 1
+
+-------------------------------------------------------------------------------
+Test: "for" open brace exception |
+----------------------------------
+
+% ./golf ./test/ms2/parse.t2
+
+STDOUT:
+program 
+    func @ line 4
+        newid [main] @ line 4
+        sig 
+            formals 
+        block 
+            for @ line 5
+                block 
+
+
+STDERR:
+
+
+RETURN CODE: 0
+
+-------------------------------------------------------------------------------
+Test: "for" open brace in wrong place |
+---------------------------------------
+
+% ./golf ./test/ms2/parse.t3
+
+STDOUT:
+
+
+STDERR:
+Error: unexpected ;, expected { at or near 4
+
+
+RETURN CODE: 1
+
+-------------------------------------------------------------------------------
+Test: "if" open brace in wrong place |
+--------------------------------------
+
+% ./golf ./test/ms2/parse.t4
+
+STDOUT:
+
+
+STDERR:
+Error: unexpected ;, expected { at or near 4
+
+
+RETURN CODE: 1
+
+-------------------------------------------------------------------------------
+Test: weird but correct formatting |
+------------------------------------
+
+% ./golf ./test/ms2/parse.t5
+
+STDOUT:
+program 
+    func @ line 3
+        newid [main] @ line 3
+        sig 
+            formals 
+        block 
+            if @ line 5
+                + [+] @ line 5
+                    int [2] @ line 5
+                    == [==] @ line 6
+                        int [3] @ line 6
+                        int [5] @ line 7
+                block 
+
+
+STDERR:
+
+
+RETURN CODE: 0
+
+-------------------------------------------------------------------------------
+Test: precedence check |
+------------------------
+
+% ./golf ./test/ms2/parse.t6
+
+STDOUT:
+
+
+STDERR:
+Error: unexpected =, expected ; at or near 5
+
+
+RETURN CODE: 1
+
+-------------------------------------------------------------------------------
+Test: formal and actual params |
+--------------------------------
+
+% ./golf ./test/ms2/parse.t7
+
+STDOUT:
+program 
+    func @ line 3
+        newid [foo] @ line 3
+        sig 
+            formals 
+        block 
+    func @ line 6
+        newid [bar] @ line 6
+        sig 
+            , [,] @ line 6
+                , [,] @ line 6
+                    id [a1] @ line 6
+                        id [int] @ line 6
+                    id [a2] @ line 6
+                        id [bool] @ line 6
+                id [a3] @ line 6
+                    id [sometype] @ line 6
+            id [returntype] @ line 6
+        block 
+    func @ line 9
+        newid [baz] @ line 9
+        sig 
+            formals 
+            id [int] @ line 9
+        block 
+            id [blarg] @ line 10
+                Arguments [(] @ line 10
+                    , [,] @ line 13
+                        , [,] @ line 12
+                            , [,] @ line 11
+                                + [+] @ line 11
+                                    int [123] @ line 11
+                                    int [456] @ line 11
+                                id [garble] @ line 12
+                                    Arguments [(] @ line 12
+                                        int [789] @ line 12
+                            id [true] @ line 13
+                        id [greep] @ line 14
+                            Arguments [(] @ line 14
+                                , [,] @ line 14
+                                    id [false] @ line 14
+                                    string [eek] @ line 14
+
+
+STDERR:
+
+
+RETURN CODE: 0
+
+-------------------------------------------------------------------------------
+Test: unary and binary minus |
+------------------------------
+
+% ./golf ./test/ms2/parse.t8
+
+STDOUT:
+
+
+STDERR:
+Error: unexpected =, expected ; at or near 4
+
+
+RETURN CODE: 1
+
+-------------------------------------------------------------------------------
+Test: func open brace in wrong place, with semicolon |
+------------------------------------------------------
+
+% ./golf ./test/ms2/parse.t9
+
+STDOUT:
+
+
+STDERR:
+Error: unexpected ;, expected { at or near 4
+
+
+RETURN CODE: 1
+
+-------------------------------------------------------------------------------
+Test: func open brace with bonus semicolon |
+--------------------------------------------
+
+% ./golf ./test/ms2/parse.t10
+
+STDOUT:
+
+
+STDERR:
+Error: unexpected ;, expected { at or near 4
+
+
+RETURN CODE: 1
+
+-------------------------------------------------------------------------------
+Test: "for" open brace in wrong place, with semicolon |
+-------------------------------------------------------
+
+% ./golf ./test/ms2/parse.t11
+
+STDOUT:
+
+
+STDERR:
+Error: unexpected ;, expected { at or near 5
+
+
+RETURN CODE: 1
+
+-------------------------------------------------------------------------------
+Test: "for" with bonus semicolon |
+----------------------------------
+
+% ./golf ./test/ms2/parse.t12
+
+STDOUT:
+
+
+STDERR:
+Error: unexpected ;, expected { at or near 5
+
+
+RETURN CODE: 1
+
+-------------------------------------------------------------------------------
+Test: "if" open brace in wrong place, with semicolon |
+------------------------------------------------------
+
+% ./golf ./test/ms2/parse.t13
+
+STDOUT:
+
+
+STDERR:
+Error: unexpected ;, expected { at or near 5
+
+
+RETURN CODE: 1
+
+-------------------------------------------------------------------------------
+Test: "if" with bonus semicolon |
+---------------------------------
+
+% ./golf ./test/ms2/parse.t14
+
+STDOUT:
+
+
+STDERR:
+Error: unexpected ;, expected { at or near 5
+
+
+RETURN CODE: 1
+
+-------------------------------------------------------------------------------
+Test: func line breaks using trailing commas |
+----------------------------------------------
+
+% ./golf ./test/ms2/parse.t15
+
+STDOUT:
+
+
+STDERR:
+Error: unexpected ), expected id at or near 6
+
+
+RETURN CODE: 1
+
+-------------------------------------------------------------------------------
+Test: func line breaks sans trailing comma |
+--------------------------------------------
+
+% ./golf ./test/ms2/parse.t16
+
+STDOUT:
+
+
+STDERR:
+Error: unexpected ;, expected ) at or near 6
+
+
+RETURN CODE: 1
+
+-------------------------------------------------------------------------------
+Test: func call line breaks with trailing commas |
+--------------------------------------------------
+
+% ./golf ./test/ms2/parse.t17
+
+STDOUT:
+
+
+STDERR:
+Error: expected Operand at or near 7
+
+
+RETURN CODE: 1
+
+-------------------------------------------------------------------------------
+Test: func call line breaks sans trailing comma |
+-------------------------------------------------
+
+% ./golf ./test/ms2/parse.t18
+
+STDOUT:
+
+
+STDERR:
+Error: unexpected ;, expected ) at or near 7
+
+
+RETURN CODE: 1
+
+-------------------------------------------------------------------------------
+Test: legit syntax salad |
+--------------------------
+
+% ./golf ./test/ms2/parse.t19
+
+STDOUT:
+
+
+STDERR:
+Error: Expected source file at or near 1
+
+
+RETURN CODE: 1
+
+-------------------------------------------------------------------------------
+Test: assignment |
+------------------
+
+% ./golf ./test/ms2/parse.t20
+
+STDOUT:
+
+
+STDERR:
+Error: unexpected =, expected ; at or near 7
+
+
+RETURN CODE: 1
+
+-------------------------------------------------------------------------------
+Test: associativity test |
+--------------------------
+
+% ./golf ./test/ms2/parse.t21
+
+STDOUT:
+program 
+    func @ line 3
+        newid [a_sock] @ line 3
+        sig 
+            formals 
+        block 
+            var [var] @ line 4
+                id [a] @ line 4
+                    id [int] @ line 4
+            var [var] @ line 5
+                id [b] @ line 5
+                    id [int] @ line 5
+            var [var] @ line 6
+                id [c] @ line 6
+                    id [int] @ line 6
+            var [var] @ line 7
+                id [d] @ line 7
+                    id [int] @ line 7
+            var [var] @ line 8
+                id [e] @ line 8
+                    id [int] @ line 8
+            + [+] @ line 10
+                id [a] @ line 10
+                + [+] @ line 10
+                    id [b] @ line 10
+                    + [+] @ line 10
+                        id [c] @ line 10
+                        + [+] @ line 10
+                            id [d] @ line 10
+                            id [e] @ line 10
+            / [/] @ line 11
+                id [a] @ line 11
+                / [/] @ line 11
+                    id [b] @ line 11
+                    / [/] @ line 11
+                        id [d] @ line 11
+                        / [/] @ line 11
+                            id [d] @ line 11
+                            id [e] @ line 11
+
+
+STDERR:
+
+
+RETURN CODE: 0
+
+-------------------------------------------------------------------------------
+Test: a calculated move |
+-------------------------
+
+% ./golf ./test/ms2/gen.t18
+
+STDOUT:
+
+
+STDERR:
+Error: unexpected =, expected ; at or near 19
+
+
+RETURN CODE: 1
+
+Run ended on Tue Feb 28 17:13:38 2023
+

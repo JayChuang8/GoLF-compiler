@@ -15,7 +15,7 @@ AST::AST(string t) : kids()
 {
     type = t;
     attribute = "";
-    lineNum = 0;
+    lineNum = -1;
 }
 
 AST::AST(string t, int l) : kids()
@@ -50,15 +50,46 @@ int AST::getKidsLength(AST *self)
 
 void AST::printAST(const AST &ast, int indent = 0)
 {
-    for (int i = 0; i < indent; i++)
+    if (!ast.type.empty())
     {
-        cout << " ";
-    }
+        for (int i = 0; i < indent; i++)
+        {
+            cout << " ";
+        }
 
-    cout << ast.type << " [" << ast.attribute << "] " << ast.lineNum << endl;
+        string str = ast.type + " [" + ast.attribute + "]";
+        string substring = "[]";
 
-    for (const AST &child : ast.kids)
-    {
-        printAST(child, indent + 4);
+        // Find the position of the substring
+        size_t pos = str.find(substring);
+
+        if (pos != string::npos)
+        {
+            // Extract the part of the string before the substring
+            string before = str.substr(0, pos);
+
+            // Extract the part of the string after the substring
+            string after = str.substr(pos + substring.length());
+
+            // Print the modified string
+            if (ast.lineNum < 0)
+            {
+                cout << before << after << endl;
+            }
+            else
+            {
+                cout << before << after << "@ line " << ast.lineNum << endl;
+            }
+        }
+        else
+        {
+            // Substring not found
+            cout << str << " @ line " << ast.lineNum << endl;
+        }
+
+        for (const AST &child : ast.kids)
+        {
+            printAST(child, indent + 4);
+        }
     }
 }
