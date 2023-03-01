@@ -138,7 +138,6 @@ Token Scanner::lex()
                 inputFile.get(c);
                 if (c == '=')
                 {
-                    // replace with util error method later
                     setLastToken(Token("==", "==", getLineNum()));
                 }
                 else
@@ -146,13 +145,13 @@ Token Scanner::lex()
                     inputFile.putback(c);
                     setLastToken(Token("=", "=", getLineNum()));
                 }
+                break;
             }
             case '<':
             {
                 inputFile.get(c);
                 if (c == '=')
                 {
-                    // replace with util error method later
                     setLastToken(Token("<=", "<=", getLineNum()));
                 }
                 else
@@ -167,7 +166,6 @@ Token Scanner::lex()
                 inputFile.get(c);
                 if (c == '=')
                 {
-                    // replace with util error method later
                     setLastToken(Token(">=", ">=", getLineNum()));
                 }
                 else
@@ -182,7 +180,6 @@ Token Scanner::lex()
                 inputFile.get(c);
                 if (c == '=')
                 {
-                    // replace with util error method later
                     setLastToken(Token("!=", "!=", getLineNum()));
                 }
                 else
