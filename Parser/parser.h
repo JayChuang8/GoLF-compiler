@@ -23,6 +23,8 @@ public:
 private:
     Token expect(string type);
 
+    AST AddOpExpr();
+    AST AndOpExpr();
     AST Arguments();
     AST Assignment();
     AST BasicLit();
@@ -33,7 +35,6 @@ private:
     AST EmptyStmt();
     AST Expression();
     AST ExpressionList();
-    AST ExpressionRest();
     AST ExpressionStmt();
     AST ForStmt();
     AST FunctionBody();
@@ -41,13 +42,15 @@ private:
     AST FunctionName();
     AST IfStmt();
     AST Literal();
+    AST MulOpExpr();
     AST Operand();
     AST OperandName();
+    AST OrOpExpr();
     AST ParameterDecl();
     AST ParameterList();
     AST Parameters();
     AST PrimaryExpr();
-    AST PrimaryExprRest();
+    AST RelOpExpr();
     AST Result();
     AST ReturnStmt();
     AST Signature();
