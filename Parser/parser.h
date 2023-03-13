@@ -36,6 +36,7 @@ private:
     AST Expression();
     AST ExpressionList();
     AST ExpressionStmt();
+    AST ExpressionStmtOrAssignment();
     AST ForStmt();
     AST FunctionBody();
     AST FunctionDecl();

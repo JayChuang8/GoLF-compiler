@@ -14,17 +14,14 @@ using namespace std;
 const unordered_set<string> ADDOP = {"+", "-"};
 const unordered_set<string> ANDOP = {"&&"};
 const unordered_set<string> ARGUMENTS = {"("};
-const unordered_set<string> ASSIGNMENT = {"-", "!", "int", "string", "id", "("};
+const unordered_set<string> ASSIGNOP = {"="};
 const unordered_set<string> BASICLIT = {"int", "string"};
 const unordered_set<string> BINARYOP = {"||", "&&", "==", "!=", "<", "<=", ">", ">=", "+", "-", "*", "/", "%"};
 const unordered_set<string> BLOCK = {"{"};
 const unordered_set<string> BREAKSTMT = {"break"};
-const unordered_set<string> CONDITION = {"-", "!", "int", "string", "id", "("};
 const unordered_set<string> DECLARATION = {"var"};
 const unordered_set<string> EMPTYSTMT = {";"};
 const unordered_set<string> EXPRESSION = {"-", "!", "int", "string", "id", "("};
-const unordered_set<string> EXPRESSIONLIST = {"-", "!", "int", "string", "id", "("};
-const unordered_set<string> EXPRESSIONSTMT = {"-", "!", "int", "string", "id", "("};
 const unordered_set<string> FORSTMT = {"for"};
 const unordered_set<string> FUNCTIONDECL = {"func"};
 const unordered_set<string> IFSTMT = {"if"};
@@ -101,7 +98,7 @@ AST Parser::Arguments()
         // Dont want to add ")" to children?
         // ast.addChild(child);
     }
-    else if (EXPRESSIONLIST.count(token.type) > 0)
+    else if (EXPRESSION.count(token.type) > 0)
     {
         scanner.unlex();
 
@@ -213,12 +210,30 @@ AST Parser::ExpressionStmt()
     return ast;
 }
 
+AST Parser::ExpressionStmtOrAssignment()
+{
+    AST ast = Expression();
+    Token token = scanner.lex();
+
+    if (ASSIGNOP.count(token.type) > 0)
+    {
+
+        AST child(Expression());
+        ast.addChild(child);
+    }
+    else
+    {
+        scanner.unlex();
+    }
+    return ast;
+}
+
 AST Parser::ForStmt()
 {
     Token token = expect("for");
     AST ast = AST(token.type, token.lineNum);
 
-    if (CONDITION.count((token = scanner.lex()).type) > 0)
+    if (EXPRESSION.count((token = scanner.lex()).type) > 0)
     {
         scanner.unlex();
         AST child(Condition());
@@ -508,15 +523,10 @@ AST Parser::SimpleStmt()
         scanner.unlex();
         ast = EmptyStmt();
     }
-    else if (EXPRESSIONSTMT.count(token.type) > 0)
+    else if (EXPRESSION.count(token.type) > 0)
     {
         scanner.unlex();
-        ast = ExpressionStmt();
-    }
-    else if (ASSIGNMENT.count(token.type) > 0)
-    {
-        scanner.unlex();
-        ast = Assignment();
+        ast = ExpressionStmtOrAssignment();
     }
     else
     {
