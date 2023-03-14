@@ -1,4 +1,4 @@
-Run started on Tue Feb 28 17:13:37 2023
+Run started on Tue Mar 14 15:26:20 2023
 
 Hostname: DESKTOP-LH91K7L
 
@@ -26,10 +26,6 @@ g++ -o golf main.o Scanner/token.o Scanner/scanner.o Utility/utility.o Parser/pa
 
 
 STDERR:
-make: Warning: File 'main.d' has modification time 21415 s in the future
-make[1]: Warning: File 'parser.d' has modification time 21340 s in the future
-make[1]: warning:  Clock skew detected.  Your build may be incomplete.
-make: warning:  Clock skew detected.  Your build may be incomplete.
 
 
 RETURN CODE: 0
@@ -109,11 +105,11 @@ Test: "for" open brace exception |
 STDOUT:
 program 
     func @ line 4
-        newid [main] @ line 4
+        functionName [main] @ line 4
         sig 
             formals 
         block 
-            for @ line 5
+            for [ForStmt for] @ line 5
                 block 
 
 
@@ -161,16 +157,16 @@ Test: weird but correct formatting |
 STDOUT:
 program 
     func @ line 3
-        newid [main] @ line 3
+        functionName [main] @ line 3
         sig 
             formals 
         block 
-            if @ line 5
-                + [+] @ line 5
-                    int [2] @ line 5
-                    == [==] @ line 6
-                        int [3] @ line 6
-                        int [5] @ line 7
+            if [IfStmt if] @ line 5
+                == [RelOpExpr ==] @ line 6
+                    + [AddOpExpr+] @ line 5
+                        int [BasicLit2] @ line 5
+                        int [BasicLit3] @ line 6
+                    int [BasicLit5] @ line 7
                 block 
 
 
@@ -186,13 +182,33 @@ Test: precedence check |
 % ./golf ./test/ms2/parse.t6
 
 STDOUT:
+program 
+    func @ line 4
+        functionName [foo] @ line 4
+        sig 
+            formals 
+            typeid [TypeName asdf] @ line 4
+        block 
+            = [ASSIGNOP=] @ line 5
+                id [OperandName x] @ line 5
+                + [AddOpExpr+] @ line 5
+                    int [BasicLit2] @ line 5
+                    * [MulOpExpr *] @ line 5
+                        int [BasicLit3] @ line 5
+                        int [BasicLit5] @ line 5
+            = [ASSIGNOP=] @ line 6
+                id [OperandName y] @ line 6
+                * [MulOpExpr *] @ line 6
+                    + [AddOpExpr+] @ line 6
+                        int [BasicLit2] @ line 6
+                        int [BasicLit3] @ line 6
+                    int [BasicLit5] @ line 6
 
 
 STDERR:
-Error: unexpected =, expected ; at or near 5
 
 
-RETURN CODE: 1
+RETURN CODE: 0
 
 -------------------------------------------------------------------------------
 Test: formal and actual params |
@@ -203,46 +219,48 @@ Test: formal and actual params |
 STDOUT:
 program 
     func @ line 3
-        newid [foo] @ line 3
+        functionName [foo] @ line 3
         sig 
             formals 
         block 
     func @ line 6
-        newid [bar] @ line 6
-        sig 
-            , [,] @ line 6
-                , [,] @ line 6
-                    id [a1] @ line 6
-                        id [int] @ line 6
-                    id [a2] @ line 6
-                        id [bool] @ line 6
-                id [a3] @ line 6
-                    id [sometype] @ line 6
-            id [returntype] @ line 6
-        block 
-    func @ line 9
-        newid [baz] @ line 9
+        functionName [bar] @ line 6
         sig 
             formals 
-            id [int] @ line 9
+                formal 
+                    id [a1] @ line 6
+                    typeid [TypeName int] @ line 6
+                formal 
+                    id [a2] @ line 6
+                    typeid [TypeName bool] @ line 6
+                formal 
+                    id [a3] @ line 6
+                    typeid [TypeName sometype] @ line 6
+            typeid [TypeName returntype] @ line 6
         block 
-            id [blarg] @ line 10
-                Arguments [(] @ line 10
-                    , [,] @ line 13
-                        , [,] @ line 12
-                            , [,] @ line 11
-                                + [+] @ line 11
-                                    int [123] @ line 11
-                                    int [456] @ line 11
-                                id [garble] @ line 12
-                                    Arguments [(] @ line 12
-                                        int [789] @ line 12
-                            id [true] @ line 13
-                        id [greep] @ line 14
-                            Arguments [(] @ line 14
-                                , [,] @ line 14
-                                    id [false] @ line 14
-                                    string [eek] @ line 14
+    func @ line 9
+        functionName [baz] @ line 9
+        sig 
+            formals 
+            typeid [TypeName int] @ line 9
+        block 
+            exprstmt @ line 10
+                funccall @ line 10
+                    id [OperandName blarg] @ line 10
+                    actuals 
+                        + [AddOpExpr+] @ line 11
+                            int [BasicLit123] @ line 11
+                            int [BasicLit456] @ line 11
+                        funccall @ line 12
+                            id [OperandName garble] @ line 12
+                            actuals 
+                                int [BasicLit789] @ line 12
+                        id [OperandName true] @ line 13
+                        funccall @ line 14
+                            id [OperandName greep] @ line 14
+                            actuals 
+                                id [OperandName false] @ line 14
+                                string [BasicLiteek] @ line 14
 
 
 STDERR:
@@ -257,13 +275,53 @@ Test: unary and binary minus |
 % ./golf ./test/ms2/parse.t8
 
 STDOUT:
+program 
+    func @ line 3
+        functionName [main] @ line 3
+        sig 
+            formals 
+        block 
+            = [ASSIGNOP=] @ line 4
+                id [OperandName x] @ line 4
+                - [AddOpExpr-] @ line 4
+                    id [OperandName a] @ line 4
+                    - [UNARYOP -] @ line 4
+                        int [BasicLit123] @ line 4
+            = [ASSIGNOP=] @ line 5
+                id [OperandName x] @ line 5
+                - [AddOpExpr-] @ line 5
+                    id [OperandName a] @ line 5
+                    - [UNARYOP -] @ line 5
+                        int [BasicLit123] @ line 5
+            = [ASSIGNOP=] @ line 6
+                id [OperandName x] @ line 6
+                - [AddOpExpr-] @ line 6
+                    id [OperandName a] @ line 6
+                    - [UNARYOP -] @ line 6
+                        - [UNARYOP -] @ line 6
+                            int [BasicLit123] @ line 6
+            = [ASSIGNOP=] @ line 7
+                id [OperandName x] @ line 7
+                - [AddOpExpr-] @ line 7
+                    id [OperandName a] @ line 7
+                    - [UNARYOP -] @ line 7
+                        id [OperandName b] @ line 7
+            = [ASSIGNOP=] @ line 8
+                id [OperandName x] @ line 8
+                - [UNARYOP -] @ line 8
+                    - [UNARYOP -] @ line 8
+                        - [UNARYOP -] @ line 8
+                            - [UNARYOP -] @ line 8
+                                - [UNARYOP -] @ line 8
+                                    - [UNARYOP -] @ line 8
+                                        - [UNARYOP -] @ line 8
+                                            id [OperandName x] @ line 8
 
 
 STDERR:
-Error: unexpected =, expected ; at or near 4
 
 
-RETURN CODE: 1
+RETURN CODE: 0
 
 -------------------------------------------------------------------------------
 Test: func open brace in wrong place, with semicolon |
@@ -362,13 +420,27 @@ Test: func line breaks using trailing commas |
 % ./golf ./test/ms2/parse.t15
 
 STDOUT:
+program 
+    func @ line 3
+        functionName [foo] @ line 3
+        sig 
+            formals 
+                formal 
+                    id [a] @ line 3
+                    typeid [TypeName int] @ line 3
+                formal 
+                    id [b] @ line 4
+                    typeid [TypeName int] @ line 4
+                formal 
+                    id [c] @ line 5
+                    typeid [TypeName int] @ line 5
+        block 
 
 
 STDERR:
-Error: unexpected ), expected id at or near 6
 
 
-RETURN CODE: 1
+RETURN CODE: 0
 
 -------------------------------------------------------------------------------
 Test: func line breaks sans trailing comma |
@@ -392,13 +464,25 @@ Test: func call line breaks with trailing commas |
 % ./golf ./test/ms2/parse.t17
 
 STDOUT:
+program 
+    func @ line 3
+        functionName [foo] @ line 3
+        sig 
+            formals 
+        block 
+            exprstmt @ line 4
+                funccall @ line 4
+                    id [OperandName garbled] @ line 4
+                    actuals 
+                        id [OperandName a] @ line 4
+                        id [OperandName b] @ line 5
+                        id [OperandName c] @ line 6
 
 
 STDERR:
-Error: expected Operand at or near 7
 
 
-RETURN CODE: 1
+RETURN CODE: 0
 
 -------------------------------------------------------------------------------
 Test: func call line breaks sans trailing comma |
@@ -425,7 +509,7 @@ STDOUT:
 
 
 STDERR:
-Error: Expected source file at or near 1
+Error: unexpected id, expected ; at or near 6
 
 
 RETURN CODE: 1
@@ -454,43 +538,45 @@ Test: associativity test |
 STDOUT:
 program 
     func @ line 3
-        newid [a_sock] @ line 3
+        functionName [a_sock] @ line 3
         sig 
             formals 
         block 
-            var [var] @ line 4
-                id [a] @ line 4
-                    id [int] @ line 4
-            var [var] @ line 5
-                id [b] @ line 5
-                    id [int] @ line 5
-            var [var] @ line 6
-                id [c] @ line 6
-                    id [int] @ line 6
-            var [var] @ line 7
-                id [d] @ line 7
-                    id [int] @ line 7
-            var [var] @ line 8
-                id [e] @ line 8
-                    id [int] @ line 8
-            + [+] @ line 10
-                id [a] @ line 10
-                + [+] @ line 10
-                    id [b] @ line 10
-                    + [+] @ line 10
-                        id [c] @ line 10
-                        + [+] @ line 10
-                            id [d] @ line 10
-                            id [e] @ line 10
-            / [/] @ line 11
-                id [a] @ line 11
-                / [/] @ line 11
-                    id [b] @ line 11
-                    / [/] @ line 11
-                        id [d] @ line 11
-                        / [/] @ line 11
-                            id [d] @ line 11
-                            id [e] @ line 11
+            var [VarDecl var] @ line 4
+                id [VarSpec a] @ line 4
+                    typeid [TypeName int] @ line 4
+            var [VarDecl var] @ line 5
+                id [VarSpec b] @ line 5
+                    typeid [TypeName int] @ line 5
+            var [VarDecl var] @ line 6
+                id [VarSpec c] @ line 6
+                    typeid [TypeName int] @ line 6
+            var [VarDecl var] @ line 7
+                id [VarSpec d] @ line 7
+                    typeid [TypeName int] @ line 7
+            var [VarDecl var] @ line 8
+                id [VarSpec e] @ line 8
+                    typeid [TypeName int] @ line 8
+            exprstmt @ line 10
+                + [AddOpExpr+] @ line 10
+                    + [AddOpExpr+] @ line 10
+                        + [AddOpExpr+] @ line 10
+                            + [AddOpExpr+] @ line 10
+                                id [OperandName a] @ line 10
+                                id [OperandName b] @ line 10
+                            id [OperandName c] @ line 10
+                        id [OperandName d] @ line 10
+                    id [OperandName e] @ line 10
+            exprstmt @ line 11
+                / [MulOpExpr /] @ line 11
+                    / [MulOpExpr /] @ line 11
+                        / [MulOpExpr /] @ line 11
+                            / [MulOpExpr /] @ line 11
+                                id [OperandName a] @ line 11
+                                id [OperandName b] @ line 11
+                            id [OperandName d] @ line 11
+                        id [OperandName d] @ line 11
+                    id [OperandName e] @ line 11
 
 
 STDERR:
@@ -508,10 +594,10 @@ STDOUT:
 
 
 STDERR:
-Error: unexpected =, expected ; at or near 19
+Error: unexpected id, expected ; at or near 55
 
 
 RETURN CODE: 1
 
-Run ended on Tue Feb 28 17:13:38 2023
+Run ended on Tue Mar 14 15:26:21 2023
 

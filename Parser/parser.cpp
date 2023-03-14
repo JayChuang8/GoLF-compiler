@@ -66,7 +66,7 @@ AST Parser::AddOpExpr()
     {
         AST R = MulOpExpr();
         vector<AST> children = {L, R};
-        L = AST(token.type, token.attribute, token.lineNum).setChildren(children);
+        L = AST(token.type, "AddOpExpr" + token.attribute, token.lineNum).setChildren(children);
     }
     scanner.unlex();
     return L;
@@ -90,7 +90,7 @@ AST Parser::AndOpExpr()
 AST Parser::Arguments()
 {
     Token token = expect("(");
-    AST ast = AST("Arguments", token.attribute, token.lineNum);
+    AST ast;
 
     if ((token = scanner.lex()).type == ")")
     {
@@ -102,9 +102,7 @@ AST Parser::Arguments()
     {
         scanner.unlex();
 
-        AST child(ExpressionList());
-        ast.addChild(child);
-
+        ast = ExpressionList();
         if ((token = scanner.lex()).type == ",")
         {
             // child = AST(token.type, token.attribute, token.lineNum);
@@ -191,17 +189,19 @@ AST Parser::Expression()
 
 AST Parser::ExpressionList()
 {
-    AST L = Expression();
+    AST ast = AST("actuals");
+    AST child = Expression();
+    ast.addChild(child);
 
     Token token;
-    while ((token = scanner.lex()).attribute == ",")
+    while ((token = scanner.lex()).type == "," && (token = scanner.lex()).type != ")")
     {
-        AST R = Expression();
-        vector<AST> children = {L, R};
-        L = AST(token.type, token.attribute, token.lineNum).setChildren(children);
+        scanner.unlex();
+        child = Expression();
+        ast.addChild(child);
     }
     scanner.unlex();
-    return L;
+    return ast;
 }
 
 AST Parser::ExpressionStmt()
@@ -210,28 +210,10 @@ AST Parser::ExpressionStmt()
     return ast;
 }
 
-AST Parser::ExpressionStmtOrAssignment()
-{
-    AST ast = Expression();
-    Token token = scanner.lex();
-
-    if (ASSIGNOP.count(token.type) > 0)
-    {
-
-        AST child(Expression());
-        ast.addChild(child);
-    }
-    else
-    {
-        scanner.unlex();
-    }
-    return ast;
-}
-
 AST Parser::ForStmt()
 {
     Token token = expect("for");
-    AST ast = AST(token.type, token.lineNum);
+    AST ast = AST(token.type, token.attribute, token.lineNum);
 
     if (EXPRESSION.count((token = scanner.lex()).type) > 0)
     {
@@ -258,7 +240,7 @@ AST Parser::FunctionBody()
 AST Parser::FunctionDecl()
 {
     Token token = expect("func");
-    AST ast = AST(token.type, token.lineNum);
+    AST ast = AST("func", token.lineNum);
     AST child(FunctionName());
     ast.addChild(child);
     child = AST(Signature());
@@ -271,7 +253,7 @@ AST Parser::FunctionDecl()
 AST Parser::FunctionName()
 {
     Token token = expect("id");
-    AST ast = AST("functionName", token.attribute, token.lineNum);
+    AST ast = AST("newid", token.attribute, token.lineNum);
     return ast;
 }
 
@@ -286,7 +268,7 @@ AST Parser::IfStmt()
 
     if ((token = scanner.lex()).attribute == "else")
     {
-        child = AST(token.type, token.attribute, token.lineNum);
+        child = AST(token.type, token.lineNum);
         ast.addChild(child);
 
         token = scanner.lex();
@@ -381,25 +363,28 @@ AST Parser::OrOpExpr()
 AST Parser::ParameterDecl()
 {
     Token token = expect("id");
-    AST ast = AST(token.type, token.attribute, token.lineNum);
-    AST child = AST(Type());
-    ast.addChild(child);
+    AST L = AST(token.type, token.attribute, token.lineNum);
+    AST R = Type();
+    vector<AST> children = {L, R};
+    AST ast = AST("formal").setChildren(children);
     return ast;
 }
 
 AST Parser::ParameterList()
 {
-    AST L = ParameterDecl();
+    AST ast = AST("formals");
+    AST child = ParameterDecl();
+    ast.addChild(child);
 
     Token token;
-    while ((token = scanner.lex()).type == ",")
+    while ((token = scanner.lex()).type == "," && (token = scanner.lex()).type != ")")
     {
-        AST R = ParameterDecl();
-        vector<AST> children = {L, R};
-        L = AST(token.type, token.attribute, token.lineNum).setChildren(children);
+        scanner.unlex();
+        child = ParameterDecl();
+        ast.addChild(child);
     }
     scanner.unlex();
-    return L;
+    return ast;
 }
 
 AST Parser::Parameters()
@@ -419,21 +404,12 @@ AST Parser::Parameters()
         AST child(ParameterList());
         ast.addChild(child);
 
-        if ((token = scanner.lex()).type == ",")
-        {
-            child = AST(token.type, token.attribute, token.lineNum);
-            // Dont want to add "," to children?
-            // ast.addChild(child);
-        }
-        else
+        if ((token = scanner.lex()).type != ",")
         {
             scanner.unlex();
         }
 
         token = expect(")");
-        child = AST(token.type, token.attribute, token.lineNum);
-        // Dont want to add ")" to children?
-        // ast.addChild(child);
     }
     else
     {
@@ -444,13 +420,16 @@ AST Parser::Parameters()
 
 AST Parser::PrimaryExpr()
 {
+    Token token = scanner.lex();
+    AST funcCall = AST("funccall", token.lineNum);
+    scanner.unlex();
     AST ast = Operand();
-    Token token;
 
     while (ARGUMENTS.count((token = scanner.lex()).type) > 0)
     {
+        ast = funcCall.addChild(ast);
         scanner.unlex();
-        AST child(Arguments());
+        AST child = Arguments();
         ast.addChild(child);
     }
     scanner.unlex();
@@ -525,8 +504,23 @@ AST Parser::SimpleStmt()
     }
     else if (EXPRESSION.count(token.type) > 0)
     {
+        AST exprtstmt = AST("exprstmt", token.lineNum);
+
         scanner.unlex();
-        ast = ExpressionStmtOrAssignment();
+        ast = Expression();
+
+        token = scanner.lex();
+        if (ASSIGNOP.count(token.type) > 0)
+        {
+            AST R = Expression();
+            vector<AST> children = {ast, R};
+            ast = AST(token.type, token.attribute, token.lineNum).setChildren(children);
+        }
+        else
+        {
+            ast = exprtstmt.addChild(ast);
+            scanner.unlex();
+        }
     }
     else
     {
@@ -644,7 +638,7 @@ AST Parser::Type()
 AST Parser::TypeName()
 {
     Token token = expect("id");
-    AST ast = AST(token.type, token.attribute, token.lineNum);
+    AST ast = AST("typeid", token.attribute, token.lineNum);
     return ast;
 }
 
@@ -660,7 +654,7 @@ AST Parser::UnaryExpr()
     }
     else if (UNARYOP.count(token.type) > 0)
     {
-        ast = AST(token.type, token.attribute, token.lineNum);
+        ast = AST(token.type, "UNARYOP " + token.attribute, token.lineNum);
         AST child(UnaryExpr());
         ast.addChild(child);
     }
@@ -675,7 +669,10 @@ AST Parser::VarDecl()
 {
     Token token = expect("var");
     AST ast = AST(token.type, token.attribute, token.lineNum);
-    AST child(VarSpec());
+    token = expect("id");
+    AST child = AST("newid", token.attribute, token.lineNum);
+    ast.addChild(child);
+    child = Type();
     ast.addChild(child);
     return ast;
 }
