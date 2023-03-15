@@ -20,6 +20,7 @@ const unordered_set<string> BINARYOP = {"||", "&&", "==", "!=", "<", "<=", ">", 
 const unordered_set<string> BLOCK = {"{"};
 const unordered_set<string> BREAKSTMT = {"break"};
 const unordered_set<string> DECLARATION = {"var"};
+const unordered_set<string> ELSESTMT = {"else"};
 const unordered_set<string> EMPTYSTMT = {";"};
 const unordered_set<string> EXPRESSION = {"-", "!", "int", "string", "id", "("};
 const unordered_set<string> FORSTMT = {"for"};
@@ -178,6 +179,8 @@ AST Parser::EmptyStmt()
 {
     Token token = expect(";");
     AST ast = AST("emptystmt", token.attribute, token.lineNum);
+    // unlex since empty statement does not do anything
+    scanner.unlex();
     return ast;
 }
 
@@ -266,27 +269,31 @@ AST Parser::IfStmt()
     child = AST(Block());
     ast.addChild(child);
 
-    if ((token = scanner.lex()).attribute == "else")
+    while (ELSESTMT.count((token = scanner.lex()).attribute) > 0)
     {
-        child = AST(token.type, token.lineNum);
-        ast.addChild(child);
-
-        token = scanner.lex();
-        if (IFSTMT.count(token.attribute) > 0)
+        Token elseToken = token;
+        if (IFSTMT.count((token = scanner.lex()).attribute) > 0)
         {
-            child = AST(IfStmt());
-            ast.addChild(child);
-        }
-        else if (BLOCK.count(token.attribute) > 0)
-        {
+            AST ifElse = AST("ifelse", token.lineNum);
+            AST child(Expression());
+            ifElse.addChild(child);
             child = AST(Block());
+            ifElse.addChild(child);
+            ast.addChild(ifElse);
+        }
+        else if (BLOCK.count(token.type) > 0)
+        {
+            scanner.unlex();
+            AST child(Block());
             ast.addChild(child);
+            return ast;
+        }
+        else
+        {
+            util.error("expected If Statement", token.lineNum);
         }
     }
-    else
-    {
-        scanner.unlex();
-    }
+    scanner.unlex();
     return ast;
 }
 
