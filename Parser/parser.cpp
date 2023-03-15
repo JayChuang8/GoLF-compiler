@@ -67,7 +67,7 @@ AST Parser::AddOpExpr()
     {
         AST R = MulOpExpr();
         vector<AST> children = {L, R};
-        L = AST(token.type, "AddOpExpr" + token.attribute, token.lineNum).setChildren(children);
+        L = AST(token.type, token.lineNum).setChildren(children);
     }
     scanner.unlex();
     return L;
@@ -82,7 +82,7 @@ AST Parser::AndOpExpr()
     {
         AST R = RelOpExpr();
         vector<AST> children = {L, R};
-        L = AST(token.type, token.attribute, token.lineNum).setChildren(children);
+        L = AST(token.type, token.lineNum).setChildren(children);
     }
     scanner.unlex();
     return L;
@@ -177,10 +177,7 @@ AST Parser::Declaration()
 
 AST Parser::EmptyStmt()
 {
-    Token token = expect(";");
-    AST ast = AST("emptystmt", token.attribute, token.lineNum);
-    // unlex since empty statement does not do anything
-    scanner.unlex();
+    AST ast = AST("emptystmt");
     return ast;
 }
 
@@ -312,7 +309,7 @@ AST Parser::MulOpExpr()
     {
         AST R = UnaryExpr();
         vector<AST> children = {L, R};
-        L = AST(token.type, token.attribute, token.lineNum).setChildren(children);
+        L = AST(token.type, token.lineNum).setChildren(children);
     }
     scanner.unlex();
     return L;
@@ -361,7 +358,7 @@ AST Parser::OrOpExpr()
     {
         AST R = AndOpExpr();
         vector<AST> children = {L, R};
-        L = AST(token.type, token.attribute, token.lineNum).setChildren(children);
+        L = AST(token.type, token.lineNum).setChildren(children);
     }
     scanner.unlex();
     return L;
@@ -452,7 +449,7 @@ AST Parser::RelOpExpr()
     {
         AST R = AddOpExpr();
         vector<AST> children = {L, R};
-        L = AST(token.type, token.attribute, token.lineNum).setChildren(children);
+        L = AST(token.type, token.lineNum).setChildren(children);
     }
     scanner.unlex();
     return L;
@@ -602,6 +599,17 @@ AST Parser::StatementList()
 {
     AST ast = AST("block");
     Token token;
+
+    // if block is empty
+    if ((token = scanner.lex()).type == "}")
+    {
+        scanner.unlex();
+        AST child = EmptyStmt();
+        ast.addChild(child);
+        return ast;
+    }
+    scanner.unlex();
+
     while (STATEMENT.count((token = scanner.lex()).attribute) > 0 ||
            STATEMENT.count(token.type) > 0)
     {
@@ -661,7 +669,7 @@ AST Parser::UnaryExpr()
     }
     else if (UNARYOP.count(token.type) > 0)
     {
-        ast = AST(token.type, "UNARYOP " + token.attribute, token.lineNum);
+        ast = AST("u" + token.type, token.lineNum);
         AST child(UnaryExpr());
         ast.addChild(child);
     }
