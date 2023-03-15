@@ -12,6 +12,7 @@ public:
     AST();
     AST(string type);
     AST(string type, int lineNum);
+    AST(string type, string attribute);
     AST(string type, string attribute, int lineNum);
     AST &setChildren(vector<AST> children);
     AST &addChild(AST child);

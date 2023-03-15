@@ -24,6 +24,13 @@ AST::AST(string t, int l) : kids()
     lineNum = l;
 }
 
+AST::AST(string t, string a) : kids()
+{
+    type = t;
+    attribute = a;
+    lineNum = -1;
+}
+
 AST::AST(string t, string a, int l) : kids()
 {
     type = t;
@@ -84,7 +91,14 @@ void AST::printAST(const AST &ast, int indent = 0)
         else
         {
             // Substring not found
-            cout << str << " @ line " << ast.lineNum << endl;
+            if (ast.lineNum < 0)
+            {
+                cout << str << endl;
+            }
+            else
+            {
+                cout << str << " @ line " << ast.lineNum << endl;
+            }
         }
 
         for (const AST &child : ast.kids)

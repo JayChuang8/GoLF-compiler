@@ -159,7 +159,7 @@ AST Parser::Block()
 AST Parser::BreakStmt()
 {
     Token token = expect("break");
-    AST ast = AST(token.type, token.attribute, token.lineNum);
+    AST ast = AST(token.type, token.lineNum);
     return ast;
 }
 
@@ -213,7 +213,7 @@ AST Parser::ExpressionStmt()
 AST Parser::ForStmt()
 {
     Token token = expect("for");
-    AST ast = AST(token.type, token.attribute, token.lineNum);
+    AST ast = AST(token.type, token.lineNum);
 
     if (EXPRESSION.count((token = scanner.lex()).type) > 0)
     {
@@ -224,6 +224,10 @@ AST Parser::ForStmt()
     else
     {
         scanner.unlex();
+
+        // if no Condition in for loop
+        AST child = AST("id", "$true");
+        ast.addChild(child);
     }
 
     AST child(Block());
@@ -367,7 +371,7 @@ AST Parser::OrOpExpr()
 AST Parser::ParameterDecl()
 {
     Token token = expect("id");
-    AST L = AST(token.type, token.attribute, token.lineNum);
+    AST L = AST("newid", token.attribute, token.lineNum);
     AST R = Type();
     vector<AST> children = {L, R};
     AST ast = AST("formal").setChildren(children);
@@ -464,7 +468,7 @@ AST Parser::Result()
 AST Parser::ReturnStmt()
 {
     Token token = expect("return");
-    AST ast = AST(token.type, token.attribute, token.lineNum);
+    AST ast = AST(token.type, token.lineNum);
 
     if (EXPRESSION.count((token = scanner.lex()).type) > 0)
     {
@@ -493,6 +497,10 @@ AST Parser::Signature()
     else
     {
         scanner.unlex();
+
+        // If no return type
+        AST child = AST("typeid", "$void");
+        ast.addChild(child);
     }
     return ast;
 }
@@ -518,7 +526,7 @@ AST Parser::SimpleStmt()
         {
             AST R = Expression();
             vector<AST> children = {ast, R};
-            ast = AST(token.type, token.attribute, token.lineNum).setChildren(children);
+            ast = AST(token.type, token.lineNum).setChildren(children);
         }
         else
         {
@@ -683,7 +691,7 @@ AST Parser::UnaryExpr()
 AST Parser::VarDecl()
 {
     Token token = expect("var");
-    AST ast = AST(token.type, token.attribute, token.lineNum);
+    AST ast = AST(token.type, token.lineNum);
     token = expect("id");
     AST child = AST("newid", token.attribute, token.lineNum);
     ast.addChild(child);
