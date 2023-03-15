@@ -14,8 +14,8 @@ public:
     AST(string type, int lineNum);
     AST(string type, string attribute);
     AST(string type, string attribute, int lineNum);
-    AST &setChildren(vector<AST> children);
     AST &addChild(AST child);
+    AST &setChildren(vector<AST> children);
     int getKidsLength(AST *self);
     void printAST(const AST &ast, int indent);
 

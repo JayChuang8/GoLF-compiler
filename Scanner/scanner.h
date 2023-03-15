@@ -15,12 +15,10 @@ class Scanner
 {
 public:
     Scanner(fstream &inputFile, Utility &util);
-
     int lineNum;
     Token lastToken;
     bool reread;
     bool insertSemicolon;
-
     Token lex();
     void unlex();
 

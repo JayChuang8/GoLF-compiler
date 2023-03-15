@@ -16,13 +16,7 @@ public:
     Parser(Scanner &scanner, Utility &util);
     AST parse();
 
-    string type;
-    string attribute;
-    int lineNum;
-
 private:
-    Token expect(string type);
-
     AST AddOpExpr();
     AST AndOpExpr();
     AST Arguments();
@@ -36,7 +30,6 @@ private:
     AST Expression();
     AST ExpressionList();
     AST ExpressionStmt();
-    AST ExpressionStmtOrAssignment();
     AST ForStmt();
     AST FunctionBody();
     AST FunctionDecl();
@@ -65,8 +58,8 @@ private:
     AST UnaryExpr();
     AST VarDecl();
     AST VarSpec();
-
     Scanner &scanner;
+    Token expect(string type);
     Utility &util;
 };
 
