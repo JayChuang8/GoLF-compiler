@@ -270,23 +270,36 @@ AST Parser::IfStmt()
     child = AST(Block());
     ast.addChild(child);
 
+    bool elseIf = false;
+    AST ifElse;
+
     while (ELSESTMT.count((token = scanner.lex()).attribute) > 0)
     {
-        Token elseToken = token;
+        ast.type = "ifelse";
         if (IFSTMT.count((token = scanner.lex()).attribute) > 0)
         {
-            AST ifElse = AST("ifelse", token.lineNum);
+            elseIf = true;
+            ifElse = AST("ifelse", token.lineNum);
             AST child(Expression());
             ifElse.addChild(child);
             child = AST(Block());
             ifElse.addChild(child);
-            ast.addChild(ifElse);
         }
         else if (BLOCK.count(token.type) > 0)
         {
             scanner.unlex();
-            AST child(Block());
-            ast.addChild(child);
+            // if it is an "if else" statement, add the "if else" block to the ifElse node
+            if (elseIf)
+            {
+                AST child(Block());
+                ifElse.addChild(child);
+                ast.addChild(ifElse);
+            }
+            else
+            {
+                AST child(Block());
+                ast.addChild(child);
+            }
             return ast;
         }
         else
