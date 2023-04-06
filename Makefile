@@ -1,5 +1,5 @@
 CC := g++
-SUBDIRS = Scanner Utility Parser
+SUBDIRS = Scanner Utility Parser SemanticChecker
 OBJS := main.o
 
 all: golf

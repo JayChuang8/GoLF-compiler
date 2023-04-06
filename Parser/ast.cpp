@@ -55,6 +55,11 @@ int AST::getKidsLength(AST *self)
     return self->kids.size();
 }
 
+const AST &AST::operator[](int i) const
+{
+    return kids[i];
+}
+
 void AST::printAST(const AST &ast, int indent = 0)
 {
     if (!ast.type.empty())
@@ -106,4 +111,38 @@ void AST::printAST(const AST &ast, int indent = 0)
             printAST(child, indent + 4);
         }
     }
+}
+
+void AST::prune() const
+{
+    throw ASTPrune();
+}
+
+void AST::preorder(std::function<void(AST *)> callback)
+{
+    prepost(callback, [](AST *) {});
+}
+
+void AST::postorder(std::function<void(AST *)> callback)
+{
+    for (AST &kid : kids)
+        kid.postorder(callback);
+    callback(this);
+}
+
+void AST::prepost(std::function<void(AST *)> pre, std::function<void(AST *)> post)
+{
+    try
+    {
+        pre(this);
+    }
+    catch (const ASTPrune &)
+    {
+        return;
+    }
+
+    for (AST &kid : kids)
+        kid.prepost(pre, post);
+
+    post(this);
 }
