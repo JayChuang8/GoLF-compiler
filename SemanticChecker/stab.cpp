@@ -5,29 +5,27 @@
 
 using namespace std;
 
-Symbol::Symbol() : sig("") {}
-Symbol::Symbol(const string &s) : sig(s) {}
-
 SymbolTable::SymbolTable(Utility &util) : util(util)
 {
 }
 
-void SymbolTable::define(const string &name, const string &sig, int lineNum)
+void SymbolTable::define(string name, string sig, int lineNum)
 {
     if (stab.count(name) > 0)
     {
         util.error("\"" + name + "\" redefined", lineNum);
     }
-    stab[name] = Symbol(sig);
+    Symbol s{sig};
+    stab[name] = s;
 }
 
-Symbol &SymbolTable::lookup(const string &name, int lineNum)
+Symbol &SymbolTable::lookup(string name, int lineNum)
 {
     if (stab.count(name) > 0)
     {
         return stab[name];
     }
     util.error("unknown identifier \"" + name + "\"", lineNum);
-    static Symbol s("");
+    Symbol s{""};
     return s;
 }

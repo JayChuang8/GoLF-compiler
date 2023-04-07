@@ -6,25 +6,21 @@
 #include <string>
 #include <unordered_map>
 
-class Symbol
+struct Symbol
 {
-public:
     string sig;
-
-    Symbol();
-    Symbol(const string &s);
 };
 
 class SymbolTable
 {
-private:
-    std::unordered_map<string, Symbol> stab;
-    Utility &util;
-
 public:
     SymbolTable(Utility &util);
-    void define(const string &name, const string &sig, int lineNum);
-    Symbol &lookup(const string &name, int lineNum);
+    void define(string name, string sig, int lineNum);
+    Symbol &lookup(string name, int lineNum);
+
+private:
+    std::unordered_map<std::string, Symbol> stab;
+    Utility &util;
 };
 
 #endif
