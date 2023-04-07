@@ -9,17 +9,21 @@
 struct Symbol
 {
     string sig;
+    string rtname;
+    bool isconst;
+    bool istype;
 };
 
 class SymbolTable
 {
 public:
     SymbolTable(Utility &util);
-    void define(string name, string sig, int lineNum);
+    Symbol *define(string name, string sig, int lineNum);
     Symbol *lookup(string name, int lineNum);
+    void openScope();
+    void closeScope();
 
 private:
-    std::unordered_map<std::string, Symbol> stab;
     Utility &util;
 };
 
