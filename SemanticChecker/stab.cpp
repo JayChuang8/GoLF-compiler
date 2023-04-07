@@ -19,13 +19,12 @@ void SymbolTable::define(string name, string sig, int lineNum)
     stab[name] = s;
 }
 
-Symbol &SymbolTable::lookup(string name, int lineNum)
+Symbol *SymbolTable::lookup(string name, int lineNum)
 {
     if (stab.count(name) > 0)
     {
-        return stab[name];
+        return &stab[name];
     }
     util.error("unknown identifier \"" + name + "\"", lineNum);
-    Symbol s{""};
-    return s;
+    return nullptr;
 }
