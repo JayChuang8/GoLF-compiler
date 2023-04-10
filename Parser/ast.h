@@ -8,6 +8,7 @@
 #include <functional>
 #include <stdexcept>
 #include <string>
+#include "../semanticchecker/stab.h"
 using namespace std;
 
 class AST
@@ -35,6 +36,8 @@ public:
     string type;
     string attribute;
     int lineNum;
+    string sig;
+    Symbol *sym;
     vector<AST> kids;
 };
 
