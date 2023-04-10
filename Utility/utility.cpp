@@ -39,7 +39,7 @@ void Utility::error(string message, int lineNum = 0)
     }
     else
     {
-        errorMessage = message + " at or near " + to_string(lineNum);
+        errorMessage = message + " at or near line " + to_string(lineNum);
     }
 
     cerr << "Error: " << errorMessage << endl;
@@ -48,7 +48,7 @@ void Utility::error(string message, int lineNum = 0)
 
 void Utility::warning(string message, int lineNum)
 {
-    cerr << "Warning: " << message << " at or near " << lineNum << endl;
+    cerr << "Warning: " << message << " at or near line " << lineNum << endl;
 
     Utility::numWarnings++;
 
