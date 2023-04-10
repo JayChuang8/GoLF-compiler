@@ -1,0 +1,443 @@
+Run started on Mon Apr 10 10:22:42 2023
+
+Hostname: DESKTOP-LH91K7L
+
+-------------------------------------------------------------------------------
+Running make |
+--------------
+
+% /usr/bin/make
+
+STDOUT:
+/usr/bin/make -C Scanner
+make[1]: Entering directory '/mnt/c/Projects/golf-compiler/Scanner'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/mnt/c/Projects/golf-compiler/Scanner'
+/usr/bin/make -C Utility
+make[1]: Entering directory '/mnt/c/Projects/golf-compiler/Utility'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/mnt/c/Projects/golf-compiler/Utility'
+/usr/bin/make -C Parser
+make[1]: Entering directory '/mnt/c/Projects/golf-compiler/Parser'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/mnt/c/Projects/golf-compiler/Parser'
+/usr/bin/make -C SemanticChecker
+make[1]: Entering directory '/mnt/c/Projects/golf-compiler/SemanticChecker'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/mnt/c/Projects/golf-compiler/SemanticChecker'
+g++ -o main.o -c main.cpp -MMD -MF main.d
+g++ -o golf main.o Scanner/token.o Scanner/scanner.o Utility/utility.o Parser/parser.o Parser/ast.o SemanticChecker/semantic.o SemanticChecker/stab.o
+
+
+STDERR:
+
+
+RETURN CODE: 0
+
+-------------------------------------------------------------------------------
+Locating GoLF compiler |
+------------------------
+
+Compiler will be run as ./golf
+
+-------------------------------------------------------------------------------
+Test: too few arguments |
+-------------------------
+
+% ./golf
+
+STDOUT:
+
+
+STDERR:
+Error: Requires 1 input file
+
+
+RETURN CODE: 0
+
+-------------------------------------------------------------------------------
+Test: too many arguments |
+--------------------------
+
+% ./golf /dev/null /dev/zero
+
+STDOUT:
+
+
+STDERR:
+Error: Requires 1 input file
+
+
+RETURN CODE: 0
+
+-------------------------------------------------------------------------------
+Test: nonexistent file |
+------------------------
+
+% ./golf /i/do/not/exist
+
+STDOUT:
+
+
+STDERR:
+Error: file '/i/do/not/exist' could not be opened
+
+
+RETURN CODE: 1
+
+-------------------------------------------------------------------------------
+Test: func open brace in wrong place |
+--------------------------------------
+
+% ./golf ./test/ms2/parse.t1
+
+STDOUT:
+
+
+STDERR:
+Error: unexpected ;, expected { at or near line 3
+
+
+RETURN CODE: 1
+
+-------------------------------------------------------------------------------
+Test: "for" open brace exception |
+----------------------------------
+
+% ./golf ./test/ms2/parse.t2
+
+STDOUT:
+program 
+    func sym=0x55cd2c715418 @ line 4
+        newid [main] @ line 4
+        sig 
+            formals 
+            typeid [$void] sym=0x55cd2c714648
+        block 
+            for  @ line 5
+                id [$true] sig=bool  sym=0x55cd2c7134e8
+                block 
+                    emptystmt 
+
+
+STDERR:
+
+
+RETURN CODE: 0
+
+-------------------------------------------------------------------------------
+Test: "for" open brace in wrong place |
+---------------------------------------
+
+% ./golf ./test/ms2/parse.t3
+
+STDOUT:
+
+
+STDERR:
+Error: unexpected ;, expected { at or near line 4
+
+
+RETURN CODE: 1
+
+-------------------------------------------------------------------------------
+Test: "if" open brace in wrong place |
+--------------------------------------
+
+% ./golf ./test/ms2/parse.t4
+
+STDOUT:
+
+
+STDERR:
+Error: unexpected ;, expected { at or near line 4
+
+
+RETURN CODE: 1
+
+-------------------------------------------------------------------------------
+Test: weird but correct formatting |
+------------------------------------
+
+% ./golf ./test/ms2/parse.t5
+
+STDOUT:
+program 
+    func sym=0x56114bb05a28 @ line 3
+        newid [main] @ line 3
+        sig 
+            formals 
+            typeid [$void] sym=0x56114bb00968
+        block 
+            if  @ line 5
+                ==  sig=bool  @ line 6
+                    +  sig=int  @ line 5
+                        int [2] sig=int  @ line 5
+                        int [3] sig=int  @ line 6
+                    int [5] sig=int  @ line 7
+                block 
+                    emptystmt 
+
+
+STDERR:
+
+
+RETURN CODE: 0
+
+-------------------------------------------------------------------------------
+Test: precedence check |
+------------------------
+
+% ./golf ./test/ms2/parse.t6
+
+STDOUT:
+
+
+STDERR:
+Error: unknown identifier "asdf" at or near line 4
+
+
+RETURN CODE: 1
+
+-------------------------------------------------------------------------------
+Test: formal and actual params |
+--------------------------------
+
+% ./golf ./test/ms2/parse.t7
+
+STDOUT:
+
+
+STDERR:
+Error: unknown identifier "sometype" at or near line 6
+
+
+RETURN CODE: 1
+
+-------------------------------------------------------------------------------
+Test: unary and binary minus |
+------------------------------
+
+% ./golf ./test/ms2/parse.t8
+
+STDOUT:
+
+
+STDERR:
+Error: unknown identifier "x" at or near line 4
+
+
+RETURN CODE: 1
+
+-------------------------------------------------------------------------------
+Test: func open brace in wrong place, with semicolon |
+------------------------------------------------------
+
+% ./golf ./test/ms2/parse.t9
+
+STDOUT:
+
+
+STDERR:
+Error: unexpected ;, expected { at or near line 4
+
+
+RETURN CODE: 1
+
+-------------------------------------------------------------------------------
+Test: func open brace with bonus semicolon |
+--------------------------------------------
+
+% ./golf ./test/ms2/parse.t10
+
+STDOUT:
+
+
+STDERR:
+Error: unexpected ;, expected { at or near line 4
+
+
+RETURN CODE: 1
+
+-------------------------------------------------------------------------------
+Test: "for" open brace in wrong place, with semicolon |
+-------------------------------------------------------
+
+% ./golf ./test/ms2/parse.t11
+
+STDOUT:
+
+
+STDERR:
+Error: unexpected ;, expected { at or near line 5
+
+
+RETURN CODE: 1
+
+-------------------------------------------------------------------------------
+Test: "for" with bonus semicolon |
+----------------------------------
+
+% ./golf ./test/ms2/parse.t12
+
+STDOUT:
+
+
+STDERR:
+Error: unexpected ;, expected { at or near line 5
+
+
+RETURN CODE: 1
+
+-------------------------------------------------------------------------------
+Test: "if" open brace in wrong place, with semicolon |
+------------------------------------------------------
+
+% ./golf ./test/ms2/parse.t13
+
+STDOUT:
+
+
+STDERR:
+Error: unexpected ;, expected { at or near line 5
+
+
+RETURN CODE: 1
+
+-------------------------------------------------------------------------------
+Test: "if" with bonus semicolon |
+---------------------------------
+
+% ./golf ./test/ms2/parse.t14
+
+STDOUT:
+
+
+STDERR:
+Error: unexpected ;, expected { at or near line 5
+
+
+RETURN CODE: 1
+
+-------------------------------------------------------------------------------
+Test: func line breaks using trailing commas |
+----------------------------------------------
+
+% ./golf ./test/ms2/parse.t15
+
+STDOUT:
+
+
+STDERR:
+Error: missing main() function
+
+
+RETURN CODE: 1
+
+-------------------------------------------------------------------------------
+Test: func line breaks sans trailing comma |
+--------------------------------------------
+
+% ./golf ./test/ms2/parse.t16
+
+STDOUT:
+
+
+STDERR:
+Error: unexpected ;, expected ) at or near line 6
+
+
+RETURN CODE: 1
+
+-------------------------------------------------------------------------------
+Test: func call line breaks with trailing commas |
+--------------------------------------------------
+
+% ./golf ./test/ms2/parse.t17
+
+STDOUT:
+
+
+STDERR:
+Error: unknown identifier "garbled" at or near line 4
+
+
+RETURN CODE: 1
+
+-------------------------------------------------------------------------------
+Test: func call line breaks sans trailing comma |
+-------------------------------------------------
+
+% ./golf ./test/ms2/parse.t18
+
+STDOUT:
+
+
+STDERR:
+Error: unexpected ;, expected ) at or near line 7
+
+
+RETURN CODE: 1
+
+-------------------------------------------------------------------------------
+Test: legit syntax salad |
+--------------------------
+
+% ./golf ./test/ms2/parse.t19
+
+STDOUT:
+
+
+STDERR:
+Error: unknown identifier "x" at or near line 6
+
+
+RETURN CODE: 1
+
+-------------------------------------------------------------------------------
+Test: assignment |
+------------------
+
+% ./golf ./test/ms2/parse.t20
+
+STDOUT:
+
+
+STDERR:
+Error: unexpected =, expected ; at or near line 7
+
+
+RETURN CODE: 1
+
+-------------------------------------------------------------------------------
+Test: associativity test |
+--------------------------
+
+% ./golf ./test/ms2/parse.t21
+
+STDOUT:
+
+
+STDERR:
+Error: missing main() function
+
+
+RETURN CODE: 1
+
+-------------------------------------------------------------------------------
+Test: a calculated move |
+-------------------------
+
+% ./golf ./test/ms2/gen.t18
+
+STDOUT:
+
+
+STDERR:
+Error: unexpected id, expected ; at or near line 55
+
+
+RETURN CODE: 1
+
+Run ended on Mon Apr 10 10:22:44 2023
+

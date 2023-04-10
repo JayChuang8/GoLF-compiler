@@ -25,8 +25,8 @@ import signal
 import socket
 import subprocess
 
-TESTPATH = './test/ms2'
-LOGFILE = 'run.output'
+TESTPATH = './test/ms1'
+LOGFILE = 'run1.output'
 JARCLASS = 'golf'
 JAR = 'golf.jar'
 EXE = './golf'
@@ -41,29 +41,38 @@ WIDTH = 79
 #
 
 TESTS = (
-        ('parse.t1',	'func open brace in wrong place'),
-        ('parse.t2',	'"for" open brace exception'),
-        ('parse.t3',	'"for" open brace in wrong place'),
-        ('parse.t4',	'"if" open brace in wrong place'),
-        ('parse.t5',	'weird but correct formatting'),
-        ('parse.t6',	'precedence check'),
-        ('parse.t7',	'formal and actual params'),
-        ('parse.t8',	'unary and binary minus'),
-        ('parse.t9',	'func open brace in wrong place, with semicolon'),
-        ('parse.t10',	'func open brace with bonus semicolon'),
-        ('parse.t11',	'"for" open brace in wrong place, with semicolon'),
-        ('parse.t12',	'"for" with bonus semicolon'),
-        ('parse.t13',	'"if" open brace in wrong place, with semicolon'),
-        ('parse.t14',	'"if" with bonus semicolon'),
-        ('parse.t15',	'func line breaks using trailing commas'),
-        ('parse.t16',	'func line breaks sans trailing comma'),
-        ('parse.t17',	'func call line breaks with trailing commas'),
-        ('parse.t18',	'func call line breaks sans trailing comma'),
-        ('parse.t19',	'legit syntax salad'),
-        ('parse.t20',	'assignment'),
-        ('parse.t21',	'associativity test'),
-    # oh hai how did you get in here
-        ('gen.t18',	'a calculated move'),
+        ('scan.t1',	'empty file'),
+        ('scan.t2',	'comment ending in EOF'),
+        ('scan.t3',	'comment only'),
+        ('scan.t4',	'illegal whitespace'),
+        ('scan.t5',	'legal whitespace'),
+        ('scan.t6',	'"}" with no previous token'),
+        ('scan.t7',	'the carat schtick'),
+        ('scan.t8',	'NUL character'),
+        ('scan.t9',	'non-7-bit chars'),
+        ('scan.t10',	'whitespace inside && token pair'),
+        ('scan.t11',	'whitespace inside || token pair'),
+        ('scan.t12',	'leading 0 on number'),
+        ('scan.t13',	'comment inside && token pair'),
+        ('scan.t14',	'illegal characters'),
+        ('scan.t15',	'legit token salad'),
+        ('scan.t16',	'semicolon insertion post-break at EOF'),
+        ('scan.t17',	'semicolon insertion post-return at EOF'),
+        ('scan.t18',	'semicolon insertion post-id at EOF'),
+        ('scan.t19',	'semicolon insertion post-number at EOF'),
+        ('scan.t20',	'semicolon insertion post-string at EOF'),
+        ('scan.t21',	'semicolon insertion post-) at EOF'),
+        ('scan.t22',	'semicolon insertion post-} at EOF'),
+        ('scan.t23',	'string ending in EOF'),
+        ('scan.t24',	'partial string containing newline'),
+        ('scan.t25',	'string containing newline'),
+        ('scan.t26',	'unescaped double quote in string'),
+        ('scan.t27',	'string escape at EOF'),
+        ('scan.t28',	'string escape then newline'),
+        ('scan.t29',	'legal strings'),
+        ('scan.t30',	'illegal "x" string escape'),
+        ('scan.t31',	'illegal "a" string escape'),
+        ('scan.t32',	'illegal "u" string escape'),
 )
 
 #
@@ -77,8 +86,7 @@ def log(s):
     global f
     if f is None:
         try:
-            # ensure Python doesn't try to alter output
-            f = open(LOGFILE, 'w', encoding='iso-8859-1')
+            f = open(LOGFILE, 'w')
         except IOError as e:
             print(f'{LOGFILE}: {e.strerror}', file=sys.stderr)
             sys.exit(1)
@@ -112,16 +120,20 @@ def run(cmd):
     log('% ' + ' '.join(cmd))
 
     try:
-        cp = subprocess.run(cmd, capture_output=True)
+        # XXX this enables the universal_newlines "feature", which
+        # means that \r will be erronously converted into a
+        # newline for printing (otoh, it might be easier to
+        # read in this context, so there's that)
+        cp = subprocess.run(cmd, text=True, capture_output=True)
     except subprocess.SubprocessError:
         die('unexpected exception running command')
     except IOError as e:
         die(f'unexpected I/O error running command: {e.strerror}')
+    except UnicodeDecodeError:
+        die('check that input characters are being filtered per spec')
 
-    # encoding should effectively act as a passthrough with no
-    # possibility of encoding errors
-    log('STDOUT:\n' + str(cp.stdout, encoding='iso-8859-1'))
-    log('STDERR:\n' + str(cp.stderr, encoding='iso-8859-1'))
+    log('STDOUT:\n' + cp.stdout)
+    log('STDERR:\n' + cp.stderr)
 
     if cp.returncode < 0:
         # rarely a good sign, let's be honest

@@ -7,6 +7,8 @@
 #include "./utility/utility.h"
 #include "./parser/parser.h"
 #include "./parser/ast.h"
+#include "./semanticchecker/semantic.h"
+#include "./semanticchecker/stab.h"
 
 int main(int argc, char *argv[])
 {
@@ -36,6 +38,12 @@ int main(int argc, char *argv[])
     Parser parser(scanner, util);
     AST ast = parser.parse();
 
+    // Semantic checker
+    SymbolTable stab(util);
+    Semantic semantic(util, stab);
+    semantic.semantic(ast);
+
+    // Print ast
     ast.printAST(ast, 0);
 
     // Close input file

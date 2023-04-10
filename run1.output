@@ -1,0 +1,110 @@
+Run started on Mon Apr 10 10:24:07 2023
+
+Hostname: DESKTOP-LH91K7L
+
+-------------------------------------------------------------------------------
+Running make |
+--------------
+
+% /usr/bin/make
+
+STDOUT:
+/usr/bin/make -C Scanner
+make[1]: Entering directory '/mnt/c/Projects/golf-compiler/Scanner'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/mnt/c/Projects/golf-compiler/Scanner'
+/usr/bin/make -C Utility
+make[1]: Entering directory '/mnt/c/Projects/golf-compiler/Utility'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/mnt/c/Projects/golf-compiler/Utility'
+/usr/bin/make -C Parser
+make[1]: Entering directory '/mnt/c/Projects/golf-compiler/Parser'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/mnt/c/Projects/golf-compiler/Parser'
+/usr/bin/make -C SemanticChecker
+make[1]: Entering directory '/mnt/c/Projects/golf-compiler/SemanticChecker'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/mnt/c/Projects/golf-compiler/SemanticChecker'
+g++ -o main.o -c main.cpp -MMD -MF main.d
+g++ -o golf main.o Scanner/token.o Scanner/scanner.o Utility/utility.o Parser/parser.o Parser/ast.o SemanticChecker/semantic.o SemanticChecker/stab.o
+
+
+STDERR:
+
+
+RETURN CODE: 0
+
+-------------------------------------------------------------------------------
+Locating GoLF compiler |
+------------------------
+
+Compiler will be run as ./golf
+
+-------------------------------------------------------------------------------
+Test: too few arguments |
+-------------------------
+
+% ./golf
+
+STDOUT:
+
+
+STDERR:
+Error: Requires 1 input file
+
+
+RETURN CODE: 0
+
+-------------------------------------------------------------------------------
+Test: too many arguments |
+--------------------------
+
+% ./golf /dev/null /dev/zero
+
+STDOUT:
+
+
+STDERR:
+Error: Requires 1 input file
+
+
+RETURN CODE: 0
+
+-------------------------------------------------------------------------------
+Test: nonexistent file |
+------------------------
+
+% ./golf /i/do/not/exist
+
+STDOUT:
+
+
+STDERR:
+Error: file '/i/do/not/exist' could not be opened
+
+
+RETURN CODE: 1
+
+-------------------------------------------------------------------------------
+Test: empty file |
+------------------
+
+% ./golf ./test/ms1/scan.t1
+
+STDOUT:
+
+
+STDERR:
+Error: missing main() function
+
+
+RETURN CODE: 1
+
+-------------------------------------------------------------------------------
+Test: comment ending in EOF |
+-----------------------------
+
+% ./golf ./test/ms1/scan.t2
+
+*** ABNORMAL TERMINATION: terminated via keyboard interrupt
+
