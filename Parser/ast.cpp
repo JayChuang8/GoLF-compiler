@@ -11,27 +11,27 @@ AST::AST()
 {
 }
 
-AST::AST(string t) : kids()
+AST::AST(string t) : kids(), sym(nullptr)
 {
     type = t;
     attribute = "";
     lineNum = -1;
 }
 
-AST::AST(string t, int l) : kids()
+AST::AST(string t, int l) : kids(), sym(nullptr)
 {
     type = t;
     lineNum = l;
 }
 
-AST::AST(string t, string a) : kids()
+AST::AST(string t, string a) : kids(), sym(nullptr)
 {
     type = t;
     attribute = a;
     lineNum = -1;
 }
 
-AST::AST(string t, string a, int l) : kids()
+AST::AST(string t, string a, int l) : kids(), sym(nullptr)
 {
     type = t;
     attribute = a;
@@ -60,7 +60,7 @@ const AST &AST::operator[](int i) const
     return kids[i];
 }
 
-void AST::printAST(const AST &ast, int indent = 0)
+void AST::printAST(const AST &ast, int indent)
 {
     if (!ast.type.empty())
     {
@@ -84,26 +84,54 @@ void AST::printAST(const AST &ast, int indent = 0)
             string after = str.substr(pos + substring.length());
 
             // Print the modified string
-            if (ast.lineNum < 0)
+            // Substring not found
+            if (!ast.sig.empty())
             {
-                cout << before << after << endl;
+                before += " sig=";
+                before += ast.sig;
+                before += " ";
+            }
+            if (ast.sym != nullptr)
+            {
+                cout << before << "sym=" << ast.sym << after;
             }
             else
             {
-                cout << before << after << "@ line " << ast.lineNum << endl;
+                cout << before << after;
             }
+
+            if (ast.lineNum >= 0)
+            {
+                cout << " @ line " << ast.lineNum;
+            }
+
+            cout << endl;
         }
         else
         {
             // Substring not found
-            if (ast.lineNum < 0)
+            if (!ast.sig.empty())
             {
-                cout << str << endl;
+                str += " sig=";
+                str += ast.sig;
+                str += " ";
+            }
+            // Substring not found
+            if (ast.sym != nullptr)
+            {
+                cout << str << " sym=" << ast.sym;
             }
             else
             {
-                cout << str << " @ line " << ast.lineNum << endl;
+                cout << str;
             }
+
+            if (ast.lineNum >= 0)
+            {
+                cout << " @ line " << ast.lineNum;
+            }
+
+            cout << endl;
         }
 
         for (const AST &child : ast.kids)
