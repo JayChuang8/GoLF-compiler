@@ -43,6 +43,8 @@ const unordered_set<string> TOPLEVELDECL = {"var", "func"};
 const unordered_set<string> UNARYOP = {"-", "!"};
 const unordered_set<string> VARDECL = {"var"};
 
+bool GLOBALVAR = false;
+
 Parser::Parser(Scanner &scanner, Utility &util) : scanner(scanner), util(util)
 {
 }
@@ -650,8 +652,10 @@ AST Parser::TopLevelDecl()
 
     if (DECLARATION.count(token.type) > 0)
     {
+        GLOBALVAR = true;
         scanner.unlex();
         ast = Declaration();
+        GLOBALVAR = false;
     }
     else if (FUNCTIONDECL.count(token.type) > 0)
     {
@@ -704,7 +708,12 @@ AST Parser::UnaryExpr()
 AST Parser::VarDecl()
 {
     Token token = expect("var");
-    AST ast = AST(token.type, token.lineNum);
+
+    string type = token.type;
+    if (GLOBALVAR)
+        type = "globvar";
+
+    AST ast = AST(type, token.lineNum);
     token = expect("id");
     AST child = AST("newid", token.attribute, token.lineNum);
     ast.addChild(child);
