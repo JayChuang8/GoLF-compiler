@@ -79,7 +79,7 @@ void Semantic::pass2_cb(AST *node)
     }
     else if (node->type == "formal")
     {
-        stab.define(node->kids[0].attribute, node->kids[1].attribute, node->kids[0].lineNum);
+        node->kids[0].sym = stab.define(node->kids[0].attribute, node->kids[1].attribute, node->kids[0].lineNum);
     }
     else if (node->type == "var")
     {

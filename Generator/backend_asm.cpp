@@ -65,7 +65,7 @@ void BackendASM::freeArgReg(string reg)
 {
     if (argPool.find(reg) != argPool.end())
     {
-        util.error("attempting to free unallocated register", 0);
+        util.error("attempting to free unallocated ARG register", 0);
     }
     else
     {
@@ -191,6 +191,18 @@ void BackendASM::pass3_cb(AST *node)
         // currentStackAddress = node->sym->allocspace;
         // emit return register address
         emit("sw $ra, 0($sp)");
+
+        // make sure all the second child nodes (sig->formals) are defined
+        node->kids[1].prepost([this](AST *node)
+                              { pass3_cb(node); },
+                              [this](AST *node)
+                              { pass3_post_cb(node); });
+
+        // dealloc all arg regs since the arg values have been stored into stack now
+        for (AST &child : node->kids[1].kids[0].kids)
+        {
+            freeArgReg(child.reg);
+        }
 
         // make sure all the child nodes in block are defined
         node->kids[2].prepost([this](AST *node)
@@ -326,6 +338,18 @@ void BackendASM::pass3_cb(AST *node)
         emitlabel(ifelseEnd);
         node->prune();
     }
+    else if (node->type == "return")
+    {
+        emit("RETURN-------------");
+
+        node->kids[0].prepost([this](AST *node)
+                              { pass3_cb(node); },
+                              [this](AST *node)
+                              { pass3_post_cb(node); });
+
+        emit("move $v0, " + node->kids[0].reg);
+        node->prune();
+    }
     else if (node->type == "var")
     {
         emit("VAR-----------------");
@@ -343,6 +367,16 @@ void BackendASM::pass3_cb(AST *node)
         emit("sw " + reg + ", " + to_string(currentStackAddress) + "($sp)");
         node->reg = to_string(currentStackAddress) + "($sp)";
         node->sym->reg = to_string(currentStackAddress) + "($sp)";
+    }
+    else if (node->type == "formal")
+    {
+        emit("FORMAL-----------------");
+        currentStackAddress += 4;
+
+        string argReg = allocArgReg();
+        emit("sw " + argReg + ", " + to_string(currentStackAddress) + "($sp)");
+        node->reg = argReg;
+        node->kids[0].sym->reg = to_string(currentStackAddress) + "($sp)";
     }
 }
 

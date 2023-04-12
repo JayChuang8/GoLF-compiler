@@ -40,7 +40,6 @@ public:
     int lineNum;
     string sig;
     string reg;
-    // string mipsLabel;
     Symbol *sym;
     vector<AST> kids;
 };
