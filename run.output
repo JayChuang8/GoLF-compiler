@@ -1,4 +1,4 @@
-Run started on Wed Apr 12 14:25:48 2023
+Run started on Wed Apr 12 14:28:08 2023
 
 Hostname: csx3.cs.ucalgary.ca
 
@@ -104,18 +104,10 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-The following symbols are undefined:
-Lhalt
-Lprints
-
+Hello, world!
 
 
 STDERR:
-spim: (parser) syntax error on line 50 of file out.s
-	  beqz $a0, Lfalse
-	            ^
-Instruction references undefined symbol at 0x00400040
-  [0x00400040]	0x0c000000  jal 0x00000000 [Lprints]        ; 43: jal Lprints
 
 
 RETURN CODE: 0
@@ -135,20 +127,18 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-The following symbols are undefined:
-Lhalt
-Lprintc
-Lprinti
-Lprints
-
+start of loop
+0
+start of loop
+0
+start of loop
+0
+start of loop
+0
+4
 
 
 STDERR:
-spim: (parser) syntax error on line 81 of file out.s
-	  beqz $a0, Lfalse
-	            ^
-Instruction references undefined symbol at 0x00400064
-  [0x00400064]	0x0c000000  jal 0x00000000 [Lprints]        ; 53: jal Lprints
 
 
 RETURN CODE: 0
@@ -168,20 +158,10 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-The following symbols are undefined:
-Lhalt
-Lprintc
-Lprinti
-Lprints
-
+global zero values: 
 
 
 STDERR:
-spim: (parser) syntax error on line 314 of file out.s
-	  beqz $a0, Lfalse
-	            ^
-Instruction references undefined symbol at 0x0040005c
-  [0x0040005c]	0x0c000000  jal 0x00000000 [Lprints]        ; 154: jal Lprints
 
 
 RETURN CODE: 0
@@ -201,19 +181,10 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-The following symbols are undefined:
-Lhalt
-Lprinti
-Lprints
-
+0
 
 
 STDERR:
-spim: (parser) syntax error on line 132 of file out.s
-	  beqz $a0, Lfalse
-	            ^
-Instruction references undefined symbol at 0x004001a0
-  [0x004001a0]	0x0c000000  jal 0x00000000 [Lprinti]        ; 122: jal Lprinti
 
 
 RETURN CODE: 0
@@ -247,19 +218,56 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-The following symbols are undefined:
-Lhalt
-Lprinti
-Lprints
-
+fib(0) = 0
+fib(1) = 1
+fib(2) = 1
+fib(3) = 2
+fib(4) = 3
+fib(5) = 5
+fib(6) = 8
+fib(7) = 13
+fib(8) = 21
+fib(9) = 34
+fib(10) = 55
+fib(11) = 89
+fib(12) = 144
+fib(13) = 233
+fib(14) = 377
+fib(15) = 610
+fib(16) = 987
+fib(17) = 1597
+fib(18) = 2584
+fib(19) = 4181
+fib(20) = 6765
+fib(21) = 10946
+fib(22) = 17711
+fib(23) = 28657
+fib(24) = 46368
+fib(25) = 75025
+fib(26) = 121393
+fib(27) = 196418
+fib(28) = 317811
+fib(29) = 514229
+fib(30) = 832040
+fib(31) = 1346269
+fib(32) = 2178309
+fib(33) = 3524578
+fib(34) = 5702887
+fib(35) = 9227465
+fib(36) = 14930352
+fib(37) = 24157817
+fib(38) = 39088169
+fib(39) = 63245986
+fib(40) = 102334155
+fib(41) = 165580141
+fib(42) = 267914296
+fib(43) = 433494437
+fib(44) = 701408733
+fib(45) = 1134903170
+fib(46) = 1836311903
 
 
 STDERR:
-spim: (parser) syntax error on line 122 of file out.s
-	  beqz $a0, Lfalse
-	            ^
-Instruction references undefined symbol at 0x00400068
-  [0x00400068]	0x0c000000  jal 0x00000000 [Lprints]        ; 78: jal Lprints
 
 
 RETURN CODE: 0
@@ -283,19 +291,10 @@ A man, a plan, a canal: Panama.
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-The following symbols are undefined:
-Lhalt
-Lprintc
-Lgetchar
-
 
 
 STDERR:
-spim: (parser) syntax error on line 56 of file out.s
-	  beqz $a0, Lfalse
-	            ^
-Instruction references undefined symbol at 0x0040003c
-  [0x0040003c]	0x0c000000  jal 0x00000000 [Lgetchar]       ; 28: jal Lgetchar
+Memory address out of bounds
 
 
 RETURN CODE: 0
@@ -315,19 +314,10 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-The following symbols are undefined:
-Lhalt
-Lprinti
-Lprints
-
+minint is -2147483648
 
 
 STDERR:
-spim: (parser) syntax error on line 83 of file out.s
-	  beqz $a0, Lfalse
-	            ^
-Instruction references undefined symbol at 0x004000ac
-  [0x004000ac]	0x0c000000  jal 0x00000000 [Lprints]        ; 68: jal Lprints
 
 
 RETURN CODE: 0
@@ -375,21 +365,12 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-The following symbols are undefined:
-Lhalt
-Lprinti
-Lprints
-
   Exception 9  [Breakpoint]  occurred and ignored
+0
 
 
 STDERR:
-spim: (parser) syntax error on line 42 of file out.s
-	  beqz $a0, Lfalse
-	            ^
 Exception occurred at PC=0x00400044
-Instruction references undefined symbol at 0x00400054
-  [0x00400054]	0x0c000000  jal 0x00000000 [Lprinti]        ; 32: jal Lprinti
 
 
 RETURN CODE: 0
@@ -409,18 +390,10 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-The following symbols are undefined:
-Lhalt
-Lprints
-
+OK
 
 
 STDERR:
-spim: (parser) syntax error on line 58 of file out.s
-	  beqz $a0, Lfalse
-	            ^
-Instruction references undefined symbol at 0x00400078
-  [0x00400078]	0x0c000000  jal 0x00000000 [Lprints]        ; 50: jal Lprints
 
 
 RETURN CODE: 0
@@ -531,20 +504,11 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-The following symbols are undefined:
-Lhalt
-Lprinti
-
   Exception 9  [Breakpoint]  occurred and ignored
-
+0
 
 STDERR:
-spim: (parser) syntax error on line 54 of file out.s
-	  beqz $a0, Lfalse
-	            ^
 Exception occurred at PC=0x0040006c
-Instruction references undefined symbol at 0x0040007c
-  [0x0040007c]	0x0c000000  jal 0x00000000 [Lprinti]        ; 38: jal Lprinti
 
 
 RETURN CODE: 0
@@ -713,17 +677,11 @@ RETURN CODE: 0
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
 The following symbols are undefined:
-Lhalt
-Lprintc
-Lprints
 Llen
 
 
 
 STDERR:
-spim: (parser) syntax error on line 474 of file out.s
-	  beqz $a0, Lfalse
-	            ^
 Instruction references undefined symbol at 0x00400374
   [0x00400374]	0x0c000000  jal 0x00000000 [Llen]           ; 336: jal Llen
 
@@ -796,5 +754,5 @@ STDERR:
 
 (GoLF compiler unsuccessful, skipping test)
 
-Run ended on Wed Apr 12 14:25:56 2023
+Run ended on Wed Apr 12 14:28:16 2023
 
