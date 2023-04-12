@@ -253,23 +253,23 @@ main:
 GINTERNALX:
 	.word 0
 Lmain:
-	subu $sp, $sp, 16
-	sw $ra, 0($sp)
-	sw $0, 4($sp)
-	sw $0, 8($sp)
-	sw $0, 12($sp)
-	li $t0, 1
-	sw $t0, 4($sp)
+	subu $sp,$sp,16
+	sw $ra,0($sp)
+	sw $0,4($sp)
+	sw $0,8($sp)
+	sw $0,12($sp)
+	li $t0,1
+	sw $t0,4($sp)
 L0for:
-	lw $t0, 4($sp)
-	li $t1, 100
-	sle $t2, $t0, $t1
-	beqz $t2, L1for
-	lw $t0, 4($sp)
-	li $t1, 1
-	seq $t2, $t0, $t1
-	beqz $t2, L2else
-	li $t0, 0
-	sw $t0, GA_1
+	lw $t0,4($sp)
+	li $t1,100
+	sle $t2,$t0,$t1
+	beqz $t2,L1for
+	lw $t0,4($sp)
+	li $t1,1
+	seq $t2,$t0,$t1
+	beqz $t2,L2else
+	li $t0,0
+	sw $t0,GA_1
 	j L3ifelse
 L2else:

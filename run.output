@@ -1,4 +1,4 @@
-Run started on Wed Apr 12 14:31:44 2023
+Run started on Wed Apr 12 14:41:54 2023
 
 Hostname: csx3.cs.ucalgary.ca
 
@@ -451,7 +451,7 @@ Lmain
 
 STDERR:
 spim: (parser) syntax error on line 275 of file out.s
-	  	 $t5, $t3, $t4
+	  	 $t5,$t3,$t4
 	    ^
 Instruction references undefined symbol at 0x00400030
   [0x00400030]	0x0c000000  jal 0x00000000 [Lmain]          ; 200: jal Lmain
@@ -481,9 +481,9 @@ Lhalt
 
 STDERR:
 spim: (parser) syntax error on line 44 of file out.s
-	  move $a0, 
+	  move $a0,
 
-	            ^
+	           ^
 Attempt to execute non-instruction at 0x00400070
 
 
@@ -651,13 +651,13 @@ L1for
 
 STDERR:
 spim: (parser) syntax error on line 46 of file out.s
-	  seq $t2, $t0, 
+	  seq $t2,$t0,
 
-	                ^
+	              ^
 Exception occurred at PC=0x0040004c
   Unaligned address in inst/data fetch: 0x00000001
 Instruction references undefined symbol at 0x00400050
-  [0x00400050]	0x11000000  beq $8, $0, 0 [L1for-0x00400050]; 38: beqz $t0, L1for
+  [0x00400050]	0x11000000  beq $8, $0, 0 [L1for-0x00400050]; 38: beqz $t0,L1for
 
 
 RETURN CODE: 0
@@ -755,5 +755,5 @@ STDERR:
 
 (GoLF compiler unsuccessful, skipping test)
 
-Run ended on Wed Apr 12 14:31:52 2023
+Run ended on Wed Apr 12 14:42:01 2023
 
