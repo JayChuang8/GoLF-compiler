@@ -1,4 +1,4 @@
-Run started on Wed Apr 12 14:09:43 2023
+Run started on Wed Apr 12 14:13:39 2023
 
 Hostname: csx3.cs.ucalgary.ca
 
@@ -112,13 +112,15 @@ Lprints
 
 STDERR:
 spim: (parser) Can't put data in text segment on line 39 of file out.s
-	  .asciiz "true"
-
-	                ^
-spim: (parser) Can't put data in text segment on line 40 of file out.s
-	  .asciiz "false"
+	  .asciiz "true
+"
 
 	                 ^
+spim: (parser) Can't put data in text segment on line 40 of file out.s
+	  .asciiz "false
+"
+
+	                  ^
 spim: (parser) syntax error on line 44 of file out.s
 	  li $a0, true_str
 
@@ -154,13 +156,15 @@ Lprints
 
 STDERR:
 spim: (parser) Can't put data in text segment on line 70 of file out.s
-	  .asciiz "true"
-
-	                ^
-spim: (parser) Can't put data in text segment on line 71 of file out.s
-	  .asciiz "false"
+	  .asciiz "true
+"
 
 	                 ^
+spim: (parser) Can't put data in text segment on line 71 of file out.s
+	  .asciiz "false
+"
+
+	                  ^
 spim: (parser) syntax error on line 75 of file out.s
 	  li $a0, true_str
 
@@ -196,13 +200,15 @@ Lprints
 
 STDERR:
 spim: (parser) Can't put data in text segment on line 303 of file out.s
-	  .asciiz "true"
-
-	                ^
-spim: (parser) Can't put data in text segment on line 304 of file out.s
-	  .asciiz "false"
+	  .asciiz "true
+"
 
 	                 ^
+spim: (parser) Can't put data in text segment on line 304 of file out.s
+	  .asciiz "false
+"
+
+	                  ^
 spim: (parser) syntax error on line 308 of file out.s
 	  li $a0, true_str
 
@@ -237,13 +243,15 @@ Lprints
 
 STDERR:
 spim: (parser) Can't put data in text segment on line 121 of file out.s
-	  .asciiz "true"
-
-	                ^
-spim: (parser) Can't put data in text segment on line 122 of file out.s
-	  .asciiz "false"
+	  .asciiz "true
+"
 
 	                 ^
+spim: (parser) Can't put data in text segment on line 122 of file out.s
+	  .asciiz "false
+"
+
+	                  ^
 spim: (parser) syntax error on line 126 of file out.s
 	  li $a0, true_str
 
@@ -292,13 +300,15 @@ Lprints
 
 STDERR:
 spim: (parser) Can't put data in text segment on line 111 of file out.s
-	  .asciiz "true"
-
-	                ^
-spim: (parser) Can't put data in text segment on line 112 of file out.s
-	  .asciiz "false"
+	  .asciiz "true
+"
 
 	                 ^
+spim: (parser) Can't put data in text segment on line 112 of file out.s
+	  .asciiz "false
+"
+
+	                  ^
 spim: (parser) syntax error on line 116 of file out.s
 	  li $a0, true_str
 
@@ -337,13 +347,15 @@ Lgetchar
 
 STDERR:
 spim: (parser) Can't put data in text segment on line 45 of file out.s
-	  .asciiz "true"
-
-	                ^
-spim: (parser) Can't put data in text segment on line 46 of file out.s
-	  .asciiz "false"
+	  .asciiz "true
+"
 
 	                 ^
+spim: (parser) Can't put data in text segment on line 46 of file out.s
+	  .asciiz "false
+"
+
+	                  ^
 spim: (parser) syntax error on line 50 of file out.s
 	  li $a0, true_str
 
@@ -378,13 +390,15 @@ Lprints
 
 STDERR:
 spim: (parser) Can't put data in text segment on line 72 of file out.s
-	  .asciiz "true"
-
-	                ^
-spim: (parser) Can't put data in text segment on line 73 of file out.s
-	  .asciiz "false"
+	  .asciiz "true
+"
 
 	                 ^
+spim: (parser) Can't put data in text segment on line 73 of file out.s
+	  .asciiz "false
+"
+
+	                  ^
 spim: (parser) syntax error on line 77 of file out.s
 	  li $a0, true_str
 
@@ -448,13 +462,15 @@ Lprints
 
 STDERR:
 spim: (parser) Can't put data in text segment on line 31 of file out.s
-	  .asciiz "true"
-
-	                ^
-spim: (parser) Can't put data in text segment on line 32 of file out.s
-	  .asciiz "false"
+	  .asciiz "true
+"
 
 	                 ^
+spim: (parser) Can't put data in text segment on line 32 of file out.s
+	  .asciiz "false
+"
+
+	                  ^
 spim: (parser) syntax error on line 36 of file out.s
 	  li $a0, true_str
 
@@ -489,13 +505,15 @@ Lprints
 
 STDERR:
 spim: (parser) Can't put data in text segment on line 47 of file out.s
-	  .asciiz "true"
-
-	                ^
-spim: (parser) Can't put data in text segment on line 48 of file out.s
-	  .asciiz "false"
+	  .asciiz "true
+"
 
 	                 ^
+spim: (parser) Can't put data in text segment on line 48 of file out.s
+	  .asciiz "false
+"
+
+	                  ^
 spim: (parser) syntax error on line 52 of file out.s
 	  li $a0, true_str
 
@@ -621,13 +639,15 @@ Lprinti
 
 STDERR:
 spim: (parser) Can't put data in text segment on line 43 of file out.s
-	  .asciiz "true"
-
-	                ^
-spim: (parser) Can't put data in text segment on line 44 of file out.s
-	  .asciiz "false"
+	  .asciiz "true
+"
 
 	                 ^
+spim: (parser) Can't put data in text segment on line 44 of file out.s
+	  .asciiz "false
+"
+
+	                  ^
 spim: (parser) syntax error on line 48 of file out.s
 	  li $a0, true_str
 
@@ -812,13 +832,15 @@ Llen
 
 STDERR:
 spim: (parser) Can't put data in text segment on line 463 of file out.s
-	  .asciiz "true"
-
-	                ^
-spim: (parser) Can't put data in text segment on line 464 of file out.s
-	  .asciiz "false"
+	  .asciiz "true
+"
 
 	                 ^
+spim: (parser) Can't put data in text segment on line 464 of file out.s
+	  .asciiz "false
+"
+
+	                  ^
 spim: (parser) syntax error on line 468 of file out.s
 	  li $a0, true_str
 
@@ -895,5 +917,5 @@ STDERR:
 
 (GoLF compiler unsuccessful, skipping test)
 
-Run ended on Wed Apr 12 14:09:50 2023
+Run ended on Wed Apr 12 14:13:47 2023
 
