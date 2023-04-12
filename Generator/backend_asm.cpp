@@ -202,6 +202,7 @@ void BackendASM::pass1_cb(AST *node)
     }
 }
 
+int globalvarCount = 0;
 void BackendASM::pass2_cb(AST *node)
 {
     if (node->type == "func")
@@ -220,9 +221,14 @@ void BackendASM::pass2_cb(AST *node)
     }
     else if (node->type == "globvar")
     {
-        node->sym->rtname = "G" + node->kids[0].attribute;
+        // node->sym->rtname = "G" + node->kids[0].attribute;
+        node->sym->rtname = "G" + to_string(globalvarCount);
         emitlabel(node->sym->rtname);
-        emit(".word 0");
+
+        if (node->kids[1].attribute == "string")
+            emit(".word S0");
+        else
+            emit(".word 0");
     }
 }
 
