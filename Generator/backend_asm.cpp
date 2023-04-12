@@ -96,6 +96,27 @@ void BackendASM::epilogue()
 {
     emit("");
 
+    emitlabel("PDCTrue");
+    emit(".byte 116");
+    emit(".byte 114");
+    emit(".byte 117");
+    emit(".byte 101");
+
+    emitlabel("PDCFalse");
+    emit(".byte 102");
+    emit(".byte 97");
+    emit(".byte 108");
+    emit(".byte 115");
+    emit(".byte 101");
+
+    emitlabel("Lprintb");
+    emit("beqz $a0, Lfalse");
+    emit("la $a0, PDCTrue");
+    emit("j Lprints");
+    emitlabel("Lfalse");
+    emit("la $a0, PDCFalse");
+    emit("j Lprints");
+
     emitlabel("Lhalt");
     emit("li $v0, 10");
     emit("syscall");
