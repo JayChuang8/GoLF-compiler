@@ -407,9 +407,10 @@ void BackendASM::pass3_cb(AST *node)
         string reg = "$0";
         if (node->kids[1].attribute == "string")
         {
-            reg = allocreg();
+            // reg = allocreg();
+            reg = "$v1";
             emit("la " + reg + ",S0");
-            freereg(reg);
+            // freereg(reg);
         }
 
         emit("sw " + reg + "," + to_string(currentStackAddress) + "($sp)");
