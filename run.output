@@ -1,4 +1,4 @@
-Run started on Wed Apr 12 12:43:25 2023
+Run started on Wed Apr 12 12:48:02 2023
 
 Hostname: csx3.cs.ucalgary.ca
 
@@ -110,7 +110,7 @@ main
 
 
 STDERR:
-spim: (parser) syntax error on line 4 of file out.s
+spim: (parser) syntax error on line 1 of file out.s
 	  .data:
 	       ^
 Instruction references undefined symbol at 0x00400014
@@ -140,7 +140,7 @@ main
 
 
 STDERR:
-spim: (parser) syntax error on line 4 of file out.s
+spim: (parser) syntax error on line 1 of file out.s
 	  .data:
 	       ^
 Instruction references undefined symbol at 0x00400014
@@ -170,7 +170,7 @@ main
 
 
 STDERR:
-spim: (parser) syntax error on line 4 of file out.s
+spim: (parser) syntax error on line 1 of file out.s
 	  .data:
 	       ^
 Instruction references undefined symbol at 0x00400014
@@ -200,7 +200,7 @@ main
 
 
 STDERR:
-spim: (parser) syntax error on line 4 of file out.s
+spim: (parser) syntax error on line 1 of file out.s
 	  .data:
 	       ^
 Instruction references undefined symbol at 0x00400014
@@ -244,7 +244,7 @@ main
 
 
 STDERR:
-spim: (parser) syntax error on line 4 of file out.s
+spim: (parser) syntax error on line 1 of file out.s
 	  .data:
 	       ^
 Instruction references undefined symbol at 0x00400014
@@ -278,7 +278,7 @@ main
 
 
 STDERR:
-spim: (parser) syntax error on line 4 of file out.s
+spim: (parser) syntax error on line 1 of file out.s
 	  .data:
 	       ^
 Instruction references undefined symbol at 0x00400014
@@ -308,7 +308,7 @@ main
 
 
 STDERR:
-spim: (parser) syntax error on line 4 of file out.s
+spim: (parser) syntax error on line 1 of file out.s
 	  .data:
 	       ^
 Instruction references undefined symbol at 0x00400014
@@ -366,7 +366,7 @@ main
 
 
 STDERR:
-spim: (parser) syntax error on line 4 of file out.s
+spim: (parser) syntax error on line 1 of file out.s
 	  .data:
 	       ^
 Instruction references undefined symbol at 0x00400014
@@ -396,7 +396,7 @@ main
 
 
 STDERR:
-spim: (parser) syntax error on line 4 of file out.s
+spim: (parser) syntax error on line 1 of file out.s
 	  .data:
 	       ^
 Instruction references undefined symbol at 0x00400014
@@ -454,7 +454,7 @@ main
 
 
 STDERR:
-spim: (parser) syntax error on line 4 of file out.s
+spim: (parser) syntax error on line 1 of file out.s
 	  .data:
 	       ^
 Instruction references undefined symbol at 0x00400014
@@ -484,7 +484,7 @@ main
 
 
 STDERR:
-spim: (parser) syntax error on line 4 of file out.s
+spim: (parser) syntax error on line 1 of file out.s
 	  .data:
 	       ^
 Instruction references undefined symbol at 0x00400014
@@ -514,7 +514,7 @@ main
 
 
 STDERR:
-spim: (parser) syntax error on line 4 of file out.s
+spim: (parser) syntax error on line 1 of file out.s
 	  .data:
 	       ^
 Instruction references undefined symbol at 0x00400014
@@ -558,7 +558,7 @@ main
 
 
 STDERR:
-spim: (parser) syntax error on line 4 of file out.s
+spim: (parser) syntax error on line 1 of file out.s
 	  .data:
 	       ^
 Instruction references undefined symbol at 0x00400014
@@ -615,7 +615,7 @@ main
 
 
 STDERR:
-spim: (parser) syntax error on line 4 of file out.s
+spim: (parser) syntax error on line 1 of file out.s
 	  .data:
 	       ^
 Instruction references undefined symbol at 0x00400014
@@ -649,7 +649,7 @@ main
 
 
 STDERR:
-spim: (parser) syntax error on line 4 of file out.s
+spim: (parser) syntax error on line 1 of file out.s
 	  .data:
 	       ^
 Instruction references undefined symbol at 0x00400014
@@ -679,7 +679,7 @@ main
 
 
 STDERR:
-spim: (parser) syntax error on line 4 of file out.s
+spim: (parser) syntax error on line 1 of file out.s
 	  .data:
 	       ^
 Instruction references undefined symbol at 0x00400014
@@ -754,5 +754,5 @@ STDERR:
 
 (GoLF compiler unsuccessful, skipping test)
 
-Run ended on Wed Apr 12 12:43:32 2023
+Run ended on Wed Apr 12 12:48:07 2023
 

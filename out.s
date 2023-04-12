@@ -1,6 +1,3 @@
-	Ltrue = 1
-	Lfalse = 0
-	.globl main
 .data:
 S0:
 	.byte 0
@@ -31,6 +28,7 @@ S3:
 	.byte 61
 	.byte 32
 	.byte 0
+	
 .text:
 GA_0:
 	.word 0
