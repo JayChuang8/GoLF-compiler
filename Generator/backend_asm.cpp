@@ -110,11 +110,11 @@ void BackendASM::epilogue()
 
     emitlabel("Lprintb");
     string argReg1 = allocArgReg();
-    emit("beqz " + argReg1 + ", Lfalse");
+    emit("beqz " + argReg1 + ", PrintFalse");
     emit("la " + argReg1 + ", PDCTrue");
     freeArgReg(argReg1);
     emit("j Lprints");
-    emitlabel("Lfalse");
+    emitlabel("PrintFalse");
     emit("la " + argReg1 + ", PDCFalse");
 
     emitlabel("Lhalt");
