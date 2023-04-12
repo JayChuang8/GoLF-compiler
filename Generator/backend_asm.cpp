@@ -222,7 +222,7 @@ void BackendASM::pass2_cb(AST *node)
     else if (node->type == "globvar")
     {
         // node->sym->rtname = "G" + node->kids[0].attribute;
-        node->sym->rtname = "G" + to_string(globalvarCount);
+        node->sym->rtname = "G" + to_string(globalvarCount++);
         emitlabel(node->sym->rtname);
 
         if (node->kids[1].attribute == "string")
