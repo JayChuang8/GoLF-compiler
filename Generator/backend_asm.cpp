@@ -152,6 +152,26 @@ void BackendASM::epilogue()
     emit("li $v0,8");
     emit("syscall");
     emit("jr $ra");
+
+    emitlabel("Llen");
+    emit("addi $sp,$sp,-4");
+    emit("sw $ra,0($sp)");
+    string reg1 = allocreg();
+    emit("li " + reg1 + ",0 ");
+    emitlabel("loopStart");
+    string reg2 = allocreg();
+    emit("lb " + reg2 + ", ($a0)");
+    emit("beq " + reg2 + ", $zero, loopEnd");
+    emit("addi $a0,$a0,1");
+    emit("addi " + reg1 + "," + reg1 + ",1");
+    emit("j loopStart");
+    emitlabel("loopEnd");
+    emit("lw $ra, 0($sp)");
+    emit("addi $sp,$sp,4");
+    emit("move $v0," + reg1);
+    emit("jr $ra");
+    freereg(reg1);
+    freereg(reg2);
 }
 
 string BackendASM::id2asm(string name)
