@@ -1,6 +1,17 @@
 	Ltrue = 1
 	Lfalse = 0
 .data
+PDCTrue:
+	.byte 116
+	.byte 114
+	.byte 117
+	.byte 101
+PDCFalse:
+	.byte 102
+	.byte 97
+	.byte 108
+	.byte 115
+	.byte 101
 S0:
 	.byte 0
 S1:
