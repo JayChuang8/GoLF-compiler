@@ -11,13 +11,6 @@
 
 using namespace std;
 
-void printASTNode(string attr, string type, int linNum)
-{
-    cout << "attribute: " << attr
-         << " type: " << type
-         << " linenum: " << linNum << endl;
-}
-
 Semantic::Semantic(Utility &util, SymbolTable &stab) : util(util), stab(stab)
 {
 }
@@ -60,7 +53,7 @@ void Semantic::pass2_cb(AST *node)
 
         // set func Symbol's return type
         Symbol *funcSym = stab.lookup(node->sig, node->lineNum);
-        funcSym->rtname = node->kids[1].attribute;
+        funcSym->rettype = node->kids[1].attribute;
     }
     else if (node->type == "formals")
     {
@@ -223,7 +216,7 @@ void Semantic::pass3_cb(AST *node)
             util.error("can't call something that isn't a function", node->kids[0].lineNum);
         }
 
-        node->sig = node->kids[0].sym->rtname;
+        node->sig = node->kids[0].sym->rettype;
 
         Symbol *funcSym = stab.lookup(node->kids[0].attribute, node->lineNum);
         string funcSig = "f(";
@@ -335,17 +328,17 @@ void Semantic::pass4_post_cb(AST *node)
             util.error("main() can't have arguments", node->lineNum);
         }
 
-        if (node->sym->name == "main" && node->sym->rtname != "$void")
+        if (node->sym->name == "main" && node->sym->rettype != "$void")
         {
             util.error("main() can't have a return value", node->lineNum);
         }
 
-        if (node->sym->rtname != "$void" && returncount == 0)
+        if (node->sym->rettype != "$void" && returncount == 0)
         {
             util.error("no return statement in function", node->lineNum);
         }
 
-        if (node->sym->rtname == "$void" && returncount != 0)
+        if (node->sym->rettype == "$void" && returncount != 0)
         {
             util.error("this function can't return a value", node->kids[2].kids[0].lineNum);
         }
@@ -358,7 +351,7 @@ void Semantic::pass4_post_cb(AST *node)
                 {
                     if (child2.type == "return" &&
                         child2.getKidsLength(&child2) == 1 &&
-                        node->sym->rtname != child2.kids[0].sig)
+                        node->sym->rettype != child2.kids[0].sig)
                     {
                         util.error("returned value has the wrong type", child2.kids[0].lineNum);
                     }
@@ -366,7 +359,7 @@ void Semantic::pass4_post_cb(AST *node)
             }
         }
 
-        if (node->sym->rtname != "$void" &&
+        if (node->sym->rettype != "$void" &&
             node->kids.size() > 2 &&
             node->kids[2].kids.size() > 0 &&
             node->kids[2].kids[0].kids.size() == 0)

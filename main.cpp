@@ -9,6 +9,7 @@
 #include "./parser/ast.h"
 #include "./semanticchecker/semantic.h"
 #include "./semanticchecker/stab.h"
+#include "./generator/backend_asm.h"
 
 int main(int argc, char *argv[])
 {
@@ -25,7 +26,7 @@ int main(int argc, char *argv[])
     fstream inputFile;
     util.openInputFile(inputFile, argv[1]);
 
-    // Scanner
+    // // Scanner
     // Scanner scanner(inputFile, util);
     // Token token;
     // while ((token = scanner.lex()).attribute != "EOF")
@@ -45,6 +46,11 @@ int main(int argc, char *argv[])
 
     // Print ast
     ast.printAST(ast, 0);
+    cout << "-----------------------" << endl;
+
+    // MIPS code generator
+    BackendASM generator(util);
+    generator.gen(ast);
 
     // Close input file
     util.closeInputFile(inputFile);

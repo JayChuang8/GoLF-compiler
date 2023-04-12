@@ -15,20 +15,20 @@ SymbolTable::SymbolTable(Utility &util) : util(util), sigscope(nullptr)
     // initialize the UNIVERSE symbol table and add it to the symbol table stack
     std::unordered_map<std::string, Symbol> *UNIVERSE = new std::unordered_map<std::string, Symbol>;
 
-    UNIVERSE->insert({"$void", {"$void", "void", "", false, true}});
-    UNIVERSE->insert({"bool", {"bool", "bool", "", false, true}});
-    UNIVERSE->insert({"int", {"int", "int", "", false, true}});
-    UNIVERSE->insert({"string", {"string", "string", "", false, true}});
-    UNIVERSE->insert({"$true", {"$true", "bool", "", true, false}});
-    UNIVERSE->insert({"true", {"true", "bool", "", true, false}});
-    UNIVERSE->insert({"false", {"false", "bool", "", true, false}});
-    UNIVERSE->insert({"printb", {"printb", "f(bool)", "void", false, false}});
-    UNIVERSE->insert({"printc", {"printc", "f(int)", "void", false, false}});
-    UNIVERSE->insert({"printi", {"printi", "f(int)", "void", false, false}});
-    UNIVERSE->insert({"prints", {"prints", "f(string)", "void", false, false}});
-    UNIVERSE->insert({"getchar", {"getchar", "f()", "int", false, false}});
-    UNIVERSE->insert({"halt", {"halt", "f()", "void", false, false}});
-    UNIVERSE->insert({"len", {"len", "f(string)", "int", false, false}});
+    UNIVERSE->insert({"$void", {"$void", "void", "", "", false, true}});
+    UNIVERSE->insert({"bool", {"bool", "bool", "", "", false, true}});
+    UNIVERSE->insert({"int", {"int", "int", "", "", false, true}});
+    UNIVERSE->insert({"string", {"string", "string", "", "", false, true}});
+    UNIVERSE->insert({"$true", {"$true", "bool", "", "Ltrue", true, false}});
+    UNIVERSE->insert({"true", {"true", "bool", "", "Ltrue", true, false}});
+    UNIVERSE->insert({"false", {"false", "bool", "", "Lfalse", true, false}});
+    UNIVERSE->insert({"printb", {"printb", "f(bool)", "void", "Lprintb", false, false}});
+    UNIVERSE->insert({"printc", {"printc", "f(int)", "void", "Lprintc", false, false}});
+    UNIVERSE->insert({"printi", {"printi", "f(int)", "void", "Lprinti", false, false}});
+    UNIVERSE->insert({"prints", {"prints", "f(string)", "void", "Lprints", false, false}});
+    UNIVERSE->insert({"getchar", {"getchar", "f()", "int", "Lgetchar", false, false}});
+    UNIVERSE->insert({"halt", {"halt", "f()", "void", "Lhalt", false, false}});
+    UNIVERSE->insert({"len", {"len", "f(string)", "int", "Llen", false, false}});
 
     stabstack.push_back(UNIVERSE);
 }
@@ -133,7 +133,7 @@ void SymbolTable::printScope()
         std::cout << "----- STAB -----" << std::endl;
         for (const auto &symbol : *stab)
         {
-            std::cout << symbol.first << " : " << symbol.second.sig << " : " << symbol.second.rtname << " : " << symbol.second.isconst << " : " << symbol.second.istype << std::endl;
+            std::cout << symbol.first << " : " << symbol.second.sig << " : " << symbol.second.rettype << " : " << symbol.second.rtname << " : " << symbol.second.isconst << " : " << symbol.second.istype << std::endl;
         }
     }
 }

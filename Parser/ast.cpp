@@ -174,3 +174,17 @@ void AST::prepost(std::function<void(AST *)> pre, std::function<void(AST *)> pos
 
     post(this);
 }
+
+int AST::countChildrenByType(AST &node, string type)
+{
+    int count = 0;
+    if (node.type == type)
+    {
+        count++;
+    }
+    for (AST &child : node.kids)
+    {
+        count += countChildrenByType(child, type);
+    }
+    return count;
+}

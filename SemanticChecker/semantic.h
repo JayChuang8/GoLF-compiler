@@ -1,7 +1,6 @@
 #ifndef semantic_h
 #define semantic_h
 
-#include <string>
 #include <unordered_map>
 #include "../Utility/utility.h"
 #include "../Parser/ast.h"

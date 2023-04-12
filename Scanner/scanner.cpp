@@ -80,6 +80,12 @@ Token Scanner::lex()
                     {
                         inputFile.get(c);
                     }
+                    if (!getLastToken().attribute.empty() && !getLastToken().type.empty())
+                    {
+                        setLastToken(Token(";", "", getLineNum()));
+                        incrementLineNum();
+                        break;
+                    }
                     inputFile.putback(c);
                     continue;
                 }
@@ -98,8 +104,11 @@ Token Scanner::lex()
             case ';':
             {
                 setLastToken(Token(string(1, c), string(1, c), getLineNum()));
-
-                if ((inputFile.peek() == '\n' || inputFile.peek() == EOF) && (c == ')' || c == '}'))
+                if ((inputFile.peek() == '\n' ||
+                     inputFile.peek() == EOF ||
+                     inputFile.peek() == 13 ||
+                     inputFile.peek() == 10) &&
+                    (c == ')' || c == '}'))
                 {
                     setInsertSemicolon(true);
                 }
@@ -246,7 +255,10 @@ Token Scanner::lex()
                 {
                     setLastToken(Token("string", str, getLineNum()));
 
-                    if ((inputFile.peek() == '\n' || inputFile.peek() == EOF))
+                    if ((inputFile.peek() == '\n' ||
+                         inputFile.peek() == EOF ||
+                         inputFile.peek() == 13 ||
+                         inputFile.peek() == 10))
                     {
                         setInsertSemicolon(true);
                     }
@@ -267,7 +279,7 @@ Token Scanner::lex()
                     }
                     setLastToken(Token("int", num, getLineNum()));
 
-                    if (c == '\n' || inputFile.eof())
+                    if (c == '\n' || inputFile.eof() || c == 13 || c == 10)
                     {
                         setInsertSemicolon(true);
                     }
@@ -293,7 +305,11 @@ Token Scanner::lex()
                     {
                         setLastToken(Token(id, id, getLineNum()));
 
-                        if ((c == '\n' || inputFile.eof()) && (id == "break" || id == "return"))
+                        if ((c == '\n' ||
+                             inputFile.eof() ||
+                             c == 13 ||
+                             c == 10) &&
+                            (id == "break" || id == "return"))
                         {
                             setInsertSemicolon(true);
                         }
@@ -302,7 +318,10 @@ Token Scanner::lex()
                     {
                         setLastToken(Token("id", id, getLineNum()));
 
-                        if ((c == '\n' || inputFile.eof()))
+                        if ((c == '\n' ||
+                             inputFile.eof() ||
+                             c == 13 ||
+                             c == 10))
                         {
                             setInsertSemicolon(true);
                         }

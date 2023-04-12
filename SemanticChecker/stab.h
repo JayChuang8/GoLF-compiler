@@ -10,9 +10,12 @@ struct Symbol
 {
     string name;
     string sig;
+    string rettype;
     string rtname;
     bool isconst;
     bool istype;
+    int allocspace;
+    string reg;
 };
 
 class SymbolTable

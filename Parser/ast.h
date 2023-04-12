@@ -33,10 +33,14 @@ public:
     void postorder(std::function<void(AST *)> callback);
     void prepost(std::function<void(AST *)> pre, std::function<void(AST *)> post);
 
+    int countChildrenByType(AST &node, string type);
+
     string type;
     string attribute;
     int lineNum;
     string sig;
+    string reg;
+    // string mipsLabel;
     Symbol *sym;
     vector<AST> kids;
 };
