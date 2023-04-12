@@ -8,7 +8,7 @@
 #include <functional>
 #include <stdexcept>
 #include <string>
-#include "../semanticchecker/stab.h"
+#include "../SemanticChecker/stab.h"
 using namespace std;
 
 class AST
