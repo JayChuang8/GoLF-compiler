@@ -88,14 +88,6 @@ void BackendASM::prologue()
     emit("Lfalse = 0");
     // emit(".globl main");
     cout << ".data" << endl;
-    emitlabel(getDataLabel());
-    emit(".byte 0");
-}
-
-void BackendASM::epilogue()
-{
-    emit("");
-
     emitlabel("PDCTrue");
     emit(".byte 116");
     emit(".byte 114");
@@ -108,6 +100,13 @@ void BackendASM::epilogue()
     emit(".byte 108");
     emit(".byte 115");
     emit(".byte 101");
+    emitlabel(getDataLabel());
+    emit(".byte 0");
+}
+
+void BackendASM::epilogue()
+{
+    emit("");
 
     emitlabel("Lprintb");
     string argReg1 = allocArgReg();
