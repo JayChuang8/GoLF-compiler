@@ -39,7 +39,7 @@ private:
     string getDataLabel();
 
     set<string> pool;
-    vector<string> argPool;
+    set<string> argPool;
     int labelnum;
     std::unordered_map<std::string, std::string> OP2ASM;
 };

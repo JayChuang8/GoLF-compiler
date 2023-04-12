@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <map>
 #include "./backend_asm.h"
 using namespace std;
 
@@ -10,12 +11,12 @@ BackendASM::BackendASM(Utility &util) : util(util),
                                         argPool({"$a0", "$a1", "$a2", "$a3", "$a4", "$a5", "$a6", "$a7", "$a8", "$a9"}),
                                         labelnum(0),
                                         OP2ASM({{"+", "addu"},
-                                                {"-", "sub"},
+                                                {"-", "subu"},
                                                 {"*", "mul"},
                                                 {"/", "div"},
                                                 {"%", ""}, //
                                                 {"==", "seteq"},
-                                                {"!=", "setne"},
+                                                {"!=", "sne"},
                                                 {"<", "slt"},  //
                                                 {"<=", "sle"}, //
                                                 {">", "sgt"},  //
@@ -53,27 +54,23 @@ string BackendASM::allocArgReg()
 {
     if (argPool.empty())
     {
-        cout << "expression too complicated" << endl;
-        exit(1);
+        util.error("expression too complicated", 0);
     }
-    string reg = argPool.front();
+    string reg = *argPool.begin();
     argPool.erase(argPool.begin());
     return reg;
 }
 
 void BackendASM::freeArgReg(string reg)
 {
-    for (const string &str : argPool)
+    if (argPool.find(reg) != argPool.end())
     {
-        if (str == reg)
-        {
-            cout << "attempting to free unallocated register" << endl;
-            exit(1);
-        }
-        else
-        {
-            argPool.push_back(reg);
-        }
+        util.error("attempting to free unallocated register", 0);
+    }
+    else
+    {
+        // cout << "---REG FREED--- " + reg << endl;
+        argPool.insert(reg);
     }
 }
 
@@ -93,6 +90,8 @@ void BackendASM::prologue()
     emit("Lfalse = 0");
     emit(".globl main");
     emit(".data");
+    emitlabel(getDataLabel());
+    emit(".byte 0");
 }
 
 void BackendASM::epilogue()
@@ -122,27 +121,36 @@ string BackendASM::getlabel()
     return "L" + to_string(labelNum++);
 }
 
+std::map<std::string, std::string> stringDict;
 void BackendASM::pass1_cb(AST *node)
 {
     if (node->type == "string")
     {
-        node->reg = getDataLabel();
-        emitlabel(node->reg);
-        for (int i = 0; i < node->attribute.size(); i++)
+        if (stringDict.find(node->attribute) == stringDict.end())
         {
-            int currentByte = static_cast<int>(node->attribute[i]);
-            if (currentByte == 92 && i < node->attribute.size() - 1 && static_cast<int>(node->attribute[i + 1]) == 110)
+            node->reg = getDataLabel();
+            stringDict.insert(std::make_pair(node->attribute, node->reg));
+            emitlabel(node->reg);
+            for (int i = 0; i < node->attribute.size(); i++)
             {
-                // for \n
-                emit(".byte 10");
-                i++;
+                int currentByte = static_cast<int>(node->attribute[i]);
+                if (currentByte == 92 && i < node->attribute.size() - 1 && static_cast<int>(node->attribute[i + 1]) == 110)
+                {
+                    // for \n
+                    emit(".byte 10");
+                    i++;
+                }
+                else
+                {
+                    emit(".byte " + to_string(currentByte));
+                }
             }
-            else
-            {
-                emit(".byte " + to_string(currentByte));
-            }
+            emit(".byte 0");
         }
-        emit(".byte 0");
+        else
+        {
+            node->reg = stringDict[node->attribute];
+        }
     }
 }
 
@@ -176,6 +184,8 @@ void BackendASM::pass3_cb(AST *node)
 {
     if (node->type == "func")
     {
+        currentStackAddress = 0;
+        emit("[FUNC-----------------]");
         emitlabel(node->sym->rtname);
         emit("subu $sp, $sp, " + to_string(node->sym->allocspace));
         // currentStackAddress = node->sym->allocspace;
@@ -197,6 +207,7 @@ void BackendASM::pass3_cb(AST *node)
     }
     else if (node->type == "funccall")
     {
+        emit("[FUNCCALL-----------------]");
         // make sure all the right child nodes (actuals) are defined
         node->kids[1].prepost([this](AST *node)
                               { pass3_cb(node); },
@@ -206,21 +217,28 @@ void BackendASM::pass3_cb(AST *node)
         // move all needed reg's into arg reg's
         for (AST &child : node->kids[1].kids)
         {
-            // string reg = child.reg;
-            // if (child.sym != nullptr)
-            //     reg = child.sym->reg;
-
-            emit("move " + allocArgReg() + ", " + child.reg);
-            freeArgReg(child.reg);
+            string argReg = allocArgReg();
+            emit("move " + argReg + ", " + child.reg);
+            freeArgReg(argReg);
+            freereg(child.reg);
         }
 
         // function call
         emit("jal " + node->kids[0].sym->rtname);
+
+        // store return value of funccall if the func has a return type
+        if (node->sig != "$void" && node->sig != "void")
+        {
+            node->reg = allocreg();
+            emit("move " + node->reg + ", $v0");
+        }
+
         node->prune();
         currentStackAddress = 0;
     }
     else if (node->type == "=")
     {
+        emit("ASSIGNMENT--------------");
         // make sure the nodes on the RHS of assignment (=) are defined
         node->kids[1].prepost([this](AST *node)
                               { pass3_cb(node); },
@@ -238,6 +256,7 @@ void BackendASM::pass3_cb(AST *node)
     }
     else if (node->type == "for")
     {
+        emit("FOR-----------------");
         string loopStart = getlabel() + "for";
         emitlabel(loopStart);
 
@@ -258,10 +277,70 @@ void BackendASM::pass3_cb(AST *node)
         emitlabel(loopEnd);
         node->prune();
     }
+    else if (node->type == "if")
+    {
+        emit("IF-----------------");
+        string ifEnd = getlabel() + "if";
+
+        node->kids[0].prepost([this](AST *node)
+                              { pass3_cb(node); },
+                              [this](AST *node)
+                              { pass3_post_cb(node); });
+
+        emit("beqz " + node->kids[0].reg + ", " + ifEnd);
+        freereg(node->kids[0].reg);
+
+        node->kids[1].prepost([this](AST *node)
+                              { pass3_cb(node); },
+                              [this](AST *node)
+                              { pass3_post_cb(node); });
+        emitlabel(ifEnd);
+        node->prune();
+    }
+    else if (node->type == "ifelse")
+    {
+        emit("IFELSE-----------------");
+        string elseStart = getlabel() + "else";
+        string ifelseEnd = getlabel() + "ifelse";
+
+        node->kids[0].prepost([this](AST *node)
+                              { pass3_cb(node); },
+                              [this](AST *node)
+                              { pass3_post_cb(node); });
+
+        emit("beqz " + node->kids[0].reg + ", " + elseStart);
+        freereg(node->kids[0].reg);
+
+        node->kids[1].prepost([this](AST *node)
+                              { pass3_cb(node); },
+                              [this](AST *node)
+                              { pass3_post_cb(node); });
+        emit("j " + ifelseEnd);
+
+        emitlabel(elseStart);
+        node->kids[2].prepost([this](AST *node)
+                              { pass3_cb(node); },
+                              [this](AST *node)
+                              { pass3_post_cb(node); });
+
+        emitlabel(ifelseEnd);
+        node->prune();
+    }
     else if (node->type == "var")
     {
+        emit("VAR-----------------");
         currentStackAddress += 4;
-        emit("sw $0, " + to_string(currentStackAddress) + "($sp)");
+
+        // load empty string data into register if var declaration is a string
+        string reg = "$0";
+        if (node->kids[1].attribute == "string")
+        {
+            reg = allocreg();
+            emit("la " + reg + ", S0");
+            freereg(reg);
+        }
+
+        emit("sw " + reg + ", " + to_string(currentStackAddress) + "($sp)");
         node->reg = to_string(currentStackAddress) + "($sp)";
         node->sym->reg = to_string(currentStackAddress) + "($sp)";
     }
@@ -271,27 +350,32 @@ void BackendASM::pass3_post_cb(AST *node)
 {
     if (node->type == "string")
     {
+        emit("STRING-----------------");
         string strLabel = node->reg;
         node->reg = allocreg();
         emit("la " + node->reg + ", " + strLabel);
     }
     else if (node->type == "int")
     {
+        emit("INT-----------------");
         node->reg = allocreg();
         emit("li " + node->reg + ", " + node->attribute);
     }
     else if (node->attribute == "true" || node->attribute == "false")
     {
+        emit("BOOL-----------------");
         node->reg = allocreg();
-        cout << "[LOADB] " + node->reg + " = " + node->sym->rtname << endl;
+        emit("li " + node->reg + ", " + node->sym->rtname);
     }
     else if (node->type == "u!")
     {
+        emit("UNARYNOT-----------------");
         node->reg = node->kids[0].reg;
-        cout << "[NOT] " + node->reg + " = not " + node->kids[0].reg << endl;
+        emit("xori " + node->reg + ", " + node->reg + ", 1");
     }
     else if (node->type == "id")
     {
+        emit("ID-----------------");
         // still needs work
         node->reg = allocreg();
         string reg = node->sym->reg;
@@ -301,6 +385,7 @@ void BackendASM::pass3_post_cb(AST *node)
     }
     else if (OP2ASM.find(node->type) != OP2ASM.end())
     {
+        emit("BINARYOP-----------------");
         // binary operator
         node->reg = allocreg();
         string op = OP2ASM[node->type];
