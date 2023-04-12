@@ -1,4 +1,4 @@
-Run started on Wed Apr 12 15:17:04 2023
+Run started on Wed Apr 12 15:19:46 2023
 
 Hostname: csx3.cs.ucalgary.ca
 
@@ -159,7 +159,7 @@ RETURN CODE: 0
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
 global zero values: 
-truefalse
+false
 0
 
 
@@ -758,5 +758,5 @@ STDERR:
 
 (GoLF compiler unsuccessful, skipping test)
 
-Run ended on Wed Apr 12 15:17:12 2023
+Run ended on Wed Apr 12 15:19:54 2023
 
