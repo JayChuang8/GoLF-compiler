@@ -86,9 +86,9 @@ void BackendASM::emit(string instr)
 
 void BackendASM::prologue()
 {
-    emit("Ltrue = 1");
-    emit("Lfalse = 0");
-    emit(".globl main");
+    // emit("Ltrue = 1");
+    // emit("Lfalse = 0");
+    // emit(".globl main");
     emitlabel(".data");
     emitlabel(getDataLabel());
     emit(".byte 0");
@@ -439,6 +439,7 @@ void BackendASM::gen(AST &ast)
                  { pass1_cb(node); });
 
     // pass 2: define MIPS labels for globvar's, func's, strings
+    emit("");
     emitlabel(".text");
     ast.preorder([this](AST *node)
                  { pass2_cb(node); });
@@ -454,113 +455,3 @@ void BackendASM::gen(AST &ast)
     emit("li $v0, 10");
     emit("syscall");
 }
-
-// void BackendASM::pass1_cb(AST *node)
-// {
-//     if (node->type == "if")
-//     {
-//         string bottom = getlabel();
-//         node->kids[0].prepost([this](AST *node)
-//                               { pass1_cb(node); },
-//                               [this](AST *node)
-//                               { pass1_post_cb(node); });
-//         emit("bf " + node->kids[0].reg + ", " + bottom);
-//         freereg(node->kids[0].reg);
-//         node->kids[1].prepost([this](AST *node)
-//                               { pass1_cb(node); },
-//                               [this](AST *node)
-//                               { pass1_post_cb(node); });
-//         emitlabel(bottom);
-//         node->prune();
-//     }
-//     else if (node->type == "=")
-//     {
-//         node->kids[1].prepost([this](AST *node)
-//                               { pass1_cb(node); },
-//                               [this](AST *node)
-//                               { pass1_post_cb(node); });
-//         emit("move " + node->kids[1].reg + ", " + id2asm(node->attribute));
-//         freereg(node->kids[1].reg);
-//         node->prune();
-//     }
-//     else if (OP2ASM.find(node->type) != OP2ASM.end())
-//     {
-//         // binary operator
-//         node->kids[0].prepost([this](AST *node)
-//                               { pass1_cb(node); },
-//                               [this](AST *node)
-//                               { pass1_post_cb(node); });
-//         node->kids[1].prepost([this](AST *node)
-//                               { pass1_cb(node); },
-//                               [this](AST *node)
-//                               { pass1_post_cb(node); });
-//         string op = OP2ASM[node->type];
-//         string reg = allocreg();
-//         emit(op + " " + node->kids[0].reg + "," + node->kids[1].reg + "," + reg);
-//         freereg(node->kids[0].reg);
-//         freereg(node->kids[1].reg);
-//         node->reg = reg;
-//     }
-// }
-
-// void BackendASM::pass1_post_cb(AST *node)
-// {
-//     if (node->type == "id")
-//     {
-//         node->reg = allocreg();
-//         emit("move " + id2asm(node->attribute) + ", " + node->reg);
-//     }
-//     else if (node->type == "number")
-//     {
-//         node->reg = allocreg();
-//         emit("move #" + to_string(stoi(node->attribute)) + ", " + node->reg);
-//     }
-//     else if (node->type == "print")
-//     {
-//         emit("call rtsprint(" + node->kids[0].reg + ")");
-//         freereg(node->kids[0].reg);
-//     }
-//     else if (node->type == "u-")
-//     {
-//         node->reg = allocreg();
-//         emit("neg " + node->kids[0].reg + ", " + node->reg);
-//         freereg(node->kids[0].reg);
-//     }
-//     else if (OP2ASM.find(node->type) != OP2ASM.end())
-//     {
-//         // binary operator
-//         node->reg = allocreg();
-//         string op = OP2ASM[node->type];
-//         emit(op + " " + node->kids[0].reg + "," + node->kids[1].reg + "," + node->reg);
-//         freereg(node->kids[0].reg);
-//         freereg(node->kids[1].reg);
-//     }
-// }
-
-// void BackendASM::pass2_cb(AST *node)
-// {
-//     if (node->type == "string")
-//     {
-//         emitlabel(getDataLabel());
-
-//         for (char c : node->attribute)
-//         {
-//             emit(".byte " + to_string(static_cast<int>(c)));
-//         }
-//         emit(".byte 0");
-//         emit(".align 2");
-//         emit(".text");
-//     }
-//     else if (node->type == "funccall")
-//     {
-//         emitlabel(getlabel());
-//     }
-// }
-
-// void pass2_cb(Node* node) {
-//     if (node->type == "newid") {
-//         // make both ints and bools into words
-//         emitlabel(id2asm(node->attr));
-//         emit("word 0");
-//     }
-// }
