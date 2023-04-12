@@ -43,214 +43,214 @@ S3:
 	.byte 0
 	
 .text
-GA_0:
+G0:
 	.word 0
-GA_1:
+G0:
 	.word 0
-GA_2:
+G0:
 	.word 0
-GA_3:
+G0:
 	.word 0
-GA_4:
+G0:
 	.word 0
-GA_5:
+G0:
 	.word 0
-GA_6:
+G0:
 	.word 0
-GA_7:
+G0:
 	.word 0
-GA_8:
+G0:
 	.word 0
-GA_9:
+G0:
 	.word 0
-GA_10:
+G0:
 	.word 0
-GA_11:
+G0:
 	.word 0
-GA_12:
+G0:
 	.word 0
-GA_13:
+G0:
 	.word 0
-GA_14:
+G0:
 	.word 0
-GA_15:
+G0:
 	.word 0
-GA_16:
+G0:
 	.word 0
-GA_17:
+G0:
 	.word 0
-GA_18:
+G0:
 	.word 0
-GA_19:
+G0:
 	.word 0
-GA_20:
+G0:
 	.word 0
-GA_21:
+G0:
 	.word 0
-GA_22:
+G0:
 	.word 0
-GA_23:
+G0:
 	.word 0
-GA_24:
+G0:
 	.word 0
-GA_25:
+G0:
 	.word 0
-GA_26:
+G0:
 	.word 0
-GA_27:
+G0:
 	.word 0
-GA_28:
+G0:
 	.word 0
-GA_29:
+G0:
 	.word 0
-GA_30:
+G0:
 	.word 0
-GA_31:
+G0:
 	.word 0
-GA_32:
+G0:
 	.word 0
-GA_33:
+G0:
 	.word 0
-GA_34:
+G0:
 	.word 0
-GA_35:
+G0:
 	.word 0
-GA_36:
+G0:
 	.word 0
-GA_37:
+G0:
 	.word 0
-GA_38:
+G0:
 	.word 0
-GA_39:
+G0:
 	.word 0
-GA_40:
+G0:
 	.word 0
-GA_41:
+G0:
 	.word 0
-GA_42:
+G0:
 	.word 0
-GA_43:
+G0:
 	.word 0
-GA_44:
+G0:
 	.word 0
-GA_45:
+G0:
 	.word 0
-GA_46:
+G0:
 	.word 0
-GA_47:
+G0:
 	.word 0
-GA_48:
+G0:
 	.word 0
-GA_49:
+G0:
 	.word 0
-GA_50:
+G0:
 	.word 0
-GA_51:
+G0:
 	.word 0
-GA_52:
+G0:
 	.word 0
-GA_53:
+G0:
 	.word 0
-GA_54:
+G0:
 	.word 0
-GA_55:
+G0:
 	.word 0
-GA_56:
+G0:
 	.word 0
-GA_57:
+G0:
 	.word 0
-GA_58:
+G0:
 	.word 0
-GA_59:
+G0:
 	.word 0
-GA_60:
+G0:
 	.word 0
-GA_61:
+G0:
 	.word 0
-GA_62:
+G0:
 	.word 0
-GA_63:
+G0:
 	.word 0
-GA_64:
+G0:
 	.word 0
-GA_65:
+G0:
 	.word 0
-GA_66:
+G0:
 	.word 0
-GA_67:
+G0:
 	.word 0
-GA_68:
+G0:
 	.word 0
-GA_69:
+G0:
 	.word 0
-GA_70:
+G0:
 	.word 0
-GA_71:
+G0:
 	.word 0
-GA_72:
+G0:
 	.word 0
-GA_73:
+G0:
 	.word 0
-GA_74:
+G0:
 	.word 0
-GA_75:
+G0:
 	.word 0
-GA_76:
+G0:
 	.word 0
-GA_77:
+G0:
 	.word 0
-GA_78:
+G0:
 	.word 0
-GA_79:
+G0:
 	.word 0
-GA_80:
+G0:
 	.word 0
-GA_81:
+G0:
 	.word 0
-GA_82:
+G0:
 	.word 0
-GA_83:
+G0:
 	.word 0
-GA_84:
+G0:
 	.word 0
-GA_85:
+G0:
 	.word 0
-GA_86:
+G0:
 	.word 0
-GA_87:
+G0:
 	.word 0
-GA_88:
+G0:
 	.word 0
-GA_89:
+G0:
 	.word 0
-GA_90:
+G0:
 	.word 0
-GA_91:
+G0:
 	.word 0
-GA_92:
+G0:
 	.word 0
-GA_93:
+G0:
 	.word 0
-GA_94:
+G0:
 	.word 0
-GA_95:
+G0:
 	.word 0
-GA_96:
+G0:
 	.word 0
-GA_97:
+G0:
 	.word 0
-GA_98:
+G0:
 	.word 0
-GA_99:
+G0:
 	.word 0
-GA_100:
+G0:
 	.word 0
-Gnot_there:
+G0:
 	.word 0
 main:
 	jal Lmain
 	j Lhalt
-GINTERNALX:
+G0:
 	.word 0
 Lmain:
 	subu $sp,$sp,16
@@ -270,6 +270,6 @@ L0for:
 	seq $t2,$t0,$t1
 	beqz $t2,L2else
 	li $t0,0
-	sw $t0,GA_1
+	sw $t0,G0
 	j L3ifelse
 L2else:
