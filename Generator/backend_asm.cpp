@@ -100,12 +100,12 @@ void BackendASM::epilogue()
     emit("li $v0, 10");
     emit("syscall");
 
-    emitlabel("printc");
+    emitlabel("Lprintc");
     emit("li $v0, 11");
     emit("syscall");
     emit("jr $ra");
 
-    emitlabel("printi");
+    emitlabel("Lprinti");
     emit("li $v0 1");
     emit("syscall");
     emit("jr $ra");
@@ -115,7 +115,7 @@ void BackendASM::epilogue()
     emit("syscall");
     emit("jr $ra");
 
-    emitlabel("getchar");
+    emitlabel("Lgetchar");
     emit("li $v0, 8");
     emit("syscall");
     emit("jr $ra");
