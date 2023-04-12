@@ -96,8 +96,8 @@ void BackendASM::epilogue()
 {
     emit("");
 
-    cout << "true_str:  .asciiz \"true\"" << endl;
-    cout << "false_str:  .asciiz \"false\"" << endl;
+    cout << "true_str:  .asciiz \"true\n\"" << endl;
+    cout << "false_str:  .asciiz \"false\n\"" << endl;
 
     emitlabel("Lprintb");
     string argReg1 = allocArgReg();
