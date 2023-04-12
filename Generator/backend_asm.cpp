@@ -26,6 +26,7 @@ BackendASM::BackendASM(Utility &util) : util(util),
 {
 }
 
+std::set<std::string> inUsePool;
 string BackendASM::allocreg()
 {
     if (pool.empty())
@@ -34,6 +35,8 @@ string BackendASM::allocreg()
     }
     string reg = *pool.begin();
     pool.erase(pool.begin());
+
+    inUsePool.insert(reg);
     return reg;
 }
 
@@ -46,6 +49,10 @@ void BackendASM::freereg(string reg)
     else
     {
         pool.insert(reg);
+
+        auto iter = inUsePool.find(reg);
+        if (iter != inUsePool.end())
+            inUsePool.erase(iter);
     }
 }
 
@@ -221,7 +228,6 @@ void BackendASM::pass2_cb(AST *node)
     }
     else if (node->type == "globvar")
     {
-        // node->sym->rtname = "G" + node->kids[0].attribute;
         node->sym->rtname = "G" + to_string(globalvarCount++);
         emitlabel(node->sym->rtname);
 
@@ -273,7 +279,22 @@ void BackendASM::pass3_cb(AST *node)
     }
     else if (node->type == "funccall")
     {
-        // emittemp("[FUNCCALL-----------------]");
+        // emittemp("[FUNCCALL-----------------] " + node->kids[0].attribute + " " + to_string(node->kids[0].sym->allocspace));
+
+        // if there are reg's being used before a func call, store them in the stack
+        int stackspace = 0;
+        int allocSpace = (10 - pool.size()) * 4;
+        if (pool.size() != 10)
+        {
+            emit("subu $sp,$sp," + to_string(allocSpace));
+
+            for (const auto &str : inUsePool)
+            {
+                emit("sw " + str + "," + to_string(stackspace) + "($sp)");
+                stackspace += 4;
+            }
+        }
+
         // make sure all the right child nodes (actuals) are defined
         node->kids[1].prepost([this](AST *node)
                               { pass3_cb(node); },
@@ -291,6 +312,18 @@ void BackendASM::pass3_cb(AST *node)
 
         // function call
         emit("jal " + node->kids[0].sym->rtname);
+
+        // load data back from stack into regs after func return
+        if (pool.size() != 10)
+        {
+            stackspace = 0;
+            for (const auto &str : inUsePool)
+            {
+                emit("lw " + str + "," + to_string(stackspace) + "($sp)");
+                stackspace += 4;
+            }
+            emit("addu $sp,$sp," + to_string(allocSpace));
+        }
 
         // store return value of funccall if the func has a return type
         if (node->sig != "$void" && node->sig != "void")
@@ -402,6 +435,7 @@ void BackendASM::pass3_cb(AST *node)
                               { pass3_post_cb(node); });
 
         emit("move $v0," + node->kids[0].reg);
+        freereg(node->kids[0].reg);
         node->prune();
     }
     else if (node->type == "var")
