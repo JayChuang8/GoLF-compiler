@@ -1,4 +1,4 @@
-Run started on Wed Apr 12 12:31:37 2023
+Run started on Wed Apr 12 12:43:25 2023
 
 Hostname: csx3.cs.ucalgary.ca
 
@@ -27,7 +27,7 @@ make[1]: Nothing to be done for 'all'.
 make[1]: Leaving directory '/home/ugb/jay.chuang1/golf-compiler/SemanticChecker'
 /usr/bin/make -C Generator
 make[1]: Entering directory '/home/ugb/jay.chuang1/golf-compiler/Generator'
-make[1]: Nothing to be done for 'all'.
+g++ -o backend_asm.o -c backend_asm.cpp -MMD -MF backend_asm.d
 make[1]: Leaving directory '/home/ugb/jay.chuang1/golf-compiler/Generator'
 g++ -o main.o -c main.cpp -MMD -MF main.d
 g++ -o golf main.o Scanner/scanner.o Scanner/token.o Utility/utility.o Parser/ast.o Parser/parser.o SemanticChecker/semantic.o SemanticChecker/stab.o Generator/backend_asm.o
@@ -110,10 +110,9 @@ main
 
 
 STDERR:
-spim: (parser) syntax error on line 2 of file out.s
-	  program 
-
-	          ^
+spim: (parser) syntax error on line 4 of file out.s
+	  .data:
+	       ^
 Instruction references undefined symbol at 0x00400014
   [0x00400014]	0x0c000000  jal 0x00000000 [main]           ; 188: jal main
 
@@ -141,10 +140,9 @@ main
 
 
 STDERR:
-spim: (parser) syntax error on line 2 of file out.s
-	  program 
-
-	          ^
+spim: (parser) syntax error on line 4 of file out.s
+	  .data:
+	       ^
 Instruction references undefined symbol at 0x00400014
   [0x00400014]	0x0c000000  jal 0x00000000 [main]           ; 188: jal main
 
@@ -172,10 +170,9 @@ main
 
 
 STDERR:
-spim: (parser) syntax error on line 2 of file out.s
-	  program 
-
-	          ^
+spim: (parser) syntax error on line 4 of file out.s
+	  .data:
+	       ^
 Instruction references undefined symbol at 0x00400014
   [0x00400014]	0x0c000000  jal 0x00000000 [main]           ; 188: jal main
 
@@ -203,10 +200,9 @@ main
 
 
 STDERR:
-spim: (parser) syntax error on line 2 of file out.s
-	  program 
-
-	          ^
+spim: (parser) syntax error on line 4 of file out.s
+	  .data:
+	       ^
 Instruction references undefined symbol at 0x00400014
   [0x00400014]	0x0c000000  jal 0x00000000 [main]           ; 188: jal main
 
@@ -248,10 +244,9 @@ main
 
 
 STDERR:
-spim: (parser) syntax error on line 2 of file out.s
-	  program 
-
-	          ^
+spim: (parser) syntax error on line 4 of file out.s
+	  .data:
+	       ^
 Instruction references undefined symbol at 0x00400014
   [0x00400014]	0x0c000000  jal 0x00000000 [main]           ; 188: jal main
 
@@ -283,10 +278,9 @@ main
 
 
 STDERR:
-spim: (parser) syntax error on line 2 of file out.s
-	  program 
-
-	          ^
+spim: (parser) syntax error on line 4 of file out.s
+	  .data:
+	       ^
 Instruction references undefined symbol at 0x00400014
   [0x00400014]	0x0c000000  jal 0x00000000 [main]           ; 188: jal main
 
@@ -314,10 +308,9 @@ main
 
 
 STDERR:
-spim: (parser) syntax error on line 2 of file out.s
-	  program 
-
-	          ^
+spim: (parser) syntax error on line 4 of file out.s
+	  .data:
+	       ^
 Instruction references undefined symbol at 0x00400014
   [0x00400014]	0x0c000000  jal 0x00000000 [main]           ; 188: jal main
 
@@ -373,10 +366,9 @@ main
 
 
 STDERR:
-spim: (parser) syntax error on line 2 of file out.s
-	  program 
-
-	          ^
+spim: (parser) syntax error on line 4 of file out.s
+	  .data:
+	       ^
 Instruction references undefined symbol at 0x00400014
   [0x00400014]	0x0c000000  jal 0x00000000 [main]           ; 188: jal main
 
@@ -404,10 +396,9 @@ main
 
 
 STDERR:
-spim: (parser) syntax error on line 2 of file out.s
-	  program 
-
-	          ^
+spim: (parser) syntax error on line 4 of file out.s
+	  .data:
+	       ^
 Instruction references undefined symbol at 0x00400014
   [0x00400014]	0x0c000000  jal 0x00000000 [main]           ; 188: jal main
 
@@ -463,10 +454,9 @@ main
 
 
 STDERR:
-spim: (parser) syntax error on line 2 of file out.s
-	  program 
-
-	          ^
+spim: (parser) syntax error on line 4 of file out.s
+	  .data:
+	       ^
 Instruction references undefined symbol at 0x00400014
   [0x00400014]	0x0c000000  jal 0x00000000 [main]           ; 188: jal main
 
@@ -494,10 +484,9 @@ main
 
 
 STDERR:
-spim: (parser) syntax error on line 2 of file out.s
-	  program 
-
-	          ^
+spim: (parser) syntax error on line 4 of file out.s
+	  .data:
+	       ^
 Instruction references undefined symbol at 0x00400014
   [0x00400014]	0x0c000000  jal 0x00000000 [main]           ; 188: jal main
 
@@ -525,10 +514,9 @@ main
 
 
 STDERR:
-spim: (parser) syntax error on line 2 of file out.s
-	  program 
-
-	          ^
+spim: (parser) syntax error on line 4 of file out.s
+	  .data:
+	       ^
 Instruction references undefined symbol at 0x00400014
   [0x00400014]	0x0c000000  jal 0x00000000 [main]           ; 188: jal main
 
@@ -570,10 +558,9 @@ main
 
 
 STDERR:
-spim: (parser) syntax error on line 2 of file out.s
-	  program 
-
-	          ^
+spim: (parser) syntax error on line 4 of file out.s
+	  .data:
+	       ^
 Instruction references undefined symbol at 0x00400014
   [0x00400014]	0x0c000000  jal 0x00000000 [main]           ; 188: jal main
 
@@ -628,10 +615,9 @@ main
 
 
 STDERR:
-spim: (parser) syntax error on line 2 of file out.s
-	  program 
-
-	          ^
+spim: (parser) syntax error on line 4 of file out.s
+	  .data:
+	       ^
 Instruction references undefined symbol at 0x00400014
   [0x00400014]	0x0c000000  jal 0x00000000 [main]           ; 188: jal main
 
@@ -663,10 +649,9 @@ main
 
 
 STDERR:
-spim: (parser) syntax error on line 2 of file out.s
-	  program 
-
-	          ^
+spim: (parser) syntax error on line 4 of file out.s
+	  .data:
+	       ^
 Instruction references undefined symbol at 0x00400014
   [0x00400014]	0x0c000000  jal 0x00000000 [main]           ; 188: jal main
 
@@ -694,10 +679,9 @@ main
 
 
 STDERR:
-spim: (parser) syntax error on line 2 of file out.s
-	  program 
-
-	          ^
+spim: (parser) syntax error on line 4 of file out.s
+	  .data:
+	       ^
 Instruction references undefined symbol at 0x00400014
   [0x00400014]	0x0c000000  jal 0x00000000 [main]           ; 188: jal main
 
@@ -770,5 +754,5 @@ STDERR:
 
 (GoLF compiler unsuccessful, skipping test)
 
-Run ended on Wed Apr 12 12:31:39 2023
+Run ended on Wed Apr 12 12:43:32 2023
 
