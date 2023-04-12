@@ -1,4 +1,4 @@
-Run started on Wed Apr 12 15:12:56 2023
+Run started on Wed Apr 12 15:14:17 2023
 
 Hostname: csx3.cs.ucalgary.ca
 
@@ -104,22 +104,10 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-The following symbols are undefined:
-Lhalt
-
+Hello, world!
 
 
 STDERR:
-spim: (parser) Unknown character on line 38 of file out.s
-	  	[FUNC-----------------]
-	   ^
-spim: (parser) Unknown character on line 42 of file out.s
-	  	[FUNCCALL-----------------]
-	   ^
-spim: (parser) syntax error on line 43 of file out.s
-	  	STRING-----------------
-	         ^
-Attempt to execute non-instruction at 0x00400034
 
 
 RETURN CODE: 0
@@ -139,19 +127,18 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-The following symbols are undefined:
-Lhalt
-
+start of loop
+0
+start of loop
+0
+start of loop
+0
+start of loop
+0
+4
 
 
 STDERR:
-spim: (parser) Unknown character on line 40 of file out.s
-	  	[FUNC-----------------]
-	   ^
-spim: (parser) syntax error on line 44 of file out.s
-	  	ASSIGNMENT--------------
-	             ^
-Attempt to execute non-instruction at 0x00400038
 
 
 RETURN CODE: 0
@@ -171,19 +158,13 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-The following symbols are undefined:
-Lhalt
-
+global zero values: 
+truefalse
+0
 
 
 STDERR:
-spim: (parser) Unknown character on line 147 of file out.s
-	  	[FUNC-----------------]
-	   ^
-spim: (parser) syntax error on line 151 of file out.s
-	  	ASSIGNMENT--------------
-	             ^
-Attempt to execute non-instruction at 0x00400044
+Memory address out of bounds
 
 
 RETURN CODE: 0
@@ -203,21 +184,10 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-The following symbols are undefined:
-Lhalt
-Lmain
-
+0
 
 
 STDERR:
-spim: (parser) Unknown character on line 27 of file out.s
-	  	[FUNC-----------------]
-	   ^
-spim: (parser) syntax error on line 31 of file out.s
-	  	FORMAL-----------------
-	         ^
-Instruction references undefined symbol at 0x00400028
-  [0x00400028]	0x0c000000  jal 0x00000000 [Lmain]          ; 25: jal Lmain
 
 
 RETURN CODE: 0
@@ -251,19 +221,56 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-The following symbols are undefined:
-Lhalt
-
+fib(0) = 0
+fib(1) = 1
+fib(2) = 1
+fib(3) = 2
+fib(4) = 3
+fib(5) = 5
+fib(6) = 8
+fib(7) = 13
+fib(8) = 21
+fib(9) = 34
+fib(10) = 55
+fib(11) = 89
+fib(12) = 144
+fib(13) = 233
+fib(14) = 377
+fib(15) = 610
+fib(16) = 987
+fib(17) = 1597
+fib(18) = 2584
+fib(19) = 4181
+fib(20) = 6765
+fib(21) = 10946
+fib(22) = 17711
+fib(23) = 28657
+fib(24) = 46368
+fib(25) = 75025
+fib(26) = 121393
+fib(27) = 196418
+fib(28) = 317811
+fib(29) = 514229
+fib(30) = 832040
+fib(31) = 1346269
+fib(32) = 2178309
+fib(33) = 3524578
+fib(34) = 5702887
+fib(35) = 9227465
+fib(36) = 14930352
+fib(37) = 24157817
+fib(38) = 39088169
+fib(39) = 63245986
+fib(40) = 102334155
+fib(41) = 165580141
+fib(42) = 267914296
+fib(43) = 433494437
+fib(44) = 701408733
+fib(45) = 1134903170
+fib(46) = 1836311903
 
 
 STDERR:
-spim: (parser) Unknown character on line 63 of file out.s
-	  	[FUNC-----------------]
-	   ^
-spim: (parser) syntax error on line 67 of file out.s
-	  	VAR-----------------
-	      ^
-Attempt to execute non-instruction at 0x00400034
 
 
 RETURN CODE: 0
@@ -287,21 +294,10 @@ A man, a plan, a canal: Panama.
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-The following symbols are undefined:
-Lhalt
-Lmain
-
 
 
 STDERR:
-spim: (parser) Unknown character on line 24 of file out.s
-	  	[FUNC-----------------]
-	   ^
-spim: (parser) syntax error on line 28 of file out.s
-	  	VAR-----------------
-	      ^
-Instruction references undefined symbol at 0x00400028
-  [0x00400028]	0x0c000000  jal 0x00000000 [Lmain]          ; 22: jal Lmain
+Memory address out of bounds
 
 
 RETURN CODE: 0
@@ -321,19 +317,10 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-The following symbols are undefined:
-Lhalt
-
+minint is -2147483648
 
 
 STDERR:
-spim: (parser) Unknown character on line 37 of file out.s
-	  	[FUNC-----------------]
-	   ^
-spim: (parser) syntax error on line 41 of file out.s
-	  	VAR-----------------
-	      ^
-Attempt to execute non-instruction at 0x00400034
 
 
 RETURN CODE: 0
@@ -381,22 +368,12 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-The following symbols are undefined:
-Lhalt
-
+  Exception 9  [Breakpoint]  occurred and ignored
+0
 
 
 STDERR:
-spim: (parser) Unknown character on line 25 of file out.s
-	  	[FUNC-----------------]
-	   ^
-spim: (parser) Unknown character on line 29 of file out.s
-	  	[FUNCCALL-----------------]
-	   ^
-spim: (parser) syntax error on line 30 of file out.s
-	  	INT-----------------
-	      ^
-Attempt to execute non-instruction at 0x00400034
+Exception occurred at PC=0x00400044
 
 
 RETURN CODE: 0
@@ -416,19 +393,10 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-The following symbols are undefined:
-Lhalt
-
+OK
 
 
 STDERR:
-spim: (parser) Unknown character on line 35 of file out.s
-	  	[FUNC-----------------]
-	   ^
-spim: (parser) syntax error on line 39 of file out.s
-	  	IFELSE-----------------
-	         ^
-Attempt to execute non-instruction at 0x00400034
 
 
 RETURN CODE: 0
@@ -478,20 +446,16 @@ STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
 The following symbols are undefined:
 Lhalt
+Lprintb
+Lprints
 Lmain
 
 
 
 STDERR:
-spim: (parser) Unknown character on line 202 of file out.s
-	  	[FUNC-----------------]
-	   ^
-spim: (parser) Unknown character on line 206 of file out.s
-	  	[FUNCCALL-----------------]
-	   ^
-spim: (parser) syntax error on line 207 of file out.s
-	  	STRING-----------------
-	         ^
+spim: (parser) syntax error on line 275 of file out.s
+	  	 $t5,$t3,$t4
+	    ^
 Instruction references undefined symbol at 0x00400030
   [0x00400030]	0x0c000000  jal 0x00000000 [Lmain]          ; 200: jal Lmain
 
@@ -515,19 +479,15 @@ STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
 The following symbols are undefined:
 Lhalt
-Lmain
 
 
 
 STDERR:
-spim: (parser) Unknown character on line 22 of file out.s
-	  	[FUNC-----------------]
-	   ^
-spim: (parser) syntax error on line 26 of file out.s
-	  	FORMAL-----------------
-	         ^
-Instruction references undefined symbol at 0x00400024
-  [0x00400024]	0x0c000000  jal 0x00000000 [Lmain]          ; 20: jal Lmain
+spim: (parser) syntax error on line 44 of file out.s
+	  move $a0,
+
+	           ^
+Attempt to execute non-instruction at 0x00400070
 
 
 RETURN CODE: 0
@@ -547,19 +507,11 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-The following symbols are undefined:
-Lhalt
-
-
+  Exception 9  [Breakpoint]  occurred and ignored
+0
 
 STDERR:
-spim: (parser) Unknown character on line 26 of file out.s
-	  	[FUNC-----------------]
-	   ^
-spim: (parser) syntax error on line 30 of file out.s
-	  	ASSIGNMENT--------------
-	             ^
-Attempt to execute non-instruction at 0x0040003c
+Exception occurred at PC=0x0040006c
 
 
 RETURN CODE: 0
@@ -594,20 +546,12 @@ RETURN CODE: 0
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
 The following symbols are undefined:
-Lhalt
-Lmain
+Llen
 
-
+кся: len(\"
 
 STDERR:
-spim: (parser) Unknown character on line 312 of file out.s
-	  	[FUNC-----------------]
-	   ^
-spim: (parser) syntax error on line 316 of file out.s
-	  	RETURN-------------
-	         ^
-Instruction references undefined symbol at 0x00400024
-  [0x00400024]	0x0c000000  jal 0x00000000 [Lmain]          ; 310: jal Lmain
+Memory address out of bounds
 
 
 RETURN CODE: 0
@@ -654,19 +598,29 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-The following symbols are undefined:
-Lhalt
-
-
+0
+100 101 102 103 104 105 
+106 107 108 109 1
+100 101 102 103 104 105 
+106 107 108 109 2
+100 101 102 103 104 105 
+106 107 108 109 3
+100 101 102 103 104 105 
+106 107 108 109 4
+100 101 102 103 104 105 
+106 107 108 109 5
+100 101 102 103 104 105 
+106 107 108 109 6
+100 101 102 103 104 105 
+106 107 108 109 7
+100 101 102 103 104 105 
+106 107 108 109 8
+100 101 102 103 104 105 
+106 107 108 109 9
+100 101 102 103 104 105 
+106 107 108 109 
 
 STDERR:
-spim: (parser) Unknown character on line 28 of file out.s
-	  	[FUNC-----------------]
-	   ^
-spim: (parser) syntax error on line 32 of file out.s
-	  	VAR-----------------
-	      ^
-Attempt to execute non-instruction at 0x00400034
 
 
 RETURN CODE: 0
@@ -692,17 +646,21 @@ STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
 The following symbols are undefined:
 Lhalt
+Lgetchar
+L1for
 
+  Exception 4  [Address error in inst/data fetch]  occurred and ignored
 
 
 STDERR:
-spim: (parser) Unknown character on line 29 of file out.s
-	  	[FUNC-----------------]
-	   ^
-spim: (parser) syntax error on line 33 of file out.s
-	  	VAR-----------------
-	      ^
-Attempt to execute non-instruction at 0x00400034
+spim: (parser) syntax error on line 46 of file out.s
+	  seq $t2,$t0,
+
+	              ^
+Exception occurred at PC=0x0040004c
+  Unaligned address in inst/data fetch: 0x00000001
+Instruction references undefined symbol at 0x00400050
+  [0x00400050]	0x11000000  beq $8, $0, 0 [L1for-0x00400050]; 38: beqz $t0,L1for
 
 
 RETURN CODE: 0
@@ -723,20 +681,13 @@ RETURN CODE: 0
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
 The following symbols are undefined:
-Lhalt
-Lmain
+Llen
 
 
 
 STDERR:
-spim: (parser) Unknown character on line 133 of file out.s
-	  	[FUNC-----------------]
-	   ^
-spim: (parser) syntax error on line 137 of file out.s
-	  	FORMAL-----------------
-	         ^
-Instruction references undefined symbol at 0x0040002c
-  [0x0040002c]	0x0c000000  jal 0x00000000 [Lmain]          ; 131: jal Lmain
+Instruction references undefined symbol at 0x00400374
+  [0x00400374]	0x0c000000  jal 0x00000000 [Llen]           ; 336: jal Llen
 
 
 RETURN CODE: 0
@@ -807,5 +758,5 @@ STDERR:
 
 (GoLF compiler unsuccessful, skipping test)
 
-Run ended on Wed Apr 12 15:13:01 2023
+Run ended on Wed Apr 12 15:14:24 2023
 
