@@ -234,7 +234,7 @@ void BackendASM::pass3_cb(AST *node)
     if (node->type == "func")
     {
         currentStackAddress = 0;
-        emittemp("[FUNC-----------------]");
+        // emittemp("[FUNC-----------------]");
         emitlabel(node->sym->rtname);
         emit("subu $sp,$sp," + to_string(node->sym->allocspace));
         // currentStackAddress = node->sym->allocspace;
@@ -268,7 +268,7 @@ void BackendASM::pass3_cb(AST *node)
     }
     else if (node->type == "funccall")
     {
-        emittemp("[FUNCCALL-----------------]");
+        // emittemp("[FUNCCALL-----------------]");
         // make sure all the right child nodes (actuals) are defined
         node->kids[1].prepost([this](AST *node)
                               { pass3_cb(node); },
@@ -299,7 +299,7 @@ void BackendASM::pass3_cb(AST *node)
     }
     else if (node->type == "=")
     {
-        emittemp("ASSIGNMENT--------------");
+        // emittemp("ASSIGNMENT--------------");
         // make sure the nodes on the RHS of assignment (=) are defined
         node->kids[1].prepost([this](AST *node)
                               { pass3_cb(node); },
@@ -317,7 +317,7 @@ void BackendASM::pass3_cb(AST *node)
     }
     else if (node->type == "for")
     {
-        emittemp("FOR-----------------");
+        // emittemp("FOR-----------------");
         string loopStart = getlabel() + "for";
         emitlabel(loopStart);
 
@@ -340,7 +340,7 @@ void BackendASM::pass3_cb(AST *node)
     }
     else if (node->type == "if")
     {
-        emittemp("IF-----------------");
+        // emittemp("IF-----------------");
         string ifEnd = getlabel() + "if";
 
         node->kids[0].prepost([this](AST *node)
@@ -360,7 +360,7 @@ void BackendASM::pass3_cb(AST *node)
     }
     else if (node->type == "ifelse")
     {
-        emittemp("IFELSE-----------------");
+        // emittemp("IFELSE-----------------");
         string elseStart = getlabel() + "else";
         string ifelseEnd = getlabel() + "ifelse";
 
@@ -389,7 +389,7 @@ void BackendASM::pass3_cb(AST *node)
     }
     else if (node->type == "return")
     {
-        emittemp("RETURN-------------");
+        // emittemp("RETURN-------------");
 
         node->kids[0].prepost([this](AST *node)
                               { pass3_cb(node); },
@@ -401,7 +401,7 @@ void BackendASM::pass3_cb(AST *node)
     }
     else if (node->type == "var")
     {
-        emittemp("VAR-----------------");
+        // emittemp("VAR-----------------");
         currentStackAddress += 4;
 
         // load empty string data into register if var declaration is a string
@@ -419,7 +419,7 @@ void BackendASM::pass3_cb(AST *node)
     }
     else if (node->type == "formal")
     {
-        emittemp("FORMAL-----------------");
+        // emittemp("FORMAL-----------------");
         currentStackAddress += 4;
 
         string argReg = allocArgReg();
@@ -433,32 +433,32 @@ void BackendASM::pass3_post_cb(AST *node)
 {
     if (node->type == "string")
     {
-        emittemp("STRING-----------------");
+        // emittemp("STRING-----------------");
         string strLabel = node->reg;
         node->reg = allocreg();
         emit("la " + node->reg + "," + strLabel);
     }
     else if (node->type == "int")
     {
-        emittemp("INT-----------------");
+        // emittemp("INT-----------------");
         node->reg = allocreg();
         emit("li " + node->reg + "," + node->attribute);
     }
     else if (node->attribute == "true" || node->attribute == "false")
     {
-        emittemp("BOOL-----------------");
+        // emittemp("BOOL-----------------");
         node->reg = allocreg();
         emit("li " + node->reg + "," + node->sym->rtname);
     }
     else if (node->type == "u!")
     {
-        emittemp("UNARYNOT-----------------");
+        // emittemp("UNARYNOT-----------------");
         node->reg = node->kids[0].reg;
         emit("xori " + node->reg + "," + node->reg + ",1");
     }
     else if (node->type == "id")
     {
-        emittemp("ID-----------------");
+        // emittemp("ID-----------------");
         // still needs work
         node->reg = allocreg();
         string reg = node->sym->reg;
@@ -468,7 +468,7 @@ void BackendASM::pass3_post_cb(AST *node)
     }
     else if (OP2ASM.find(node->type) != OP2ASM.end())
     {
-        emittemp("BINARYOP-----------------");
+        // emittemp("BINARYOP-----------------");
         // binary operator
         node->reg = allocreg();
         string op = OP2ASM[node->type];
