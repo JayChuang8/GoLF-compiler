@@ -113,10 +113,8 @@ void BackendASM::epilogue()
     emit("");
 
     emitlabel("Lprintb");
-    string reg = allocreg();
-    emit("lw " + reg + ",4($sp)");
-    emit("beqz " + reg + ",PrintFalse");
     string argReg1 = allocArgReg();
+    emit("beqz " + argReg1 + ",PrintFalse");
     emit("la " + argReg1 + ",PDCTrue");
     freeArgReg(argReg1);
     emit("j Lprints");
