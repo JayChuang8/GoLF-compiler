@@ -1,4 +1,4 @@
-Run started on Wed Apr 12 13:31:35 2023
+Run started on Wed Apr 12 13:33:31 2023
 
 Hostname: csx3.cs.ucalgary.ca
 
@@ -127,16 +127,18 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-The following symbols are undefined:
-Lprintc
-Lprinti
-
 start of loop
+0
+start of loop
+0
+start of loop
+0
+start of loop
+0
+4
 
 
 STDERR:
-Instruction references undefined symbol at 0x00400074
-  [0x00400074]	0x0c000000  jal 0x00000000 [Lprinti]        ; 46: jal Lprinti
 
 
 RETURN CODE: 0
@@ -158,8 +160,6 @@ STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
 The following symbols are undefined:
 Lprintb
-Lprintc
-Lprinti
 
 global zero values: 
 
@@ -186,14 +186,10 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-The following symbols are undefined:
-Lprinti
-
+0
 
 
 STDERR:
-Instruction references undefined symbol at 0x004001a0
-  [0x004001a0]	0x0c000000  jal 0x00000000 [Lprinti]        ; 111: jal Lprinti
 
 
 RETURN CODE: 0
@@ -227,16 +223,56 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-The following symbols are undefined:
-Lprinti
-
 fib(0) = 0
 fib(1) = 1
-fib(
+fib(2) = 1
+fib(3) = 2
+fib(4) = 3
+fib(5) = 5
+fib(6) = 8
+fib(7) = 13
+fib(8) = 21
+fib(9) = 34
+fib(10) = 55
+fib(11) = 89
+fib(12) = 144
+fib(13) = 233
+fib(14) = 377
+fib(15) = 610
+fib(16) = 987
+fib(17) = 1597
+fib(18) = 2584
+fib(19) = 4181
+fib(20) = 6765
+fib(21) = 10946
+fib(22) = 17711
+fib(23) = 28657
+fib(24) = 46368
+fib(25) = 75025
+fib(26) = 121393
+fib(27) = 196418
+fib(28) = 317811
+fib(29) = 514229
+fib(30) = 832040
+fib(31) = 1346269
+fib(32) = 2178309
+fib(33) = 3524578
+fib(34) = 5702887
+fib(35) = 9227465
+fib(36) = 14930352
+fib(37) = 24157817
+fib(38) = 39088169
+fib(39) = 63245986
+fib(40) = 102334155
+fib(41) = 165580141
+fib(42) = 267914296
+fib(43) = 433494437
+fib(44) = 701408733
+fib(45) = 1134903170
+fib(46) = 1836311903
+
 
 STDERR:
-Instruction references undefined symbol at 0x004000a4
-  [0x004000a4]	0x0c000000  jal 0x00000000 [Lprinti]        ; 81: jal Lprinti
 
 
 RETURN CODE: 0
@@ -260,15 +296,10 @@ A man, a plan, a canal: Panama.
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-The following symbols are undefined:
-Lprintc
-Lgetchar
-
 
 
 STDERR:
-Instruction references undefined symbol at 0x0040003c
-  [0x0040003c]	0x0c000000  jal 0x00000000 [Lgetchar]       ; 17: jal Lgetchar
+Memory address out of bounds
 
 
 RETURN CODE: 0
@@ -288,14 +319,10 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-The following symbols are undefined:
-Lprinti
+minint is -2147483648
 
-minint is 
 
 STDERR:
-Instruction references undefined symbol at 0x004000c0
-  [0x004000c0]	0x0c000000  jal 0x00000000 [Lprinti]        ; 62: jal Lprinti
 
 
 RETURN CODE: 0
@@ -343,16 +370,12 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-The following symbols are undefined:
-Lprinti
-
   Exception 9  [Breakpoint]  occurred and ignored
+0
 
 
 STDERR:
 Exception occurred at PC=0x00400044
-Instruction references undefined symbol at 0x00400054
-  [0x00400054]	0x0c000000  jal 0x00000000 [Lprinti]        ; 21: jal Lprinti
 
 
 RETURN CODE: 0
@@ -486,16 +509,11 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-The following symbols are undefined:
-Lprinti
-
   Exception 9  [Breakpoint]  occurred and ignored
-
+0
 
 STDERR:
 Exception occurred at PC=0x0040006c
-Instruction references undefined symbol at 0x0040007c
-  [0x0040007c]	0x0c000000  jal 0x00000000 [Lprinti]        ; 27: jal Lprinti
 
 
 RETURN CODE: 0
@@ -664,7 +682,6 @@ RETURN CODE: 0
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
 The following symbols are undefined:
-Lprintc
 Llen
 
 
@@ -742,5 +759,5 @@ STDERR:
 
 (GoLF compiler unsuccessful, skipping test)
 
-Run ended on Wed Apr 12 13:31:42 2023
+Run ended on Wed Apr 12 13:33:38 2023
 
