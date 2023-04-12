@@ -2,14 +2,14 @@
 #include <iostream>
 #include <iomanip>
 
-#include "./scanner/scanner.h"
-#include "./scanner/token.h"
-#include "./utility/utility.h"
-#include "./parser/parser.h"
-#include "./parser/ast.h"
-#include "./semanticchecker/semantic.h"
-#include "./semanticchecker/stab.h"
-#include "./generator/backend_asm.h"
+#include "./Scanner/scanner.h"
+#include "./Scanner/token.h"
+#include "./Utility/utility.h"
+#include "./Parser/parser.h"
+#include "./Parser/ast.h"
+#include "./SemanticChecker/semantic.h"
+#include "./SemanticChecker/stab.h"
+#include "./Generator/backend_asm.h"
 
 int main(int argc, char *argv[])
 {
