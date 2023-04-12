@@ -1,4 +1,4 @@
-Run started on Wed Apr 12 15:48:55 2023
+Run started on Wed Apr 12 17:15:29 2023
 
 Hostname: csx3.cs.ucalgary.ca
 
@@ -473,8 +473,8 @@ Lmain
 
 
 STDERR:
-spim: (parser) syntax error on line 275 of file out.s
-	  	 $t5,$t3,$t4
+spim: (parser) syntax error on line 279 of file out.s
+	  	 $t2,$t0,$t1
 	    ^
 Instruction references undefined symbol at 0x00400030
   [0x00400030]	0x0c000000  jal 0x00000000 [Lmain]          ; 200: jal Lmain
@@ -706,8 +706,8 @@ Llen
 
 
 STDERR:
-Instruction references undefined symbol at 0x00400374
-  [0x00400374]	0x0c000000  jal 0x00000000 [Llen]           ; 336: jal Llen
+Instruction references undefined symbol at 0x004003f4
+  [0x004003f4]	0x0c000000  jal 0x00000000 [Llen]           ; 368: jal Llen
 
 
 RETURN CODE: 0
@@ -778,5 +778,5 @@ STDERR:
 
 (GoLF compiler unsuccessful, skipping test)
 
-Run ended on Wed Apr 12 15:49:02 2023
+Run ended on Wed Apr 12 17:15:36 2023
 
