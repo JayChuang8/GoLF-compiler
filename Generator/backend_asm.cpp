@@ -96,20 +96,27 @@ void BackendASM::epilogue()
 {
     emit("");
 
-    cout << "true_str:  .asciiz \"true\n\"" << endl;
-    cout << "false_str:  .asciiz \"false\n\"" << endl;
+    emitlabel("PDCTrue");
+    emit(".byte 116");
+    emit(".byte 114");
+    emit(".byte 117");
+    emit(".byte 101");
+
+    emitlabel("PDCFalse");
+    emit(".byte 102");
+    emit(".byte 97");
+    emit(".byte 108");
+    emit(".byte 115");
+    emit(".byte 101");
 
     emitlabel("Lprintb");
     string argReg1 = allocArgReg();
-    emit("lw " + argReg1 + ", 0($sp)");
+    emit("beqz " + argReg1 + ", Lfalse");
+    emit("la " + argReg1 + ", PDCTrue");
     freeArgReg(argReg1);
-    emit("addiu $sp, $sp, 4");
-    string argReg2 = allocArgReg();
-    emit("li " + argReg2 + ", true_str");
-    freeArgReg(argReg2);
-    emit("li $v0, 4");
-    emit("syscall");
-    emit("jr $ra");
+    emit("j Lprints");
+    emitlabel("Lfalse");
+    emit("la " + argReg1 + ", PDCFalse");
 
     emitlabel("Lhalt");
     emit("li $v0, 10");
