@@ -89,7 +89,7 @@ void BackendASM::prologue()
     // emit("Ltrue = 1");
     // emit("Lfalse = 0");
     // emit(".globl main");
-    emitlabel(".data");
+    cout << ".data" << endl;
     emitlabel(getDataLabel());
     emit(".byte 0");
 }
@@ -440,7 +440,7 @@ void BackendASM::gen(AST &ast)
 
     // pass 2: define MIPS labels for globvar's, func's, strings
     emit("");
-    emitlabel(".text");
+    cout << ".text" << endl;
     ast.preorder([this](AST *node)
                  { pass2_cb(node); });
 
