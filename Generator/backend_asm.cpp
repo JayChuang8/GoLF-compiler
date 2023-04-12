@@ -110,19 +110,19 @@ void BackendASM::epilogue()
 
     emitlabel("Lprintb");
     string argReg1 = allocArgReg();
-    emit("beqz " + argReg1 + ", PrintFalse");
-    emit("la " + argReg1 + ", PDCTrue");
+    emit("beqz " + argReg1 + ",PrintFalse");
+    emit("la " + argReg1 + ",PDCTrue");
     freeArgReg(argReg1);
     emit("j Lprints");
     emitlabel("PrintFalse");
-    emit("la " + argReg1 + ", PDCFalse");
+    emit("la " + argReg1 + ",PDCFalse");
 
     emitlabel("Lhalt");
-    emit("li $v0, 10");
+    emit("li $v0,10");
     emit("syscall");
 
     emitlabel("Lprintc");
-    emit("li $v0, 11");
+    emit("li $v0,11");
     emit("syscall");
     emit("jr $ra");
 
@@ -132,12 +132,12 @@ void BackendASM::epilogue()
     emit("jr $ra");
 
     emitlabel("Lprints");
-    emit("li $v0, 4");
+    emit("li $v0,4");
     emit("syscall");
     emit("jr $ra");
 
     emitlabel("Lgetchar");
-    emit("li $v0, 8");
+    emit("li $v0,8");
     emit("syscall");
     emit("jr $ra");
 }
@@ -230,10 +230,10 @@ void BackendASM::pass3_cb(AST *node)
         currentStackAddress = 0;
         // emit("[FUNC-----------------]");
         emitlabel(node->sym->rtname);
-        emit("subu $sp, $sp, " + to_string(node->sym->allocspace));
+        emit("subu $sp,$sp," + to_string(node->sym->allocspace));
         // currentStackAddress = node->sym->allocspace;
         // emit return register address
-        emit("sw $ra, 0($sp)");
+        emit("sw $ra,0($sp)");
 
         // make sure all the second child nodes (sig->formals) are defined
         node->kids[1].prepost([this](AST *node)
@@ -273,7 +273,7 @@ void BackendASM::pass3_cb(AST *node)
         for (AST &child : node->kids[1].kids)
         {
             string argReg = allocArgReg();
-            emit("move " + argReg + ", " + child.reg);
+            emit("move " + argReg + "," + child.reg);
             freeArgReg(argReg);
             freereg(child.reg);
         }
@@ -285,7 +285,7 @@ void BackendASM::pass3_cb(AST *node)
         if (node->sig != "$void" && node->sig != "void")
         {
             node->reg = allocreg();
-            emit("move " + node->reg + ", $v0");
+            emit("move " + node->reg + ",$v0");
         }
 
         node->prune();
@@ -305,7 +305,7 @@ void BackendASM::pass3_cb(AST *node)
             reg = node->kids[0].sym->rtname;
         if (node->kids[0].sym->rtname.empty())
             reg = node->kids[0].sym->reg;
-        emit("sw " + node->kids[1].reg + ", " + reg);
+        emit("sw " + node->kids[1].reg + "," + reg);
         freereg(node->kids[1].reg);
         node->prune();
     }
@@ -321,7 +321,7 @@ void BackendASM::pass3_cb(AST *node)
                               { pass3_post_cb(node); });
 
         string loopEnd = getlabel() + "for";
-        emit("beqz " + node->kids[0].reg + ", " + loopEnd);
+        emit("beqz " + node->kids[0].reg + "," + loopEnd);
         freereg(node->kids[0].reg);
 
         node->kids[1].prepost([this](AST *node)
@@ -342,7 +342,7 @@ void BackendASM::pass3_cb(AST *node)
                               [this](AST *node)
                               { pass3_post_cb(node); });
 
-        emit("beqz " + node->kids[0].reg + ", " + ifEnd);
+        emit("beqz " + node->kids[0].reg + "," + ifEnd);
         freereg(node->kids[0].reg);
 
         node->kids[1].prepost([this](AST *node)
@@ -363,7 +363,7 @@ void BackendASM::pass3_cb(AST *node)
                               [this](AST *node)
                               { pass3_post_cb(node); });
 
-        emit("beqz " + node->kids[0].reg + ", " + elseStart);
+        emit("beqz " + node->kids[0].reg + "," + elseStart);
         freereg(node->kids[0].reg);
 
         node->kids[1].prepost([this](AST *node)
@@ -390,7 +390,7 @@ void BackendASM::pass3_cb(AST *node)
                               [this](AST *node)
                               { pass3_post_cb(node); });
 
-        emit("move $v0, " + node->kids[0].reg);
+        emit("move $v0," + node->kids[0].reg);
         node->prune();
     }
     else if (node->type == "var")
@@ -403,11 +403,11 @@ void BackendASM::pass3_cb(AST *node)
         if (node->kids[1].attribute == "string")
         {
             reg = allocreg();
-            emit("la " + reg + ", S0");
+            emit("la " + reg + ",S0");
             freereg(reg);
         }
 
-        emit("sw " + reg + ", " + to_string(currentStackAddress) + "($sp)");
+        emit("sw " + reg + "," + to_string(currentStackAddress) + "($sp)");
         node->reg = to_string(currentStackAddress) + "($sp)";
         node->sym->reg = to_string(currentStackAddress) + "($sp)";
     }
@@ -417,7 +417,7 @@ void BackendASM::pass3_cb(AST *node)
         currentStackAddress += 4;
 
         string argReg = allocArgReg();
-        emit("sw " + argReg + ", " + to_string(currentStackAddress) + "($sp)");
+        emit("sw " + argReg + "," + to_string(currentStackAddress) + "($sp)");
         node->reg = argReg;
         node->kids[0].sym->reg = to_string(currentStackAddress) + "($sp)";
     }
@@ -430,25 +430,25 @@ void BackendASM::pass3_post_cb(AST *node)
         // emit("STRING-----------------");
         string strLabel = node->reg;
         node->reg = allocreg();
-        emit("la " + node->reg + ", " + strLabel);
+        emit("la " + node->reg + "," + strLabel);
     }
     else if (node->type == "int")
     {
         // emit("INT-----------------");
         node->reg = allocreg();
-        emit("li " + node->reg + ", " + node->attribute);
+        emit("li " + node->reg + "," + node->attribute);
     }
     else if (node->attribute == "true" || node->attribute == "false")
     {
         // emit("BOOL-----------------");
         node->reg = allocreg();
-        emit("li " + node->reg + ", " + node->sym->rtname);
+        emit("li " + node->reg + "," + node->sym->rtname);
     }
     else if (node->type == "u!")
     {
         // emit("UNARYNOT-----------------");
         node->reg = node->kids[0].reg;
-        emit("xori " + node->reg + ", " + node->reg + ", 1");
+        emit("xori " + node->reg + "," + node->reg + ",1");
     }
     else if (node->type == "id")
     {
@@ -458,7 +458,7 @@ void BackendASM::pass3_post_cb(AST *node)
         string reg = node->sym->reg;
         if (node->sym->reg.empty())
             reg = node->sym->rtname;
-        emit("lw " + node->reg + ", " + reg);
+        emit("lw " + node->reg + "," + reg);
     }
     else if (OP2ASM.find(node->type) != OP2ASM.end())
     {
@@ -467,7 +467,7 @@ void BackendASM::pass3_post_cb(AST *node)
         node->reg = allocreg();
         string op = OP2ASM[node->type];
 
-        emit(op + " " + node->reg + ", " + node->kids[0].reg + ", " + node->kids[1].reg);
+        emit(op + " " + node->reg + "," + node->kids[0].reg + "," + node->kids[1].reg);
 
         freereg(node->kids[0].reg);
         freereg(node->kids[1].reg);
