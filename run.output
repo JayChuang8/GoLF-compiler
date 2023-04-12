@@ -1,4 +1,4 @@
-Run started on Wed Apr 12 13:58:21 2023
+Run started on Wed Apr 12 14:09:43 2023
 
 Hostname: csx3.cs.ucalgary.ca
 
@@ -111,45 +111,18 @@ Lprints
 
 
 STDERR:
+spim: (parser) Can't put data in text segment on line 39 of file out.s
+	  .asciiz "true"
+
+	                ^
 spim: (parser) Can't put data in text segment on line 40 of file out.s
-	  .byte 116
+	  .asciiz "false"
 
-	           ^
-spim: (parser) Can't put data in text segment on line 41 of file out.s
-	  .byte 114
+	                 ^
+spim: (parser) syntax error on line 44 of file out.s
+	  li $a0, true_str
 
-	           ^
-spim: (parser) Can't put data in text segment on line 42 of file out.s
-	  .byte 117
-
-	           ^
-spim: (parser) Can't put data in text segment on line 43 of file out.s
-	  .byte 101
-
-	           ^
-spim: (parser) Can't put data in text segment on line 45 of file out.s
-	  .byte 102
-
-	           ^
-spim: (parser) Can't put data in text segment on line 46 of file out.s
-	  .byte 97
-
-	          ^
-spim: (parser) Can't put data in text segment on line 47 of file out.s
-	  .byte 108
-
-	           ^
-spim: (parser) Can't put data in text segment on line 48 of file out.s
-	  .byte 115
-
-	           ^
-spim: (parser) Can't put data in text segment on line 49 of file out.s
-	  .byte 101
-
-	           ^
-spim: (parser) syntax error on line 50 of file out.s
-	  beqz $a0, Lfalse
-	            ^
+	                  ^
 Instruction references undefined symbol at 0x00400040
   [0x00400040]	0x0c000000  jal 0x00000000 [Lprints]        ; 32: jal Lprints
 
@@ -180,45 +153,18 @@ Lprints
 
 
 STDERR:
+spim: (parser) Can't put data in text segment on line 70 of file out.s
+	  .asciiz "true"
+
+	                ^
 spim: (parser) Can't put data in text segment on line 71 of file out.s
-	  .byte 116
+	  .asciiz "false"
 
-	           ^
-spim: (parser) Can't put data in text segment on line 72 of file out.s
-	  .byte 114
+	                 ^
+spim: (parser) syntax error on line 75 of file out.s
+	  li $a0, true_str
 
-	           ^
-spim: (parser) Can't put data in text segment on line 73 of file out.s
-	  .byte 117
-
-	           ^
-spim: (parser) Can't put data in text segment on line 74 of file out.s
-	  .byte 101
-
-	           ^
-spim: (parser) Can't put data in text segment on line 76 of file out.s
-	  .byte 102
-
-	           ^
-spim: (parser) Can't put data in text segment on line 77 of file out.s
-	  .byte 97
-
-	          ^
-spim: (parser) Can't put data in text segment on line 78 of file out.s
-	  .byte 108
-
-	           ^
-spim: (parser) Can't put data in text segment on line 79 of file out.s
-	  .byte 115
-
-	           ^
-spim: (parser) Can't put data in text segment on line 80 of file out.s
-	  .byte 101
-
-	           ^
-spim: (parser) syntax error on line 81 of file out.s
-	  beqz $a0, Lfalse
-	            ^
+	                  ^
 Instruction references undefined symbol at 0x00400064
   [0x00400064]	0x0c000000  jal 0x00000000 [Lprints]        ; 42: jal Lprints
 
@@ -249,45 +195,18 @@ Lprints
 
 
 STDERR:
+spim: (parser) Can't put data in text segment on line 303 of file out.s
+	  .asciiz "true"
+
+	                ^
 spim: (parser) Can't put data in text segment on line 304 of file out.s
-	  .byte 116
+	  .asciiz "false"
 
-	           ^
-spim: (parser) Can't put data in text segment on line 305 of file out.s
-	  .byte 114
+	                 ^
+spim: (parser) syntax error on line 308 of file out.s
+	  li $a0, true_str
 
-	           ^
-spim: (parser) Can't put data in text segment on line 306 of file out.s
-	  .byte 117
-
-	           ^
-spim: (parser) Can't put data in text segment on line 307 of file out.s
-	  .byte 101
-
-	           ^
-spim: (parser) Can't put data in text segment on line 309 of file out.s
-	  .byte 102
-
-	           ^
-spim: (parser) Can't put data in text segment on line 310 of file out.s
-	  .byte 97
-
-	          ^
-spim: (parser) Can't put data in text segment on line 311 of file out.s
-	  .byte 108
-
-	           ^
-spim: (parser) Can't put data in text segment on line 312 of file out.s
-	  .byte 115
-
-	           ^
-spim: (parser) Can't put data in text segment on line 313 of file out.s
-	  .byte 101
-
-	           ^
-spim: (parser) syntax error on line 314 of file out.s
-	  beqz $a0, Lfalse
-	            ^
+	                  ^
 Instruction references undefined symbol at 0x0040005c
   [0x0040005c]	0x0c000000  jal 0x00000000 [Lprints]        ; 143: jal Lprints
 
@@ -317,45 +236,18 @@ Lprints
 
 
 STDERR:
+spim: (parser) Can't put data in text segment on line 121 of file out.s
+	  .asciiz "true"
+
+	                ^
 spim: (parser) Can't put data in text segment on line 122 of file out.s
-	  .byte 116
+	  .asciiz "false"
 
-	           ^
-spim: (parser) Can't put data in text segment on line 123 of file out.s
-	  .byte 114
+	                 ^
+spim: (parser) syntax error on line 126 of file out.s
+	  li $a0, true_str
 
-	           ^
-spim: (parser) Can't put data in text segment on line 124 of file out.s
-	  .byte 117
-
-	           ^
-spim: (parser) Can't put data in text segment on line 125 of file out.s
-	  .byte 101
-
-	           ^
-spim: (parser) Can't put data in text segment on line 127 of file out.s
-	  .byte 102
-
-	           ^
-spim: (parser) Can't put data in text segment on line 128 of file out.s
-	  .byte 97
-
-	          ^
-spim: (parser) Can't put data in text segment on line 129 of file out.s
-	  .byte 108
-
-	           ^
-spim: (parser) Can't put data in text segment on line 130 of file out.s
-	  .byte 115
-
-	           ^
-spim: (parser) Can't put data in text segment on line 131 of file out.s
-	  .byte 101
-
-	           ^
-spim: (parser) syntax error on line 132 of file out.s
-	  beqz $a0, Lfalse
-	            ^
+	                  ^
 Instruction references undefined symbol at 0x004001a0
   [0x004001a0]	0x0c000000  jal 0x00000000 [Lprinti]        ; 111: jal Lprinti
 
@@ -399,45 +291,18 @@ Lprints
 
 
 STDERR:
+spim: (parser) Can't put data in text segment on line 111 of file out.s
+	  .asciiz "true"
+
+	                ^
 spim: (parser) Can't put data in text segment on line 112 of file out.s
-	  .byte 116
+	  .asciiz "false"
 
-	           ^
-spim: (parser) Can't put data in text segment on line 113 of file out.s
-	  .byte 114
+	                 ^
+spim: (parser) syntax error on line 116 of file out.s
+	  li $a0, true_str
 
-	           ^
-spim: (parser) Can't put data in text segment on line 114 of file out.s
-	  .byte 117
-
-	           ^
-spim: (parser) Can't put data in text segment on line 115 of file out.s
-	  .byte 101
-
-	           ^
-spim: (parser) Can't put data in text segment on line 117 of file out.s
-	  .byte 102
-
-	           ^
-spim: (parser) Can't put data in text segment on line 118 of file out.s
-	  .byte 97
-
-	          ^
-spim: (parser) Can't put data in text segment on line 119 of file out.s
-	  .byte 108
-
-	           ^
-spim: (parser) Can't put data in text segment on line 120 of file out.s
-	  .byte 115
-
-	           ^
-spim: (parser) Can't put data in text segment on line 121 of file out.s
-	  .byte 101
-
-	           ^
-spim: (parser) syntax error on line 122 of file out.s
-	  beqz $a0, Lfalse
-	            ^
+	                  ^
 Instruction references undefined symbol at 0x00400068
   [0x00400068]	0x0c000000  jal 0x00000000 [Lprints]        ; 67: jal Lprints
 
@@ -471,45 +336,18 @@ Lgetchar
 
 
 STDERR:
+spim: (parser) Can't put data in text segment on line 45 of file out.s
+	  .asciiz "true"
+
+	                ^
 spim: (parser) Can't put data in text segment on line 46 of file out.s
-	  .byte 116
+	  .asciiz "false"
 
-	           ^
-spim: (parser) Can't put data in text segment on line 47 of file out.s
-	  .byte 114
+	                 ^
+spim: (parser) syntax error on line 50 of file out.s
+	  li $a0, true_str
 
-	           ^
-spim: (parser) Can't put data in text segment on line 48 of file out.s
-	  .byte 117
-
-	           ^
-spim: (parser) Can't put data in text segment on line 49 of file out.s
-	  .byte 101
-
-	           ^
-spim: (parser) Can't put data in text segment on line 51 of file out.s
-	  .byte 102
-
-	           ^
-spim: (parser) Can't put data in text segment on line 52 of file out.s
-	  .byte 97
-
-	          ^
-spim: (parser) Can't put data in text segment on line 53 of file out.s
-	  .byte 108
-
-	           ^
-spim: (parser) Can't put data in text segment on line 54 of file out.s
-	  .byte 115
-
-	           ^
-spim: (parser) Can't put data in text segment on line 55 of file out.s
-	  .byte 101
-
-	           ^
-spim: (parser) syntax error on line 56 of file out.s
-	  beqz $a0, Lfalse
-	            ^
+	                  ^
 Instruction references undefined symbol at 0x0040003c
   [0x0040003c]	0x0c000000  jal 0x00000000 [Lgetchar]       ; 17: jal Lgetchar
 
@@ -539,45 +377,18 @@ Lprints
 
 
 STDERR:
+spim: (parser) Can't put data in text segment on line 72 of file out.s
+	  .asciiz "true"
+
+	                ^
 spim: (parser) Can't put data in text segment on line 73 of file out.s
-	  .byte 116
+	  .asciiz "false"
 
-	           ^
-spim: (parser) Can't put data in text segment on line 74 of file out.s
-	  .byte 114
+	                 ^
+spim: (parser) syntax error on line 77 of file out.s
+	  li $a0, true_str
 
-	           ^
-spim: (parser) Can't put data in text segment on line 75 of file out.s
-	  .byte 117
-
-	           ^
-spim: (parser) Can't put data in text segment on line 76 of file out.s
-	  .byte 101
-
-	           ^
-spim: (parser) Can't put data in text segment on line 78 of file out.s
-	  .byte 102
-
-	           ^
-spim: (parser) Can't put data in text segment on line 79 of file out.s
-	  .byte 97
-
-	          ^
-spim: (parser) Can't put data in text segment on line 80 of file out.s
-	  .byte 108
-
-	           ^
-spim: (parser) Can't put data in text segment on line 81 of file out.s
-	  .byte 115
-
-	           ^
-spim: (parser) Can't put data in text segment on line 82 of file out.s
-	  .byte 101
-
-	           ^
-spim: (parser) syntax error on line 83 of file out.s
-	  beqz $a0, Lfalse
-	            ^
+	                  ^
 Instruction references undefined symbol at 0x004000ac
   [0x004000ac]	0x0c000000  jal 0x00000000 [Lprints]        ; 57: jal Lprints
 
@@ -636,45 +447,18 @@ Lprints
 
 
 STDERR:
+spim: (parser) Can't put data in text segment on line 31 of file out.s
+	  .asciiz "true"
+
+	                ^
 spim: (parser) Can't put data in text segment on line 32 of file out.s
-	  .byte 116
+	  .asciiz "false"
 
-	           ^
-spim: (parser) Can't put data in text segment on line 33 of file out.s
-	  .byte 114
+	                 ^
+spim: (parser) syntax error on line 36 of file out.s
+	  li $a0, true_str
 
-	           ^
-spim: (parser) Can't put data in text segment on line 34 of file out.s
-	  .byte 117
-
-	           ^
-spim: (parser) Can't put data in text segment on line 35 of file out.s
-	  .byte 101
-
-	           ^
-spim: (parser) Can't put data in text segment on line 37 of file out.s
-	  .byte 102
-
-	           ^
-spim: (parser) Can't put data in text segment on line 38 of file out.s
-	  .byte 97
-
-	          ^
-spim: (parser) Can't put data in text segment on line 39 of file out.s
-	  .byte 108
-
-	           ^
-spim: (parser) Can't put data in text segment on line 40 of file out.s
-	  .byte 115
-
-	           ^
-spim: (parser) Can't put data in text segment on line 41 of file out.s
-	  .byte 101
-
-	           ^
-spim: (parser) syntax error on line 42 of file out.s
-	  beqz $a0, Lfalse
-	            ^
+	                  ^
 Exception occurred at PC=0x00400044
 Instruction references undefined symbol at 0x00400054
   [0x00400054]	0x0c000000  jal 0x00000000 [Lprinti]        ; 21: jal Lprinti
@@ -704,45 +488,18 @@ Lprints
 
 
 STDERR:
+spim: (parser) Can't put data in text segment on line 47 of file out.s
+	  .asciiz "true"
+
+	                ^
 spim: (parser) Can't put data in text segment on line 48 of file out.s
-	  .byte 116
+	  .asciiz "false"
 
-	           ^
-spim: (parser) Can't put data in text segment on line 49 of file out.s
-	  .byte 114
+	                 ^
+spim: (parser) syntax error on line 52 of file out.s
+	  li $a0, true_str
 
-	           ^
-spim: (parser) Can't put data in text segment on line 50 of file out.s
-	  .byte 117
-
-	           ^
-spim: (parser) Can't put data in text segment on line 51 of file out.s
-	  .byte 101
-
-	           ^
-spim: (parser) Can't put data in text segment on line 53 of file out.s
-	  .byte 102
-
-	           ^
-spim: (parser) Can't put data in text segment on line 54 of file out.s
-	  .byte 97
-
-	          ^
-spim: (parser) Can't put data in text segment on line 55 of file out.s
-	  .byte 108
-
-	           ^
-spim: (parser) Can't put data in text segment on line 56 of file out.s
-	  .byte 115
-
-	           ^
-spim: (parser) Can't put data in text segment on line 57 of file out.s
-	  .byte 101
-
-	           ^
-spim: (parser) syntax error on line 58 of file out.s
-	  beqz $a0, Lfalse
-	            ^
+	                  ^
 Instruction references undefined symbol at 0x00400078
   [0x00400078]	0x0c000000  jal 0x00000000 [Lprints]        ; 39: jal Lprints
 
@@ -863,45 +620,18 @@ Lprinti
 
 
 STDERR:
+spim: (parser) Can't put data in text segment on line 43 of file out.s
+	  .asciiz "true"
+
+	                ^
 spim: (parser) Can't put data in text segment on line 44 of file out.s
-	  .byte 116
+	  .asciiz "false"
 
-	           ^
-spim: (parser) Can't put data in text segment on line 45 of file out.s
-	  .byte 114
+	                 ^
+spim: (parser) syntax error on line 48 of file out.s
+	  li $a0, true_str
 
-	           ^
-spim: (parser) Can't put data in text segment on line 46 of file out.s
-	  .byte 117
-
-	           ^
-spim: (parser) Can't put data in text segment on line 47 of file out.s
-	  .byte 101
-
-	           ^
-spim: (parser) Can't put data in text segment on line 49 of file out.s
-	  .byte 102
-
-	           ^
-spim: (parser) Can't put data in text segment on line 50 of file out.s
-	  .byte 97
-
-	          ^
-spim: (parser) Can't put data in text segment on line 51 of file out.s
-	  .byte 108
-
-	           ^
-spim: (parser) Can't put data in text segment on line 52 of file out.s
-	  .byte 115
-
-	           ^
-spim: (parser) Can't put data in text segment on line 53 of file out.s
-	  .byte 101
-
-	           ^
-spim: (parser) syntax error on line 54 of file out.s
-	  beqz $a0, Lfalse
-	            ^
+	                  ^
 Exception occurred at PC=0x0040006c
 Instruction references undefined symbol at 0x0040007c
   [0x0040007c]	0x0c000000  jal 0x00000000 [Lprinti]        ; 27: jal Lprinti
@@ -1081,45 +811,18 @@ Llen
 
 
 STDERR:
+spim: (parser) Can't put data in text segment on line 463 of file out.s
+	  .asciiz "true"
+
+	                ^
 spim: (parser) Can't put data in text segment on line 464 of file out.s
-	  .byte 116
+	  .asciiz "false"
 
-	           ^
-spim: (parser) Can't put data in text segment on line 465 of file out.s
-	  .byte 114
+	                 ^
+spim: (parser) syntax error on line 468 of file out.s
+	  li $a0, true_str
 
-	           ^
-spim: (parser) Can't put data in text segment on line 466 of file out.s
-	  .byte 117
-
-	           ^
-spim: (parser) Can't put data in text segment on line 467 of file out.s
-	  .byte 101
-
-	           ^
-spim: (parser) Can't put data in text segment on line 469 of file out.s
-	  .byte 102
-
-	           ^
-spim: (parser) Can't put data in text segment on line 470 of file out.s
-	  .byte 97
-
-	          ^
-spim: (parser) Can't put data in text segment on line 471 of file out.s
-	  .byte 108
-
-	           ^
-spim: (parser) Can't put data in text segment on line 472 of file out.s
-	  .byte 115
-
-	           ^
-spim: (parser) Can't put data in text segment on line 473 of file out.s
-	  .byte 101
-
-	           ^
-spim: (parser) syntax error on line 474 of file out.s
-	  beqz $a0, Lfalse
-	            ^
+	                  ^
 Instruction references undefined symbol at 0x00400374
   [0x00400374]	0x0c000000  jal 0x00000000 [Llen]           ; 325: jal Llen
 
@@ -1192,5 +895,5 @@ STDERR:
 
 (GoLF compiler unsuccessful, skipping test)
 
-Run ended on Wed Apr 12 13:58:29 2023
+Run ended on Wed Apr 12 14:09:50 2023
 
