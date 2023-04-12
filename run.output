@@ -1,4 +1,4 @@
-Run started on Wed Apr 12 14:28:08 2023
+Run started on Wed Apr 12 14:31:44 2023
 
 Hostname: csx3.cs.ucalgary.ca
 
@@ -543,20 +543,12 @@ RETURN CODE: 0
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
 The following symbols are undefined:
-Lhalt
-Lprinti
-Lprints
-Lmain
 Llen
 
-
+кся: len(\"
 
 STDERR:
-spim: (parser) syntax error on line 364 of file out.s
-	  	seteq $t3, $t1, $t2
-	         ^
-Instruction references undefined symbol at 0x00400024
-  [0x00400024]	0x0c000000  jal 0x00000000 [Lmain]          ; 310: jal Lmain
+Memory address out of bounds
 
 
 RETURN CODE: 0
@@ -603,21 +595,29 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-The following symbols are undefined:
-Lhalt
-Lprinti
-Lprints
-L3for
-L1for
-
-
+0
+100 101 102 103 104 105 
+106 107 108 109 1
+100 101 102 103 104 105 
+106 107 108 109 2
+100 101 102 103 104 105 
+106 107 108 109 3
+100 101 102 103 104 105 
+106 107 108 109 4
+100 101 102 103 104 105 
+106 107 108 109 5
+100 101 102 103 104 105 
+106 107 108 109 6
+100 101 102 103 104 105 
+106 107 108 109 7
+100 101 102 103 104 105 
+106 107 108 109 8
+100 101 102 103 104 105 
+106 107 108 109 9
+100 101 102 103 104 105 
+106 107 108 109 
 
 STDERR:
-spim: (parser) syntax error on line 61 of file out.s
-	  	seteq $t2, $t0, $t1
-	         ^
-Instruction references undefined symbol at 0x00400050
-  [0x00400050]	0x11400000  beq $10, $0, 0 [L1for-0x00400050]; 39: beqz $t2, L1for
 
 
 RETURN CODE: 0
@@ -650,9 +650,10 @@ L1for
 
 
 STDERR:
-spim: (parser) syntax error on line 45 of file out.s
-	  	seteq $t2, $t0, 
-	         ^
+spim: (parser) syntax error on line 46 of file out.s
+	  seq $t2, $t0, 
+
+	                ^
 Exception occurred at PC=0x0040004c
   Unaligned address in inst/data fetch: 0x00000001
 Instruction references undefined symbol at 0x00400050
@@ -754,5 +755,5 @@ STDERR:
 
 (GoLF compiler unsuccessful, skipping test)
 
-Run ended on Wed Apr 12 14:28:16 2023
+Run ended on Wed Apr 12 14:31:52 2023
 

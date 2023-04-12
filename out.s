@@ -267,7 +267,7 @@ L0for:
 	beqz $t2, L1for
 	lw $t0, 4($sp)
 	li $t1, 1
-	seteq $t2, $t0, $t1
+	seq $t2, $t0, $t1
 	beqz $t2, L2else
 	li $t0, 0
 	sw $t0, GA_1
