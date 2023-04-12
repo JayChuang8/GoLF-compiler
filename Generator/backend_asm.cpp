@@ -281,19 +281,19 @@ void BackendASM::pass3_cb(AST *node)
     {
         // emittemp("[FUNCCALL-----------------] " + node->kids[0].attribute + " " + to_string(node->kids[0].sym->allocspace));
 
-        // if there are reg's being used before a func call, store them in the stack
-        int stackspace = 0;
-        int allocSpace = (10 - pool.size()) * 4;
-        if (pool.size() != 10)
-        {
-            emit("subu $sp,$sp," + to_string(allocSpace));
+        // // if there are reg's being used before a func call, store them in the stack
+        // int stackspace = 0;
+        // int allocSpace = (10 - pool.size()) * 4;
+        // if (pool.size() != 10)
+        // {
+        //     emit("subu $sp,$sp," + to_string(allocSpace));
 
-            for (const auto &str : inUsePool)
-            {
-                emit("sw " + str + "," + to_string(stackspace) + "($sp)");
-                stackspace += 4;
-            }
-        }
+        //     for (const auto &str : inUsePool)
+        //     {
+        //         emit("sw " + str + "," + to_string(stackspace) + "($sp)");
+        //         stackspace += 4;
+        //     }
+        // }
 
         // make sure all the right child nodes (actuals) are defined
         node->kids[1].prepost([this](AST *node)
@@ -313,17 +313,17 @@ void BackendASM::pass3_cb(AST *node)
         // function call
         emit("jal " + node->kids[0].sym->rtname);
 
-        // load data back from stack into regs after func return
-        if (pool.size() != 10)
-        {
-            stackspace = 0;
-            for (const auto &str : inUsePool)
-            {
-                emit("lw " + str + "," + to_string(stackspace) + "($sp)");
-                stackspace += 4;
-            }
-            emit("addu $sp,$sp," + to_string(allocSpace));
-        }
+        // // load data back from stack into regs after func return
+        // if (pool.size() != 10)
+        // {
+        //     stackspace = 0;
+        //     for (const auto &str : inUsePool)
+        //     {
+        //         emit("lw " + str + "," + to_string(stackspace) + "($sp)");
+        //         stackspace += 4;
+        //     }
+        //     emit("addu $sp,$sp," + to_string(allocSpace));
+        // }
 
         // store return value of funccall if the func has a return type
         if (node->sig != "$void" && node->sig != "void")
