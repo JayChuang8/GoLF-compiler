@@ -45,7 +45,6 @@ void BackendASM::freereg(string reg)
     }
     else
     {
-        // cout << "---REG FREED--- " + reg << endl;
         pool.insert(reg);
     }
 }
@@ -69,7 +68,6 @@ void BackendASM::freeArgReg(string reg)
     }
     else
     {
-        // cout << "---REG FREED--- " + reg << endl;
         argPool.insert(reg);
     }
 }
@@ -96,7 +94,31 @@ void BackendASM::prologue()
 
 void BackendASM::epilogue()
 {
-    emit("j Lhalt");
+    emit("");
+
+    emitlabel("Lhalt");
+    emit("li $v0, 10");
+    emit("syscall");
+
+    emitlabel("printc");
+    emit("li $v0, 11");
+    emit("syscall");
+    emit("jr $ra");
+
+    emitlabel("printi");
+    emit("li $v0 1");
+    emit("syscall");
+    emit("jr $ra");
+
+    emitlabel("Lprints");
+    emit("li $v0, 4");
+    emit("syscall");
+    emit("jr $ra");
+
+    emitlabel("getchar");
+    emit("li $v0, 8");
+    emit("syscall");
+    emit("jr $ra");
 }
 
 string BackendASM::id2asm(string name)
@@ -167,7 +189,7 @@ void BackendASM::pass2_cb(AST *node)
         {
             emitlabel("main");
             emit("jal " + node->sym->rtname);
-            epilogue();
+            emit("j Lhalt");
         }
     }
     else if (node->type == "globvar")
@@ -451,12 +473,5 @@ void BackendASM::gen(AST &ast)
         [this](AST *node)
         { pass3_post_cb(node); });
 
-    emitlabel("Lhalt");
-    emit("li $v0, 10");
-    emit("syscall");
-
-    emitlabel("Lprints");
-    emit("li $v0, 4");
-    emit("syscall");
-    emit("jr $ra");
+    epilogue();
 }
