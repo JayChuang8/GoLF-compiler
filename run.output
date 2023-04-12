@@ -1,4 +1,4 @@
-Run started on Wed Apr 12 15:47:53 2023
+Run started on Wed Apr 12 15:48:55 2023
 
 Hostname: csx3.cs.ucalgary.ca
 
@@ -159,21 +159,32 @@ RETURN CODE: 0
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
 global zero values: 
+false
+0
+
+local zero values: 
+false
+0
+
+local zero values: 
+false
+0
+
+sub-block zero values: 
+false
+0
+
+sub-block zero values: 
+false
+0
+
+post-sub-block zero values: 
 truefalse
-10
+123
+garble
 
 
 STDERR:
-spim: (parser) Label is defined for the second time on line 141 of file out.s
-	  G0:
-	    ^
-spim: (parser) Label is defined for the second time on line 143 of file out.s
-	  G0:
-	    ^
-spim: (parser) Label is defined for the second time on line 145 of file out.s
-	  G0:
-	    ^
-Memory address out of bounds
 
 
 RETURN CODE: 0
@@ -462,12 +473,6 @@ Lmain
 
 
 STDERR:
-spim: (parser) Label is defined for the second time on line 195 of file out.s
-	  G0:
-	    ^
-spim: (parser) Label is defined for the second time on line 197 of file out.s
-	  G0:
-	    ^
 spim: (parser) syntax error on line 275 of file out.s
 	  	 $t5,$t3,$t4
 	    ^
@@ -526,9 +531,6 @@ Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
 0
 
 STDERR:
-spim: (parser) Label is defined for the second time on line 24 of file out.s
-	  G0:
-	    ^
 Exception occurred at PC=0x0040006c
 
 
@@ -704,9 +706,6 @@ Llen
 
 
 STDERR:
-spim: (parser) Label is defined for the second time on line 128 of file out.s
-	  G0:
-	    ^
 Instruction references undefined symbol at 0x00400374
   [0x00400374]	0x0c000000  jal 0x00000000 [Llen]           ; 336: jal Llen
 
@@ -779,5 +778,5 @@ STDERR:
 
 (GoLF compiler unsuccessful, skipping test)
 
-Run ended on Wed Apr 12 15:48:01 2023
+Run ended on Wed Apr 12 15:49:02 2023
 
