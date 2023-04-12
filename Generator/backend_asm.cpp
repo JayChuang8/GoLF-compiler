@@ -122,6 +122,7 @@ void BackendASM::epilogue()
     emit("j Lprints");
     emitlabel("PrintFalse");
     emit("la " + argReg1 + ",PDCFalse");
+    emit("j Lprints");
 
     emitlabel("Lhalt");
     emit("li $v0,10");
