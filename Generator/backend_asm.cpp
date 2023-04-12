@@ -86,8 +86,8 @@ void BackendASM::emit(string instr)
 
 void BackendASM::prologue()
 {
-    // emit("Ltrue = 1");
-    // emit("Lfalse = 0");
+    emit("Ltrue = 1");
+    emit("Lfalse = 0");
     // emit(".globl main");
     cout << ".data" << endl;
     emitlabel(getDataLabel());
