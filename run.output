@@ -1,4 +1,4 @@
-Run started on Wed Apr 12 12:48:02 2023
+Run started on Wed Apr 12 12:54:15 2023
 
 Hostname: csx3.cs.ucalgary.ca
 
@@ -104,17 +104,10 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-The following symbols are undefined:
-main
-
+Hello, world!
 
 
 STDERR:
-spim: (parser) syntax error on line 1 of file out.s
-	  .data:
-	       ^
-Instruction references undefined symbol at 0x00400014
-  [0x00400014]	0x0c000000  jal 0x00000000 [main]           ; 188: jal main
 
 
 RETURN CODE: 0
@@ -135,16 +128,15 @@ RETURN CODE: 0
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
 The following symbols are undefined:
-main
+Lprintc
+Lprinti
 
+start of loop
 
 
 STDERR:
-spim: (parser) syntax error on line 1 of file out.s
-	  .data:
-	       ^
-Instruction references undefined symbol at 0x00400014
-  [0x00400014]	0x0c000000  jal 0x00000000 [main]           ; 188: jal main
+Instruction references undefined symbol at 0x00400074
+  [0x00400074]	0x0c000000  jal 0x00000000 [Lprinti]        ; 44: jal Lprinti
 
 
 RETURN CODE: 0
@@ -165,16 +157,22 @@ RETURN CODE: 0
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
 The following symbols are undefined:
-main
+Lhalt
+Lprintb
+Lprintc
+Lprinti
+Lprints
+Lbar
 
 
 
 STDERR:
-spim: (parser) syntax error on line 1 of file out.s
-	  .data:
-	       ^
-Instruction references undefined symbol at 0x00400014
-  [0x00400014]	0x0c000000  jal 0x00000000 [main]           ; 188: jal main
+spim: (parser) syntax error on line 198 of file out.s
+	  li $t0, Ltrue
+
+	               ^
+Instruction references undefined symbol at 0x0040005c
+  [0x0040005c]	0x0c000000  jal 0x00000000 [Lprints]        ; 141: jal Lprints
 
 
 RETURN CODE: 0
@@ -195,16 +193,13 @@ RETURN CODE: 0
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
 The following symbols are undefined:
-main
+Lprinti
 
 
 
 STDERR:
-spim: (parser) syntax error on line 1 of file out.s
-	  .data:
-	       ^
-Instruction references undefined symbol at 0x00400014
-  [0x00400014]	0x0c000000  jal 0x00000000 [main]           ; 188: jal main
+Instruction references undefined symbol at 0x004001a0
+  [0x004001a0]	0x0c000000  jal 0x00000000 [Lprinti]        ; 109: jal Lprinti
 
 
 RETURN CODE: 0
@@ -239,16 +234,15 @@ RETURN CODE: 0
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
 The following symbols are undefined:
-main
+Lprinti
 
-
+fib(0) = 0
+fib(1) = 1
+fib(
 
 STDERR:
-spim: (parser) syntax error on line 1 of file out.s
-	  .data:
-	       ^
-Instruction references undefined symbol at 0x00400014
-  [0x00400014]	0x0c000000  jal 0x00000000 [main]           ; 188: jal main
+Instruction references undefined symbol at 0x004000a4
+  [0x004000a4]	0x0c000000  jal 0x00000000 [Lprinti]        ; 79: jal Lprinti
 
 
 RETURN CODE: 0
@@ -273,16 +267,14 @@ A man, a plan, a canal: Panama.
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
 The following symbols are undefined:
-main
+Lprintc
+Lgetchar
 
 
 
 STDERR:
-spim: (parser) syntax error on line 1 of file out.s
-	  .data:
-	       ^
-Instruction references undefined symbol at 0x00400014
-  [0x00400014]	0x0c000000  jal 0x00000000 [main]           ; 188: jal main
+Instruction references undefined symbol at 0x0040003c
+  [0x0040003c]	0x0c000000  jal 0x00000000 [Lgetchar]       ; 15: jal Lgetchar
 
 
 RETURN CODE: 0
@@ -303,16 +295,13 @@ RETURN CODE: 0
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
 The following symbols are undefined:
-main
+Lprinti
 
-
+minint is 
 
 STDERR:
-spim: (parser) syntax error on line 1 of file out.s
-	  .data:
-	       ^
-Instruction references undefined symbol at 0x00400014
-  [0x00400014]	0x0c000000  jal 0x00000000 [main]           ; 188: jal main
+Instruction references undefined symbol at 0x004000c0
+  [0x004000c0]	0x0c000000  jal 0x00000000 [Lprinti]        ; 60: jal Lprinti
 
 
 RETURN CODE: 0
@@ -361,16 +350,15 @@ RETURN CODE: 0
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
 The following symbols are undefined:
-main
+Lprinti
 
+  Exception 9  [Breakpoint]  occurred and ignored
 
 
 STDERR:
-spim: (parser) syntax error on line 1 of file out.s
-	  .data:
-	       ^
-Instruction references undefined symbol at 0x00400014
-  [0x00400014]	0x0c000000  jal 0x00000000 [main]           ; 188: jal main
+Exception occurred at PC=0x00400044
+Instruction references undefined symbol at 0x00400054
+  [0x00400054]	0x0c000000  jal 0x00000000 [Lprinti]        ; 19: jal Lprinti
 
 
 RETURN CODE: 0
@@ -391,16 +379,16 @@ RETURN CODE: 0
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
 The following symbols are undefined:
-main
+Lhalt
 
 
 
 STDERR:
-spim: (parser) syntax error on line 1 of file out.s
-	  .data:
-	       ^
-Instruction references undefined symbol at 0x00400014
-  [0x00400014]	0x0c000000  jal 0x00000000 [main]           ; 188: jal main
+spim: (parser) syntax error on line 26 of file out.s
+	  li $t0, Lfalse
+
+	                ^
+Attempt to execute non-instruction at 0x00400034
 
 
 RETURN CODE: 0
@@ -449,16 +437,19 @@ RETURN CODE: 0
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
 The following symbols are undefined:
-main
+Lhalt
+Lprintb
+Lprints
+Lmain
 
 
 
 STDERR:
-spim: (parser) syntax error on line 1 of file out.s
-	  .data:
-	       ^
-Instruction references undefined symbol at 0x00400014
-  [0x00400014]	0x0c000000  jal 0x00000000 [main]           ; 188: jal main
+spim: (parser) syntax error on line 262 of file out.s
+	  	 $t5, $t3, $t4
+	    ^
+Instruction references undefined symbol at 0x00400030
+  [0x00400030]	0x0c000000  jal 0x00000000 [Lmain]          ; 187: jal Lmain
 
 
 RETURN CODE: 0
@@ -479,16 +470,16 @@ RETURN CODE: 0
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
 The following symbols are undefined:
-main
+Lhalt
 
 
 
 STDERR:
-spim: (parser) syntax error on line 1 of file out.s
-	  .data:
-	       ^
-Instruction references undefined symbol at 0x00400014
-  [0x00400014]	0x0c000000  jal 0x00000000 [main]           ; 188: jal main
+spim: (parser) syntax error on line 31 of file out.s
+	  move $a0, 
+
+	            ^
+Attempt to execute non-instruction at 0x00400070
 
 
 RETURN CODE: 0
@@ -509,16 +500,15 @@ RETURN CODE: 0
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
 The following symbols are undefined:
-main
+Lprinti
 
+  Exception 9  [Breakpoint]  occurred and ignored
 
 
 STDERR:
-spim: (parser) syntax error on line 1 of file out.s
-	  .data:
-	       ^
-Instruction references undefined symbol at 0x00400014
-  [0x00400014]	0x0c000000  jal 0x00000000 [main]           ; 188: jal main
+Exception occurred at PC=0x0040006c
+Instruction references undefined symbol at 0x0040007c
+  [0x0040007c]	0x0c000000  jal 0x00000000 [Lprinti]        ; 25: jal Lprinti
 
 
 RETURN CODE: 0
@@ -553,16 +543,20 @@ RETURN CODE: 0
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
 The following symbols are undefined:
-main
+Lhalt
+Lprinti
+Lprints
+Lmain
+Llen
 
 
 
 STDERR:
-spim: (parser) syntax error on line 1 of file out.s
-	  .data:
-	       ^
-Instruction references undefined symbol at 0x00400014
-  [0x00400014]	0x0c000000  jal 0x00000000 [main]           ; 188: jal main
+spim: (parser) syntax error on line 351 of file out.s
+	  	seteq $t3, $t1, $t2
+	         ^
+Instruction references undefined symbol at 0x00400024
+  [0x00400024]	0x0c000000  jal 0x00000000 [Lmain]          ; 297: jal Lmain
 
 
 RETURN CODE: 0
@@ -610,16 +604,20 @@ RETURN CODE: 0
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
 The following symbols are undefined:
-main
+Lhalt
+Lprinti
+Lprints
+L3for
+L1for
 
 
 
 STDERR:
-spim: (parser) syntax error on line 1 of file out.s
-	  .data:
-	       ^
-Instruction references undefined symbol at 0x00400014
-  [0x00400014]	0x0c000000  jal 0x00000000 [main]           ; 188: jal main
+spim: (parser) syntax error on line 48 of file out.s
+	  	seteq $t2, $t0, $t1
+	         ^
+Instruction references undefined symbol at 0x00400050
+  [0x00400050]	0x11400000  beq $10, $0, 0 [L1for-0x00400050]; 26: beqz $t2, L1for
 
 
 RETURN CODE: 0
@@ -644,16 +642,19 @@ The quick brown fox jumps over the lazy dog.
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
 The following symbols are undefined:
-main
+Lhalt
+Lgetchar
+Ltrue
+L1for
 
 
 
 STDERR:
-spim: (parser) syntax error on line 1 of file out.s
-	  .data:
-	       ^
-Instruction references undefined symbol at 0x00400014
-  [0x00400014]	0x0c000000  jal 0x00000000 [main]           ; 188: jal main
+spim: (parser) syntax error on line 32 of file out.s
+	  	seteq $t2, $t0, 
+	         ^
+Instruction references undefined symbol at 0x00400048
+  [0x00400048]	0x3c010000  lui $1, 0 [Ltrue]               ; 24: lw $t0, Ltrue
 
 
 RETURN CODE: 0
@@ -674,16 +675,14 @@ RETURN CODE: 0
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
 The following symbols are undefined:
-main
+Lprintc
+Llen
 
 
 
 STDERR:
-spim: (parser) syntax error on line 1 of file out.s
-	  .data:
-	       ^
-Instruction references undefined symbol at 0x00400014
-  [0x00400014]	0x0c000000  jal 0x00000000 [main]           ; 188: jal main
+Instruction references undefined symbol at 0x00400374
+  [0x00400374]	0x0c000000  jal 0x00000000 [Llen]           ; 323: jal Llen
 
 
 RETURN CODE: 0
@@ -754,5 +753,5 @@ STDERR:
 
 (GoLF compiler unsuccessful, skipping test)
 
-Run ended on Wed Apr 12 12:48:07 2023
+Run ended on Wed Apr 12 12:54:23 2023
 

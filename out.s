@@ -1,4 +1,4 @@
-.data:
+.data
 S0:
 	.byte 0
 S1:
@@ -29,7 +29,7 @@ S3:
 	.byte 32
 	.byte 0
 	
-.text:
+.text
 GA_0:
 	.word 0
 GA_1:
