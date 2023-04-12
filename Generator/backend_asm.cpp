@@ -454,4 +454,9 @@ void BackendASM::gen(AST &ast)
     emitlabel("Lhalt");
     emit("li $v0, 10");
     emit("syscall");
+
+    emitlabel("Lprints");
+    emit("li $v0, 4");
+    emit("syscall");
+    emit("jr $ra");
 }
