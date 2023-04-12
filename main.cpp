@@ -45,8 +45,7 @@ int main(int argc, char *argv[])
     semantic.semantic(ast);
 
     // Print ast
-    ast.printAST(ast, 0);
-    cout << "-----------------------" << endl;
+    // ast.printAST(ast, 0);
 
     // MIPS code generator
     BackendASM generator(util);

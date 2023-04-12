@@ -89,7 +89,7 @@ void BackendASM::prologue()
     emit("Ltrue = 1");
     emit("Lfalse = 0");
     emit(".globl main");
-    emit(".data");
+    emitlabel(".data");
     emitlabel(getDataLabel());
     emit(".byte 0");
 }
@@ -185,7 +185,7 @@ void BackendASM::pass3_cb(AST *node)
     if (node->type == "func")
     {
         currentStackAddress = 0;
-        emit("[FUNC-----------------]");
+        // emit("[FUNC-----------------]");
         emitlabel(node->sym->rtname);
         emit("subu $sp, $sp, " + to_string(node->sym->allocspace));
         // currentStackAddress = node->sym->allocspace;
@@ -219,7 +219,7 @@ void BackendASM::pass3_cb(AST *node)
     }
     else if (node->type == "funccall")
     {
-        emit("[FUNCCALL-----------------]");
+        // emit("[FUNCCALL-----------------]");
         // make sure all the right child nodes (actuals) are defined
         node->kids[1].prepost([this](AST *node)
                               { pass3_cb(node); },
@@ -250,7 +250,7 @@ void BackendASM::pass3_cb(AST *node)
     }
     else if (node->type == "=")
     {
-        emit("ASSIGNMENT--------------");
+        // emit("ASSIGNMENT--------------");
         // make sure the nodes on the RHS of assignment (=) are defined
         node->kids[1].prepost([this](AST *node)
                               { pass3_cb(node); },
@@ -268,7 +268,7 @@ void BackendASM::pass3_cb(AST *node)
     }
     else if (node->type == "for")
     {
-        emit("FOR-----------------");
+        // emit("FOR-----------------");
         string loopStart = getlabel() + "for";
         emitlabel(loopStart);
 
@@ -291,7 +291,7 @@ void BackendASM::pass3_cb(AST *node)
     }
     else if (node->type == "if")
     {
-        emit("IF-----------------");
+        // emit("IF-----------------");
         string ifEnd = getlabel() + "if";
 
         node->kids[0].prepost([this](AST *node)
@@ -311,7 +311,7 @@ void BackendASM::pass3_cb(AST *node)
     }
     else if (node->type == "ifelse")
     {
-        emit("IFELSE-----------------");
+        // emit("IFELSE-----------------");
         string elseStart = getlabel() + "else";
         string ifelseEnd = getlabel() + "ifelse";
 
@@ -340,7 +340,7 @@ void BackendASM::pass3_cb(AST *node)
     }
     else if (node->type == "return")
     {
-        emit("RETURN-------------");
+        // emit("RETURN-------------");
 
         node->kids[0].prepost([this](AST *node)
                               { pass3_cb(node); },
@@ -352,7 +352,7 @@ void BackendASM::pass3_cb(AST *node)
     }
     else if (node->type == "var")
     {
-        emit("VAR-----------------");
+        // emit("VAR-----------------");
         currentStackAddress += 4;
 
         // load empty string data into register if var declaration is a string
@@ -370,7 +370,7 @@ void BackendASM::pass3_cb(AST *node)
     }
     else if (node->type == "formal")
     {
-        emit("FORMAL-----------------");
+        // emit("FORMAL-----------------");
         currentStackAddress += 4;
 
         string argReg = allocArgReg();
@@ -384,32 +384,32 @@ void BackendASM::pass3_post_cb(AST *node)
 {
     if (node->type == "string")
     {
-        emit("STRING-----------------");
+        // emit("STRING-----------------");
         string strLabel = node->reg;
         node->reg = allocreg();
         emit("la " + node->reg + ", " + strLabel);
     }
     else if (node->type == "int")
     {
-        emit("INT-----------------");
+        // emit("INT-----------------");
         node->reg = allocreg();
         emit("li " + node->reg + ", " + node->attribute);
     }
     else if (node->attribute == "true" || node->attribute == "false")
     {
-        emit("BOOL-----------------");
+        // emit("BOOL-----------------");
         node->reg = allocreg();
         emit("li " + node->reg + ", " + node->sym->rtname);
     }
     else if (node->type == "u!")
     {
-        emit("UNARYNOT-----------------");
+        // emit("UNARYNOT-----------------");
         node->reg = node->kids[0].reg;
         emit("xori " + node->reg + ", " + node->reg + ", 1");
     }
     else if (node->type == "id")
     {
-        emit("ID-----------------");
+        // emit("ID-----------------");
         // still needs work
         node->reg = allocreg();
         string reg = node->sym->reg;
@@ -419,7 +419,7 @@ void BackendASM::pass3_post_cb(AST *node)
     }
     else if (OP2ASM.find(node->type) != OP2ASM.end())
     {
-        emit("BINARYOP-----------------");
+        // emit("BINARYOP-----------------");
         // binary operator
         node->reg = allocreg();
         string op = OP2ASM[node->type];
@@ -439,7 +439,7 @@ void BackendASM::gen(AST &ast)
                  { pass1_cb(node); });
 
     // pass 2: define MIPS labels for globvar's, func's, strings
-    emit(".text");
+    emitlabel(".text");
     ast.preorder([this](AST *node)
                  { pass2_cb(node); });
 
@@ -449,17 +449,6 @@ void BackendASM::gen(AST &ast)
         { pass3_cb(node); },
         [this](AST *node)
         { pass3_post_cb(node); });
-
-    // // pass 3:
-    // ast.prepost(
-    //     [this](AST *node)
-    //     { pass3_cb(node); },
-    //     [this](AST *node)
-    //     { pass3_post_cb(node); });
-
-    // // pass 4: define data (S#) labels
-    // ast.preorder([this](AST *node)
-    //              { pass4_cb(node); });
 
     emitlabel("Lhalt");
     emit("li $v0, 10");
