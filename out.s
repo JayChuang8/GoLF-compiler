@@ -1,3 +1,5 @@
+	Ltrue = 1
+	Lfalse = 0
 .data
 S0:
 	.byte 0

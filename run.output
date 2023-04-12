@@ -1,4 +1,4 @@
-Run started on Wed Apr 12 12:54:15 2023
+Run started on Wed Apr 12 12:57:50 2023
 
 Hostname: csx3.cs.ucalgary.ca
 
@@ -136,7 +136,7 @@ start of loop
 
 STDERR:
 Instruction references undefined symbol at 0x00400074
-  [0x00400074]	0x0c000000  jal 0x00000000 [Lprinti]        ; 44: jal Lprinti
+  [0x00400074]	0x0c000000  jal 0x00000000 [Lprinti]        ; 46: jal Lprinti
 
 
 RETURN CODE: 0
@@ -157,22 +157,16 @@ RETURN CODE: 0
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
 The following symbols are undefined:
-Lhalt
 Lprintb
 Lprintc
 Lprinti
-Lprints
-Lbar
 
+global zero values: 
 
 
 STDERR:
-spim: (parser) syntax error on line 198 of file out.s
-	  li $t0, Ltrue
-
-	               ^
-Instruction references undefined symbol at 0x0040005c
-  [0x0040005c]	0x0c000000  jal 0x00000000 [Lprints]        ; 141: jal Lprints
+Instruction references undefined symbol at 0x0040006c
+  [0x0040006c]	0x0c000000  jal 0x00000000 [Lprintb]        ; 146: jal Lprintb
 
 
 RETURN CODE: 0
@@ -199,7 +193,7 @@ Lprinti
 
 STDERR:
 Instruction references undefined symbol at 0x004001a0
-  [0x004001a0]	0x0c000000  jal 0x00000000 [Lprinti]        ; 109: jal Lprinti
+  [0x004001a0]	0x0c000000  jal 0x00000000 [Lprinti]        ; 111: jal Lprinti
 
 
 RETURN CODE: 0
@@ -242,7 +236,7 @@ fib(
 
 STDERR:
 Instruction references undefined symbol at 0x004000a4
-  [0x004000a4]	0x0c000000  jal 0x00000000 [Lprinti]        ; 79: jal Lprinti
+  [0x004000a4]	0x0c000000  jal 0x00000000 [Lprinti]        ; 81: jal Lprinti
 
 
 RETURN CODE: 0
@@ -274,7 +268,7 @@ Lgetchar
 
 STDERR:
 Instruction references undefined symbol at 0x0040003c
-  [0x0040003c]	0x0c000000  jal 0x00000000 [Lgetchar]       ; 15: jal Lgetchar
+  [0x0040003c]	0x0c000000  jal 0x00000000 [Lgetchar]       ; 17: jal Lgetchar
 
 
 RETURN CODE: 0
@@ -301,7 +295,7 @@ minint is
 
 STDERR:
 Instruction references undefined symbol at 0x004000c0
-  [0x004000c0]	0x0c000000  jal 0x00000000 [Lprinti]        ; 60: jal Lprinti
+  [0x004000c0]	0x0c000000  jal 0x00000000 [Lprinti]        ; 62: jal Lprinti
 
 
 RETURN CODE: 0
@@ -358,7 +352,7 @@ Lprinti
 STDERR:
 Exception occurred at PC=0x00400044
 Instruction references undefined symbol at 0x00400054
-  [0x00400054]	0x0c000000  jal 0x00000000 [Lprinti]        ; 19: jal Lprinti
+  [0x00400054]	0x0c000000  jal 0x00000000 [Lprinti]        ; 21: jal Lprinti
 
 
 RETURN CODE: 0
@@ -378,17 +372,10 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-The following symbols are undefined:
-Lhalt
-
+OK
 
 
 STDERR:
-spim: (parser) syntax error on line 26 of file out.s
-	  li $t0, Lfalse
-
-	                ^
-Attempt to execute non-instruction at 0x00400034
 
 
 RETURN CODE: 0
@@ -445,11 +432,11 @@ Lmain
 
 
 STDERR:
-spim: (parser) syntax error on line 262 of file out.s
+spim: (parser) syntax error on line 264 of file out.s
 	  	 $t5, $t3, $t4
 	    ^
 Instruction references undefined symbol at 0x00400030
-  [0x00400030]	0x0c000000  jal 0x00000000 [Lmain]          ; 187: jal Lmain
+  [0x00400030]	0x0c000000  jal 0x00000000 [Lmain]          ; 189: jal Lmain
 
 
 RETURN CODE: 0
@@ -475,7 +462,7 @@ Lhalt
 
 
 STDERR:
-spim: (parser) syntax error on line 31 of file out.s
+spim: (parser) syntax error on line 33 of file out.s
 	  move $a0, 
 
 	            ^
@@ -508,7 +495,7 @@ Lprinti
 STDERR:
 Exception occurred at PC=0x0040006c
 Instruction references undefined symbol at 0x0040007c
-  [0x0040007c]	0x0c000000  jal 0x00000000 [Lprinti]        ; 25: jal Lprinti
+  [0x0040007c]	0x0c000000  jal 0x00000000 [Lprinti]        ; 27: jal Lprinti
 
 
 RETURN CODE: 0
@@ -552,11 +539,11 @@ Llen
 
 
 STDERR:
-spim: (parser) syntax error on line 351 of file out.s
+spim: (parser) syntax error on line 353 of file out.s
 	  	seteq $t3, $t1, $t2
 	         ^
 Instruction references undefined symbol at 0x00400024
-  [0x00400024]	0x0c000000  jal 0x00000000 [Lmain]          ; 297: jal Lmain
+  [0x00400024]	0x0c000000  jal 0x00000000 [Lmain]          ; 299: jal Lmain
 
 
 RETURN CODE: 0
@@ -613,11 +600,11 @@ L1for
 
 
 STDERR:
-spim: (parser) syntax error on line 48 of file out.s
+spim: (parser) syntax error on line 50 of file out.s
 	  	seteq $t2, $t0, $t1
 	         ^
 Instruction references undefined symbol at 0x00400050
-  [0x00400050]	0x11400000  beq $10, $0, 0 [L1for-0x00400050]; 26: beqz $t2, L1for
+  [0x00400050]	0x11400000  beq $10, $0, 0 [L1for-0x00400050]; 28: beqz $t2, L1for
 
 
 RETURN CODE: 0
@@ -644,17 +631,19 @@ Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
 The following symbols are undefined:
 Lhalt
 Lgetchar
-Ltrue
 L1for
 
+  Exception 4  [Address error in inst/data fetch]  occurred and ignored
 
 
 STDERR:
-spim: (parser) syntax error on line 32 of file out.s
+spim: (parser) syntax error on line 34 of file out.s
 	  	seteq $t2, $t0, 
 	         ^
-Instruction references undefined symbol at 0x00400048
-  [0x00400048]	0x3c010000  lui $1, 0 [Ltrue]               ; 24: lw $t0, Ltrue
+Exception occurred at PC=0x00400048
+  Unaligned address in inst/data fetch: 0x00000001
+Instruction references undefined symbol at 0x0040004c
+  [0x0040004c]	0x11000000  beq $8, $0, 0 [L1for-0x0040004c]; 27: beqz $t0, L1for
 
 
 RETURN CODE: 0
@@ -682,7 +671,7 @@ Llen
 
 STDERR:
 Instruction references undefined symbol at 0x00400374
-  [0x00400374]	0x0c000000  jal 0x00000000 [Llen]           ; 323: jal Llen
+  [0x00400374]	0x0c000000  jal 0x00000000 [Llen]           ; 325: jal Llen
 
 
 RETURN CODE: 0
@@ -753,5 +742,5 @@ STDERR:
 
 (GoLF compiler unsuccessful, skipping test)
 
-Run ended on Wed Apr 12 12:54:23 2023
+Run ended on Wed Apr 12 12:57:58 2023
 
