@@ -15,7 +15,7 @@ BackendASM::BackendASM(Utility &util) : util(util),
                                                 {"*", "mul"},
                                                 {"/", "div"},
                                                 {"%", ""}, //
-                                                {"==", "seteq"},
+                                                {"==", "seq"},
                                                 {"!=", "sne"},
                                                 {"<", "slt"},  //
                                                 {"<=", "sle"}, //
