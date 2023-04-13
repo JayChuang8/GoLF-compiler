@@ -1,4 +1,4 @@
-Run started on Wed Apr 12 18:06:02 2023
+Run started on Wed Apr 12 18:18:27 2023
 
 Hostname: csx3.cs.ucalgary.ca
 
@@ -23,7 +23,7 @@ make[1]: Nothing to be done for 'all'.
 make[1]: Leaving directory '/home/ugb/jay.chuang1/golf-compiler/Parser'
 /usr/bin/make -C SemanticChecker
 make[1]: Entering directory '/home/ugb/jay.chuang1/golf-compiler/SemanticChecker'
-g++ -o stab.o -c stab.cpp -MMD -MF stab.d
+make[1]: Nothing to be done for 'all'.
 make[1]: Leaving directory '/home/ugb/jay.chuang1/golf-compiler/SemanticChecker'
 /usr/bin/make -C Generator
 make[1]: Entering directory '/home/ugb/jay.chuang1/golf-compiler/Generator'
@@ -857,5 +857,5 @@ STDERR:
 
 (GoLF compiler unsuccessful, skipping test)
 
-Run ended on Wed Apr 12 18:06:10 2023
+Run ended on Wed Apr 12 18:18:35 2023
 
