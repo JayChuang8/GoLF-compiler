@@ -184,16 +184,6 @@ void BackendASM::epilogue()
     // emit("li $a0, 1");
     // emit("syscall");
 
-    emitlabel("exit");
-    string argReg = allocArgReg();
-    emit("la " + argReg + ", diverror");
-    emit("li $v0, 4");
-    emit("syscall");
-    emit("li " + argReg + ", 1");
-    freeArgReg(argReg);
-    emit("li $v0, 10");
-    emit("syscall");
-
     cout << ".data" << endl;
     emitlabel("PDCTrue");
     emit(".byte 116");
@@ -466,6 +456,7 @@ void BackendASM::pass3_cb(AST *node)
 
         if (node->type == "/")
         {
+            cout << "hello ------------" << endl;
             // string argReg1 = allocArgReg();
             // string argReg2 = allocArgReg();
             // emit("move " + argReg1 + "," + node->kids[0].reg);
@@ -475,6 +466,16 @@ void BackendASM::pass3_cb(AST *node)
             // freeArgReg(argReg1);
             // freeArgReg(argReg2);
             emit("beq " + node->kids[1].reg + ", $zero, exit");
+
+            emitlabel("exit");
+            string argReg = allocArgReg();
+            emit("la " + argReg + ", diverror");
+            emit("li $v0, 4");
+            emit("syscall");
+            emit("li " + argReg + ", 1");
+            freeArgReg(argReg);
+            emit("li $v0, 10");
+            emit("syscall");
 
             // emit("move " + node->kids[1].reg + ",$v0");
         }
