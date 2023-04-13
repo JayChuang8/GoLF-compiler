@@ -179,7 +179,13 @@ void BackendASM::epilogue()
     emitlabel("divmod_error");
     emit("li $v0, 4");
     emit("la $a0, DivZeroError");
-    emit("li $v0, 10");
+    emit("syscall");
+    emit("li $v0, 1");
+    emit("li $a0, 1");
+    emit("syscall");
+
+    emitlabel("exit_with_error");
+    emit("li $v0, 1");
     emit("syscall");
 
     cout << ".data" << endl;
@@ -464,6 +470,7 @@ void BackendASM::pass3_cb(AST *node)
             freeArgReg(argReg2);
 
             emit("move " + node->kids[1].reg + ",$v0");
+            emit("bne $v0, $zero, exit_with_error");
         }
 
         emit(op + " " + node->reg + "," + node->kids[0].reg + "," + node->kids[1].reg);
