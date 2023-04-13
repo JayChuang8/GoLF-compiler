@@ -99,18 +99,6 @@ void BackendASM::prologue()
     emit("Ltrue = 1");
     emit("Lfalse = 0");
     cout << ".data" << endl;
-    emitlabel("PDCTrue");
-    emit(".byte 116");
-    emit(".byte 114");
-    emit(".byte 117");
-    emit(".byte 101");
-
-    emitlabel("PDCFalse");
-    emit(".byte 102");
-    emit(".byte 97");
-    emit(".byte 108");
-    emit(".byte 115");
-    emit(".byte 101");
     emitlabel(getDataLabel());
     emit(".byte 0");
 }
@@ -172,6 +160,20 @@ void BackendASM::epilogue()
     emit("jr $ra");
     freereg(reg1);
     freereg(reg2);
+
+    cout << ".data" << endl;
+    emitlabel("PDCTrue");
+    emit(".byte 116");
+    emit(".byte 114");
+    emit(".byte 117");
+    emit(".byte 101");
+
+    emitlabel("PDCFalse");
+    emit(".byte 102");
+    emit(".byte 97");
+    emit(".byte 108");
+    emit(".byte 115");
+    emit(".byte 101");
 }
 
 string BackendASM::id2asm(string name)
