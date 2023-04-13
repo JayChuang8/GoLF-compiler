@@ -1,4 +1,4 @@
-Run started on Wed Apr 12 22:30:40 2023
+Run started on Wed Apr 12 22:35:57 2023
 
 Hostname: csx3.cs.ucalgary.ca
 
@@ -302,25 +302,12 @@ Test: string reversal |
 % ./golf /home/profs/aycock/411/TEST/final/gen.t7 > out.s
 
 STDERR:
+error: Expected source file at or near line 1
 
 
-RETURN CODE: 0
+RETURN CODE: 1
 
-% /home/profs/aycock/411/bin/spim -file out.s < /home/profs/aycock/411/TEST/final/input/gen.t7.in
-
-STDIN:
-A man, a plan, a canal: Panama.
-
-
-STDOUT:
-Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-
-
-STDERR:
-Memory address out of bounds
-
-
-RETURN CODE: 0
+(GoLF compiler unsuccessful, skipping test)
 
 -------------------------------------------------------------------------------
 Test: hunting minint |
@@ -388,10 +375,10 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-error: division by zero1
+error: division by zero11
 
 STDERR:
-Attempt to execute non-instruction at 0x00400130
+Attempt to execute non-instruction at 0x0040013c
 
 
 RETURN CODE: 0
@@ -625,10 +612,10 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-error: division by zero1
+error: division by zero11
 
 STDERR:
-Attempt to execute non-instruction at 0x00400168
+Attempt to execute non-instruction at 0x00400174
 
 
 RETURN CODE: 0
@@ -884,5 +871,5 @@ STDERR:
 
 (GoLF compiler unsuccessful, skipping test)
 
-Run ended on Wed Apr 12 22:30:48 2023
+Run ended on Wed Apr 12 22:36:04 2023
 
