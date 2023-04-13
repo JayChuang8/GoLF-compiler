@@ -22,6 +22,8 @@ BackendASM::BackendASM(Utility &util) : util(util),
                                             {"<=", "sle"}, //
                                             {">", "sgt"},  //
                                             {">=", "sge"},
+                                            {"&&", "and"}, //
+                                            {"||", "or"},
                                         }) //
 {
 }
@@ -375,7 +377,7 @@ void BackendASM::pass3_cb(AST *node)
         freereg(node->kids[1].reg);
         node->prune();
     }
-    else if (node->type == "&&")
+    else if (OP2ASM.find(node->type) != OP2ASM.end())
     {
         // emittemp("AND-----------------");
         // make sure the nodes on the LHS of && are defined
@@ -391,29 +393,8 @@ void BackendASM::pass3_cb(AST *node)
                               { pass3_post_cb(node); });
 
         node->reg = allocreg();
-        emit("and " + node->reg + "," + node->kids[0].reg + "," + node->kids[1].reg);
-        freereg(node->kids[0].reg);
-        freereg(node->kids[1].reg);
-
-        node->prune();
-    }
-    else if (node->type == "||")
-    {
-        // emittemp("OR-----------------");
-        // make sure the nodes on the LHS of || are defined
-        node->kids[0].prepost([this](AST *node)
-                              { pass3_cb(node); },
-                              [this](AST *node)
-                              { pass3_post_cb(node); });
-
-        // make sure the nodes on the RHS of || are defined
-        node->kids[1].prepost([this](AST *node)
-                              { pass3_cb(node); },
-                              [this](AST *node)
-                              { pass3_post_cb(node); });
-
-        node->reg = allocreg();
-        emit("or " + node->reg + "," + node->kids[0].reg + "," + node->kids[1].reg);
+        string op = OP2ASM[node->type];
+        emit(op + " " + node->reg + "," + node->kids[0].reg + "," + node->kids[1].reg);
         freereg(node->kids[0].reg);
         freereg(node->kids[1].reg);
 
@@ -572,18 +553,18 @@ void BackendASM::pass3_post_cb(AST *node)
             reg = node->sym->rtname;
         emit("lw " + node->reg + "," + reg);
     }
-    else if (OP2ASM.find(node->type) != OP2ASM.end())
-    {
-        // emittemp("BINARYOP-----------------");
-        // binary operator
-        node->reg = allocreg();
-        string op = OP2ASM[node->type];
+    // else if (OP2ASM.find(node->type) != OP2ASM.end())
+    // {
+    //     // emittemp("BINARYOP-----------------");
+    //     // binary operator
+    //     node->reg = allocreg();
+    //     string op = OP2ASM[node->type];
 
-        emit(op + " " + node->reg + "," + node->kids[0].reg + "," + node->kids[1].reg);
+    //     emit(op + " " + node->reg + "," + node->kids[0].reg + "," + node->kids[1].reg);
 
-        freereg(node->kids[0].reg);
-        freereg(node->kids[1].reg);
-    }
+    //     freereg(node->kids[0].reg);
+    //     freereg(node->kids[1].reg);
+    // }
 }
 
 void BackendASM::gen(AST &ast)
