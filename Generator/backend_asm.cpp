@@ -121,13 +121,12 @@ void BackendASM::epilogue()
     // emit("j Lprints");
 
     emitlabel("Lprintb");
-    emit("addi $sp, $sp, -4");
-    emit("sw $ra, 0($sp)");
-    emit("beqz $a0, PrintFalse");
+    emit("beq $a0, $zero, PrintFalse");
     emit("la $a0, PDCTrue");
     emit("j Lprints");
     emitlabel("PrintFalse");
     emit("la $a0, PDCFalse");
+    emit("j Lprints");
 
     emitlabel("Lhalt");
     emit("li $v0,10");
