@@ -456,7 +456,6 @@ void BackendASM::pass3_cb(AST *node)
 
         if (node->type == "/")
         {
-            cout << "hello ------------" << endl;
             // string argReg1 = allocArgReg();
             // string argReg2 = allocArgReg();
             // emit("move " + argReg1 + "," + node->kids[0].reg);
