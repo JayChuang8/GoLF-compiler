@@ -495,10 +495,10 @@ void BackendASM::pass3_cb(AST *node)
             emit("beq " + node->kids[1].reg + ", $zero, exit");
 
             emitlabel("exit");
-            // string argReg = allocArgReg();
-            // emit("la " + argReg + ", diverror");
-            // emit("jal Lprints");
-            // freeArgReg(argReg);
+            string argReg = allocArgReg();
+            emit("la " + argReg + ", diverror");
+            emit("jal Lprints");
+            freeArgReg(argReg);
             emit("li $v0, 10");
             emit("syscall");
 
