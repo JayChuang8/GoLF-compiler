@@ -1,4 +1,4 @@
-Run started on Wed Apr 12 21:14:06 2023
+Run started on Wed Apr 12 21:34:19 2023
 
 Hostname: csx3.cs.ucalgary.ca
 
@@ -15,7 +15,7 @@ make[1]: Nothing to be done for 'all'.
 make[1]: Leaving directory '/home/ugb/jay.chuang1/golf-compiler/Scanner'
 /usr/bin/make -C Utility
 make[1]: Entering directory '/home/ugb/jay.chuang1/golf-compiler/Utility'
-make[1]: Nothing to be done for 'all'.
+g++ -o utility.o -c utility.cpp -MMD -MF utility.d
 make[1]: Leaving directory '/home/ugb/jay.chuang1/golf-compiler/Utility'
 /usr/bin/make -C Parser
 make[1]: Entering directory '/home/ugb/jay.chuang1/golf-compiler/Parser'
@@ -84,7 +84,7 @@ STDOUT:
 
 
 STDERR:
-Error: file '/i/do/not/exist' could not be opened
+error: file '/i/do/not/exist' could not be opened
 
 
 RETURN CODE: 1
@@ -159,29 +159,6 @@ RETURN CODE: 0
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
 global zero values: 
-false
-0
-
-local zero values: 
-false
-0
-
-local zero values: 
-false
-0
-
-sub-block zero values: 
-false
-0
-
-sub-block zero values: 
-false
-0
-
-post-sub-block zero values: 
-truefalse
-123
-garble
 
 
 STDERR:
@@ -219,7 +196,7 @@ Test: recursive Fibonacci |
 % ./golf /home/profs/aycock/411/TEST/final/gen.t5 > out.s
 
 STDERR:
-Error: unexpected }, expected ; at or near line 20
+error: unexpected }, expected ; at or near line 20
 
 
 RETURN CODE: 1
@@ -352,7 +329,7 @@ Test: negating minint |
 % ./golf /home/profs/aycock/411/TEST/final/gen.t9 > out.s
 
 STDERR:
-Error: integer literal out of range at or near line 7
+error: integer literal out of range at or near line 7
 
 
 RETURN CODE: 1
@@ -366,7 +343,7 @@ Test: minint div and mod |
 % ./golf /home/profs/aycock/411/TEST/final/gen.t10 > out.s
 
 STDERR:
-Error: integer literal out of range at or near line 4
+error: integer literal out of range at or near line 4
 
 
 RETURN CODE: 1
@@ -458,7 +435,7 @@ Test: all your base are belong to us |
 % ./golf /home/profs/aycock/411/TEST/final/gen.t14 > out.s
 
 STDERR:
-Error: this function can't return a value at or near line 2
+error: this function can't return a value at or near line 2
 
 
 RETURN CODE: 1
@@ -480,102 +457,7 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-if ((A && B) || C) {...} else {...}, with A=false B=truefalse C=truefalse
-evaluated A
-evaluated B
-evaluated C
-if-part executed
-
-if ((A && B) || C) {...} else {...}, with A=truefalse B=truefalse C=truefalse
-evaluated A
-evaluated B
-evaluated C
-if-part executed
-
-if ((A && B) || C) {...} else {...}, with A=false B=truefalse C=truefalse
-evaluated A
-evaluated B
-evaluated C
-if-part executed
-
-if ((A && B) || C) {...} else {...}, with A=truefalse B=truefalse C=truefalse
-evaluated A
-evaluated B
-evaluated C
-if-part executed
-
-if ((A && B) || C) {...} else {...}, with A=false B=truefalse C=truefalse
-evaluated A
-evaluated B
-evaluated C
-if-part executed
-
-if ((A && B) || C) {...} else {...}, with A=truefalse B=truefalse C=truefalse
-evaluated A
-evaluated B
-evaluated C
-if-part executed
-
-if ((A && B) || C) {...} else {...}, with A=false B=truefalse C=truefalse
-evaluated A
-evaluated B
-evaluated C
-if-part executed
-
-if ((A && B) || C) {...} else {...}, with A=truefalse B=truefalse C=truefalse
-evaluated A
-evaluated B
-evaluated C
-if-part executed
-
-x = (A && !B) || C, with A=false B=truefalse C=truefalse
-evaluated A
-evaluated B
-evaluated C
-x=truefalse
-
-x = (A && !B) || C, with A=truefalse B=truefalse C=truefalse
-evaluated A
-evaluated B
-evaluated C
-x=truefalse
-
-x = (A && !B) || C, with A=false B=truefalse C=truefalse
-evaluated A
-evaluated B
-evaluated C
-x=truefalse
-
-x = (A && !B) || C, with A=truefalse B=truefalse C=truefalse
-evaluated A
-evaluated B
-evaluated C
-x=truefalse
-
-x = (A && !B) || C, with A=false B=truefalse C=truefalse
-evaluated A
-evaluated B
-evaluated C
-x=truefalse
-
-x = (A && !B) || C, with A=truefalse B=truefalse C=truefalse
-evaluated A
-evaluated B
-evaluated C
-x=truefalse
-
-x = (A && !B) || C, with A=false B=truefalse C=truefalse
-evaluated A
-evaluated B
-evaluated C
-x=truefalse
-
-x = (A && !B) || C, with A=truefalse B=truefalse C=truefalse
-evaluated A
-evaluated B
-evaluated C
-x=truefalse
-
+if ((A && B) || C) {...} else {...}, with A=
 
 STDERR:
 
@@ -643,7 +525,7 @@ Test: recursive-descent calculator |
 % ./golf /home/profs/aycock/411/TEST/final/gen.t18 > out.s
 
 STDERR:
-Error: unexpected }, expected ; at or near line 71
+error: unexpected }, expected ; at or near line 71
 
 
 RETURN CODE: 1
@@ -715,7 +597,7 @@ Test: register blow-out |
 % ./golf /home/profs/aycock/411/TEST/final/gen.t21 > out.s
 
 STDERR:
-Error: expression too complicated
+error: expression too complicated
 
 
 RETURN CODE: 1
@@ -828,7 +710,7 @@ Test: div and mod table |
 % ./golf /home/profs/aycock/411/TEST/final/gen.t25 > out.s
 
 STDERR:
-Error: attempting to free unallocated register
+error: attempting to free unallocated register
 
 
 RETURN CODE: 1
@@ -887,5 +769,5 @@ STDERR:
 
 (GoLF compiler unsuccessful, skipping test)
 
-Run ended on Wed Apr 12 21:14:13 2023
+Run ended on Wed Apr 12 21:34:28 2023
 
