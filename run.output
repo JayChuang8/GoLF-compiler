@@ -1,4 +1,4 @@
-Run started on Wed Apr 12 22:38:55 2023
+Run started on Wed Apr 12 22:48:24 2023
 
 Hostname: csx3.cs.ucalgary.ca
 
@@ -388,10 +388,9 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-268501004268501004
+
 
 STDERR:
-Attempt to execute non-instruction at 0x00400134
 
 
 RETURN CODE: 0
@@ -625,10 +624,9 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-268501002268501002
+
 
 STDERR:
-Attempt to execute non-instruction at 0x0040016c
 
 
 RETURN CODE: 0
@@ -884,5 +882,5 @@ STDERR:
 
 (GoLF compiler unsuccessful, skipping test)
 
-Run ended on Wed Apr 12 22:39:03 2023
+Run ended on Wed Apr 12 22:48:32 2023
 
