@@ -1,4 +1,4 @@
-Run started on Wed Apr 12 18:39:11 2023
+Run started on Wed Apr 12 19:40:12 2023
 
 Hostname: csx3.cs.ucalgary.ca
 
@@ -27,7 +27,7 @@ make[1]: Nothing to be done for 'all'.
 make[1]: Leaving directory '/home/ugb/jay.chuang1/golf-compiler/SemanticChecker'
 /usr/bin/make -C Generator
 make[1]: Entering directory '/home/ugb/jay.chuang1/golf-compiler/Generator'
-g++ -o backend_asm.o -c backend_asm.cpp -MMD -MF backend_asm.d
+make[1]: Nothing to be done for 'all'.
 make[1]: Leaving directory '/home/ugb/jay.chuang1/golf-compiler/Generator'
 g++ -o main.o -c main.cpp -MMD -MF main.d
 g++ -o golf main.o Scanner/scanner.o Scanner/token.o Utility/utility.o Parser/ast.o Parser/parser.o SemanticChecker/semantic.o SemanticChecker/stab.o Generator/backend_asm.o
@@ -302,12 +302,25 @@ Test: string reversal |
 % ./golf /home/profs/aycock/411/TEST/final/gen.t7 > out.s
 
 STDERR:
-Error: Expected source file at or near line 1
 
 
-RETURN CODE: 1
+RETURN CODE: 0
 
-(GoLF compiler unsuccessful, skipping test)
+% /home/profs/aycock/411/bin/spim -file out.s < /home/profs/aycock/411/TEST/final/input/gen.t7.in
+
+STDIN:
+A man, a plan, a canal: Panama.
+
+
+STDOUT:
+Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
+
+
+STDERR:
+Memory address out of bounds
+
+
+RETURN CODE: 0
 
 -------------------------------------------------------------------------------
 Test: hunting minint |
@@ -688,25 +701,17 @@ STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
 0
 100 101 102 103 104 105 
-106 107 108 109 1
+1
 100 101 102 103 104 105 
-106 107 108 109 2
+2
 100 101 102 103 104 105 
-106 107 108 109 3
+3
 100 101 102 103 104 105 
-106 107 108 109 4
+4
 100 101 102 103 104 105 
-106 107 108 109 5
+5
 100 101 102 103 104 105 
-106 107 108 109 6
-100 101 102 103 104 105 
-106 107 108 109 7
-100 101 102 103 104 105 
-106 107 108 109 8
-100 101 102 103 104 105 
-106 107 108 109 9
-100 101 102 103 104 105 
-106 107 108 109 
+
 
 STDERR:
 
@@ -844,5 +849,5 @@ STDERR:
 
 (GoLF compiler unsuccessful, skipping test)
 
-Run ended on Wed Apr 12 18:39:18 2023
+Run ended on Wed Apr 12 19:40:17 2023
 

@@ -1,4 +1,4 @@
-Run started on Wed Apr 12 18:43:38 2023
+Run started on Wed Apr 12 19:39:56 2023
 
 Hostname: csx3.cs.ucalgary.ca
 
@@ -27,7 +27,7 @@ make[1]: Nothing to be done for 'all'.
 make[1]: Leaving directory '/home/ugb/jay.chuang1/golf-compiler/SemanticChecker'
 /usr/bin/make -C Generator
 make[1]: Entering directory '/home/ugb/jay.chuang1/golf-compiler/Generator'
-make[1]: Nothing to be done for 'all'.
+g++ -o backend_asm.o -c backend_asm.cpp -MMD -MF backend_asm.d
 make[1]: Leaving directory '/home/ugb/jay.chuang1/golf-compiler/Generator'
 g++ -o main.o -c main.cpp -MMD -MF main.d
 g++ -o golf main.o Scanner/scanner.o Scanner/token.o Utility/utility.o Parser/ast.o Parser/parser.o SemanticChecker/semantic.o SemanticChecker/stab.o Generator/backend_asm.o
@@ -126,21 +126,81 @@ Test: local var version of check.t2 |
 % ./golf ./test/ms3/check.t3
 
 STDOUT:
-program 
-    func sym=0x212fef8 @ line 4
-        newid [main] @ line 4
-        sig 
-            formals 
-            typeid [$void] sym=0x2128ff8
-        block 
-            var sym=0x212ffd8 @ line 5
-                newid [int] @ line 5
-                typeid [int] sym=0x212ffd8 @ line 5
-            exprstmt  @ line 6
-                funccall  sig=void  @ line 6
-                    id [printi] sig=f(int)  sym=0x212f9a8 @ line 6
-                    actuals 
-                        id [int] sig=int  sym=0x212ffd8 @ line 6
+	Ltrue = 1
+	Lfalse = 0
+.data
+S0:
+	.byte 0
+	
+.text
+main:
+	jal Lmain
+	j Lhalt
+Lmain:
+	subu $sp,$sp,8
+	sw $ra,0($sp)
+	sw $0,4($sp)
+	lw $t0,4($sp)
+	move $a0,$t0
+	jal Lprinti
+RLmain:
+	lw $ra,0($sp)
+	addu $sp,$sp,8
+	jr $ra
+	
+Lprintb:
+	beqz $a0,PrintFalse
+	la $a0,PDCTrue
+	j Lprints
+PrintFalse:
+	la $a0,PDCFalse
+	j Lprints
+Lhalt:
+	li $v0,10
+	syscall
+Lprintc:
+	li $v0,11
+	syscall
+	jr $ra
+Lprinti:
+	li $v0 1
+	syscall
+	jr $ra
+Lprints:
+	li $v0,4
+	syscall
+	jr $ra
+Lgetchar:
+	li $v0,8
+	syscall
+	jr $ra
+Llen:
+	addi $sp,$sp,-4
+	sw $ra,0($sp)
+	li $t0,0 
+loopStart:
+	lb $t1, ($a0)
+	beq $t1, $zero, loopEnd
+	addi $a0,$a0,1
+	addi $t0,$t0,1
+	j loopStart
+loopEnd:
+	lw $ra, 0($sp)
+	addi $sp,$sp,4
+	move $v0,$t0
+	jr $ra
+.data
+PDCTrue:
+	.byte 116
+	.byte 114
+	.byte 117
+	.byte 101
+PDCFalse:
+	.byte 102
+	.byte 97
+	.byte 108
+	.byte 115
+	.byte 101
 
 
 STDERR:
@@ -155,57 +215,109 @@ Test: global name test |
 % ./golf ./test/ms3/check.t4
 
 STDOUT:
-program 
-    globvar sym=0xdefe58 @ line 3
-        newid [b4int] @ line 3
-        typeid [int] sym=0xdef2e8 @ line 3
-    func sym=0xdeff38 @ line 5
-        newid [b4func] @ line 5
-        sig 
-            formals 
-            typeid [$void] sym=0xde7458
-        block 
-            exprstmt  @ line 6
-                funccall  sig=void  @ line 6
-                    id [printi] sig=f(int)  sym=0xdef908 @ line 6
-                    actuals 
-                        id [b4int] sig=int  sym=0xdefe58 @ line 6
-            exprstmt  @ line 7
-                funccall  sig=void  @ line 7
-                    id [printi] sig=f(int)  sym=0xdef908 @ line 7
-                    actuals 
-                        id [aft3rint] sig=int  sym=0xdf01d8 @ line 7
-            exprstmt  @ line 8
-                funccall  sig=$void  @ line 8
-                    id [aft3rfunc] sig=f()  sym=0xdf00f8 @ line 8
-    func sym=0xdf0018 @ line 11
-        newid [main] @ line 11
-        sig 
-            formals 
-            typeid [$void] sym=0xde7458
-        block 
-            exprstmt  @ line 12
-                funccall  sig=$void  @ line 12
-                    id [b4func] sig=f()  sym=0xdeff38 @ line 12
-    func sym=0xdf00f8 @ line 15
-        newid [aft3rfunc] @ line 15
-        sig 
-            formals 
-            typeid [$void] sym=0xde7458
-        block 
-            exprstmt  @ line 16
-                funccall  sig=void  @ line 16
-                    id [printi] sig=f(int)  sym=0xdef908 @ line 16
-                    actuals 
-                        id [b4int] sig=int  sym=0xdefe58 @ line 16
-            exprstmt  @ line 17
-                funccall  sig=void  @ line 17
-                    id [printi] sig=f(int)  sym=0xdef908 @ line 17
-                    actuals 
-                        id [aft3rint] sig=int  sym=0xdf01d8 @ line 17
-    globvar sym=0xdf01d8 @ line 20
-        newid [aft3rint] @ line 20
-        typeid [int] sym=0xdef2e8 @ line 20
+	Ltrue = 1
+	Lfalse = 0
+.data
+S0:
+	.byte 0
+	
+.text
+G0:
+	.word 0
+main:
+	jal Lmain
+	j Lhalt
+G1:
+	.word 0
+Lb4func:
+	subu $sp,$sp,4
+	sw $ra,0($sp)
+	lw $t0,G0
+	move $a0,$t0
+	jal Lprinti
+	lw $t0,G1
+	move $a0,$t0
+	jal Lprinti
+	jal Laft3rfunc
+RLb4func:
+	lw $ra,0($sp)
+	addu $sp,$sp,4
+	jr $ra
+Lmain:
+	subu $sp,$sp,4
+	sw $ra,0($sp)
+	jal Lb4func
+RLmain:
+	lw $ra,0($sp)
+	addu $sp,$sp,4
+	jr $ra
+Laft3rfunc:
+	subu $sp,$sp,4
+	sw $ra,0($sp)
+	lw $t0,G0
+	move $a0,$t0
+	jal Lprinti
+	lw $t0,G1
+	move $a0,$t0
+	jal Lprinti
+RLaft3rfunc:
+	lw $ra,0($sp)
+	addu $sp,$sp,4
+	jr $ra
+	
+Lprintb:
+	beqz $a0,PrintFalse
+	la $a0,PDCTrue
+	j Lprints
+PrintFalse:
+	la $a0,PDCFalse
+	j Lprints
+Lhalt:
+	li $v0,10
+	syscall
+Lprintc:
+	li $v0,11
+	syscall
+	jr $ra
+Lprinti:
+	li $v0 1
+	syscall
+	jr $ra
+Lprints:
+	li $v0,4
+	syscall
+	jr $ra
+Lgetchar:
+	li $v0,8
+	syscall
+	jr $ra
+Llen:
+	addi $sp,$sp,-4
+	sw $ra,0($sp)
+	li $t0,0 
+loopStart:
+	lb $t1, ($a0)
+	beq $t1, $zero, loopEnd
+	addi $a0,$a0,1
+	addi $t0,$t0,1
+	j loopStart
+loopEnd:
+	lw $ra, 0($sp)
+	addi $sp,$sp,4
+	move $v0,$t0
+	jr $ra
+.data
+PDCTrue:
+	.byte 116
+	.byte 114
+	.byte 117
+	.byte 101
+PDCFalse:
+	.byte 102
+	.byte 97
+	.byte 108
+	.byte 115
+	.byte 101
 
 
 STDERR:
@@ -220,51 +332,103 @@ Test: block scope check |
 % ./golf ./test/ms3/check.t5
 
 STDOUT:
-program 
-    func sym=0x22a1048 @ line 3
-        newid [main] @ line 3
-        sig 
-            formals 
-            typeid [$void] sym=0x2298198
-        block 
-            var sym=0x22a1128 @ line 4
-                newid [x] @ line 4
-                typeid [int] sym=0x229ef18 @ line 4
-            block 
-                var sym=0x22a1208 @ line 6
-                    newid [x] @ line 6
-                    typeid [bool] sym=0x2297c98 @ line 6
-                block 
-                    var sym=0x22a12e8 @ line 8
-                        newid [x] @ line 8
-                        typeid [string] sym=0x229e028 @ line 8
-                    =  @ line 9
-                        id [x] sig=string  sym=0x22a12e8 @ line 9
-                        string [asdf] sig=string  @ line 9
-                    block 
-                        var sym=0x22a13c8 @ line 11
-                            newid [x] @ line 11
-                            typeid [int] sym=0x229ef18 @ line 11
-                        =  @ line 12
-                            id [x] sig=int  sym=0x22a13c8 @ line 12
-                            +  sig=int  @ line 12
-                                id [x] sig=int  sym=0x22a13c8 @ line 12
-                                int [1] sig=int  @ line 12
-                    exprstmt  @ line 14
-                        funccall  sig=void  @ line 14
-                            id [prints] sig=f(string)  sym=0x22a0bd8 @ line 14
-                            actuals 
-                                id [x] sig=string  sym=0x22a12e8 @ line 14
-                exprstmt  @ line 16
-                    funccall  sig=void  @ line 16
-                        id [printb] sig=f(bool)  sym=0x2299568 @ line 16
-                        actuals 
-                            id [x] sig=bool  sym=0x22a1208 @ line 16
-            exprstmt  @ line 18
-                funccall  sig=void  @ line 18
-                    id [printi] sig=f(int)  sym=0x229f768 @ line 18
-                    actuals 
-                        id [x] sig=int  sym=0x22a1128 @ line 18
+	Ltrue = 1
+	Lfalse = 0
+.data
+S0:
+	.byte 0
+S1:
+	.byte 97
+	.byte 115
+	.byte 100
+	.byte 102
+	.byte 0
+	
+.text
+main:
+	jal Lmain
+	j Lhalt
+Lmain:
+	subu $sp,$sp,20
+	sw $ra,0($sp)
+	sw $0,4($sp)
+	sw $0,8($sp)
+	la $v1,S0
+	sw $v1,12($sp)
+	la $t0,S1
+	sw $t0,12($sp)
+	sw $0,16($sp)
+	lw $t0,16($sp)
+	li $t1,1
+	addu $t2,$t0,$t1
+	sw $t2,16($sp)
+	lw $t0,12($sp)
+	move $a0,$t0
+	jal Lprints
+	lw $t0,8($sp)
+	move $a0,$t0
+	jal Lprintb
+	lw $t0,4($sp)
+	move $a0,$t0
+	jal Lprinti
+RLmain:
+	lw $ra,0($sp)
+	addu $sp,$sp,20
+	jr $ra
+	
+Lprintb:
+	beqz $a0,PrintFalse
+	la $a0,PDCTrue
+	j Lprints
+PrintFalse:
+	la $a0,PDCFalse
+	j Lprints
+Lhalt:
+	li $v0,10
+	syscall
+Lprintc:
+	li $v0,11
+	syscall
+	jr $ra
+Lprinti:
+	li $v0 1
+	syscall
+	jr $ra
+Lprints:
+	li $v0,4
+	syscall
+	jr $ra
+Lgetchar:
+	li $v0,8
+	syscall
+	jr $ra
+Llen:
+	addi $sp,$sp,-4
+	sw $ra,0($sp)
+	li $t0,0 
+loopStart:
+	lb $t1, ($a0)
+	beq $t1, $zero, loopEnd
+	addi $a0,$a0,1
+	addi $t0,$t0,1
+	j loopStart
+loopEnd:
+	lw $ra, 0($sp)
+	addi $sp,$sp,4
+	move $v0,$t0
+	jr $ra
+.data
+PDCTrue:
+	.byte 116
+	.byte 114
+	.byte 117
+	.byte 101
+PDCFalse:
+	.byte 102
+	.byte 97
+	.byte 108
+	.byte 115
+	.byte 101
 
 
 STDERR:
@@ -582,7 +746,7 @@ STDOUT:
 
 
 STDERR:
-Error: this function can't return a value at or near line 4
+Error: Expected source file at or near line 1
 
 
 RETURN CODE: 1
@@ -669,20 +833,80 @@ Test: legit expression statements |
 % ./golf ./test/ms3/check.t32
 
 STDOUT:
-program 
-    func sym=0x1c0ff98 @ line 3
-        newid [main] @ line 3
-        sig 
-            formals 
-            typeid [$void] sym=0x1c0ad38
-        block 
-            var sym=0x1c10078 @ line 4
-                newid [i] @ line 4
-                typeid [int] sym=0x1c0f428 @ line 4
-            exprstmt  @ line 5
-                id [i] sig=int  sym=0x1c10078 @ line 5
-            exprstmt  @ line 6
-                int [42] sig=int  @ line 6
+	Ltrue = 1
+	Lfalse = 0
+.data
+S0:
+	.byte 0
+	
+.text
+main:
+	jal Lmain
+	j Lhalt
+Lmain:
+	subu $sp,$sp,8
+	sw $ra,0($sp)
+	sw $0,4($sp)
+	lw $t0,4($sp)
+	li $t1,42
+RLmain:
+	lw $ra,0($sp)
+	addu $sp,$sp,8
+	jr $ra
+	
+Lprintb:
+	beqz $a0,PrintFalse
+	la $a0,PDCTrue
+	j Lprints
+PrintFalse:
+	la $a0,PDCFalse
+	j Lprints
+Lhalt:
+	li $v0,10
+	syscall
+Lprintc:
+	li $v0,11
+	syscall
+	jr $ra
+Lprinti:
+	li $v0 1
+	syscall
+	jr $ra
+Lprints:
+	li $v0,4
+	syscall
+	jr $ra
+Lgetchar:
+	li $v0,8
+	syscall
+	jr $ra
+Llen:
+	addi $sp,$sp,-4
+	sw $ra,0($sp)
+	li $t2,0 
+loopStart:
+	lb $t3, ($a0)
+	beq $t3, $zero, loopEnd
+	addi $a0,$a0,1
+	addi $t2,$t2,1
+	j loopStart
+loopEnd:
+	lw $ra, 0($sp)
+	addi $sp,$sp,4
+	move $v0,$t2
+	jr $ra
+.data
+PDCTrue:
+	.byte 116
+	.byte 114
+	.byte 117
+	.byte 101
+PDCFalse:
+	.byte 102
+	.byte 97
+	.byte 108
+	.byte 115
+	.byte 101
 
 
 STDERR:
@@ -697,43 +921,110 @@ Test: built-in routine check |
 % ./golf ./test/ms3/check.t33
 
 STDOUT:
-program 
-    func sym=0x15c8978 @ line 3
-        newid [main] @ line 3
-        sig 
-            formals 
-            typeid [$void] sym=0x15c2a18
-        block 
-            exprstmt  @ line 4
-                funccall  sig=void  @ line 4
-                    id [prints] sig=f(string)  sym=0x15c71e8 @ line 4
-                    actuals 
-                        string [Hello, world!\n] sig=string  @ line 4
-            exprstmt  @ line 5
-                funccall  sig=void  @ line 5
-                    id [printb] sig=f(bool)  sym=0x15c1028 @ line 5
-                    actuals 
-                        id [true] sig=bool  sym=0x15c2568 @ line 5
-            exprstmt  @ line 6
-                funccall  sig=void  @ line 6
-                    id [printi] sig=f(int)  sym=0x15c7108 @ line 6
-                    actuals 
-                        int [123] sig=int  @ line 6
-            exprstmt  @ line 7
-                funccall  sig=void  @ line 7
-                    id [printc] sig=f(int)  sym=0x15c7028 @ line 7
-                    actuals 
-                        int [123] sig=int  @ line 7
-            var sym=0x15c8a58 @ line 8
-                newid [ch] @ line 8
-                typeid [int] sym=0x15c2168 @ line 8
-            =  @ line 9
-                id [ch] sig=int  sym=0x15c8a58 @ line 9
-                funccall  sig=int  @ line 9
-                    id [getchar] sig=f()  sym=0x15c72c8 @ line 9
-            exprstmt  @ line 10
-                funccall  sig=void  @ line 10
-                    id [halt] sig=f()  sym=0x15c73a8 @ line 10
+	Ltrue = 1
+	Lfalse = 0
+.data
+S0:
+	.byte 0
+S1:
+	.byte 72
+	.byte 101
+	.byte 108
+	.byte 108
+	.byte 111
+	.byte 44
+	.byte 32
+	.byte 119
+	.byte 111
+	.byte 114
+	.byte 108
+	.byte 100
+	.byte 33
+	.byte 10
+	.byte 0
+	
+.text
+main:
+	jal Lmain
+	j Lhalt
+Lmain:
+	subu $sp,$sp,8
+	sw $ra,0($sp)
+	la $t0,S1
+	move $a0,$t0
+	jal Lprints
+	li $t0,Ltrue
+	move $a0,$t0
+	jal Lprintb
+	li $t0,123
+	move $a0,$t0
+	jal Lprinti
+	li $t0,123
+	move $a0,$t0
+	jal Lprintc
+	sw $0,4($sp)
+	jal Lgetchar
+	move $t0,$v0
+	sw $t0,4($sp)
+	jal Lhalt
+RLmain:
+	lw $ra,0($sp)
+	addu $sp,$sp,8
+	jr $ra
+	
+Lprintb:
+	beqz $a0,PrintFalse
+	la $a0,PDCTrue
+	j Lprints
+PrintFalse:
+	la $a0,PDCFalse
+	j Lprints
+Lhalt:
+	li $v0,10
+	syscall
+Lprintc:
+	li $v0,11
+	syscall
+	jr $ra
+Lprinti:
+	li $v0 1
+	syscall
+	jr $ra
+Lprints:
+	li $v0,4
+	syscall
+	jr $ra
+Lgetchar:
+	li $v0,8
+	syscall
+	jr $ra
+Llen:
+	addi $sp,$sp,-4
+	sw $ra,0($sp)
+	li $t0,0 
+loopStart:
+	lb $t1, ($a0)
+	beq $t1, $zero, loopEnd
+	addi $a0,$a0,1
+	addi $t0,$t0,1
+	j loopStart
+loopEnd:
+	lw $ra, 0($sp)
+	addi $sp,$sp,4
+	move $v0,$t0
+	jr $ra
+.data
+PDCTrue:
+	.byte 116
+	.byte 114
+	.byte 117
+	.byte 101
+PDCFalse:
+	.byte 102
+	.byte 97
+	.byte 108
+	.byte 115
+	.byte 101
 
 
 STDERR:
@@ -868,47 +1159,102 @@ Test: deep type propagation |
 % ./golf ./test/ms3/check.t42
 
 STDOUT:
-program 
-    func sym=0x19a8228 @ line 3
-        newid [main] @ line 3
-        sig 
-            formals 
-            typeid [$void] sym=0x19a1688
-        block 
-            var sym=0x19a8308 @ line 4
-                newid [x] @ line 4
-                typeid [int] sym=0x19a1a18 @ line 4
-            exprstmt  @ line 5
-                >=  sig=bool  @ line 5
-                    -  sig=int  @ line 5
-                        +  sig=int  @ line 5
-                            int [2] sig=int  @ line 5
-                            *  sig=int  @ line 5
-                                int [3] sig=int  @ line 5
-                                int [5] sig=int  @ line 5
-                        int [123] sig=int  @ line 5
-                    u-  sig=int  @ line 5
-                        u-  sig=int  @ line 5
-                            u-  sig=int  @ line 5
-                                id [x] sig=int  sym=0x19a8308 @ line 5
-            var sym=0x19a83e8 @ line 7
-                newid [b] @ line 7
-                typeid [bool] sym=0x19a1d38 @ line 7
-            exprstmt  @ line 8
-                !=  sig=bool  @ line 8
-                    u!  sig=bool  @ line 8
-                        u!  sig=bool  @ line 8
-                            u!  sig=bool  @ line 8
-                                ||  sig=bool  @ line 8
-                                    &&  sig=bool  @ line 8
-                                        id [true] sig=bool  sym=0x19a6bd8 @ line 8
-                                        id [false] sig=bool  sym=0x19a62e8 @ line 8
-                                    ==  sig=bool  @ line 8
-                                        id [b] sig=bool  sym=0x19a83e8 @ line 8
-                                        id [true] sig=bool  sym=0x19a6bd8 @ line 8
-                    <=  sig=bool  @ line 8
-                        int [5] sig=int  @ line 8
-                        int [6] sig=int  @ line 8
+	Ltrue = 1
+	Lfalse = 0
+.data
+S0:
+	.byte 0
+	
+.text
+main:
+	jal Lmain
+	j Lhalt
+Lmain:
+	subu $sp,$sp,12
+	sw $ra,0($sp)
+	sw $0,4($sp)
+	li $t0,2
+	li $t1,3
+	li $t2,5
+	mul $t3,$t1,$t2
+	addu $t1,$t0,$t3
+	li $t0,123
+	subu $t2,$t1,$t0
+	lw $t0,4($sp)
+	sge $t1,$t2,
+	sw $0,8($sp)
+	li ,Ltrue
+	li $t2,Lfalse
+	and $t3,,$t2
+	lw ,8($sp)
+	li $t2,Ltrue
+	seq $t4,,$t2
+	or ,$t3,$t4
+	xori ,,1
+	xori ,,1
+	xori ,,1
+	li $t2,5
+	li $t3,6
+	sle $t4,$t2,$t3
+	sne $t2,,$t4
+RLmain:
+	lw $ra,0($sp)
+	addu $sp,$sp,12
+	jr $ra
+	
+Lprintb:
+	beqz $a0,PrintFalse
+	la $a0,PDCTrue
+	j Lprints
+PrintFalse:
+	la $a0,PDCFalse
+	j Lprints
+Lhalt:
+	li $v0,10
+	syscall
+Lprintc:
+	li $v0,11
+	syscall
+	jr $ra
+Lprinti:
+	li $v0 1
+	syscall
+	jr $ra
+Lprints:
+	li $v0,4
+	syscall
+	jr $ra
+Lgetchar:
+	li $v0,8
+	syscall
+	jr $ra
+Llen:
+	addi $sp,$sp,-4
+	sw $ra,0($sp)
+	li ,0 
+loopStart:
+	lb $t3, ($a0)
+	beq $t3, $zero, loopEnd
+	addi $a0,$a0,1
+	addi ,,1
+	j loopStart
+loopEnd:
+	lw $ra, 0($sp)
+	addi $sp,$sp,4
+	move $v0,
+	jr $ra
+.data
+PDCTrue:
+	.byte 116
+	.byte 114
+	.byte 117
+	.byte 101
+PDCFalse:
+	.byte 102
+	.byte 97
+	.byte 108
+	.byte 115
+	.byte 101
 
 
 STDERR:
@@ -923,32 +1269,24 @@ Test: redefining "true" and "false" |
 % ./golf ./test/ms3/check.t43
 
 STDOUT:
-program 
-    globvar sym=0x1c013e8 @ line 3
-        newid [true] @ line 3
-        typeid [int] sym=0x1bfbd38 @ line 3
-    func sym=0x1c014c8 @ line 5
-        newid [main] @ line 5
-        sig 
-            formals 
-            typeid [$void] sym=0x1bfba18
-        block 
-            var sym=0x1c015a8 @ line 6
-                newid [false] @ line 6
-                typeid [int] sym=0x1bfbd38 @ line 6
-            exprstmt  @ line 7
-                funccall  sig=void  @ line 7
-                    id [printi] sig=f(int)  sym=0x1c00e98 @ line 7
-                    actuals 
-                        *  sig=int  @ line 7
-                            id [true] sig=int  sym=0x1c013e8 @ line 7
-                            id [false] sig=int  sym=0x1c015a8 @ line 7
+	Ltrue = 1
+	Lfalse = 0
+.data
+S0:
+	.byte 0
+	
+.text
+G0:
+	.word 0
+main:
+	jal Lmain
+	j Lhalt
 
 
 STDERR:
 
 
-RETURN CODE: 0
+*** TERMINATION VIA SIGNAL: Segmentation fault
 
 -------------------------------------------------------------------------------
 Test: call of non-function |
@@ -980,5 +1318,5 @@ Error: can't use type "int" here at or near line 5
 
 RETURN CODE: 1
 
-Run ended on Wed Apr 12 18:43:40 2023
+Run ended on Wed Apr 12 19:40:00 2023
 
