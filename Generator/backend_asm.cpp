@@ -214,11 +214,47 @@ void BackendASM::pass1_cb(AST *node)
             for (int i = 0; i < node->attribute.size(); i++)
             {
                 int currentByte = static_cast<int>(node->attribute[i]);
-                if (currentByte == 92 && i < node->attribute.size() - 1 && static_cast<int>(node->attribute[i + 1]) == 110)
+                if (currentByte == 92 && i < node->attribute.size() - 1) // check for backslash
                 {
-                    // for \n
-                    emit(".byte 10");
-                    i++;
+                    if (static_cast<int>(node->attribute[i + 1]) == 110) // check for \n
+                    {
+                        // for \n
+                        emit(".byte 10");
+                        i++;
+                    }
+                    else if (static_cast<int>(node->attribute[i + 1]) == 98) // check for \b
+                    {
+                        // for \b
+                        emit(".byte 8");
+                        i++;
+                    }
+                    else if (static_cast<int>(node->attribute[i + 1]) == 116) // check for \t
+                    {
+                        // for \t
+                        emit(".byte 9");
+                        i++;
+                    }
+                    else if (static_cast<int>(node->attribute[i + 1]) == 102) // check for \f
+                    {
+                        // for \f
+                        emit(".byte 12");
+                        i++;
+                    }
+                    else if (static_cast<int>(node->attribute[i + 1]) == 114) // check for \r
+                    {
+                        // for \r
+                        emit(".byte 13");
+                        i++;
+                    }
+                    else if (static_cast<int>(node->attribute[i + 1]) == 34 || static_cast<int>(node->attribute[i + 1]) == 92) // check for " and backslash
+                    {
+                        emit(".byte " + to_string(static_cast<int>(node->attribute[i + 1])));
+                        i++;
+                    }
+                    else
+                    {
+                        emit(".byte " + to_string(currentByte));
+                    }
                 }
                 else
                 {
