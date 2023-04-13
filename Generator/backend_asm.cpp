@@ -184,6 +184,10 @@ void BackendASM::epilogue()
     emit("li $a0, 1");
     emit("syscall");
 
+    emitlabel("exit_with_error");
+    emit("li $v0, 1");
+    emit("syscall");
+
     cout << ".data" << endl;
     emitlabel("PDCTrue");
     emit(".byte 116");
@@ -466,6 +470,7 @@ void BackendASM::pass3_cb(AST *node)
             freeArgReg(argReg2);
 
             emit("move " + node->kids[1].reg + ",$v0");
+            emit("bne $v0, $zero, exit_with_error");
         }
 
         emit(op + " " + node->reg + "," + node->kids[0].reg + "," + node->kids[1].reg);
