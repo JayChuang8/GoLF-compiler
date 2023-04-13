@@ -102,6 +102,21 @@ void BackendASM::prologue()
     emit("Ltrue = 1");
     emit("Lfalse = 0");
     cout << ".data" << endl;
+    emitlabel("PDCTrue");
+    emit(".byte 116");
+    emit(".byte 114");
+    emit(".byte 117");
+    emit(".byte 101");
+
+    emitlabel("PDCFalse");
+    emit(".byte 102");
+    emit(".byte 97");
+    emit(".byte 108");
+    emit(".byte 115");
+    emit(".byte 101");
+
+    cout << "diverror: .asciiz \"error: division by zero\"" << endl;
+
     emitlabel(getDataLabel());
     emit(".byte 0");
 }
@@ -183,22 +198,6 @@ void BackendASM::epilogue()
     // emit("li $v0, 1");
     // emit("li $a0, 1");
     // emit("syscall");
-
-    cout << ".data" << endl;
-    emitlabel("PDCTrue");
-    emit(".byte 116");
-    emit(".byte 114");
-    emit(".byte 117");
-    emit(".byte 101");
-
-    emitlabel("PDCFalse");
-    emit(".byte 102");
-    emit(".byte 97");
-    emit(".byte 108");
-    emit(".byte 115");
-    emit(".byte 101");
-
-    cout << "diverror: .asciiz \"error: division by zero\"" << endl;
 }
 
 string BackendASM::id2asm(string name)
