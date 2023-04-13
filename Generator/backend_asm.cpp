@@ -185,6 +185,9 @@ void BackendASM::epilogue()
     // emit("syscall");
 
     emitlabel("exit");
+    emit("la $a0, diverror");
+    emit("li $v0, 4");
+    emit("syscall");
     emit("li $v0, 10");
     emit("syscall");
 
@@ -469,9 +472,6 @@ void BackendASM::pass3_cb(AST *node)
             // freeArgReg(argReg1);
             // freeArgReg(argReg2);
             emit("beq " + node->kids[1].reg + ", $zero, exit");
-            emit("la $a0, diverror");
-            emit("li $v0, 4");
-            emit("syscall");
 
             emit("move " + node->kids[1].reg + ",$v0");
         }
