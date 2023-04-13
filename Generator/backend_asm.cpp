@@ -177,10 +177,11 @@ void BackendASM::epilogue()
     emit("move $v0, $a1");
     emit("jr $ra");
     emitlabel("divmod_error");
+    emit("li $v0, 4");
     emit("la $a0, DivZeroError");
-    emit("li $v0, 10");
     emit("syscall");
     emit("li $v0, 1");
+    emit("li $a0, 1");
     emit("syscall");
 
     emitlabel("exit_with_error");
