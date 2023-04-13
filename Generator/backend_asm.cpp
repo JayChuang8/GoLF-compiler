@@ -180,6 +180,7 @@ void BackendASM::epilogue()
     emit("li $v0, 4");
     emit("la $a0, DivZeroError");
     emit("syscall");
+    emit("li $v0, 1");
     emit("li $v0, 10");
     emit("syscall");
 
