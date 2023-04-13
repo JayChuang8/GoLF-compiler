@@ -1,4 +1,4 @@
-Run started on Thu Apr 13 13:08:20 2023
+Run started on Thu Apr 13 13:17:19 2023
 
 Hostname: csx3.cs.ucalgary.ca
 
@@ -150,20 +150,6 @@ Test: zero values |
 % ./golf /home/profs/aycock/411/TEST/final/gen.t3 > out.s
 
 STDERR:
-error: Expected source file at or near line 1
-
-
-RETURN CODE: 1
-
-(GoLF compiler unsuccessful, skipping test)
-
--------------------------------------------------------------------------------
-Test: nested function calls |
------------------------------
-
-% ./golf /home/profs/aycock/411/TEST/final/gen.t4 > out.s
-
-STDERR:
 
 
 RETURN CODE: 0
@@ -172,13 +158,50 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
+global zero values: 
+falseerror: division by zero
 0
+
+local zero values: 
+falseerror: division by zero
+0
+
+local zero values: 
+falseerror: division by zero
+0
+
+sub-block zero values: 
+falseerror: division by zero
+0
+
+sub-block zero values: 
+falseerror: division by zero
+0
+
+post-sub-block zero values: 
+truefalseerror: division by zero
+123
+garble
 
 
 STDERR:
 
 
 RETURN CODE: 0
+
+-------------------------------------------------------------------------------
+Test: nested function calls |
+-----------------------------
+
+% ./golf /home/profs/aycock/411/TEST/final/gen.t4 > out.s
+
+STDERR:
+error: Expected source file at or near line 1
+
+
+RETURN CODE: 1
+
+(GoLF compiler unsuccessful, skipping test)
 
 -------------------------------------------------------------------------------
 Test: recursive Fibonacci |
@@ -356,9 +379,16 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-error: division by zero
+The following symbols are undefined:
+Lhalt
+
+
 
 STDERR:
+spim: (parser) syntax error on line 19 of file out.s
+	  hello ------------
+	        ^
+Attempt to execute non-instruction at 0x0040003c
 
 
 RETURN CODE: 0
@@ -592,9 +622,18 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-error: division by zero
+The following symbols are undefined:
+Lhalt
+Lfoo
+
+
 
 STDERR:
+spim: (parser) syntax error on line 25 of file out.s
+	  hello ------------
+	        ^
+Instruction references undefined symbol at 0x00400048
+  [0x00400048]	0x0c000000  jal 0x00000000 [Lfoo]           ; 20: jal Lfoo
 
 
 RETURN CODE: 0
@@ -850,5 +889,5 @@ STDERR:
 
 (GoLF compiler unsuccessful, skipping test)
 
-Run ended on Thu Apr 13 13:08:28 2023
+Run ended on Thu Apr 13 13:17:27 2023
 
