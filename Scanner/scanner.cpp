@@ -209,7 +209,12 @@ Token Scanner::lex()
                     if (c == '\\')
                     {
                         char nextChar = inputFile.peek();
-                        if (escapeChars.count(nextChar) <= 0)
+                        if (nextChar == '\\')
+                        {
+                            str += c;
+                            inputFile.get(c);
+                        }
+                        else if (nextChar != '"' && nextChar != '\'' && nextChar != 'b' && nextChar != 'f' && nextChar != 'n' && nextChar != 'r' && nextChar != 't')
                         {
                             inputFile.get(c);
                             string message = "bad string escape '";
@@ -226,10 +231,8 @@ Token Scanner::lex()
                             }
                             util.error(message, getLineNum());
                         }
-                        // if there is \" escape_char
                         else if (nextChar == '"')
                         {
-                            // add backslash to string
                             str += c;
                             inputFile.get(c);
                         }
