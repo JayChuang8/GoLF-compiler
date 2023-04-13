@@ -185,10 +185,12 @@ void BackendASM::epilogue()
     // emit("syscall");
 
     emitlabel("exit");
-    emit("la $a0, diverror");
+    string argReg = allocArgReg();
+    emit("la " + argReg + ", diverror");
     emit("li $v0, 4");
     emit("syscall");
-    emit("li $a0, 1");
+    emit("li " + argReg + ", 1");
+    freeArgReg(argReg);
     emit("li $v0, 10");
     emit("syscall");
 
@@ -462,7 +464,7 @@ void BackendASM::pass3_cb(AST *node)
         node->reg = allocreg();
         string op = OP2ASM[node->type];
 
-        if (op == "div" || op == "%")
+        if (op == "div")
         {
             // string argReg1 = allocArgReg();
             // string argReg2 = allocArgReg();
@@ -474,7 +476,7 @@ void BackendASM::pass3_cb(AST *node)
             // freeArgReg(argReg2);
             emit("beq " + node->kids[1].reg + ", $zero, exit");
 
-            emit("move " + node->kids[1].reg + ",$v0");
+            // emit("move " + node->kids[1].reg + ",$v0");
         }
 
         emit(op + " " + node->reg + "," + node->kids[0].reg + "," + node->kids[1].reg);
