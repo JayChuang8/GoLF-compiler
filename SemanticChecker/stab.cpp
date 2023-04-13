@@ -12,7 +12,7 @@ bool sigscopeAppended = false;
 
 SymbolTable::SymbolTable(Utility &util) : util(util), sigscope(nullptr)
 {
-    // initialize the UNIVERSE symbol table and add it to the symbol table stack
+    // initialize the UNIVERSE symbol table and add it to symbol table stack
     std::unordered_map<std::string, Symbol> *UNIVERSE = new std::unordered_map<std::string, Symbol>;
 
     UNIVERSE->insert({"$void", {"$void", "void", "", "", false, true}});
