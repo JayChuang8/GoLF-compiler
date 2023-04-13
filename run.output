@@ -1,4 +1,4 @@
-Run started on Wed Apr 12 23:49:15 2023
+Run started on Wed Apr 12 23:52:25 2023
 
 Hostname: csx3.cs.ucalgary.ca
 
@@ -758,38 +758,12 @@ Test: EOF and scope |
 % ./golf /home/profs/aycock/411/TEST/final/gen.t23 > out.s
 
 STDERR:
+error: Expected source file at or near line 1
 
 
-RETURN CODE: 0
+RETURN CODE: 1
 
-% /home/profs/aycock/411/bin/spim -file out.s < /home/profs/aycock/411/TEST/final/input/gen.t23.in
-
-STDIN:
-The quick brown fox jumps over the lazy dog.
-
-
-STDOUT:
-Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-The following symbols are undefined:
-Lhalt
-Lgetchar
-L1for
-
-  Exception 4  [Address error in inst/data fetch]  occurred and ignored
-
-
-STDERR:
-spim: (parser) syntax error on line 35 of file out.s
-	  seq $t2,$t0,
-
-	              ^
-Exception occurred at PC=0x00400048
-  Unaligned address in inst/data fetch: 0x00000001
-Instruction references undefined symbol at 0x0040004c
-  [0x0040004c]	0x11000000  beq $8, $0, 0 [L1for-0x0040004c]; 27: beqz $t0,L1for
-
-
-RETURN CODE: 0
+(GoLF compiler unsuccessful, skipping test)
 
 -------------------------------------------------------------------------------
 Test: banners |
@@ -882,5 +856,5 @@ STDERR:
 
 (GoLF compiler unsuccessful, skipping test)
 
-Run ended on Wed Apr 12 23:49:22 2023
+Run ended on Wed Apr 12 23:52:30 2023
 
