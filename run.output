@@ -1,4 +1,4 @@
-Run started on Wed Apr 12 23:21:07 2023
+Run started on Wed Apr 12 23:23:14 2023
 
 Hostname: csx3.cs.ucalgary.ca
 
@@ -219,7 +219,7 @@ Test: recursive Fibonacci |
 % ./golf /home/profs/aycock/411/TEST/final/gen.t5 > out.s
 
 STDERR:
-error: unexpected }, expected ; at or near line 20
+error: Expected source file at or near line 1
 
 
 RETURN CODE: 1
@@ -882,5 +882,5 @@ STDERR:
 
 (GoLF compiler unsuccessful, skipping test)
 
-Run ended on Wed Apr 12 23:21:14 2023
+Run ended on Wed Apr 12 23:23:21 2023
 
