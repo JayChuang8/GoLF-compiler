@@ -1,4 +1,4 @@
-Run started on Wed Apr 12 20:53:10 2023
+Run started on Wed Apr 12 21:14:06 2023
 
 Hostname: csx3.cs.ucalgary.ca
 
@@ -11,7 +11,7 @@ Running make |
 STDOUT:
 /usr/bin/make -C Scanner
 make[1]: Entering directory '/home/ugb/jay.chuang1/golf-compiler/Scanner'
-g++ -o scanner.o -c scanner.cpp -MMD -MF scanner.d
+make[1]: Nothing to be done for 'all'.
 make[1]: Leaving directory '/home/ugb/jay.chuang1/golf-compiler/Scanner'
 /usr/bin/make -C Utility
 make[1]: Entering directory '/home/ugb/jay.chuang1/golf-compiler/Utility'
@@ -27,7 +27,7 @@ make[1]: Nothing to be done for 'all'.
 make[1]: Leaving directory '/home/ugb/jay.chuang1/golf-compiler/SemanticChecker'
 /usr/bin/make -C Generator
 make[1]: Entering directory '/home/ugb/jay.chuang1/golf-compiler/Generator'
-make[1]: Nothing to be done for 'all'.
+g++ -o backend_asm.o -c backend_asm.cpp -MMD -MF backend_asm.d
 make[1]: Leaving directory '/home/ugb/jay.chuang1/golf-compiler/Generator'
 g++ -o main.o -c main.cpp -MMD -MF main.d
 g++ -o golf main.o Scanner/scanner.o Scanner/token.o Utility/utility.o Parser/ast.o Parser/parser.o SemanticChecker/semantic.o SemanticChecker/stab.o Generator/backend_asm.o
@@ -436,14 +436,14 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-backslash b = [\b]
-backslash t = [\t]
+backslash b = []
+backslash t = [	]
 backslash n = [
 ]
-backslash f = [\f]
-backslash r = [\r]
-backslash quote = [\"]
-backslash backslash = [\\]
+backslash f = []
+backslash r = []
+backslash quote = ["]
+backslash backslash = [\]
 
 
 STDERR:
@@ -665,7 +665,7 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-яся: len(\"
+яся: len("
 
 STDERR:
 Memory address out of bounds
@@ -887,5 +887,5 @@ STDERR:
 
 (GoLF compiler unsuccessful, skipping test)
 
-Run ended on Wed Apr 12 20:53:16 2023
+Run ended on Wed Apr 12 21:14:13 2023
 
