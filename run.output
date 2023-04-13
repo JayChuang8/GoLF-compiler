@@ -1,4 +1,4 @@
-Run started on Wed Apr 12 23:31:44 2023
+Run started on Wed Apr 12 23:32:29 2023
 
 Hostname: csx3.cs.ucalgary.ca
 
@@ -388,9 +388,10 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-error: division by zero
+error: division by zero1
 
 STDERR:
+Attempt to execute non-instruction at 0x0040011c
 
 
 RETURN CODE: 0
@@ -624,9 +625,10 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-error: division by zero
+error: division by zero1
 
 STDERR:
+Attempt to execute non-instruction at 0x00400154
 
 
 RETURN CODE: 0
@@ -882,5 +884,5 @@ STDERR:
 
 (GoLF compiler unsuccessful, skipping test)
 
-Run ended on Wed Apr 12 23:31:51 2023
+Run ended on Wed Apr 12 23:32:36 2023
 
