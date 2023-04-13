@@ -1,6 +1,47 @@
 	Ltrue = 1
 	Lfalse = 0
 .data
+PDCTrue:
+	.byte 116
+	.byte 114
+	.byte 117
+	.byte 101
+	.byte 10
+	.byte 0
+PDCFalse:
+	.byte 102
+	.byte 97
+	.byte 108
+	.byte 115
+	.byte 101
+	.byte 10
+	.byte 0
+divlabel:
+	.byte 101
+	.byte 114
+	.byte 114
+	.byte 111
+	.byte 114
+	.byte 58
+	.byte 32
+	.byte 100
+	.byte 105
+	.byte 118
+	.byte 105
+	.byte 115
+	.byte 105
+	.byte 111
+	.byte 110
+	.byte 32
+	.byte 98
+	.byte 121
+	.byte 32
+	.byte 122
+	.byte 101
+	.byte 114
+	.byte 111
+	.byte 10
+	.byte 0
 S0:
 	.byte 0
 S1:

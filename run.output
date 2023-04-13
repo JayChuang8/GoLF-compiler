@@ -1,4 +1,4 @@
-Run started on Thu Apr 13 13:17:19 2023
+Run started on Thu Apr 13 13:35:06 2023
 
 Hostname: csx3.cs.ucalgary.ca
 
@@ -159,27 +159,33 @@ RETURN CODE: 0
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
 global zero values: 
-falseerror: division by zero
+false
+
 0
 
 local zero values: 
-falseerror: division by zero
+false
+
 0
 
 local zero values: 
-falseerror: division by zero
+false
+
 0
 
 sub-block zero values: 
-falseerror: division by zero
+false
+
 0
 
 sub-block zero values: 
-falseerror: division by zero
+false
+
 0
 
 post-sub-block zero values: 
-truefalseerror: division by zero
+true
+
 123
 garble
 
@@ -196,12 +202,21 @@ Test: nested function calls |
 % ./golf /home/profs/aycock/411/TEST/final/gen.t4 > out.s
 
 STDERR:
-error: Expected source file at or near line 1
 
 
-RETURN CODE: 1
+RETURN CODE: 0
 
-(GoLF compiler unsuccessful, skipping test)
+% /home/profs/aycock/411/bin/spim -file out.s
+
+STDOUT:
+Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
+0
+
+
+STDERR:
+
+
+RETURN CODE: 0
 
 -------------------------------------------------------------------------------
 Test: recursive Fibonacci |
@@ -379,16 +394,9 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-The following symbols are undefined:
-Lhalt
-
 
 
 STDERR:
-spim: (parser) syntax error on line 19 of file out.s
-	  hello ------------
-	        ^
-Attempt to execute non-instruction at 0x0040003c
 
 
 RETURN CODE: 0
@@ -475,101 +483,157 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-if ((A && B) || C) {...} else {...}, with A=falseerror: division by zero B=truefalseerror: division by zero C=truefalseerror: division by zero
+if ((A && B) || C) {...} else {...}, with A=false
+ B=true
+ C=true
+
 evaluated A
 evaluated B
 evaluated C
 if-part executed
 
-if ((A && B) || C) {...} else {...}, with A=truefalseerror: division by zero B=truefalseerror: division by zero C=truefalseerror: division by zero
+if ((A && B) || C) {...} else {...}, with A=true
+ B=true
+ C=true
+
 evaluated A
 evaluated B
 evaluated C
 if-part executed
 
-if ((A && B) || C) {...} else {...}, with A=falseerror: division by zero B=truefalseerror: division by zero C=truefalseerror: division by zero
+if ((A && B) || C) {...} else {...}, with A=false
+ B=true
+ C=true
+
 evaluated A
 evaluated B
 evaluated C
 if-part executed
 
-if ((A && B) || C) {...} else {...}, with A=truefalseerror: division by zero B=truefalseerror: division by zero C=truefalseerror: division by zero
+if ((A && B) || C) {...} else {...}, with A=true
+ B=true
+ C=true
+
 evaluated A
 evaluated B
 evaluated C
 if-part executed
 
-if ((A && B) || C) {...} else {...}, with A=falseerror: division by zero B=truefalseerror: division by zero C=truefalseerror: division by zero
+if ((A && B) || C) {...} else {...}, with A=false
+ B=true
+ C=true
+
 evaluated A
 evaluated B
 evaluated C
 if-part executed
 
-if ((A && B) || C) {...} else {...}, with A=truefalseerror: division by zero B=truefalseerror: division by zero C=truefalseerror: division by zero
+if ((A && B) || C) {...} else {...}, with A=true
+ B=true
+ C=true
+
 evaluated A
 evaluated B
 evaluated C
 if-part executed
 
-if ((A && B) || C) {...} else {...}, with A=falseerror: division by zero B=truefalseerror: division by zero C=truefalseerror: division by zero
+if ((A && B) || C) {...} else {...}, with A=false
+ B=true
+ C=true
+
 evaluated A
 evaluated B
 evaluated C
 if-part executed
 
-if ((A && B) || C) {...} else {...}, with A=truefalseerror: division by zero B=truefalseerror: division by zero C=truefalseerror: division by zero
+if ((A && B) || C) {...} else {...}, with A=true
+ B=true
+ C=true
+
 evaluated A
 evaluated B
 evaluated C
 if-part executed
 
-x = (A && !B) || C, with A=falseerror: division by zero B=truefalseerror: division by zero C=truefalseerror: division by zero
-evaluated A
-evaluated B
-evaluated C
-x=truefalseerror: division by zero
+x = (A && !B) || C, with A=false
+ B=true
+ C=true
 
-x = (A && !B) || C, with A=truefalseerror: division by zero B=truefalseerror: division by zero C=truefalseerror: division by zero
 evaluated A
 evaluated B
 evaluated C
-x=truefalseerror: division by zero
+x=true
 
-x = (A && !B) || C, with A=falseerror: division by zero B=truefalseerror: division by zero C=truefalseerror: division by zero
-evaluated A
-evaluated B
-evaluated C
-x=truefalseerror: division by zero
 
-x = (A && !B) || C, with A=truefalseerror: division by zero B=truefalseerror: division by zero C=truefalseerror: division by zero
-evaluated A
-evaluated B
-evaluated C
-x=truefalseerror: division by zero
+x = (A && !B) || C, with A=true
+ B=true
+ C=true
 
-x = (A && !B) || C, with A=falseerror: division by zero B=truefalseerror: division by zero C=truefalseerror: division by zero
 evaluated A
 evaluated B
 evaluated C
-x=truefalseerror: division by zero
+x=true
 
-x = (A && !B) || C, with A=truefalseerror: division by zero B=truefalseerror: division by zero C=truefalseerror: division by zero
-evaluated A
-evaluated B
-evaluated C
-x=truefalseerror: division by zero
 
-x = (A && !B) || C, with A=falseerror: division by zero B=truefalseerror: division by zero C=truefalseerror: division by zero
-evaluated A
-evaluated B
-evaluated C
-x=truefalseerror: division by zero
+x = (A && !B) || C, with A=false
+ B=true
+ C=true
 
-x = (A && !B) || C, with A=truefalseerror: division by zero B=truefalseerror: division by zero C=truefalseerror: division by zero
 evaluated A
 evaluated B
 evaluated C
-x=truefalseerror: division by zero
+x=true
+
+
+x = (A && !B) || C, with A=true
+ B=true
+ C=true
+
+evaluated A
+evaluated B
+evaluated C
+x=true
+
+
+x = (A && !B) || C, with A=false
+ B=true
+ C=true
+
+evaluated A
+evaluated B
+evaluated C
+x=true
+
+
+x = (A && !B) || C, with A=true
+ B=true
+ C=true
+
+evaluated A
+evaluated B
+evaluated C
+x=true
+
+
+x = (A && !B) || C, with A=false
+ B=true
+ C=true
+
+evaluated A
+evaluated B
+evaluated C
+x=true
+
+
+x = (A && !B) || C, with A=true
+ B=true
+ C=true
+
+evaluated A
+evaluated B
+evaluated C
+x=true
+
 
 
 STDERR:
@@ -598,7 +662,7 @@ Lhalt
 
 
 STDERR:
-spim: (parser) syntax error on line 33 of file out.s
+spim: (parser) syntax error on line 74 of file out.s
 	  move $a0,
 
 	           ^
@@ -622,18 +686,9 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-The following symbols are undefined:
-Lhalt
-Lfoo
-
 
 
 STDERR:
-spim: (parser) syntax error on line 25 of file out.s
-	  hello ------------
-	        ^
-Instruction references undefined symbol at 0x00400048
-  [0x00400048]	0x0c000000  jal 0x00000000 [Lfoo]           ; 20: jal Lfoo
 
 
 RETURN CODE: 0
@@ -701,11 +756,11 @@ Llen
 
 
 STDERR:
-spim: (parser) syntax error on line 162 of file out.s
+spim: (parser) syntax error on line 203 of file out.s
 	  li $t0,12($sp)
 	           ^
 Instruction references undefined symbol at 0x00400040
-  [0x00400040]	0x0c000000  jal 0x00000000 [Llen]           ; 113: jal Llen
+  [0x00400040]	0x0c000000  jal 0x00000000 [Llen]           ; 154: jal Llen
 
 
 RETURN CODE: 0
@@ -786,14 +841,14 @@ L1for
 
 
 STDERR:
-spim: (parser) syntax error on line 35 of file out.s
+spim: (parser) syntax error on line 76 of file out.s
 	  seq $t2,$t0,
 
 	              ^
-Exception occurred at PC=0x00400048
+Exception occurred at PC=0x0040004c
   Unaligned address in inst/data fetch: 0x00000001
-Instruction references undefined symbol at 0x0040004c
-  [0x0040004c]	0x11000000  beq $8, $0, 0 [L1for-0x0040004c]; 27: beqz $t0,L1for
+Instruction references undefined symbol at 0x00400050
+  [0x00400050]	0x11000000  beq $8, $0, 0 [L1for-0x00400050]; 68: beqz $t0,L1for
 
 
 RETURN CODE: 0
@@ -889,5 +944,5 @@ STDERR:
 
 (GoLF compiler unsuccessful, skipping test)
 
-Run ended on Thu Apr 13 13:17:27 2023
+Run ended on Thu Apr 13 13:35:13 2023
 
