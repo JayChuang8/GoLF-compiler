@@ -1,4 +1,4 @@
-Run started on Wed Apr 12 23:59:36 2023
+Run started on Thu Apr 13 13:08:20 2023
 
 Hostname: csx3.cs.ucalgary.ca
 
@@ -27,7 +27,7 @@ make[1]: Nothing to be done for 'all'.
 make[1]: Leaving directory '/home/ugb/jay.chuang1/golf-compiler/SemanticChecker'
 /usr/bin/make -C Generator
 make[1]: Entering directory '/home/ugb/jay.chuang1/golf-compiler/Generator'
-make[1]: Nothing to be done for 'all'.
+g++ -o backend_asm.o -c backend_asm.cpp -MMD -MF backend_asm.d
 make[1]: Leaving directory '/home/ugb/jay.chuang1/golf-compiler/Generator'
 g++ -o main.o -c main.cpp -MMD -MF main.d
 g++ -o golf main.o Scanner/scanner.o Scanner/token.o Utility/utility.o Parser/ast.o Parser/parser.o SemanticChecker/semantic.o SemanticChecker/stab.o Generator/backend_asm.o
@@ -150,44 +150,12 @@ Test: zero values |
 % ./golf /home/profs/aycock/411/TEST/final/gen.t3 > out.s
 
 STDERR:
+error: Expected source file at or near line 1
 
 
-RETURN CODE: 0
+RETURN CODE: 1
 
-% /home/profs/aycock/411/bin/spim -file out.s
-
-STDOUT:
-Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-global zero values: 
-falseerror: division by zero
-0
-
-local zero values: 
-falseerror: division by zero
-0
-
-local zero values: 
-falseerror: division by zero
-0
-
-sub-block zero values: 
-falseerror: division by zero
-0
-
-sub-block zero values: 
-falseerror: division by zero
-0
-
-post-sub-block zero values: 
-truefalseerror: division by zero
-123
-garble
-
-
-STDERR:
-
-
-RETURN CODE: 0
+(GoLF compiler unsuccessful, skipping test)
 
 -------------------------------------------------------------------------------
 Test: nested function calls |
@@ -882,5 +850,5 @@ STDERR:
 
 (GoLF compiler unsuccessful, skipping test)
 
-Run ended on Wed Apr 12 23:59:41 2023
+Run ended on Thu Apr 13 13:08:28 2023
 
