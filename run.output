@@ -1,4 +1,4 @@
-Run started on Wed Apr 12 21:34:19 2023
+Run started on Wed Apr 12 21:38:06 2023
 
 Hostname: csx3.cs.ucalgary.ca
 
@@ -15,7 +15,7 @@ make[1]: Nothing to be done for 'all'.
 make[1]: Leaving directory '/home/ugb/jay.chuang1/golf-compiler/Scanner'
 /usr/bin/make -C Utility
 make[1]: Entering directory '/home/ugb/jay.chuang1/golf-compiler/Utility'
-g++ -o utility.o -c utility.cpp -MMD -MF utility.d
+make[1]: Nothing to be done for 'all'.
 make[1]: Leaving directory '/home/ugb/jay.chuang1/golf-compiler/Utility'
 /usr/bin/make -C Parser
 make[1]: Entering directory '/home/ugb/jay.chuang1/golf-compiler/Parser'
@@ -159,6 +159,29 @@ RETURN CODE: 0
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
 global zero values: 
+false
+0
+
+local zero values: 
+false
+0
+
+local zero values: 
+false
+0
+
+sub-block zero values: 
+false
+0
+
+sub-block zero values: 
+false
+0
+
+post-sub-block zero values: 
+truefalse
+123
+garble
 
 
 STDERR:
@@ -457,7 +480,102 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-if ((A && B) || C) {...} else {...}, with A=
+if ((A && B) || C) {...} else {...}, with A=false B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+if-part executed
+
+if ((A && B) || C) {...} else {...}, with A=truefalse B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+if-part executed
+
+if ((A && B) || C) {...} else {...}, with A=false B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+if-part executed
+
+if ((A && B) || C) {...} else {...}, with A=truefalse B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+if-part executed
+
+if ((A && B) || C) {...} else {...}, with A=false B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+if-part executed
+
+if ((A && B) || C) {...} else {...}, with A=truefalse B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+if-part executed
+
+if ((A && B) || C) {...} else {...}, with A=false B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+if-part executed
+
+if ((A && B) || C) {...} else {...}, with A=truefalse B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+if-part executed
+
+x = (A && !B) || C, with A=false B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+x=truefalse
+
+x = (A && !B) || C, with A=truefalse B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+x=truefalse
+
+x = (A && !B) || C, with A=false B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+x=truefalse
+
+x = (A && !B) || C, with A=truefalse B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+x=truefalse
+
+x = (A && !B) || C, with A=false B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+x=truefalse
+
+x = (A && !B) || C, with A=truefalse B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+x=truefalse
+
+x = (A && !B) || C, with A=false B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+x=truefalse
+
+x = (A && !B) || C, with A=truefalse B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+x=truefalse
+
 
 STDERR:
 
@@ -769,5 +887,5 @@ STDERR:
 
 (GoLF compiler unsuccessful, skipping test)
 
-Run ended on Wed Apr 12 21:34:28 2023
+Run ended on Wed Apr 12 21:38:13 2023
 
