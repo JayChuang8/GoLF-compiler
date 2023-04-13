@@ -10,19 +10,19 @@ BackendASM::BackendASM(Utility &util) : util(util),
                                         pool({"$t0", "$t1", "$t2", "$t3", "$t4", "$t5", "$t6", "$t7", "$t8", "$t9"}),
                                         argPool({"$a0", "$a1", "$a2", "$a3", "$a4", "$a5", "$a6", "$a7", "$a8", "$a9"}),
                                         labelnum(0),
-                                        OP2ASM({{"+", "addu"},
-                                                {"-", "subu"},
-                                                {"*", "mul"},
-                                                {"/", "div"},
-                                                {"%", ""}, //
-                                                {"==", "seq"},
-                                                {"!=", "sne"},
-                                                {"<", "slt"},  //
-                                                {"<=", "sle"}, //
-                                                {">", "sgt"},  //
-                                                {">=", "sge"}, //
-                                                {"&&", "and"}, //
-                                                {"||", "or"}}) //
+                                        OP2ASM({
+                                            {"+", "addu"},
+                                            {"-", "subu"},
+                                            {"*", "mul"},
+                                            {"/", "div"},
+                                            {"%", ""}, //
+                                            {"==", "seq"},
+                                            {"!=", "sne"},
+                                            {"<", "slt"},  //
+                                            {"<=", "sle"}, //
+                                            {">", "sgt"},  //
+                                            {">=", "sge"},
+                                        }) //
 {
 }
 
@@ -371,6 +371,50 @@ void BackendASM::pass3_cb(AST *node)
             reg = node->kids[0].sym->reg;
         emit("sw " + node->kids[1].reg + "," + reg);
         freereg(node->kids[1].reg);
+        node->prune();
+    }
+    else if (node->type == "&&")
+    {
+        // emittemp("AND-----------------");
+        // make sure the nodes on the LHS of && are defined
+        node->kids[0].prepost([this](AST *node)
+                              { pass3_cb(node); },
+                              [this](AST *node)
+                              { pass3_post_cb(node); });
+
+        // make sure the nodes on the RHS of && are defined
+        node->kids[1].prepost([this](AST *node)
+                              { pass3_cb(node); },
+                              [this](AST *node)
+                              { pass3_post_cb(node); });
+
+        node->reg = allocreg();
+        emit("and " + node->reg + "," + node->kids[0].reg + "," + node->kids[1].reg);
+        freereg(node->kids[0].reg);
+        freereg(node->kids[1].reg);
+
+        node->prune();
+    }
+    else if (node->type == "||")
+    {
+        // emittemp("OR-----------------");
+        // make sure the nodes on the LHS of || are defined
+        node->kids[0].prepost([this](AST *node)
+                              { pass3_cb(node); },
+                              [this](AST *node)
+                              { pass3_post_cb(node); });
+
+        // make sure the nodes on the RHS of || are defined
+        node->kids[1].prepost([this](AST *node)
+                              { pass3_cb(node); },
+                              [this](AST *node)
+                              { pass3_post_cb(node); });
+
+        node->reg = allocreg();
+        emit("or " + node->reg + "," + node->kids[0].reg + "," + node->kids[1].reg);
+        freereg(node->kids[0].reg);
+        freereg(node->kids[1].reg);
+
         node->prune();
     }
     else if (node->type == "for")
