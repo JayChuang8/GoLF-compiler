@@ -115,7 +115,7 @@ void BackendASM::prologue()
     emit(".byte 115");
     emit(".byte 101");
 
-    cout << "diverror: .asciiz \"error: division by zero\"" << endl;
+    // cout << "diverror: .asciiz \"error: division by zero\"" << endl;
 
     emitlabel(getDataLabel());
     emit(".byte 0");
