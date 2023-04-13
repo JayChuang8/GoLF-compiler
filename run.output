@@ -1,4 +1,4 @@
-Run started on Wed Apr 12 19:57:33 2023
+Run started on Wed Apr 12 19:58:52 2023
 
 Hostname: csx3.cs.ucalgary.ca
 
@@ -110,15 +110,9 @@ Lhalt
 
 
 STDERR:
-spim: (parser) Unknown character on line 27 of file out.s
-	  	[FUNC-----------------]
-	   ^
-spim: (parser) Unknown character on line 31 of file out.s
-	  	[FUNCCALL-----------------] prints 0
-	   ^
-spim: (parser) syntax error on line 32 of file out.s
-	  	STRING-----------------
-	         ^
+spim: (parser) syntax error on line 30 of file out.s
+	  	BINARYOP-----------------
+	           ^
 Attempt to execute non-instruction at 0x00400034
 
 
@@ -141,17 +135,16 @@ STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
 The following symbols are undefined:
 Lhalt
+Lmain
 
 
 
 STDERR:
-spim: (parser) Unknown character on line 29 of file out.s
-	  	[FUNC-----------------]
-	   ^
-spim: (parser) syntax error on line 33 of file out.s
-	  	ASSIGNMENT--------------
-	             ^
-Attempt to execute non-instruction at 0x00400038
+spim: (parser) syntax error on line 29 of file out.s
+	  	BINARYOP-----------------
+	           ^
+Instruction references undefined symbol at 0x00400028
+  [0x00400028]	0x0c000000  jal 0x00000000 [Lmain]          ; 27: jal Lmain
 
 
 RETURN CODE: 0
@@ -177,12 +170,9 @@ Lhalt
 
 
 STDERR:
-spim: (parser) Unknown character on line 136 of file out.s
-	  	[FUNC-----------------]
-	   ^
-spim: (parser) syntax error on line 140 of file out.s
-	  	ASSIGNMENT--------------
-	             ^
+spim: (parser) syntax error on line 139 of file out.s
+	  	BINARYOP-----------------
+	           ^
 Attempt to execute non-instruction at 0x00400044
 
 
@@ -210,12 +200,9 @@ Lmain
 
 
 STDERR:
-spim: (parser) Unknown character on line 16 of file out.s
-	  	[FUNC-----------------]
-	   ^
 spim: (parser) syntax error on line 20 of file out.s
-	  	FORMAL-----------------
-	         ^
+	  	BINARYOP-----------------
+	           ^
 Instruction references undefined symbol at 0x00400028
   [0x00400028]	0x0c000000  jal 0x00000000 [Lmain]          ; 14: jal Lmain
 
@@ -257,12 +244,9 @@ Lhalt
 
 
 STDERR:
-spim: (parser) Unknown character on line 52 of file out.s
-	  	[FUNC-----------------]
-	   ^
-spim: (parser) syntax error on line 56 of file out.s
-	  	VAR-----------------
-	      ^
+spim: (parser) syntax error on line 55 of file out.s
+	  	BINARYOP-----------------
+	           ^
 Attempt to execute non-instruction at 0x00400034
 
 
@@ -294,12 +278,9 @@ Lmain
 
 
 STDERR:
-spim: (parser) Unknown character on line 13 of file out.s
-	  	[FUNC-----------------]
-	   ^
-spim: (parser) syntax error on line 17 of file out.s
-	  	VAR-----------------
-	      ^
+spim: (parser) syntax error on line 16 of file out.s
+	  	BINARYOP-----------------
+	           ^
 Instruction references undefined symbol at 0x00400028
   [0x00400028]	0x0c000000  jal 0x00000000 [Lmain]          ; 11: jal Lmain
 
@@ -327,12 +308,9 @@ Lhalt
 
 
 STDERR:
-spim: (parser) Unknown character on line 26 of file out.s
-	  	[FUNC-----------------]
-	   ^
-spim: (parser) syntax error on line 30 of file out.s
-	  	VAR-----------------
-	      ^
+spim: (parser) syntax error on line 29 of file out.s
+	  	BINARYOP-----------------
+	           ^
 Attempt to execute non-instruction at 0x00400034
 
 
@@ -387,15 +365,9 @@ Lhalt
 
 
 STDERR:
-spim: (parser) Unknown character on line 14 of file out.s
-	  	[FUNC-----------------]
-	   ^
-spim: (parser) Unknown character on line 18 of file out.s
-	  	[FUNCCALL-----------------] printi 0
-	   ^
-spim: (parser) syntax error on line 19 of file out.s
-	  	AND-----------------
-	      ^
+spim: (parser) syntax error on line 17 of file out.s
+	  	BINARYOP-----------------
+	           ^
 Attempt to execute non-instruction at 0x00400034
 
 
@@ -422,12 +394,9 @@ Lhalt
 
 
 STDERR:
-spim: (parser) Unknown character on line 24 of file out.s
-	  	[FUNC-----------------]
-	   ^
-spim: (parser) syntax error on line 28 of file out.s
-	  	IFELSE-----------------
-	         ^
+spim: (parser) syntax error on line 27 of file out.s
+	  	BINARYOP-----------------
+	           ^
 Attempt to execute non-instruction at 0x00400034
 
 
@@ -483,15 +452,9 @@ Lmain
 
 
 STDERR:
-spim: (parser) Unknown character on line 191 of file out.s
-	  	[FUNC-----------------]
-	   ^
-spim: (parser) Unknown character on line 195 of file out.s
-	  	[FUNCCALL-----------------] prints 0
-	   ^
-spim: (parser) syntax error on line 196 of file out.s
-	  	STRING-----------------
-	         ^
+spim: (parser) syntax error on line 191 of file out.s
+	  	BINARYOP-----------------
+	           ^
 Instruction references undefined symbol at 0x00400030
   [0x00400030]	0x0c000000  jal 0x00000000 [Lmain]          ; 189: jal Lmain
 
@@ -520,12 +483,9 @@ Lmain
 
 
 STDERR:
-spim: (parser) Unknown character on line 11 of file out.s
-	  	[FUNC-----------------]
-	   ^
 spim: (parser) syntax error on line 15 of file out.s
-	  	FORMAL-----------------
-	         ^
+	  	BINARYOP-----------------
+	           ^
 Instruction references undefined symbol at 0x00400024
   [0x00400024]	0x0c000000  jal 0x00000000 [Lmain]          ; 9: jal Lmain
 
@@ -549,17 +509,16 @@ STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
 The following symbols are undefined:
 Lhalt
+Lmain
 
 
 
 STDERR:
-spim: (parser) Unknown character on line 15 of file out.s
-	  	[FUNC-----------------]
-	   ^
-spim: (parser) syntax error on line 19 of file out.s
-	  	ASSIGNMENT--------------
-	             ^
-Attempt to execute non-instruction at 0x0040003c
+spim: (parser) syntax error on line 15 of file out.s
+	  	BINARYOP-----------------
+	           ^
+Instruction references undefined symbol at 0x00400028
+  [0x00400028]	0x0c000000  jal 0x00000000 [Lmain]          ; 11: jal Lmain
 
 
 RETURN CODE: 0
@@ -600,12 +559,9 @@ Lmain
 
 
 STDERR:
-spim: (parser) Unknown character on line 301 of file out.s
-	  	[FUNC-----------------]
-	   ^
-spim: (parser) syntax error on line 305 of file out.s
-	  	RETURN-------------
-	         ^
+spim: (parser) syntax error on line 304 of file out.s
+	  	BINARYOP-----------------
+	           ^
 Instruction references undefined symbol at 0x00400024
   [0x00400024]	0x0c000000  jal 0x00000000 [Lmain]          ; 299: jal Lmain
 
@@ -633,18 +589,9 @@ Lhalt
 
 
 STDERR:
-spim: (parser) Unknown character on line 108 of file out.s
-	  	[FUNC-----------------]
-	   ^
-spim: (parser) Unknown character on line 112 of file out.s
-	  	[FUNCCALL-----------------] printi 0
-	   ^
-spim: (parser) Unknown character on line 113 of file out.s
-	  	[FUNCCALL-----------------] len 0
-	   ^
-spim: (parser) syntax error on line 114 of file out.s
-	  	STRING-----------------
-	         ^
+spim: (parser) syntax error on line 111 of file out.s
+	  	BINARYOP-----------------
+	           ^
 Attempt to execute non-instruction at 0x00400034
 
 
@@ -685,12 +632,9 @@ Lhalt
 
 
 STDERR:
-spim: (parser) Unknown character on line 17 of file out.s
-	  	[FUNC-----------------]
-	   ^
-spim: (parser) syntax error on line 21 of file out.s
-	  	VAR-----------------
-	      ^
+spim: (parser) syntax error on line 20 of file out.s
+	  	BINARYOP-----------------
+	           ^
 Attempt to execute non-instruction at 0x00400034
 
 
@@ -721,12 +665,9 @@ Lhalt
 
 
 STDERR:
-spim: (parser) Unknown character on line 18 of file out.s
-	  	[FUNC-----------------]
-	   ^
-spim: (parser) syntax error on line 22 of file out.s
-	  	VAR-----------------
-	      ^
+spim: (parser) syntax error on line 21 of file out.s
+	  	BINARYOP-----------------
+	           ^
 Attempt to execute non-instruction at 0x00400034
 
 
@@ -754,12 +695,9 @@ Lmain
 
 
 STDERR:
-spim: (parser) Unknown character on line 122 of file out.s
-	  	[FUNC-----------------]
-	   ^
-spim: (parser) syntax error on line 126 of file out.s
-	  	FORMAL-----------------
-	         ^
+spim: (parser) syntax error on line 122 of file out.s
+	  	BINARYOP-----------------
+	           ^
 Instruction references undefined symbol at 0x0040002c
   [0x0040002c]	0x0c000000  jal 0x00000000 [Lmain]          ; 120: jal Lmain
 
@@ -832,5 +770,5 @@ STDERR:
 
 (GoLF compiler unsuccessful, skipping test)
 
-Run ended on Wed Apr 12 19:57:38 2023
+Run ended on Wed Apr 12 19:58:57 2023
 
