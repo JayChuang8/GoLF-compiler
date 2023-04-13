@@ -107,6 +107,8 @@ void BackendASM::prologue()
     emit(".byte 114");
     emit(".byte 117");
     emit(".byte 101");
+    emit(".byte 10");
+    emit(".byte 0");
 
     emitlabel("PDCFalse");
     emit(".byte 102");
@@ -114,8 +116,35 @@ void BackendASM::prologue()
     emit(".byte 108");
     emit(".byte 115");
     emit(".byte 101");
+    emit(".byte 10");
+    emit(".byte 0");
 
-    // cout << "diverror: .asciiz \"error: division by zero\"" << endl;
+    emitlabel("divlabel");
+    emit(".byte 101");
+    emit(".byte 114");
+    emit(".byte 114");
+    emit(".byte 111");
+    emit(".byte 114");
+    emit(".byte 58");
+    emit(".byte 32");
+    emit(".byte 100");
+    emit(".byte 105");
+    emit(".byte 118");
+    emit(".byte 105");
+    emit(".byte 115");
+    emit(".byte 105");
+    emit(".byte 111");
+    emit(".byte 110");
+    emit(".byte 32");
+    emit(".byte 98");
+    emit(".byte 121");
+    emit(".byte 32");
+    emit(".byte 122");
+    emit(".byte 101");
+    emit(".byte 114");
+    emit(".byte 111");
+    emit(".byte 10");
+    emit(".byte 0");
 
     emitlabel(getDataLabel());
     emit(".byte 0");
