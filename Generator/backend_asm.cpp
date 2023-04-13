@@ -172,6 +172,17 @@ void BackendASM::epilogue()
     freereg(reg1);
     freereg(reg2);
 
+    emitlabel("divmodchk");
+    emit("beq $a1, $zero, divmod_error");
+    emit("move $v0, $a1");
+    emit("jr $ra");
+    emitlabel("divmod_error");
+    emit("li $v0, 4");
+    emit("la $a0, div_by_zero_msg");
+    emit("syscall");
+    emit("li $v0, 10");
+    emit("syscall");
+
     cout << ".data" << endl;
     emitlabel("PDCTrue");
     emit(".byte 116");
@@ -185,6 +196,8 @@ void BackendASM::epilogue()
     emit(".byte 108");
     emit(".byte 115");
     emit(".byte 101");
+
+    cout << "DivZeroError: .asciiz \"error: division by zero\"" << endl;
 }
 
 string BackendASM::id2asm(string name)
@@ -424,7 +437,7 @@ void BackendASM::pass3_cb(AST *node)
     }
     else if (OP2ASM.find(node->type) != OP2ASM.end())
     {
-        // emittemp("AND-----------------");
+        // emittemp("BINARY OP-----------------");
         // make sure the nodes on the LHS of && are defined
         node->kids[0].prepost([this](AST *node)
                               { pass3_cb(node); },
@@ -439,6 +452,21 @@ void BackendASM::pass3_cb(AST *node)
 
         node->reg = allocreg();
         string op = OP2ASM[node->type];
+
+        if (op == "div" || op == "%")
+        {
+            string argReg1 = allocArgReg();
+            string argReg2 = allocArgReg();
+            emit("move " + argReg1 + "," + node->kids[0].reg);
+            emit("move " + argReg2 + "," + node->kids[1].reg);
+            emit("jal divmodchk");
+
+            freeArgReg(argReg1);
+            freeArgReg(argReg2);
+
+            emit("move " + node->kids[1].reg + ",$v0");
+        }
+
         emit(op + " " + node->reg + "," + node->kids[0].reg + "," + node->kids[1].reg);
         freereg(node->kids[0].reg);
         freereg(node->kids[1].reg);
