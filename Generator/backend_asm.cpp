@@ -172,17 +172,17 @@ void BackendASM::epilogue()
     freereg(reg1);
     freereg(reg2);
 
-    emitlabel("divmodchk");
-    emit("beq $a1, $zero, divmod_error");
-    emit("move $v0, $a1");
-    emit("jr $ra");
-    emitlabel("divmod_error");
-    emit("li $v0, 4");
-    emit("la $a0, DivZeroError");
-    emit("syscall");
-    emit("li $v0, 1");
-    emit("li $a0, 1");
-    emit("syscall");
+    // emitlabel("divmodchk");
+    // emit("beq $a1, $zero, divmod_error");
+    // emit("move $v0, $a1");
+    // emit("jr $ra");
+    // emitlabel("divmod_error");
+    // emit("li $v0, 4");
+    // emit("la $a0, DivZeroError");
+    // emit("syscall");
+    // emit("li $v0, 1");
+    // emit("li $a0, 1");
+    // emit("syscall");
 
     emitlabel("exit");
     emit("li $v0, 10");
@@ -468,9 +468,9 @@ void BackendASM::pass3_cb(AST *node)
 
             // freeArgReg(argReg1);
             // freeArgReg(argReg2);
-            emit("beq " + node->kids[1].reg + ", $zero, exit")
+            emit("beq " + node->kids[1].reg + ", $zero, exit");
 
-                emit("move " + node->kids[1].reg + ",$v0");
+            emit("move " + node->kids[1].reg + ",$v0");
         }
 
         emit(op + " " + node->reg + "," + node->kids[0].reg + "," + node->kids[1].reg);
