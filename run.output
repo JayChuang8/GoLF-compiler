@@ -1,4 +1,4 @@
-Run started on Wed Apr 12 17:56:44 2023
+Run started on Wed Apr 12 18:06:02 2023
 
 Hostname: csx3.cs.ucalgary.ca
 
@@ -23,11 +23,11 @@ make[1]: Nothing to be done for 'all'.
 make[1]: Leaving directory '/home/ugb/jay.chuang1/golf-compiler/Parser'
 /usr/bin/make -C SemanticChecker
 make[1]: Entering directory '/home/ugb/jay.chuang1/golf-compiler/SemanticChecker'
-make[1]: Nothing to be done for 'all'.
+g++ -o stab.o -c stab.cpp -MMD -MF stab.d
 make[1]: Leaving directory '/home/ugb/jay.chuang1/golf-compiler/SemanticChecker'
 /usr/bin/make -C Generator
 make[1]: Entering directory '/home/ugb/jay.chuang1/golf-compiler/Generator'
-make[1]: Nothing to be done for 'all'.
+g++ -o backend_asm.o -c backend_asm.cpp -MMD -MF backend_asm.d
 make[1]: Leaving directory '/home/ugb/jay.chuang1/golf-compiler/Generator'
 g++ -o main.o -c main.cpp -MMD -MF main.d
 g++ -o golf main.o Scanner/scanner.o Scanner/token.o Utility/utility.o Parser/ast.o Parser/parser.o SemanticChecker/semantic.o SemanticChecker/stab.o Generator/backend_asm.o
@@ -302,12 +302,25 @@ Test: string reversal |
 % ./golf /home/profs/aycock/411/TEST/final/gen.t7 > out.s
 
 STDERR:
-Error: Expected source file at or near line 1
 
 
-RETURN CODE: 1
+RETURN CODE: 0
 
-(GoLF compiler unsuccessful, skipping test)
+% /home/profs/aycock/411/bin/spim -file out.s < /home/profs/aycock/411/TEST/final/input/gen.t7.in
+
+STDIN:
+A man, a plan, a canal: Panama.
+
+
+STDOUT:
+Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
+
+
+STDERR:
+Memory address out of bounds
+
+
+RETURN CODE: 0
 
 -------------------------------------------------------------------------------
 Test: hunting minint |
@@ -451,20 +464,104 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-The following symbols are undefined:
-Lhalt
-Lprintb
-Lprints
-Lmain
+if ((A && B) || C) {...} else {...}, with A=false B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+if-part executed
 
+if ((A && B) || C) {...} else {...}, with A=truefalse B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+if-part executed
+
+if ((A && B) || C) {...} else {...}, with A=false B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+if-part executed
+
+if ((A && B) || C) {...} else {...}, with A=truefalse B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+if-part executed
+
+if ((A && B) || C) {...} else {...}, with A=false B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+if-part executed
+
+if ((A && B) || C) {...} else {...}, with A=truefalse B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+if-part executed
+
+if ((A && B) || C) {...} else {...}, with A=false B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+if-part executed
+
+if ((A && B) || C) {...} else {...}, with A=truefalse B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+if-part executed
+
+x = (A && !B) || C, with A=false B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+x=truefalse
+
+x = (A && !B) || C, with A=truefalse B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+x=truefalse
+
+x = (A && !B) || C, with A=false B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+x=truefalse
+
+x = (A && !B) || C, with A=truefalse B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+x=truefalse
+
+x = (A && !B) || C, with A=false B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+x=truefalse
+
+x = (A && !B) || C, with A=truefalse B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+x=truefalse
+
+x = (A && !B) || C, with A=false B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+x=truefalse
+
+x = (A && !B) || C, with A=truefalse B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+x=truefalse
 
 
 STDERR:
-spim: (parser) syntax error on line 275 of file out.s
-	  	 $t2,$t0,$t1
-	    ^
-Instruction references undefined symbol at 0x00400030
-  [0x00400030]	0x0c000000  jal 0x00000000 [Lmain]          ; 200: jal Lmain
 
 
 RETURN CODE: 0
@@ -552,7 +649,7 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-кся: len(\"
+яся: len(\"
 
 STDERR:
 Memory address out of bounds
@@ -684,8 +781,8 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-***
-* *
+***********
+*         *
 *  
 
 STDERR:
@@ -760,5 +857,5 @@ STDERR:
 
 (GoLF compiler unsuccessful, skipping test)
 
-Run ended on Wed Apr 12 17:56:50 2023
+Run ended on Wed Apr 12 18:06:10 2023
 
