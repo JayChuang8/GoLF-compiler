@@ -188,8 +188,8 @@ void BackendASM::epilogue()
     emit("la $a0, diverror");
     emit("li $v0, 4");
     emit("syscall");
-    emit("li $v0, 10");
     emit("li $a0, 1");
+    emit("li $v0, 10");
     emit("syscall");
 
     cout << ".data" << endl;
