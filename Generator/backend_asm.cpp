@@ -464,7 +464,7 @@ void BackendASM::pass3_cb(AST *node)
         node->reg = allocreg();
         string op = OP2ASM[node->type];
 
-        if (op == "div")
+        if (node->type == "/")
         {
             // string argReg1 = allocArgReg();
             // string argReg2 = allocArgReg();
