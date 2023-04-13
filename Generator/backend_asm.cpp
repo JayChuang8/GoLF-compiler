@@ -3,6 +3,7 @@
 #include <vector>
 #include <algorithm>
 #include <map>
+#include <stack>
 #include "./backend_asm.h"
 using namespace std;
 
@@ -263,7 +264,7 @@ void BackendASM::pass2_cb(AST *node)
 }
 
 int currentStackAddress = 0;
-
+std::stack<string> breakRegs;
 void BackendASM::pass3_cb(AST *node)
 {
     if (node->type == "func")
@@ -412,6 +413,8 @@ void BackendASM::pass3_cb(AST *node)
                               { pass3_post_cb(node); });
 
         string loopEnd = getlabel() + "for";
+        breakRegs.push(loopEnd);
+
         emit("beqz " + node->kids[0].reg + "," + loopEnd);
         freereg(node->kids[0].reg);
 
@@ -542,6 +545,12 @@ void BackendASM::pass3_post_cb(AST *node)
         // emittemp("UNARYNOT-----------------");
         node->reg = node->kids[0].reg;
         emit("xori " + node->reg + "," + node->reg + ",1");
+    }
+    else if (node->type == "break")
+    {
+        node->reg = breakRegs.top();
+        breakRegs.pop();
+        emit("j " + node->reg);
     }
     else if (node->type == "id")
     {
