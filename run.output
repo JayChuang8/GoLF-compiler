@@ -1,4 +1,4 @@
-Run started on Wed Apr 12 21:38:06 2023
+Run started on Wed Apr 12 22:18:23 2023
 
 Hostname: csx3.cs.ucalgary.ca
 
@@ -104,6 +104,9 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
+The following symbols are undefined:
+div_by_zero_msg
+
 Hello, world!
 
 
@@ -127,6 +130,9 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
+The following symbols are undefined:
+div_by_zero_msg
+
 start of loop
 0
 start of loop
@@ -158,28 +164,31 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
+The following symbols are undefined:
+div_by_zero_msg
+
 global zero values: 
-false
+falseerror: division by zero
 0
 
 local zero values: 
-false
+falseerror: division by zero
 0
 
 local zero values: 
-false
+falseerror: division by zero
 0
 
 sub-block zero values: 
-false
+falseerror: division by zero
 0
 
 sub-block zero values: 
-false
+falseerror: division by zero
 0
 
 post-sub-block zero values: 
-truefalse
+truefalseerror: division by zero
 123
 garble
 
@@ -204,6 +213,9 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
+The following symbols are undefined:
+div_by_zero_msg
+
 0
 
 
@@ -241,6 +253,9 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
+The following symbols are undefined:
+div_by_zero_msg
+
 fib(0) = 0
 fib(1) = 1
 fib(2) = 1
@@ -314,6 +329,9 @@ A man, a plan, a canal: Panama.
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
+The following symbols are undefined:
+div_by_zero_msg
+
 
 
 STDERR:
@@ -337,6 +355,9 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
+The following symbols are undefined:
+div_by_zero_msg
+
 minint is -2147483648
 
 
@@ -388,12 +409,14 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-  Exception 9  [Breakpoint]  occurred and ignored
-0
+The following symbols are undefined:
+div_by_zero_msg
+
 
 
 STDERR:
-Exception occurred at PC=0x00400044
+Instruction references undefined symbol at 0x00400118
+  [0x00400118]	0x3c010000  lui $1, 0 [div_by_zero_msg]     ; 81: la $a0, div_by_zero_msg
 
 
 RETURN CODE: 0
@@ -413,6 +436,9 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
+The following symbols are undefined:
+div_by_zero_msg
+
 OK
 
 
@@ -436,6 +462,9 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
+The following symbols are undefined:
+div_by_zero_msg
+
 backslash b = []
 backslash t = [	]
 backslash n = [
@@ -480,101 +509,104 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-if ((A && B) || C) {...} else {...}, with A=false B=truefalse C=truefalse
+The following symbols are undefined:
+div_by_zero_msg
+
+if ((A && B) || C) {...} else {...}, with A=falseerror: division by zero B=truefalseerror: division by zero C=truefalseerror: division by zero
 evaluated A
 evaluated B
 evaluated C
 if-part executed
 
-if ((A && B) || C) {...} else {...}, with A=truefalse B=truefalse C=truefalse
+if ((A && B) || C) {...} else {...}, with A=truefalseerror: division by zero B=truefalseerror: division by zero C=truefalseerror: division by zero
 evaluated A
 evaluated B
 evaluated C
 if-part executed
 
-if ((A && B) || C) {...} else {...}, with A=false B=truefalse C=truefalse
+if ((A && B) || C) {...} else {...}, with A=falseerror: division by zero B=truefalseerror: division by zero C=truefalseerror: division by zero
 evaluated A
 evaluated B
 evaluated C
 if-part executed
 
-if ((A && B) || C) {...} else {...}, with A=truefalse B=truefalse C=truefalse
+if ((A && B) || C) {...} else {...}, with A=truefalseerror: division by zero B=truefalseerror: division by zero C=truefalseerror: division by zero
 evaluated A
 evaluated B
 evaluated C
 if-part executed
 
-if ((A && B) || C) {...} else {...}, with A=false B=truefalse C=truefalse
+if ((A && B) || C) {...} else {...}, with A=falseerror: division by zero B=truefalseerror: division by zero C=truefalseerror: division by zero
 evaluated A
 evaluated B
 evaluated C
 if-part executed
 
-if ((A && B) || C) {...} else {...}, with A=truefalse B=truefalse C=truefalse
+if ((A && B) || C) {...} else {...}, with A=truefalseerror: division by zero B=truefalseerror: division by zero C=truefalseerror: division by zero
 evaluated A
 evaluated B
 evaluated C
 if-part executed
 
-if ((A && B) || C) {...} else {...}, with A=false B=truefalse C=truefalse
+if ((A && B) || C) {...} else {...}, with A=falseerror: division by zero B=truefalseerror: division by zero C=truefalseerror: division by zero
 evaluated A
 evaluated B
 evaluated C
 if-part executed
 
-if ((A && B) || C) {...} else {...}, with A=truefalse B=truefalse C=truefalse
+if ((A && B) || C) {...} else {...}, with A=truefalseerror: division by zero B=truefalseerror: division by zero C=truefalseerror: division by zero
 evaluated A
 evaluated B
 evaluated C
 if-part executed
 
-x = (A && !B) || C, with A=false B=truefalse C=truefalse
+x = (A && !B) || C, with A=falseerror: division by zero B=truefalseerror: division by zero C=truefalseerror: division by zero
 evaluated A
 evaluated B
 evaluated C
-x=truefalse
+x=truefalseerror: division by zero
 
-x = (A && !B) || C, with A=truefalse B=truefalse C=truefalse
+x = (A && !B) || C, with A=truefalseerror: division by zero B=truefalseerror: division by zero C=truefalseerror: division by zero
 evaluated A
 evaluated B
 evaluated C
-x=truefalse
+x=truefalseerror: division by zero
 
-x = (A && !B) || C, with A=false B=truefalse C=truefalse
+x = (A && !B) || C, with A=falseerror: division by zero B=truefalseerror: division by zero C=truefalseerror: division by zero
 evaluated A
 evaluated B
 evaluated C
-x=truefalse
+x=truefalseerror: division by zero
 
-x = (A && !B) || C, with A=truefalse B=truefalse C=truefalse
+x = (A && !B) || C, with A=truefalseerror: division by zero B=truefalseerror: division by zero C=truefalseerror: division by zero
 evaluated A
 evaluated B
 evaluated C
-x=truefalse
+x=truefalseerror: division by zero
 
-x = (A && !B) || C, with A=false B=truefalse C=truefalse
+x = (A && !B) || C, with A=falseerror: division by zero B=truefalseerror: division by zero C=truefalseerror: division by zero
 evaluated A
 evaluated B
 evaluated C
-x=truefalse
+x=truefalseerror: division by zero
 
-x = (A && !B) || C, with A=truefalse B=truefalse C=truefalse
+x = (A && !B) || C, with A=truefalseerror: division by zero B=truefalseerror: division by zero C=truefalseerror: division by zero
 evaluated A
 evaluated B
 evaluated C
-x=truefalse
+x=truefalseerror: division by zero
 
-x = (A && !B) || C, with A=false B=truefalse C=truefalse
+x = (A && !B) || C, with A=falseerror: division by zero B=truefalseerror: division by zero C=truefalseerror: division by zero
 evaluated A
 evaluated B
 evaluated C
-x=truefalse
+x=truefalseerror: division by zero
 
-x = (A && !B) || C, with A=truefalse B=truefalse C=truefalse
+x = (A && !B) || C, with A=truefalseerror: division by zero B=truefalseerror: division by zero C=truefalseerror: division by zero
 evaluated A
 evaluated B
 evaluated C
-x=truefalse
+x=truefalseerror: division by zero
 
 
 STDERR:
@@ -627,11 +659,14 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-  Exception 9  [Breakpoint]  occurred and ignored
-0
+The following symbols are undefined:
+div_by_zero_msg
+
+
 
 STDERR:
-Exception occurred at PC=0x0040006c
+Instruction references undefined symbol at 0x00400150
+  [0x00400150]	0x3c010000  lui $1, 0 [div_by_zero_msg]     ; 93: la $a0, div_by_zero_msg
 
 
 RETURN CODE: 0
@@ -665,6 +700,9 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
+The following symbols are undefined:
+div_by_zero_msg
+
 яся: len("
 
 STDERR:
@@ -737,6 +775,9 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
+The following symbols are undefined:
+div_by_zero_msg
+
 0
 100 101 102 103 104 105 
 1
@@ -811,6 +852,9 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
+The following symbols are undefined:
+div_by_zero_msg
+
 ***********
 *         *
 *  
@@ -887,5 +931,5 @@ STDERR:
 
 (GoLF compiler unsuccessful, skipping test)
 
-Run ended on Wed Apr 12 21:38:13 2023
+Run ended on Wed Apr 12 22:18:31 2023
 
