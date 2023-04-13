@@ -241,39 +241,23 @@ main:
 	j Lhalt
 G102:
 	.word 0
-	[FUNC-----------------]
 Lmain:
 	subu $sp,$sp,16
 	sw $ra,0($sp)
-	VAR-----------------
 	sw $0,4($sp)
-	VAR-----------------
 	sw $0,8($sp)
-	VAR-----------------
 	sw $0,12($sp)
-	ASSIGNMENT--------------
-	INT-----------------
 	li $t0,1
 	sw $t0,4($sp)
-	FOR-----------------
 L0for:
-	AND-----------------
-	ID-----------------
 	lw $t0,4($sp)
-	INT-----------------
 	li $t1,100
 	sle $t2,$t0,$t1
 	beqz $t2,L1for
-	IFELSE-----------------
-	AND-----------------
-	ID-----------------
 	lw $t0,4($sp)
-	INT-----------------
 	li $t1,1
 	seq $t2,$t0,$t1
 	beqz $t2,L2else
-	ASSIGNMENT--------------
-	INT-----------------
 	li $t0,0
 	sw $t0,G1
 	j L3ifelse
