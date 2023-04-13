@@ -1,4 +1,4 @@
-Run started on Wed Apr 12 18:23:48 2023
+Run started on Wed Apr 12 18:25:51 2023
 
 Hostname: csx3.cs.ucalgary.ca
 
@@ -159,6 +159,29 @@ RETURN CODE: 0
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
 global zero values: 
+false
+0
+
+local zero values: 
+false
+0
+
+local zero values: 
+false
+0
+
+sub-block zero values: 
+false
+0
+
+sub-block zero values: 
+false
+0
+
+post-sub-block zero values: 
+truefalse
+123
+garble
 
 
 STDERR:
@@ -441,7 +464,102 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-if ((A && B) || C) {...} else {...}, with A=
+if ((A && B) || C) {...} else {...}, with A=false B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+if-part executed
+
+if ((A && B) || C) {...} else {...}, with A=truefalse B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+if-part executed
+
+if ((A && B) || C) {...} else {...}, with A=false B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+if-part executed
+
+if ((A && B) || C) {...} else {...}, with A=truefalse B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+if-part executed
+
+if ((A && B) || C) {...} else {...}, with A=false B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+if-part executed
+
+if ((A && B) || C) {...} else {...}, with A=truefalse B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+if-part executed
+
+if ((A && B) || C) {...} else {...}, with A=false B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+if-part executed
+
+if ((A && B) || C) {...} else {...}, with A=truefalse B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+if-part executed
+
+x = (A && !B) || C, with A=false B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+x=truefalse
+
+x = (A && !B) || C, with A=truefalse B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+x=truefalse
+
+x = (A && !B) || C, with A=false B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+x=truefalse
+
+x = (A && !B) || C, with A=truefalse B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+x=truefalse
+
+x = (A && !B) || C, with A=false B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+x=truefalse
+
+x = (A && !B) || C, with A=truefalse B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+x=truefalse
+
+x = (A && !B) || C, with A=false B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+x=truefalse
+
+x = (A && !B) || C, with A=truefalse B=truefalse C=truefalse
+evaluated A
+evaluated B
+evaluated C
+x=truefalse
+
 
 STDERR:
 
@@ -739,5 +857,5 @@ STDERR:
 
 (GoLF compiler unsuccessful, skipping test)
 
-Run ended on Wed Apr 12 18:23:56 2023
+Run ended on Wed Apr 12 18:25:56 2023
 
