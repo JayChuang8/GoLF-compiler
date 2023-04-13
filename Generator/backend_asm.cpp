@@ -469,9 +469,7 @@ void BackendASM::pass3_cb(AST *node)
             emitlabel("exit");
             string argReg = allocArgReg();
             emit("la " + argReg + ", diverror");
-            emit("li $v0, 4");
-            emit("syscall");
-            emit("li " + argReg + ", 1");
+            emit("jal Lprints");
             freeArgReg(argReg);
             emit("li $v0, 10");
             emit("syscall");
