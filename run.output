@@ -1,4 +1,4 @@
-Run started on Wed Apr 12 23:13:57 2023
+Run started on Wed Apr 12 23:15:36 2023
 
 Hostname: csx3.cs.ucalgary.ca
 
@@ -29,22 +29,14 @@ make[1]: Leaving directory '/home/ugb/jay.chuang1/golf-compiler/SemanticChecker'
 make[1]: Entering directory '/home/ugb/jay.chuang1/golf-compiler/Generator'
 g++ -o backend_asm.o -c backend_asm.cpp -MMD -MF backend_asm.d
 make[1]: Leaving directory '/home/ugb/jay.chuang1/golf-compiler/Generator'
+g++ -o main.o -c main.cpp -MMD -MF main.d
+g++ -o golf main.o Scanner/scanner.o Scanner/token.o Utility/utility.o Parser/ast.o Parser/parser.o SemanticChecker/semantic.o SemanticChecker/stab.o Generator/backend_asm.o
 
 
 STDERR:
-backend_asm.cpp: In member function ‘void BackendASM::pass3_cb(AST*)’:
-backend_asm.cpp:471:63: error: expected ‘;’ before ‘emit’
-  471 |             emit("beq " + node->kids[1].reg + ", $zero, exit")
-      |                                                               ^
-      |                                                               ;
-  472 | 
-  473 |                 emit("move " + node->kids[1].reg + ",$v0");
-      |                 ~~~~                                           
-make[1]: *** [Makefile:9: backend_asm.o] Error 1
-make: *** [Makefile:17: Generator] Error 2
 
 
-RETURN CODE: 2
+RETURN CODE: 0
 
 -------------------------------------------------------------------------------
 Locating GoLF compiler |
@@ -396,10 +388,9 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-error: division by zero11
+
 
 STDERR:
-Attempt to execute non-instruction at 0x0040013c
 
 
 RETURN CODE: 0
@@ -633,10 +624,9 @@ RETURN CODE: 0
 
 STDOUT:
 Loaded: /home/profs/aycock/411/sw/share/spim/exceptions.s
-error: division by zero11
+
 
 STDERR:
-Attempt to execute non-instruction at 0x00400174
 
 
 RETURN CODE: 0
@@ -892,5 +882,5 @@ STDERR:
 
 (GoLF compiler unsuccessful, skipping test)
 
-Run ended on Wed Apr 12 23:14:03 2023
+Run ended on Wed Apr 12 23:15:43 2023
 
