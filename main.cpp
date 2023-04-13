@@ -45,11 +45,11 @@ int main(int argc, char *argv[])
     semantic.semantic(ast);
 
     // Print ast
-    // ast.printAST(ast, 0);
+    ast.printAST(ast, 0);
 
     // MIPS code generator
-    BackendASM generator(util);
-    generator.gen(ast);
+    // BackendASM generator(util);
+    // generator.gen(ast);
 
     // Close input file
     util.closeInputFile(inputFile);
