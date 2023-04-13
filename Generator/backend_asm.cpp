@@ -564,7 +564,7 @@ void BackendASM::pass3_post_cb(AST *node)
     }
     // else if (OP2ASM.find(node->type) != OP2ASM.end())
     // {
-    emittemp("BINARYOP-----------------");
+    // emittemp("BINARYOP-----------------");
     //     // binary operator
     //     node->reg = allocreg();
     //     string op = OP2ASM[node->type];
