@@ -1,6 +1,6 @@
-Run started on Mon Apr 10 10:22:05 2023
+Run started on Wed Apr 12 18:43:38 2023
 
-Hostname: DESKTOP-LH91K7L
+Hostname: csx3.cs.ucalgary.ca
 
 -------------------------------------------------------------------------------
 Running make |
@@ -10,23 +10,27 @@ Running make |
 
 STDOUT:
 /usr/bin/make -C Scanner
-make[1]: Entering directory '/mnt/c/Projects/golf-compiler/Scanner'
+make[1]: Entering directory '/home/ugb/jay.chuang1/golf-compiler/Scanner'
 make[1]: Nothing to be done for 'all'.
-make[1]: Leaving directory '/mnt/c/Projects/golf-compiler/Scanner'
+make[1]: Leaving directory '/home/ugb/jay.chuang1/golf-compiler/Scanner'
 /usr/bin/make -C Utility
-make[1]: Entering directory '/mnt/c/Projects/golf-compiler/Utility'
+make[1]: Entering directory '/home/ugb/jay.chuang1/golf-compiler/Utility'
 make[1]: Nothing to be done for 'all'.
-make[1]: Leaving directory '/mnt/c/Projects/golf-compiler/Utility'
+make[1]: Leaving directory '/home/ugb/jay.chuang1/golf-compiler/Utility'
 /usr/bin/make -C Parser
-make[1]: Entering directory '/mnt/c/Projects/golf-compiler/Parser'
+make[1]: Entering directory '/home/ugb/jay.chuang1/golf-compiler/Parser'
 make[1]: Nothing to be done for 'all'.
-make[1]: Leaving directory '/mnt/c/Projects/golf-compiler/Parser'
+make[1]: Leaving directory '/home/ugb/jay.chuang1/golf-compiler/Parser'
 /usr/bin/make -C SemanticChecker
-make[1]: Entering directory '/mnt/c/Projects/golf-compiler/SemanticChecker'
+make[1]: Entering directory '/home/ugb/jay.chuang1/golf-compiler/SemanticChecker'
 make[1]: Nothing to be done for 'all'.
-make[1]: Leaving directory '/mnt/c/Projects/golf-compiler/SemanticChecker'
+make[1]: Leaving directory '/home/ugb/jay.chuang1/golf-compiler/SemanticChecker'
+/usr/bin/make -C Generator
+make[1]: Entering directory '/home/ugb/jay.chuang1/golf-compiler/Generator'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/home/ugb/jay.chuang1/golf-compiler/Generator'
 g++ -o main.o -c main.cpp -MMD -MF main.d
-g++ -o golf main.o Scanner/token.o Scanner/scanner.o Utility/utility.o Parser/parser.o Parser/ast.o SemanticChecker/semantic.o SemanticChecker/stab.o
+g++ -o golf main.o Scanner/scanner.o Scanner/token.o Utility/utility.o Parser/ast.o Parser/parser.o SemanticChecker/semantic.o SemanticChecker/stab.o Generator/backend_asm.o
 
 
 STDERR:
@@ -123,20 +127,20 @@ Test: local var version of check.t2 |
 
 STDOUT:
 program 
-    func sym=0x55eaea950a28 @ line 4
+    func sym=0x212fef8 @ line 4
         newid [main] @ line 4
         sig 
             formals 
-            typeid [$void] sym=0x55eaea94b968
+            typeid [$void] sym=0x2128ff8
         block 
-            var sym=0x55eaea950ac8 @ line 5
+            var sym=0x212ffd8 @ line 5
                 newid [int] @ line 5
-                typeid [int] sym=0x55eaea950ac8 @ line 5
+                typeid [int] sym=0x212ffd8 @ line 5
             exprstmt  @ line 6
                 funccall  sig=void  @ line 6
-                    id [printi] sig=f(int)  sym=0x55eaea94c418 @ line 6
+                    id [printi] sig=f(int)  sym=0x212f9a8 @ line 6
                     actuals 
-                        id [int] sig=int  sym=0x55eaea950ac8 @ line 6
+                        id [int] sig=int  sym=0x212ffd8 @ line 6
 
 
 STDERR:
@@ -152,56 +156,56 @@ Test: global name test |
 
 STDOUT:
 program 
-    globvar sym=0x55e4e32e14b8 @ line 3
+    globvar sym=0xdefe58 @ line 3
         newid [b4int] @ line 3
-        typeid [int] sym=0x55e4e32da968 @ line 3
-    func sym=0x55e4e32e1558 @ line 5
+        typeid [int] sym=0xdef2e8 @ line 3
+    func sym=0xdeff38 @ line 5
         newid [b4func] @ line 5
         sig 
             formals 
-            typeid [$void] sym=0x55e4e32dac88
+            typeid [$void] sym=0xde7458
         block 
             exprstmt  @ line 6
                 funccall  sig=void  @ line 6
-                    id [printi] sig=f(int)  sym=0x55e4e32e10a8 @ line 6
+                    id [printi] sig=f(int)  sym=0xdef908 @ line 6
                     actuals 
-                        id [b4int] sig=int  sym=0x55e4e32e14b8 @ line 6
+                        id [b4int] sig=int  sym=0xdefe58 @ line 6
             exprstmt  @ line 7
                 funccall  sig=void  @ line 7
-                    id [printi] sig=f(int)  sym=0x55e4e32e10a8 @ line 7
+                    id [printi] sig=f(int)  sym=0xdef908 @ line 7
                     actuals 
-                        id [aft3rint] sig=int  sym=0x55e4e32e1738 @ line 7
+                        id [aft3rint] sig=int  sym=0xdf01d8 @ line 7
             exprstmt  @ line 8
                 funccall  sig=$void  @ line 8
-                    id [aft3rfunc] sig=f()  sym=0x55e4e32e1698 @ line 8
-    func sym=0x55e4e32e15f8 @ line 11
+                    id [aft3rfunc] sig=f()  sym=0xdf00f8 @ line 8
+    func sym=0xdf0018 @ line 11
         newid [main] @ line 11
         sig 
             formals 
-            typeid [$void] sym=0x55e4e32dac88
+            typeid [$void] sym=0xde7458
         block 
             exprstmt  @ line 12
                 funccall  sig=$void  @ line 12
-                    id [b4func] sig=f()  sym=0x55e4e32e1558 @ line 12
-    func sym=0x55e4e32e1698 @ line 15
+                    id [b4func] sig=f()  sym=0xdeff38 @ line 12
+    func sym=0xdf00f8 @ line 15
         newid [aft3rfunc] @ line 15
         sig 
             formals 
-            typeid [$void] sym=0x55e4e32dac88
+            typeid [$void] sym=0xde7458
         block 
             exprstmt  @ line 16
                 funccall  sig=void  @ line 16
-                    id [printi] sig=f(int)  sym=0x55e4e32e10a8 @ line 16
+                    id [printi] sig=f(int)  sym=0xdef908 @ line 16
                     actuals 
-                        id [b4int] sig=int  sym=0x55e4e32e14b8 @ line 16
+                        id [b4int] sig=int  sym=0xdefe58 @ line 16
             exprstmt  @ line 17
                 funccall  sig=void  @ line 17
-                    id [printi] sig=f(int)  sym=0x55e4e32e10a8 @ line 17
+                    id [printi] sig=f(int)  sym=0xdef908 @ line 17
                     actuals 
-                        id [aft3rint] sig=int  sym=0x55e4e32e1738 @ line 17
-    globvar sym=0x55e4e32e1738 @ line 20
+                        id [aft3rint] sig=int  sym=0xdf01d8 @ line 17
+    globvar sym=0xdf01d8 @ line 20
         newid [aft3rint] @ line 20
-        typeid [int] sym=0x55e4e32da968 @ line 20
+        typeid [int] sym=0xdef2e8 @ line 20
 
 
 STDERR:
@@ -217,50 +221,50 @@ Test: block scope check |
 
 STDOUT:
 program 
-    func sym=0x55f75965de78 @ line 3
+    func sym=0x22a1048 @ line 3
         newid [main] @ line 3
         sig 
             formals 
-            typeid [$void] sym=0x55f759655b38
+            typeid [$void] sym=0x2298198
         block 
-            var sym=0x55f75965df18 @ line 4
+            var sym=0x22a1128 @ line 4
                 newid [x] @ line 4
-                typeid [int] sym=0x55f759656c88 @ line 4
+                typeid [int] sym=0x229ef18 @ line 4
             block 
-                var sym=0x55f75965dfb8 @ line 6
+                var sym=0x22a1208 @ line 6
                     newid [x] @ line 6
-                    typeid [bool] sym=0x55f759656968 @ line 6
+                    typeid [bool] sym=0x2297c98 @ line 6
                 block 
-                    var sym=0x55f75965e058 @ line 8
+                    var sym=0x22a12e8 @ line 8
                         newid [x] @ line 8
-                        typeid [string] sym=0x55f759656648 @ line 8
+                        typeid [string] sym=0x229e028 @ line 8
                     =  @ line 9
-                        id [x] sig=string  sym=0x55f75965e058 @ line 9
+                        id [x] sig=string  sym=0x22a12e8 @ line 9
                         string [asdf] sig=string  @ line 9
                     block 
-                        var sym=0x55f75965e0f8 @ line 11
+                        var sym=0x22a13c8 @ line 11
                             newid [x] @ line 11
-                            typeid [int] sym=0x55f759656c88 @ line 11
+                            typeid [int] sym=0x229ef18 @ line 11
                         =  @ line 12
-                            id [x] sig=int  sym=0x55f75965e0f8 @ line 12
+                            id [x] sig=int  sym=0x22a13c8 @ line 12
                             +  sig=int  @ line 12
-                                id [x] sig=int  sym=0x55f75965e0f8 @ line 12
+                                id [x] sig=int  sym=0x22a13c8 @ line 12
                                 int [1] sig=int  @ line 12
                     exprstmt  @ line 14
                         funccall  sig=void  @ line 14
-                            id [prints] sig=f(string)  sym=0x55f75965c288 @ line 14
+                            id [prints] sig=f(string)  sym=0x22a0bd8 @ line 14
                             actuals 
-                                id [x] sig=string  sym=0x55f75965e058 @ line 14
+                                id [x] sig=string  sym=0x22a12e8 @ line 14
                 exprstmt  @ line 16
                     funccall  sig=void  @ line 16
-                        id [printb] sig=f(bool)  sym=0x55f759655d08 @ line 16
+                        id [printb] sig=f(bool)  sym=0x2299568 @ line 16
                         actuals 
-                            id [x] sig=bool  sym=0x55f75965dfb8 @ line 16
+                            id [x] sig=bool  sym=0x22a1208 @ line 16
             exprstmt  @ line 18
                 funccall  sig=void  @ line 18
-                    id [printi] sig=f(int)  sym=0x55f759656198 @ line 18
+                    id [printi] sig=f(int)  sym=0x229f768 @ line 18
                     actuals 
-                        id [x] sig=int  sym=0x55f75965df18 @ line 18
+                        id [x] sig=int  sym=0x22a1128 @ line 18
 
 
 STDERR:
@@ -488,7 +492,7 @@ STDOUT:
 
 
 STDERR:
-Error: unexpected id, expected ; at or near line 6
+Error: integer literal out of range at or near line 6
 
 
 RETURN CODE: 1
@@ -503,7 +507,7 @@ STDOUT:
 
 
 STDERR:
-Error: unexpected id, expected ; at or near line 6
+Error: integer literal out of range at or near line 5
 
 
 RETURN CODE: 1
@@ -653,7 +657,7 @@ STDOUT:
 
 
 STDERR:
-Error: unexpected for, expected ; at or near line 7
+Error: for expression must be boolean type at or near line 10
 
 
 RETURN CODE: 1
@@ -666,17 +670,17 @@ Test: legit expression statements |
 
 STDOUT:
 program 
-    func sym=0x563459e9abe8 @ line 3
+    func sym=0x1c0ff98 @ line 3
         newid [main] @ line 3
         sig 
             formals 
-            typeid [$void] sym=0x563459e95968
+            typeid [$void] sym=0x1c0ad38
         block 
-            var sym=0x563459e9ac88 @ line 4
+            var sym=0x1c10078 @ line 4
                 newid [i] @ line 4
-                typeid [int] sym=0x563459e95a48 @ line 4
+                typeid [int] sym=0x1c0f428 @ line 4
             exprstmt  @ line 5
-                id [i] sig=int  sym=0x563459e9ac88 @ line 5
+                id [i] sig=int  sym=0x1c10078 @ line 5
             exprstmt  @ line 6
                 int [42] sig=int  @ line 6
 
@@ -694,42 +698,42 @@ Test: built-in routine check |
 
 STDOUT:
 program 
-    func sym=0x55c300d03e38 @ line 3
+    func sym=0x15c8978 @ line 3
         newid [main] @ line 3
         sig 
             formals 
-            typeid [$void] sym=0x55c300cfdc88
+            typeid [$void] sym=0x15c2a18
         block 
             exprstmt  @ line 4
                 funccall  sig=void  @ line 4
-                    id [prints] sig=f(string)  sym=0x55c300d03ac8 @ line 4
+                    id [prints] sig=f(string)  sym=0x15c71e8 @ line 4
                     actuals 
                         string [Hello, world!\n] sig=string  @ line 4
             exprstmt  @ line 5
                 funccall  sig=void  @ line 5
-                    id [printb] sig=f(bool)  sym=0x55c300cfd198 @ line 5
+                    id [printb] sig=f(bool)  sym=0x15c1028 @ line 5
                     actuals 
-                        id [true] sig=bool  sym=0x55c300cfdb68 @ line 5
+                        id [true] sig=bool  sym=0x15c2568 @ line 5
             exprstmt  @ line 6
                 funccall  sig=void  @ line 6
-                    id [printi] sig=f(int)  sym=0x55c300d03a28 @ line 6
+                    id [printi] sig=f(int)  sym=0x15c7108 @ line 6
                     actuals 
                         int [123] sig=int  @ line 6
             exprstmt  @ line 7
                 funccall  sig=void  @ line 7
-                    id [printc] sig=f(int)  sym=0x55c300d03988 @ line 7
+                    id [printc] sig=f(int)  sym=0x15c7028 @ line 7
                     actuals 
                         int [123] sig=int  @ line 7
-            var sym=0x55c300d03f08 @ line 8
+            var sym=0x15c8a58 @ line 8
                 newid [ch] @ line 8
-                typeid [int] sym=0x55c300cfd648 @ line 8
+                typeid [int] sym=0x15c2168 @ line 8
             =  @ line 9
-                id [ch] sig=int  sym=0x55c300d03f08 @ line 9
+                id [ch] sig=int  sym=0x15c8a58 @ line 9
                 funccall  sig=int  @ line 9
-                    id [getchar] sig=f()  sym=0x55c300d03b68 @ line 9
+                    id [getchar] sig=f()  sym=0x15c72c8 @ line 9
             exprstmt  @ line 10
                 funccall  sig=void  @ line 10
-                    id [halt] sig=f()  sym=0x55c300d03c08 @ line 10
+                    id [halt] sig=f()  sym=0x15c73a8 @ line 10
 
 
 STDERR:
@@ -865,15 +869,15 @@ Test: deep type propagation |
 
 STDOUT:
 program 
-    func sym=0x55fb42b6bd38 @ line 3
+    func sym=0x19a8228 @ line 3
         newid [main] @ line 3
         sig 
             formals 
-            typeid [$void] sym=0x55fb42b64568
+            typeid [$void] sym=0x19a1688
         block 
-            var sym=0x55fb42b6bdd8 @ line 4
+            var sym=0x19a8308 @ line 4
                 newid [x] @ line 4
-                typeid [int] sym=0x55fb42b65648 @ line 4
+                typeid [int] sym=0x19a1a18 @ line 4
             exprstmt  @ line 5
                 >=  sig=bool  @ line 5
                     -  sig=int  @ line 5
@@ -886,10 +890,10 @@ program
                     u-  sig=int  @ line 5
                         u-  sig=int  @ line 5
                             u-  sig=int  @ line 5
-                                id [x] sig=int  sym=0x55fb42b6bdd8 @ line 5
-            var sym=0x55fb42b6be78 @ line 7
+                                id [x] sig=int  sym=0x19a8308 @ line 5
+            var sym=0x19a83e8 @ line 7
                 newid [b] @ line 7
-                typeid [bool] sym=0x55fb42b6abf8 @ line 7
+                typeid [bool] sym=0x19a1d38 @ line 7
             exprstmt  @ line 8
                 !=  sig=bool  @ line 8
                     u!  sig=bool  @ line 8
@@ -897,11 +901,11 @@ program
                             u!  sig=bool  @ line 8
                                 ||  sig=bool  @ line 8
                                     &&  sig=bool  @ line 8
-                                        id [true] sig=bool  sym=0x55fb42b65f68 @ line 8
-                                        id [false] sig=bool  sym=0x55fb42b64ab8 @ line 8
+                                        id [true] sig=bool  sym=0x19a6bd8 @ line 8
+                                        id [false] sig=bool  sym=0x19a62e8 @ line 8
                                     ==  sig=bool  @ line 8
-                                        id [b] sig=bool  sym=0x55fb42b6be78 @ line 8
-                                        id [true] sig=bool  sym=0x55fb42b65f68 @ line 8
+                                        id [b] sig=bool  sym=0x19a83e8 @ line 8
+                                        id [true] sig=bool  sym=0x19a6bd8 @ line 8
                     <=  sig=bool  @ line 8
                         int [5] sig=int  @ line 8
                         int [6] sig=int  @ line 8
@@ -920,25 +924,25 @@ Test: redefining "true" and "false" |
 
 STDOUT:
 program 
-    globvar sym=0x56340600a788 @ line 3
+    globvar sym=0x1c013e8 @ line 3
         newid [true] @ line 3
-        typeid [int] sym=0x56340600bc88 @ line 3
-    func sym=0x563406010ea8 @ line 5
+        typeid [int] sym=0x1bfbd38 @ line 3
+    func sym=0x1c014c8 @ line 5
         newid [main] @ line 5
         sig 
             formals 
-            typeid [$void] sym=0x56340600b648
+            typeid [$void] sym=0x1bfba18
         block 
-            var sym=0x563406010f48 @ line 6
+            var sym=0x1c015a8 @ line 6
                 newid [false] @ line 6
-                typeid [int] sym=0x56340600bc88 @ line 6
+                typeid [int] sym=0x1bfbd38 @ line 6
             exprstmt  @ line 7
                 funccall  sig=void  @ line 7
-                    id [printi] sig=f(int)  sym=0x56340600c288 @ line 7
+                    id [printi] sig=f(int)  sym=0x1c00e98 @ line 7
                     actuals 
                         *  sig=int  @ line 7
-                            id [true] sig=int  sym=0x56340600a788 @ line 7
-                            id [false] sig=int  sym=0x563406010f48 @ line 7
+                            id [true] sig=int  sym=0x1c013e8 @ line 7
+                            id [false] sig=int  sym=0x1c015a8 @ line 7
 
 
 STDERR:
@@ -976,5 +980,5 @@ Error: can't use type "int" here at or near line 5
 
 RETURN CODE: 1
 
-Run ended on Mon Apr 10 10:22:07 2023
+Run ended on Wed Apr 12 18:43:40 2023
 
