@@ -19,7 +19,7 @@ void Utility::openInputFile(fstream &inputFile, const char *fileName)
     inputFile.open(fileName, ios::in);
     if (!inputFile)
     {
-        cerr << "Error: file '" << fileName << "' could not be opened" << endl;
+        cerr << "error: file '" << fileName << "' could not be opened" << endl;
         exit(1);
     }
 }
@@ -42,13 +42,13 @@ void Utility::error(string message, int lineNum = 0)
         errorMessage = message + " at or near line " + to_string(lineNum);
     }
 
-    cerr << "Error: " << errorMessage << endl;
+    cerr << "error: " << errorMessage << endl;
     exit(1);
 }
 
 void Utility::warning(string message, int lineNum)
 {
-    cerr << "Warning: " << message << " at or near line " << lineNum << endl;
+    cerr << "warning: " << message << " at or near line " << lineNum << endl;
 
     Utility::numWarnings++;
 

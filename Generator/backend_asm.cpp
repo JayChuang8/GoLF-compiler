@@ -110,15 +110,24 @@ void BackendASM::epilogue()
 {
     emit("");
 
+    // emitlabel("Lprintb");
+    // string argReg1 = allocArgReg();
+    // emit("beqz " + argReg1 + ",PrintFalse");
+    // emit("la " + argReg1 + ",PDCTrue");
+    // freeArgReg(argReg1);
+    // emit("j Lprints");
+    // emitlabel("PrintFalse");
+    // emit("la " + argReg1 + ",PDCFalse");
+    // emit("j Lprints");
+
     emitlabel("Lprintb");
-    string argReg1 = allocArgReg();
-    emit("beqz " + argReg1 + ",PrintFalse");
-    emit("la " + argReg1 + ",PDCTrue");
-    freeArgReg(argReg1);
+    emit("addi $sp, $sp, -4");
+    emit("sw $ra, 0($sp)");
+    emit("beqz $a0, PrintFalse");
+    emit("la $a0, PDCTrue");
     emit("j Lprints");
     emitlabel("PrintFalse");
-    emit("la " + argReg1 + ",PDCFalse");
-    emit("j Lprints");
+    emit("la $a0, PDCFalse");
 
     emitlabel("Lhalt");
     emit("li $v0,10");
