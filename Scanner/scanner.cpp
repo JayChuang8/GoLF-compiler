@@ -80,6 +80,12 @@ Token Scanner::lex()
                     {
                         inputFile.get(c);
                     }
+
+                    // Don't putback the last char if it is EOF
+                    if (inputFile.eof())
+                    {
+                        continue;
+                    }
                     if (!getLastToken().attribute.empty() && !getLastToken().type.empty())
                     {
                         setLastToken(Token(";", "", getLineNum()));

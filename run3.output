@@ -1,6 +1,6 @@
-Run started on Wed Apr 12 19:39:56 2023
+Run started on Mon Aug 14 09:29:33 2023
 
-Hostname: csx3.cs.ucalgary.ca
+Hostname: Q-LTOP-12
 
 -------------------------------------------------------------------------------
 Running make |
@@ -10,27 +10,27 @@ Running make |
 
 STDOUT:
 /usr/bin/make -C Scanner
-make[1]: Entering directory '/home/ugb/jay.chuang1/golf-compiler/Scanner'
+make[1]: Entering directory '/mnt/c/Projects/golf-compiler/Scanner'
 make[1]: Nothing to be done for 'all'.
-make[1]: Leaving directory '/home/ugb/jay.chuang1/golf-compiler/Scanner'
+make[1]: Leaving directory '/mnt/c/Projects/golf-compiler/Scanner'
 /usr/bin/make -C Utility
-make[1]: Entering directory '/home/ugb/jay.chuang1/golf-compiler/Utility'
+make[1]: Entering directory '/mnt/c/Projects/golf-compiler/Utility'
 make[1]: Nothing to be done for 'all'.
-make[1]: Leaving directory '/home/ugb/jay.chuang1/golf-compiler/Utility'
+make[1]: Leaving directory '/mnt/c/Projects/golf-compiler/Utility'
 /usr/bin/make -C Parser
-make[1]: Entering directory '/home/ugb/jay.chuang1/golf-compiler/Parser'
+make[1]: Entering directory '/mnt/c/Projects/golf-compiler/Parser'
 make[1]: Nothing to be done for 'all'.
-make[1]: Leaving directory '/home/ugb/jay.chuang1/golf-compiler/Parser'
+make[1]: Leaving directory '/mnt/c/Projects/golf-compiler/Parser'
 /usr/bin/make -C SemanticChecker
-make[1]: Entering directory '/home/ugb/jay.chuang1/golf-compiler/SemanticChecker'
+make[1]: Entering directory '/mnt/c/Projects/golf-compiler/SemanticChecker'
 make[1]: Nothing to be done for 'all'.
-make[1]: Leaving directory '/home/ugb/jay.chuang1/golf-compiler/SemanticChecker'
+make[1]: Leaving directory '/mnt/c/Projects/golf-compiler/SemanticChecker'
 /usr/bin/make -C Generator
-make[1]: Entering directory '/home/ugb/jay.chuang1/golf-compiler/Generator'
-g++ -o backend_asm.o -c backend_asm.cpp -MMD -MF backend_asm.d
-make[1]: Leaving directory '/home/ugb/jay.chuang1/golf-compiler/Generator'
+make[1]: Entering directory '/mnt/c/Projects/golf-compiler/Generator'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/mnt/c/Projects/golf-compiler/Generator'
 g++ -o main.o -c main.cpp -MMD -MF main.d
-g++ -o golf main.o Scanner/scanner.o Scanner/token.o Utility/utility.o Parser/ast.o Parser/parser.o SemanticChecker/semantic.o SemanticChecker/stab.o Generator/backend_asm.o
+g++ -o golf main.o Scanner/token.o Scanner/scanner.o Utility/utility.o Parser/parser.o Parser/ast.o SemanticChecker/semantic.o SemanticChecker/stab.o Generator/backend_asm.o
 
 
 STDERR:
@@ -84,7 +84,7 @@ STDOUT:
 
 
 STDERR:
-Error: file '/i/do/not/exist' could not be opened
+error: file '/i/do/not/exist' could not be opened
 
 
 RETURN CODE: 1
@@ -99,7 +99,7 @@ STDOUT:
 
 
 STDERR:
-Error: expected type, got "int" at or near line 4
+error: expected type, got "int" at or near line 4
 
 
 RETURN CODE: 1
@@ -114,7 +114,7 @@ STDOUT:
 
 
 STDERR:
-Error: expected type, got "int" at or near line 4
+error: expected type, got "int" at or near line 4
 
 
 RETURN CODE: 1
@@ -126,81 +126,21 @@ Test: local var version of check.t2 |
 % ./golf ./test/ms3/check.t3
 
 STDOUT:
-	Ltrue = 1
-	Lfalse = 0
-.data
-S0:
-	.byte 0
-	
-.text
-main:
-	jal Lmain
-	j Lhalt
-Lmain:
-	subu $sp,$sp,8
-	sw $ra,0($sp)
-	sw $0,4($sp)
-	lw $t0,4($sp)
-	move $a0,$t0
-	jal Lprinti
-RLmain:
-	lw $ra,0($sp)
-	addu $sp,$sp,8
-	jr $ra
-	
-Lprintb:
-	beqz $a0,PrintFalse
-	la $a0,PDCTrue
-	j Lprints
-PrintFalse:
-	la $a0,PDCFalse
-	j Lprints
-Lhalt:
-	li $v0,10
-	syscall
-Lprintc:
-	li $v0,11
-	syscall
-	jr $ra
-Lprinti:
-	li $v0 1
-	syscall
-	jr $ra
-Lprints:
-	li $v0,4
-	syscall
-	jr $ra
-Lgetchar:
-	li $v0,8
-	syscall
-	jr $ra
-Llen:
-	addi $sp,$sp,-4
-	sw $ra,0($sp)
-	li $t0,0 
-loopStart:
-	lb $t1, ($a0)
-	beq $t1, $zero, loopEnd
-	addi $a0,$a0,1
-	addi $t0,$t0,1
-	j loopStart
-loopEnd:
-	lw $ra, 0($sp)
-	addi $sp,$sp,4
-	move $v0,$t0
-	jr $ra
-.data
-PDCTrue:
-	.byte 116
-	.byte 114
-	.byte 117
-	.byte 101
-PDCFalse:
-	.byte 102
-	.byte 97
-	.byte 108
-	.byte 115
-	.byte 101
+program 
+    func sym=0x55ad61049538 @ line 4
+        newid [main] @ line 4
+        sig 
+            formals 
+            typeid [$void] sym=0x55ad61043f68
+        block 
+            var sym=0x55ad61049618 @ line 5
+                newid [int] @ line 5
+                typeid [int] sym=0x55ad61049618 @ line 5
+            exprstmt  @ line 6
+                funccall  sig=void  @ line 6
+                    id [printi] sig=f(int)  sym=0x55ad61048fe8 @ line 6
+                    actuals 
+                        id [int] sig=int  sym=0x55ad61049618 @ line 6
 
 
 STDERR:
@@ -215,109 +155,57 @@ Test: global name test |
 % ./golf ./test/ms3/check.t4
 
 STDOUT:
-	Ltrue = 1
-	Lfalse = 0
-.data
-S0:
-	.byte 0
-	
-.text
-G0:
-	.word 0
-main:
-	jal Lmain
-	j Lhalt
-G1:
-	.word 0
-Lb4func:
-	subu $sp,$sp,4
-	sw $ra,0($sp)
-	lw $t0,G0
-	move $a0,$t0
-	jal Lprinti
-	lw $t0,G1
-	move $a0,$t0
-	jal Lprinti
-	jal Laft3rfunc
-RLb4func:
-	lw $ra,0($sp)
-	addu $sp,$sp,4
-	jr $ra
-Lmain:
-	subu $sp,$sp,4
-	sw $ra,0($sp)
-	jal Lb4func
-RLmain:
-	lw $ra,0($sp)
-	addu $sp,$sp,4
-	jr $ra
-Laft3rfunc:
-	subu $sp,$sp,4
-	sw $ra,0($sp)
-	lw $t0,G0
-	move $a0,$t0
-	jal Lprinti
-	lw $t0,G1
-	move $a0,$t0
-	jal Lprinti
-RLaft3rfunc:
-	lw $ra,0($sp)
-	addu $sp,$sp,4
-	jr $ra
-	
-Lprintb:
-	beqz $a0,PrintFalse
-	la $a0,PDCTrue
-	j Lprints
-PrintFalse:
-	la $a0,PDCFalse
-	j Lprints
-Lhalt:
-	li $v0,10
-	syscall
-Lprintc:
-	li $v0,11
-	syscall
-	jr $ra
-Lprinti:
-	li $v0 1
-	syscall
-	jr $ra
-Lprints:
-	li $v0,4
-	syscall
-	jr $ra
-Lgetchar:
-	li $v0,8
-	syscall
-	jr $ra
-Llen:
-	addi $sp,$sp,-4
-	sw $ra,0($sp)
-	li $t0,0 
-loopStart:
-	lb $t1, ($a0)
-	beq $t1, $zero, loopEnd
-	addi $a0,$a0,1
-	addi $t0,$t0,1
-	j loopStart
-loopEnd:
-	lw $ra, 0($sp)
-	addi $sp,$sp,4
-	move $v0,$t0
-	jr $ra
-.data
-PDCTrue:
-	.byte 116
-	.byte 114
-	.byte 117
-	.byte 101
-PDCFalse:
-	.byte 102
-	.byte 97
-	.byte 108
-	.byte 115
-	.byte 101
+program 
+    globvar sym=0x555f0ab53568 @ line 3
+        newid [b4int] @ line 3
+        typeid [int] sym=0x555f0ab529f8 @ line 3
+    func sym=0x555f0ab53648 @ line 5
+        newid [b4func] @ line 5
+        sig 
+            formals 
+            typeid [$void] sym=0x555f0ab4aa88
+        block 
+            exprstmt  @ line 6
+                funccall  sig=void  @ line 6
+                    id [printi] sig=f(int)  sym=0x555f0ab53018 @ line 6
+                    actuals 
+                        id [b4int] sig=int  sym=0x555f0ab53568 @ line 6
+            exprstmt  @ line 7
+                funccall  sig=void  @ line 7
+                    id [printi] sig=f(int)  sym=0x555f0ab53018 @ line 7
+                    actuals 
+                        id [aft3rint] sig=int  sym=0x555f0ab538e8 @ line 7
+            exprstmt  @ line 8
+                funccall  sig=$void  @ line 8
+                    id [aft3rfunc] sig=f()  sym=0x555f0ab53808 @ line 8
+    func sym=0x555f0ab53728 @ line 11
+        newid [main] @ line 11
+        sig 
+            formals 
+            typeid [$void] sym=0x555f0ab4aa88
+        block 
+            exprstmt  @ line 12
+                funccall  sig=$void  @ line 12
+                    id [b4func] sig=f()  sym=0x555f0ab53648 @ line 12
+    func sym=0x555f0ab53808 @ line 15
+        newid [aft3rfunc] @ line 15
+        sig 
+            formals 
+            typeid [$void] sym=0x555f0ab4aa88
+        block 
+            exprstmt  @ line 16
+                funccall  sig=void  @ line 16
+                    id [printi] sig=f(int)  sym=0x555f0ab53018 @ line 16
+                    actuals 
+                        id [b4int] sig=int  sym=0x555f0ab53568 @ line 16
+            exprstmt  @ line 17
+                funccall  sig=void  @ line 17
+                    id [printi] sig=f(int)  sym=0x555f0ab53018 @ line 17
+                    actuals 
+                        id [aft3rint] sig=int  sym=0x555f0ab538e8 @ line 17
+    globvar sym=0x555f0ab538e8 @ line 20
+        newid [aft3rint] @ line 20
+        typeid [int] sym=0x555f0ab529f8 @ line 20
 
 
 STDERR:
@@ -332,103 +220,51 @@ Test: block scope check |
 % ./golf ./test/ms3/check.t5
 
 STDOUT:
-	Ltrue = 1
-	Lfalse = 0
-.data
-S0:
-	.byte 0
-S1:
-	.byte 97
-	.byte 115
-	.byte 100
-	.byte 102
-	.byte 0
-	
-.text
-main:
-	jal Lmain
-	j Lhalt
-Lmain:
-	subu $sp,$sp,20
-	sw $ra,0($sp)
-	sw $0,4($sp)
-	sw $0,8($sp)
-	la $v1,S0
-	sw $v1,12($sp)
-	la $t0,S1
-	sw $t0,12($sp)
-	sw $0,16($sp)
-	lw $t0,16($sp)
-	li $t1,1
-	addu $t2,$t0,$t1
-	sw $t2,16($sp)
-	lw $t0,12($sp)
-	move $a0,$t0
-	jal Lprints
-	lw $t0,8($sp)
-	move $a0,$t0
-	jal Lprintb
-	lw $t0,4($sp)
-	move $a0,$t0
-	jal Lprinti
-RLmain:
-	lw $ra,0($sp)
-	addu $sp,$sp,20
-	jr $ra
-	
-Lprintb:
-	beqz $a0,PrintFalse
-	la $a0,PDCTrue
-	j Lprints
-PrintFalse:
-	la $a0,PDCFalse
-	j Lprints
-Lhalt:
-	li $v0,10
-	syscall
-Lprintc:
-	li $v0,11
-	syscall
-	jr $ra
-Lprinti:
-	li $v0 1
-	syscall
-	jr $ra
-Lprints:
-	li $v0,4
-	syscall
-	jr $ra
-Lgetchar:
-	li $v0,8
-	syscall
-	jr $ra
-Llen:
-	addi $sp,$sp,-4
-	sw $ra,0($sp)
-	li $t0,0 
-loopStart:
-	lb $t1, ($a0)
-	beq $t1, $zero, loopEnd
-	addi $a0,$a0,1
-	addi $t0,$t0,1
-	j loopStart
-loopEnd:
-	lw $ra, 0($sp)
-	addi $sp,$sp,4
-	move $v0,$t0
-	jr $ra
-.data
-PDCTrue:
-	.byte 116
-	.byte 114
-	.byte 117
-	.byte 101
-PDCFalse:
-	.byte 102
-	.byte 97
-	.byte 108
-	.byte 115
-	.byte 101
+program 
+    func sym=0x563f28aa1168 @ line 3
+        newid [main] @ line 3
+        sig 
+            formals 
+            typeid [$void] sym=0x563f28a98d08
+        block 
+            var sym=0x563f28aa1248 @ line 4
+                newid [x] @ line 4
+                typeid [int] sym=0x563f28a98218 @ line 4
+            block 
+                var sym=0x563f28aa1328 @ line 6
+                    newid [x] @ line 6
+                    typeid [bool] sym=0x563f28a984d8 @ line 6
+                block 
+                    var sym=0x563f28aa1408 @ line 8
+                        newid [x] @ line 8
+                        typeid [string] sym=0x563f28a99198 @ line 8
+                    =  @ line 9
+                        id [x] sig=string  sym=0x563f28aa1408 @ line 9
+                        string [asdf] sig=string  @ line 9
+                    block 
+                        var sym=0x563f28aa14e8 @ line 11
+                            newid [x] @ line 11
+                            typeid [int] sym=0x563f28a98218 @ line 11
+                        =  @ line 12
+                            id [x] sig=int  sym=0x563f28aa14e8 @ line 12
+                            +  sig=int  @ line 12
+                                id [x] sig=int  sym=0x563f28aa14e8 @ line 12
+                                int [1] sig=int  @ line 12
+                    exprstmt  @ line 14
+                        funccall  sig=void  @ line 14
+                            id [prints] sig=f(string)  sym=0x563f28aa1d68 @ line 14
+                            actuals 
+                                id [x] sig=string  sym=0x563f28aa1408 @ line 14
+                exprstmt  @ line 16
+                    funccall  sig=void  @ line 16
+                        id [printb] sig=f(bool)  sym=0x563f28a9e8c8 @ line 16
+                        actuals 
+                            id [x] sig=bool  sym=0x563f28aa1328 @ line 16
+            exprstmt  @ line 18
+                funccall  sig=void  @ line 18
+                    id [printi] sig=f(int)  sym=0x563f28aa1c88 @ line 18
+                    actuals 
+                        id [x] sig=int  sym=0x563f28aa1248 @ line 18
 
 
 STDERR:
@@ -446,7 +282,7 @@ STDOUT:
 
 
 STDERR:
-Error: expected type, got "bool" at or near line 3
+error: expected type, got "bool" at or near line 3
 
 
 RETURN CODE: 1
@@ -461,7 +297,7 @@ STDOUT:
 
 
 STDERR:
-Error: expected type, got "int" at or near line 3
+error: expected type, got "int" at or near line 3
 
 
 RETURN CODE: 1
@@ -476,7 +312,7 @@ STDOUT:
 
 
 STDERR:
-Error: can't assign to a constant at or near line 4
+error: can't assign to a constant at or near line 4
 
 
 RETURN CODE: 1
@@ -491,7 +327,7 @@ STDOUT:
 
 
 STDERR:
-Error: unknown identifier "notthere" at or near line 3
+error: unknown identifier "notthere" at or near line 3
 
 
 RETURN CODE: 1
@@ -506,7 +342,7 @@ STDOUT:
 
 
 STDERR:
-Error: expected type, got "t" at or near line 4
+error: expected type, got "t" at or near line 4
 
 
 RETURN CODE: 1
@@ -521,7 +357,7 @@ STDOUT:
 
 
 STDERR:
-Error: expected type, got "main" at or near line 6
+error: expected type, got "main" at or near line 6
 
 
 RETURN CODE: 1
@@ -536,7 +372,7 @@ STDOUT:
 
 
 STDERR:
-Error: "main" redefined at or near line 7
+error: "main" redefined at or near line 7
 
 
 RETURN CODE: 1
@@ -551,7 +387,7 @@ STDOUT:
 
 
 STDERR:
-Error: missing main() function
+error: missing main() function
 
 
 RETURN CODE: 1
@@ -566,7 +402,7 @@ STDOUT:
 
 
 STDERR:
-Error: main() can't have arguments at or near line 3
+error: main() can't have arguments at or near line 3
 
 
 RETURN CODE: 1
@@ -581,7 +417,7 @@ STDOUT:
 
 
 STDERR:
-Error: main() can't have a return value at or near line 3
+error: main() can't have a return value at or near line 3
 
 
 RETURN CODE: 1
@@ -596,7 +432,7 @@ STDOUT:
 
 
 STDERR:
-Error: "i" redefined at or near line 7
+error: "i" redefined at or near line 7
 
 
 RETURN CODE: 1
@@ -611,7 +447,7 @@ STDOUT:
 
 
 STDERR:
-Error: can only assign to a variable at or near line 6
+error: can only assign to a variable at or near line 6
 
 
 RETURN CODE: 1
@@ -626,7 +462,7 @@ STDOUT:
 
 
 STDERR:
-Error: operand type mismatch for "=" at or near line 6
+error: operand type mismatch for "=" at or near line 6
 
 
 RETURN CODE: 1
@@ -641,7 +477,7 @@ STDOUT:
 
 
 STDERR:
-Error: integer literal out of range at or near line 5
+error: integer literal out of range at or near line 5
 
 
 RETURN CODE: 1
@@ -656,7 +492,7 @@ STDOUT:
 
 
 STDERR:
-Error: integer literal out of range at or near line 6
+error: integer literal out of range at or near line 6
 
 
 RETURN CODE: 1
@@ -671,7 +507,7 @@ STDOUT:
 
 
 STDERR:
-Error: integer literal out of range at or near line 5
+error: integer literal out of range at or near line 5
 
 
 RETURN CODE: 1
@@ -686,7 +522,7 @@ STDOUT:
 
 
 STDERR:
-Error: break must be inside 'for' at or near line 7
+error: break must be inside 'for' at or near line 7
 
 
 RETURN CODE: 1
@@ -701,7 +537,7 @@ STDOUT:
 
 
 STDERR:
-Error: break must be inside 'for' at or near line 5
+error: break must be inside 'for' at or near line 5
 
 
 RETURN CODE: 1
@@ -716,7 +552,7 @@ STDOUT:
 
 
 STDERR:
-Error: break must be inside 'for' at or near line 5
+error: break must be inside 'for' at or near line 5
 
 
 RETURN CODE: 1
@@ -731,7 +567,7 @@ STDOUT:
 
 
 STDERR:
-Error: no return statement in function at or near line 6
+error: no return statement in function at or near line 6
 
 
 RETURN CODE: 1
@@ -746,7 +582,7 @@ STDOUT:
 
 
 STDERR:
-Error: Expected source file at or near line 1
+error: this function can't return a value at or near line 4
 
 
 RETURN CODE: 1
@@ -761,7 +597,7 @@ STDOUT:
 
 
 STDERR:
-Error: returned value has the wrong type at or near line 7
+error: returned value has the wrong type at or near line 7
 
 
 RETURN CODE: 1
@@ -776,7 +612,7 @@ STDOUT:
 
 
 STDERR:
-Error: this function must return a value at or near line 7
+error: this function must return a value at or near line 7
 
 
 RETURN CODE: 1
@@ -791,7 +627,7 @@ STDOUT:
 
 
 STDERR:
-Error: if expression must be boolean type at or near line 4
+error: if expression must be boolean type at or near line 4
 
 
 RETURN CODE: 1
@@ -806,7 +642,7 @@ STDOUT:
 
 
 STDERR:
-Error: ifelse expression must be boolean type at or near line 4
+error: ifelse expression must be boolean type at or near line 4
 
 
 RETURN CODE: 1
@@ -821,7 +657,7 @@ STDOUT:
 
 
 STDERR:
-Error: for expression must be boolean type at or near line 10
+error: for expression must be boolean type at or near line 10
 
 
 RETURN CODE: 1
@@ -833,80 +669,20 @@ Test: legit expression statements |
 % ./golf ./test/ms3/check.t32
 
 STDOUT:
-	Ltrue = 1
-	Lfalse = 0
-.data
-S0:
-	.byte 0
-	
-.text
-main:
-	jal Lmain
-	j Lhalt
-Lmain:
-	subu $sp,$sp,8
-	sw $ra,0($sp)
-	sw $0,4($sp)
-	lw $t0,4($sp)
-	li $t1,42
-RLmain:
-	lw $ra,0($sp)
-	addu $sp,$sp,8
-	jr $ra
-	
-Lprintb:
-	beqz $a0,PrintFalse
-	la $a0,PDCTrue
-	j Lprints
-PrintFalse:
-	la $a0,PDCFalse
-	j Lprints
-Lhalt:
-	li $v0,10
-	syscall
-Lprintc:
-	li $v0,11
-	syscall
-	jr $ra
-Lprinti:
-	li $v0 1
-	syscall
-	jr $ra
-Lprints:
-	li $v0,4
-	syscall
-	jr $ra
-Lgetchar:
-	li $v0,8
-	syscall
-	jr $ra
-Llen:
-	addi $sp,$sp,-4
-	sw $ra,0($sp)
-	li $t2,0 
-loopStart:
-	lb $t3, ($a0)
-	beq $t3, $zero, loopEnd
-	addi $a0,$a0,1
-	addi $t2,$t2,1
-	j loopStart
-loopEnd:
-	lw $ra, 0($sp)
-	addi $sp,$sp,4
-	move $v0,$t2
-	jr $ra
-.data
-PDCTrue:
-	.byte 116
-	.byte 114
-	.byte 117
-	.byte 101
-PDCFalse:
-	.byte 102
-	.byte 97
-	.byte 108
-	.byte 115
-	.byte 101
+program 
+    func sym=0x563d3f10b6f8 @ line 3
+        newid [main] @ line 3
+        sig 
+            formals 
+            typeid [$void] sym=0x563d3f105f68
+        block 
+            var sym=0x563d3f10b7d8 @ line 4
+                newid [i] @ line 4
+                typeid [int] sym=0x563d3f106288 @ line 4
+            exprstmt  @ line 5
+                id [i] sig=int  sym=0x563d3f10b7d8 @ line 5
+            exprstmt  @ line 6
+                int [42] sig=int  @ line 6
 
 
 STDERR:
@@ -921,110 +697,43 @@ Test: built-in routine check |
 % ./golf ./test/ms3/check.t33
 
 STDOUT:
-	Ltrue = 1
-	Lfalse = 0
-.data
-S0:
-	.byte 0
-S1:
-	.byte 72
-	.byte 101
-	.byte 108
-	.byte 108
-	.byte 111
-	.byte 44
-	.byte 32
-	.byte 119
-	.byte 111
-	.byte 114
-	.byte 108
-	.byte 100
-	.byte 33
-	.byte 10
-	.byte 0
-	
-.text
-main:
-	jal Lmain
-	j Lhalt
-Lmain:
-	subu $sp,$sp,8
-	sw $ra,0($sp)
-	la $t0,S1
-	move $a0,$t0
-	jal Lprints
-	li $t0,Ltrue
-	move $a0,$t0
-	jal Lprintb
-	li $t0,123
-	move $a0,$t0
-	jal Lprinti
-	li $t0,123
-	move $a0,$t0
-	jal Lprintc
-	sw $0,4($sp)
-	jal Lgetchar
-	move $t0,$v0
-	sw $t0,4($sp)
-	jal Lhalt
-RLmain:
-	lw $ra,0($sp)
-	addu $sp,$sp,8
-	jr $ra
-	
-Lprintb:
-	beqz $a0,PrintFalse
-	la $a0,PDCTrue
-	j Lprints
-PrintFalse:
-	la $a0,PDCFalse
-	j Lprints
-Lhalt:
-	li $v0,10
-	syscall
-Lprintc:
-	li $v0,11
-	syscall
-	jr $ra
-Lprinti:
-	li $v0 1
-	syscall
-	jr $ra
-Lprints:
-	li $v0,4
-	syscall
-	jr $ra
-Lgetchar:
-	li $v0,8
-	syscall
-	jr $ra
-Llen:
-	addi $sp,$sp,-4
-	sw $ra,0($sp)
-	li $t0,0 
-loopStart:
-	lb $t1, ($a0)
-	beq $t1, $zero, loopEnd
-	addi $a0,$a0,1
-	addi $t0,$t0,1
-	j loopStart
-loopEnd:
-	lw $ra, 0($sp)
-	addi $sp,$sp,4
-	move $v0,$t0
-	jr $ra
-.data
-PDCTrue:
-	.byte 116
-	.byte 114
-	.byte 117
-	.byte 101
-PDCFalse:
-	.byte 102
-	.byte 97
-	.byte 108
-	.byte 115
-	.byte 101
+program 
+    func sym=0x55e4003d9408 @ line 3
+        newid [main] @ line 3
+        sig 
+            formals 
+            typeid [$void] sym=0x55e4003d7e98
+        block 
+            exprstmt  @ line 4
+                funccall  sig=void  @ line 4
+                    id [prints] sig=f(string)  sym=0x55e4003d8f98 @ line 4
+                    actuals 
+                        string [Hello, world!\n] sig=string  @ line 4
+            exprstmt  @ line 5
+                funccall  sig=void  @ line 5
+                    id [printb] sig=f(bool)  sym=0x55e4003d7a88 @ line 5
+                    actuals 
+                        id [true] sig=bool  sym=0x55e4003d78c8 @ line 5
+            exprstmt  @ line 6
+                funccall  sig=void  @ line 6
+                    id [printi] sig=f(int)  sym=0x55e4003d7c48 @ line 6
+                    actuals 
+                        int [123] sig=int  @ line 6
+            exprstmt  @ line 7
+                funccall  sig=void  @ line 7
+                    id [printc] sig=f(int)  sym=0x55e4003d7b68 @ line 7
+                    actuals 
+                        int [123] sig=int  @ line 7
+            var sym=0x55e4003d94e8 @ line 8
+                newid [ch] @ line 8
+                typeid [int] sym=0x55e4003d2b68 @ line 8
+            =  @ line 9
+                id [ch] sig=int  sym=0x55e4003d94e8 @ line 9
+                funccall  sig=int  @ line 9
+                    id [getchar] sig=f()  sym=0x55e4003d9078 @ line 9
+            exprstmt  @ line 10
+                funccall  sig=void  @ line 10
+                    id [halt] sig=f()  sym=0x55e4003d9158 @ line 10
 
 
 STDERR:
@@ -1042,7 +751,7 @@ STDOUT:
 
 
 STDERR:
-Error: number/type of arguments doesn't match function declaration at or near line 4
+error: number/type of arguments doesn't match function declaration at or near line 4
 
 
 RETURN CODE: 1
@@ -1057,7 +766,7 @@ STDOUT:
 
 
 STDERR:
-Error: operand type mismatch for "+" at or near line 10
+error: operand type mismatch for "+" at or near line 10
 
 
 RETURN CODE: 1
@@ -1072,7 +781,7 @@ STDOUT:
 
 
 STDERR:
-Error: number/type of arguments doesn't match function declaration at or near line 7
+error: number/type of arguments doesn't match function declaration at or near line 7
 
 
 RETURN CODE: 1
@@ -1087,7 +796,7 @@ STDOUT:
 
 
 STDERR:
-Error: number/type of arguments doesn't match function declaration at or near line 8
+error: number/type of arguments doesn't match function declaration at or near line 8
 
 
 RETURN CODE: 1
@@ -1102,7 +811,7 @@ STDOUT:
 
 
 STDERR:
-Error: unknown identifier "c" at or near line 10
+error: unknown identifier "c" at or near line 10
 
 
 RETURN CODE: 1
@@ -1117,7 +826,7 @@ STDOUT:
 
 
 STDERR:
-Error: "b" redefined at or near line 13
+error: "b" redefined at or near line 13
 
 
 RETURN CODE: 1
@@ -1132,7 +841,7 @@ STDOUT:
 
 
 STDERR:
-Error: operand type mismatch for ">" at or near line 8
+error: operand type mismatch for ">" at or near line 8
 
 
 RETURN CODE: 1
@@ -1147,7 +856,7 @@ STDOUT:
 
 
 STDERR:
-Error: operand type mismatch for "=" at or near line 5
+error: operand type mismatch for "=" at or near line 5
 
 
 RETURN CODE: 1
@@ -1159,102 +868,47 @@ Test: deep type propagation |
 % ./golf ./test/ms3/check.t42
 
 STDOUT:
-	Ltrue = 1
-	Lfalse = 0
-.data
-S0:
-	.byte 0
-	
-.text
-main:
-	jal Lmain
-	j Lhalt
-Lmain:
-	subu $sp,$sp,12
-	sw $ra,0($sp)
-	sw $0,4($sp)
-	li $t0,2
-	li $t1,3
-	li $t2,5
-	mul $t3,$t1,$t2
-	addu $t1,$t0,$t3
-	li $t0,123
-	subu $t2,$t1,$t0
-	lw $t0,4($sp)
-	sge $t1,$t2,
-	sw $0,8($sp)
-	li ,Ltrue
-	li $t2,Lfalse
-	and $t3,,$t2
-	lw ,8($sp)
-	li $t2,Ltrue
-	seq $t4,,$t2
-	or ,$t3,$t4
-	xori ,,1
-	xori ,,1
-	xori ,,1
-	li $t2,5
-	li $t3,6
-	sle $t4,$t2,$t3
-	sne $t2,,$t4
-RLmain:
-	lw $ra,0($sp)
-	addu $sp,$sp,12
-	jr $ra
-	
-Lprintb:
-	beqz $a0,PrintFalse
-	la $a0,PDCTrue
-	j Lprints
-PrintFalse:
-	la $a0,PDCFalse
-	j Lprints
-Lhalt:
-	li $v0,10
-	syscall
-Lprintc:
-	li $v0,11
-	syscall
-	jr $ra
-Lprinti:
-	li $v0 1
-	syscall
-	jr $ra
-Lprints:
-	li $v0,4
-	syscall
-	jr $ra
-Lgetchar:
-	li $v0,8
-	syscall
-	jr $ra
-Llen:
-	addi $sp,$sp,-4
-	sw $ra,0($sp)
-	li ,0 
-loopStart:
-	lb $t3, ($a0)
-	beq $t3, $zero, loopEnd
-	addi $a0,$a0,1
-	addi ,,1
-	j loopStart
-loopEnd:
-	lw $ra, 0($sp)
-	addi $sp,$sp,4
-	move $v0,
-	jr $ra
-.data
-PDCTrue:
-	.byte 116
-	.byte 114
-	.byte 117
-	.byte 101
-PDCFalse:
-	.byte 102
-	.byte 97
-	.byte 108
-	.byte 115
-	.byte 101
+program 
+    func sym=0x564fca862af8 @ line 3
+        newid [main] @ line 3
+        sig 
+            formals 
+            typeid [$void] sym=0x564fca85bf68
+        block 
+            var sym=0x564fca862bd8 @ line 4
+                newid [x] @ line 4
+                typeid [int] sym=0x564fca85a6e8 @ line 4
+            exprstmt  @ line 5
+                >=  sig=bool  @ line 5
+                    -  sig=int  @ line 5
+                        +  sig=int  @ line 5
+                            int [2] sig=int  @ line 5
+                            *  sig=int  @ line 5
+                                int [3] sig=int  @ line 5
+                                int [5] sig=int  @ line 5
+                        int [123] sig=int  @ line 5
+                    u-  sig=int  @ line 5
+                        u-  sig=int  @ line 5
+                            u-  sig=int  @ line 5
+                                id [x] sig=int  sym=0x564fca862bd8 @ line 5
+            var sym=0x564fca862cb8 @ line 7
+                newid [b] @ line 7
+                typeid [bool] sym=0x564fca85c0f8 @ line 7
+            exprstmt  @ line 8
+                !=  sig=bool  @ line 8
+                    u!  sig=bool  @ line 8
+                        u!  sig=bool  @ line 8
+                            u!  sig=bool  @ line 8
+                                ||  sig=bool  @ line 8
+                                    &&  sig=bool  @ line 8
+                                        id [true] sig=bool  sym=0x564fca861448 @ line 8
+                                        id [false] sig=bool  sym=0x564fca85b198 @ line 8
+                                    ==  sig=bool  @ line 8
+                                        id [b] sig=bool  sym=0x564fca862cb8 @ line 8
+                                        id [true] sig=bool  sym=0x564fca861448 @ line 8
+                    <=  sig=bool  @ line 8
+                        int [5] sig=int  @ line 8
+                        int [6] sig=int  @ line 8
 
 
 STDERR:
@@ -1269,24 +923,32 @@ Test: redefining "true" and "false" |
 % ./golf ./test/ms3/check.t43
 
 STDOUT:
-	Ltrue = 1
-	Lfalse = 0
-.data
-S0:
-	.byte 0
-	
-.text
-G0:
-	.word 0
-main:
-	jal Lmain
-	j Lhalt
+program 
+    globvar sym=0x5645632e9ac8 @ line 3
+        newid [true] @ line 3
+        typeid [int] sym=0x5645632e4288 @ line 3
+    func sym=0x5645632e9ba8 @ line 5
+        newid [main] @ line 5
+        sig 
+            formals 
+            typeid [$void] sym=0x5645632e3f68
+        block 
+            var sym=0x5645632e9c88 @ line 6
+                newid [false] @ line 6
+                typeid [int] sym=0x5645632e4288 @ line 6
+            exprstmt  @ line 7
+                funccall  sig=void  @ line 7
+                    id [printi] sig=f(int)  sym=0x5645632e9578 @ line 7
+                    actuals 
+                        *  sig=int  @ line 7
+                            id [true] sig=int  sym=0x5645632e9ac8 @ line 7
+                            id [false] sig=int  sym=0x5645632e9c88 @ line 7
 
 
 STDERR:
 
 
-*** TERMINATION VIA SIGNAL: Segmentation fault
+RETURN CODE: 0
 
 -------------------------------------------------------------------------------
 Test: call of non-function |
@@ -1298,7 +960,7 @@ STDOUT:
 
 
 STDERR:
-Error: can't call something that isn't a function at or near line 4
+error: can't call something that isn't a function at or near line 4
 
 
 RETURN CODE: 1
@@ -1313,10 +975,10 @@ STDOUT:
 
 
 STDERR:
-Error: can't use type "int" here at or near line 5
+error: can't use type "int" here at or near line 5
 
 
 RETURN CODE: 1
 
-Run ended on Wed Apr 12 19:40:00 2023
+Run ended on Mon Aug 14 09:29:37 2023
 

@@ -1,6 +1,6 @@
-Run started on Mon Apr 10 10:22:42 2023
+Run started on Sun Aug 13 20:22:41 2023
 
-Hostname: DESKTOP-LH91K7L
+Hostname: Q-LTOP-12
 
 -------------------------------------------------------------------------------
 Running make |
@@ -25,8 +25,12 @@ make[1]: Leaving directory '/mnt/c/Projects/golf-compiler/Parser'
 make[1]: Entering directory '/mnt/c/Projects/golf-compiler/SemanticChecker'
 make[1]: Nothing to be done for 'all'.
 make[1]: Leaving directory '/mnt/c/Projects/golf-compiler/SemanticChecker'
+/usr/bin/make -C Generator
+make[1]: Entering directory '/mnt/c/Projects/golf-compiler/Generator'
+make[1]: Nothing to be done for 'all'.
+make[1]: Leaving directory '/mnt/c/Projects/golf-compiler/Generator'
 g++ -o main.o -c main.cpp -MMD -MF main.d
-g++ -o golf main.o Scanner/token.o Scanner/scanner.o Utility/utility.o Parser/parser.o Parser/ast.o SemanticChecker/semantic.o SemanticChecker/stab.o
+g++ -o golf main.o Scanner/token.o Scanner/scanner.o Utility/utility.o Parser/parser.o Parser/ast.o SemanticChecker/semantic.o SemanticChecker/stab.o Generator/backend_asm.o
 
 
 STDERR:
@@ -80,7 +84,7 @@ STDOUT:
 
 
 STDERR:
-Error: file '/i/do/not/exist' could not be opened
+error: file '/i/do/not/exist' could not be opened
 
 
 RETURN CODE: 1
@@ -95,7 +99,7 @@ STDOUT:
 
 
 STDERR:
-Error: unexpected ;, expected { at or near line 3
+error: unexpected ;, expected { at or near line 3
 
 
 RETURN CODE: 1
@@ -107,17 +111,6 @@ Test: "for" open brace exception |
 % ./golf ./test/ms2/parse.t2
 
 STDOUT:
-program 
-    func sym=0x55cd2c715418 @ line 4
-        newid [main] @ line 4
-        sig 
-            formals 
-            typeid [$void] sym=0x55cd2c714648
-        block 
-            for  @ line 5
-                id [$true] sig=bool  sym=0x55cd2c7134e8
-                block 
-                    emptystmt 
 
 
 STDERR:
@@ -135,7 +128,7 @@ STDOUT:
 
 
 STDERR:
-Error: unexpected ;, expected { at or near line 4
+error: unexpected ;, expected { at or near line 4
 
 
 RETURN CODE: 1
@@ -150,7 +143,7 @@ STDOUT:
 
 
 STDERR:
-Error: unexpected ;, expected { at or near line 4
+error: unexpected ;, expected { at or near line 4
 
 
 RETURN CODE: 1
@@ -162,21 +155,6 @@ Test: weird but correct formatting |
 % ./golf ./test/ms2/parse.t5
 
 STDOUT:
-program 
-    func sym=0x56114bb05a28 @ line 3
-        newid [main] @ line 3
-        sig 
-            formals 
-            typeid [$void] sym=0x56114bb00968
-        block 
-            if  @ line 5
-                ==  sig=bool  @ line 6
-                    +  sig=int  @ line 5
-                        int [2] sig=int  @ line 5
-                        int [3] sig=int  @ line 6
-                    int [5] sig=int  @ line 7
-                block 
-                    emptystmt 
 
 
 STDERR:
@@ -194,10 +172,9 @@ STDOUT:
 
 
 STDERR:
-Error: unknown identifier "asdf" at or near line 4
 
 
-RETURN CODE: 1
+RETURN CODE: 0
 
 -------------------------------------------------------------------------------
 Test: formal and actual params |
@@ -209,10 +186,9 @@ STDOUT:
 
 
 STDERR:
-Error: unknown identifier "sometype" at or near line 6
 
 
-RETURN CODE: 1
+RETURN CODE: 0
 
 -------------------------------------------------------------------------------
 Test: unary and binary minus |
@@ -224,10 +200,9 @@ STDOUT:
 
 
 STDERR:
-Error: unknown identifier "x" at or near line 4
 
 
-RETURN CODE: 1
+RETURN CODE: 0
 
 -------------------------------------------------------------------------------
 Test: func open brace in wrong place, with semicolon |
@@ -239,7 +214,7 @@ STDOUT:
 
 
 STDERR:
-Error: unexpected ;, expected { at or near line 4
+error: unexpected ;, expected { at or near line 4
 
 
 RETURN CODE: 1
@@ -254,7 +229,7 @@ STDOUT:
 
 
 STDERR:
-Error: unexpected ;, expected { at or near line 4
+error: unexpected ;, expected { at or near line 4
 
 
 RETURN CODE: 1
@@ -269,7 +244,7 @@ STDOUT:
 
 
 STDERR:
-Error: unexpected ;, expected { at or near line 5
+error: unexpected ;, expected { at or near line 5
 
 
 RETURN CODE: 1
@@ -284,7 +259,7 @@ STDOUT:
 
 
 STDERR:
-Error: unexpected ;, expected { at or near line 5
+error: unexpected ;, expected { at or near line 5
 
 
 RETURN CODE: 1
@@ -299,7 +274,7 @@ STDOUT:
 
 
 STDERR:
-Error: unexpected ;, expected { at or near line 5
+error: unexpected ;, expected { at or near line 5
 
 
 RETURN CODE: 1
@@ -314,7 +289,7 @@ STDOUT:
 
 
 STDERR:
-Error: unexpected ;, expected { at or near line 5
+error: unexpected ;, expected { at or near line 5
 
 
 RETURN CODE: 1
@@ -329,10 +304,9 @@ STDOUT:
 
 
 STDERR:
-Error: missing main() function
 
 
-RETURN CODE: 1
+RETURN CODE: 0
 
 -------------------------------------------------------------------------------
 Test: func line breaks sans trailing comma |
@@ -344,7 +318,7 @@ STDOUT:
 
 
 STDERR:
-Error: unexpected ;, expected ) at or near line 6
+error: unexpected ;, expected ) at or near line 6
 
 
 RETURN CODE: 1
@@ -359,10 +333,9 @@ STDOUT:
 
 
 STDERR:
-Error: unknown identifier "garbled" at or near line 4
 
 
-RETURN CODE: 1
+RETURN CODE: 0
 
 -------------------------------------------------------------------------------
 Test: func call line breaks sans trailing comma |
@@ -374,7 +347,7 @@ STDOUT:
 
 
 STDERR:
-Error: unexpected ;, expected ) at or near line 7
+error: unexpected ;, expected ) at or near line 7
 
 
 RETURN CODE: 1
@@ -389,10 +362,9 @@ STDOUT:
 
 
 STDERR:
-Error: unknown identifier "x" at or near line 6
 
 
-RETURN CODE: 1
+RETURN CODE: 0
 
 -------------------------------------------------------------------------------
 Test: assignment |
@@ -404,7 +376,7 @@ STDOUT:
 
 
 STDERR:
-Error: unexpected =, expected ; at or near line 7
+error: unexpected =, expected ; at or near line 7
 
 
 RETURN CODE: 1
@@ -419,10 +391,9 @@ STDOUT:
 
 
 STDERR:
-Error: missing main() function
 
 
-RETURN CODE: 1
+RETURN CODE: 0
 
 -------------------------------------------------------------------------------
 Test: a calculated move |
@@ -434,10 +405,10 @@ STDOUT:
 
 
 STDERR:
-Error: unexpected id, expected ; at or near line 55
+error: unexpected }, expected ; at or near line 71
 
 
 RETURN CODE: 1
 
-Run ended on Mon Apr 10 10:22:44 2023
+Run ended on Sun Aug 13 20:22:48 2023
 
