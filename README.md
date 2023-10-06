@@ -1,6 +1,6 @@
 # GoLF-compiler
 
-This project is a comprehensive effort to build a compiler for a subset of the Go programming language (GoLF) into MIPS assembly code. The GoLF compiler includes several essential components such as a scanner, a parser that generates an abstract syntax tree (AST), a semantic checker, and a MIPS code generator. The goal of this project is to demonstrate a deep understanding of compiler construction, from lexical analysis to code generation, in the context of the Go programming language.
+This project is a comprehensive effort to build a compiler using C++ for a subset of the Go programming language (GoLF) into MIPS assembly code. The GoLF compiler includes several essential components such as a scanner, a parser that generates an abstract syntax tree (AST), a semantic checker, and a MIPS code generator. The goal of this project is to demonstrate a deep understanding of compiler construction, from lexical analysis to code generation, in the context of the Go programming language.
 
 ## Components
 ### 1. Scanner 
