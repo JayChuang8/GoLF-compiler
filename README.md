@@ -20,5 +20,6 @@ To compile and use this C++ compiler, follow these steps:
 1. Clone the repository to your local machine.
 2. Build the compiler by running `make` in the root directory. This will iteratively run all of the makefiles within the subdirectories as well. The output will be a golf.exe (./golf).
 3. Run the compiler on Go source code by executing:
+   
   `./golf inputfile`
-4. The output will be MIPS assembly code printed to the console.
+5. The output will be MIPS assembly code printed to the console.
