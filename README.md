@@ -22,4 +22,5 @@ To compile and use this C++ compiler, follow these steps:
 3. Run the compiler on Go source code by executing:
    
   `./golf inputfile`
+  
 5. The output will be MIPS assembly code printed to the console.
