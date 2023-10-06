@@ -1,4 +1,0 @@
-func main() {
-	printi(123/0)
-	prints("\n")
-}
