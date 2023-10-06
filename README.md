@@ -25,6 +25,6 @@ To compile and use this C++ compiler, follow these steps:
   
 4. The output will be MIPS assembly code printed to the console.
 
-### 5. Usage Example
+## Usage Example
 Here's an example of how to use the GoLF compiler:
 
