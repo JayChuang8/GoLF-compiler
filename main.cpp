@@ -34,22 +34,22 @@ int main(int argc, char *argv[])
     //     cout << setw(10) << token.type << "     [" << token.attribute << "] @ line " << token.lineNum << endl;
     // }
 
-    // // Parser
+    // Parser
     Scanner scanner(inputFile, util);
     Parser parser(scanner, util);
     AST ast = parser.parse();
 
-    // // Semantic checker
+    // Semantic checker
     SymbolTable stab(util);
     Semantic semantic(util, stab);
     semantic.semantic(ast);
 
-    // // Print ast
-    ast.printAST(ast, 0);
+    // Print ast
+    // ast.printAST(ast, 0);
 
-    // // MIPS code generator
-    // BackendASM generator(util);
-    // generator.gen(ast);
+    // MIPS code generator
+    BackendASM generator(util);
+    generator.gen(ast);
 
     // Close input file
     util.closeInputFile(inputFile);

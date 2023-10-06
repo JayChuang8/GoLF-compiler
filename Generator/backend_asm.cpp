@@ -154,16 +154,6 @@ void BackendASM::epilogue()
 {
     emit("");
 
-    // emitlabel("Lprintb");
-    // string argReg1 = allocArgReg();
-    // emit("beqz " + argReg1 + ",PrintFalse");
-    // emit("la " + argReg1 + ",PDCTrue");
-    // freeArgReg(argReg1);
-    // emit("j Lprints");
-    // emitlabel("PrintFalse");
-    // emit("la " + argReg1 + ",PDCFalse");
-    // emit("j Lprints");
-
     emitlabel("Lprintb");
     emit("beq $a0, $zero, PrintFalse");
     emit("la $a0, PDCTrue");
@@ -215,18 +205,6 @@ void BackendASM::epilogue()
     emit("jr $ra");
     freereg(reg1);
     freereg(reg2);
-
-    // emitlabel("divmodchk");
-    // emit("beq $a1, $zero, divmod_error");
-    // emit("move $v0, $a1");
-    // emit("jr $ra");
-    // emitlabel("divmod_error");
-    // emit("li $v0, 4");
-    // emit("la $a0, DivZeroError");
-    // emit("syscall");
-    // emit("li $v0, 1");
-    // emit("li $a0, 1");
-    // emit("syscall");
 }
 
 string BackendASM::id2asm(string name)
@@ -355,11 +333,9 @@ void BackendASM::pass3_cb(AST *node)
 {
     if (node->type == "func")
     {
-        currentStackAddress = 0;
-        // emittemp("[FUNC-----------------]");
         emitlabel(node->sym->rtname);
         emit("subu $sp,$sp," + to_string(node->sym->allocspace));
-        // currentStackAddress = node->sym->allocspace;
+        
         // emit return register address
         emit("sw $ra,0($sp)");
 
@@ -390,8 +366,6 @@ void BackendASM::pass3_cb(AST *node)
     }
     else if (node->type == "funccall")
     {
-        // emittemp("[FUNCCALL-----------------] " + node->kids[0].attribute + " " + to_string(node->kids[0].sym->allocspace));
-
         // if there are reg's being used before a func call, store them in the stack
         int stackspace = 0;
         int allocSpace = (10 - pool.size()) * 4;
@@ -448,7 +422,6 @@ void BackendASM::pass3_cb(AST *node)
     }
     else if (node->type == "=")
     {
-        // emittemp("ASSIGNMENT--------------");
         // make sure the nodes on the RHS of assignment (=) are defined
         node->kids[1].prepost([this](AST *node)
                               { pass3_cb(node); },
@@ -466,7 +439,6 @@ void BackendASM::pass3_cb(AST *node)
     }
     else if (OP2ASM.find(node->type) != OP2ASM.end())
     {
-        // emittemp("BINARY OP-----------------");
         // make sure the nodes on the LHS of && are defined
         node->kids[0].prepost([this](AST *node)
                               { pass3_cb(node); },
@@ -513,7 +485,6 @@ void BackendASM::pass3_cb(AST *node)
     }
     else if (node->type == "for")
     {
-        // emittemp("FOR-----------------");
         string loopStart = getlabel() + "for";
         emitlabel(loopStart);
 
@@ -538,7 +509,6 @@ void BackendASM::pass3_cb(AST *node)
     }
     else if (node->type == "if")
     {
-        // emittemp("IF-----------------");
         string ifEnd = getlabel() + "if";
 
         node->kids[0].prepost([this](AST *node)
@@ -558,7 +528,6 @@ void BackendASM::pass3_cb(AST *node)
     }
     else if (node->type == "ifelse")
     {
-        // emittemp("IFELSE-----------------");
         string elseStart = getlabel() + "else";
         string ifelseEnd = getlabel() + "ifelse";
 
@@ -587,8 +556,6 @@ void BackendASM::pass3_cb(AST *node)
     }
     else if (node->type == "return")
     {
-        // emittemp("RETURN-------------");
-
         node->kids[0].prepost([this](AST *node)
                               { pass3_cb(node); },
                               [this](AST *node)
@@ -600,7 +567,6 @@ void BackendASM::pass3_cb(AST *node)
     }
     else if (node->type == "var")
     {
-        // emittemp("VAR-----------------");
         currentStackAddress += 4;
 
         // load empty string data into register if var declaration is a string
@@ -619,7 +585,6 @@ void BackendASM::pass3_cb(AST *node)
     }
     else if (node->type == "formal")
     {
-        // emittemp("FORMAL-----------------");
         currentStackAddress += 4;
 
         string argReg = allocArgReg();
@@ -633,20 +598,17 @@ void BackendASM::pass3_post_cb(AST *node)
 {
     if (node->type == "string")
     {
-        // emittemp("STRING-----------------");
         string strLabel = node->reg;
         node->reg = allocreg();
         emit("la " + node->reg + "," + strLabel);
     }
     else if (node->type == "int")
     {
-        // emittemp("INT-----------------");
         node->reg = allocreg();
         emit("li " + node->reg + "," + node->attribute);
     }
     else if ((node->attribute == "true" || node->attribute == "false") && node->type != "newid")
     {
-        // emittemp("BOOL-----------------");
         node->reg = allocreg();
         string reg = node->sym->rtname;
         if (reg.empty())
@@ -655,7 +617,6 @@ void BackendASM::pass3_post_cb(AST *node)
     }
     else if (node->type == "u!")
     {
-        // emittemp("UNARYNOT-----------------");
         node->reg = node->kids[0].reg;
         emit("xori " + node->reg + "," + node->reg + ",1");
     }
@@ -667,25 +628,23 @@ void BackendASM::pass3_post_cb(AST *node)
     }
     else if (node->type == "id")
     {
-        // emittemp("ID-----------------");
-        // still needs work
         node->reg = allocreg();
         string reg = node->sym->reg;
         if (node->sym->reg.empty())
             reg = node->sym->rtname;
         emit("lw " + node->reg + "," + reg);
     }
-    // else if (OP2ASM.find(node->type) != OP2ASM.end())
-    // {
-    //     // binary operator
-    //     node->reg = allocreg();
-    //     string op = OP2ASM[node->type];
+    else if (OP2ASM.find(node->type) != OP2ASM.end())
+    {
+        // binary operator
+        node->reg = allocreg();
+        string op = OP2ASM[node->type];
 
-    //     emit(op + " " + node->reg + "," + node->kids[0].reg + "," + node->kids[1].reg);
+        emit(op + " " + node->reg + "," + node->kids[0].reg + "," + node->kids[1].reg);
 
-    //     freereg(node->kids[0].reg);
-    //     freereg(node->kids[1].reg);
-    // }
+        freereg(node->kids[0].reg);
+        freereg(node->kids[1].reg);
+    }
 }
 
 void BackendASM::gen(AST &ast)

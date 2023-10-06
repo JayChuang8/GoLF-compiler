@@ -92,9 +92,8 @@ Symbol *SymbolTable::lookup(string name, int lineNum)
 
 void SymbolTable::openScope()
 {
-    // if sigscope is a nullptr, that means there is no sig/function parameters to be included in this block
-    // if sigscope is pointing to something, that means a block is already open with sig Symbols and we can include them in the block
-    // Accounts for: 3. The scope of an identifier denoting a function parameter is the function body.
+    // If sigscope is a nullptr, that means there is no sig/function parameters to be included in this block
+    // If sigscope is pointing to something, that means a block is already open with sig Symbols and we can include them in the block
     if (sigscope == nullptr || sigscopeAppended)
     {
         stabstack.push_back(new std::unordered_map<std::string, Symbol>());
@@ -107,7 +106,7 @@ void SymbolTable::openScope()
 
 void SymbolTable::closeScope()
 {
-    // close sig scope if it is open and is the next scope to be popped off
+    // Close sig scope if it is open and is the next scope to be popped off
     if (!stabstack.empty())
     {
         if (sigscope == &*stabstack.back())
