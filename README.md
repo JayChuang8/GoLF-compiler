@@ -26,6 +26,8 @@ To compile and use this C++ compiler, follow these steps:
   
 5. The output will be MIPS assembly code printed to the console.
 
+*The ./input folder contains example GoLF test files that can be used as input to the compiler.*
+
 ## Usage Example
 Here's an example of how to use the GoLF compiler:
 
