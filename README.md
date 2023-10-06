@@ -28,10 +28,19 @@ To compile and use this C++ compiler, follow these steps:
 ## Usage Example
 Here's an example of how to use the GoLF compiler:
 
+gen.t1:
 ```
 func main() {
 	prints("Hello, world!\n")
 }
 ```
+
+Make the executable:
+```make```
+
+Compile the code:
+```./golf gen.t1```
+
+The resulting console output will contain the MIPS assembly code equivalent to the GoLF program.
 
 
