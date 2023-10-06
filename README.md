@@ -28,3 +28,10 @@ To compile and use this C++ compiler, follow these steps:
 ## Usage Example
 Here's an example of how to use the GoLF compiler:
 
+```
+func main() {
+	prints("Hello, world!\n")
+}
+```
+
+
