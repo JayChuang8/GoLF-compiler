@@ -36,10 +36,14 @@ func main() {
 ```
 
 Make the executable:
-```make```
+```
+make
+```
 
 Compile the code:
-```./golf gen.t1```
+```
+./golf gen.t1
+```
 
 The resulting console output will contain the MIPS assembly code equivalent to the GoLF program.
 
